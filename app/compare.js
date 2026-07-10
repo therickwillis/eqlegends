@@ -54,6 +54,49 @@ function compareClasses(classNames, level) {
   return { overlapping, unique };
 }
 
+/**
+ * Builds a category x class grid: one row per known category, one cell per
+ * selected class holding that class's best available spell in it (or null).
+ * `isBest` marks the strongest populated cell in the row (by spellPower,
+ * falling back to level) for an at-a-glance "who wins this category" view.
+ */
+function categoryGrid(classNames, level) {
+  const perClass = classNames.map((name) => ({
+    name,
+    spells: bestSpellsForClassAtLevel(name, level),
+  }));
+
+  const allCategories = new Set();
+  perClass.forEach(({ spells }) => spells.forEach((_, cat) => allCategories.add(cat)));
+
+  const rows = [...allCategories].sort().map((category) => {
+    const cells = perClass.map(({ name, spells }) => ({
+      className: name,
+      spell: spells.get(category) || null,
+    }));
+
+    const populated = cells.filter((cell) => cell.spell);
+    let bestCell = null;
+    let bestVal = -Infinity;
+    for (const cell of populated) {
+      // Damage-ish effects (Nuke/DoT/Debuff) are stored as negative numbers,
+      // so "best" means largest magnitude, not largest signed value.
+      const val = Math.abs(spellPower(cell.spell) ?? cell.spell.level);
+      if (val > bestVal) {
+        bestVal = val;
+        bestCell = cell;
+      }
+    }
+    // Only worth highlighting a "winner" when there's actually a comparison
+    // to make - i.e. 2+ classes have a spell in this category.
+    cells.forEach((cell) => { cell.isBest = populated.length > 1 && cell === bestCell; });
+
+    return { category, cells };
+  });
+
+  return rows;
+}
+
 // Role -> the effect categories that count toward it (post-collapse; Fear/
 // Root/Slow are already their own categories so Crowd Control keeps them
 // distinct without needing raw `kind` granularity).

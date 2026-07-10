@@ -166,6 +166,41 @@
     flex: 1;
     border-top: 1px dashed var(--border);
   }
+  .grid-table-wrap { overflow-x: auto; }
+  .grid-table { border-collapse: collapse; width: 100%; font-size: 13px; }
+  .grid-table th, .grid-table td {
+    border: 1px solid var(--border);
+    padding: 8px 10px;
+    text-align: left;
+    vertical-align: top;
+  }
+  .grid-table thead th {
+    background: var(--panel);
+    color: var(--gold);
+    position: sticky;
+    top: 0;
+    white-space: nowrap;
+  }
+  .grid-table tbody th {
+    background: var(--panel);
+    color: var(--gold);
+    white-space: nowrap;
+    font-weight: normal;
+  }
+  .grid-table .category-sub { display: block; color: var(--muted); font-size: 11px; font-weight: normal; }
+  .grid-cell-empty { color: var(--muted); text-align: center; }
+  .grid-cell .spell-name { font-size: 13px; display: block; }
+  .grid-cell .grid-cell-meta { color: var(--muted); font-size: 11px; display: block; margin-top: 2px; }
+  .grid-cell.grid-cell-best { background: #22301c; }
+  .grid-cell.grid-cell-best .spell-name { color: #c8e6a0; }
+  .grid-best-swatch {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: #22301c;
+    border: 1px solid #c8e6a0;
+    vertical-align: middle;
+  }
   .unconfirmed-badge {
     display: inline-block;
     width: 14px;
@@ -218,6 +253,7 @@
 
   <div class="tabs">
     <button class="tab-btn" data-tab="loadouts">Loadouts</button>
+    <button class="tab-btn" data-tab="grid">Category Grid</button>
     <button class="tab-btn" data-tab="comparison">Full Comparison</button>
   </div>
 
@@ -241,6 +277,16 @@
       </p>
       <div id="role-loadout" class="loadout-list"></div>
     </section>
+  </div>
+
+  <div id="grid-view" class="tab-panel">
+    <p class="loadout-section-desc">
+      Every category's best available spell per selected class, at a glance. The
+      <span class="grid-best-swatch"></span> highlighted cell is the strongest option when 2+ classes have one.
+    </p>
+    <div class="grid-table-wrap">
+      <table class="grid-table" id="category-grid"></table>
+    </div>
   </div>
 
   <div id="comparison-view" class="tab-panel">

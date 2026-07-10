@@ -12,8 +12,10 @@ const roleLoadoutEl = document.getElementById("role-loadout");
 const buffSlotMeterEl = document.getElementById("buff-slot-meter");
 const roleSlotMeterEl = document.getElementById("role-slot-meter");
 const tabButtons = [...document.querySelectorAll(".tab-btn")];
+const gridTableEl = document.getElementById("category-grid");
 const tabPanels = {
   loadouts: document.getElementById("loadouts-view"),
+  grid: document.getElementById("grid-view"),
   comparison: document.getElementById("comparison-view"),
 };
 
@@ -176,6 +178,38 @@ function renderComparison(classes, level) {
   resultsEl.innerHTML = renderOverlapping(overlapping) + renderUnique(unique);
 }
 
+function gridCell(cell) {
+  if (!cell.spell) {
+    return `<td class="grid-cell grid-cell-empty">—</td>`;
+  }
+  const spell = cell.spell;
+  const meta = `Lv ${spell.level} · ${formatEffect(spell)} · ${spell.mana} mana`;
+  return `
+    <td class="grid-cell ${cell.isBest ? "grid-cell-best" : ""}">
+      <span class="spell-name">${spell.name}</span>
+      <span class="grid-cell-meta">${meta}</span>
+    </td>`;
+}
+
+function renderGrid(classes, level) {
+  if (classes.length === 0) {
+    gridTableEl.innerHTML = `<tr><td class="grid-cell-empty">Pick 1-3 classes above to see the category grid.</td></tr>`;
+    return;
+  }
+  const rows = categoryGrid(classes, level);
+  const header = `<thead><tr><th>Category</th>${classes.map((c) => `<th>${c}</th>`).join("")}</tr></thead>`;
+  const body = rows
+    .map(
+      ({ category, cells }) => `
+        <tr>
+          <th>${category}<span class="category-sub">${CATEGORIES[category] || ""}</span></th>
+          ${cells.map(gridCell).join("")}
+        </tr>`
+    )
+    .join("");
+  gridTableEl.innerHTML = header + `<tbody>${body}</tbody>`;
+}
+
 function loadoutRow(index, slotBudget, className, spell, statLabel, subText, badge = "") {
   const overBudget = index >= slotBudget;
   return `
@@ -275,6 +309,7 @@ function render() {
 
   renderBuffLoadout(classes, level, slotBudget);
   renderRoleLoadout(classes, level, slotBudget, roles);
+  renderGrid(classes, level);
   renderComparison(classes, level);
 }
 
