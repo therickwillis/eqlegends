@@ -100,14 +100,79 @@
   .unique-block { margin-top: 16px; color: var(--muted); font-size: 13px; }
   .unique-block summary { cursor: pointer; color: var(--gold); }
   .unique-block ul { margin: 8px 0 0; padding-left: 20px; }
+
+  .tabs { display: flex; gap: 4px; margin-bottom: 16px; }
+  .tab-btn {
+    background: var(--panel);
+    color: var(--muted);
+    border: 1px solid var(--border);
+    border-bottom: none;
+    padding: 8px 18px;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  .tab-btn.active { color: var(--gold); background: #1b2230; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  .roles-field { display: flex; flex-direction: column; gap: 4px; }
+  .roles-checkboxes { display: flex; flex-wrap: wrap; gap: 4px 14px; }
+  .roles-checkboxes label {
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 13px;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+  }
+
+  .loadout-section { margin-bottom: 28px; }
+  .loadout-section-desc { color: var(--muted); font-size: 13px; margin: 2px 0 12px; }
+  .slot-meter { font-size: 13px; color: var(--muted); font-weight: normal; float: right; }
+  .slot-meter.over { color: #e08a8a; }
+  .loadout-list { display: flex; flex-direction: column; gap: 8px; }
+  .loadout-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+  }
+  .loadout-row.over-budget { opacity: 0.45; }
+  .loadout-rank { color: var(--muted); font-size: 12px; width: 20px; flex-shrink: 0; }
+  .loadout-row .spell-icon { margin: 0; }
+  .loadout-main { flex: 1 1 auto; min-width: 0; }
+  .loadout-main .spell-name { font-size: 14px; display: inline; }
+  .loadout-main .class-name { margin-right: 6px; }
+  .loadout-main .spell-desc { margin-top: 2px; }
+  .loadout-stat { font-size: 13px; color: var(--text); text-align: right; min-width: 130px; }
+  .loadout-stat .loadout-sub { display: block; color: var(--muted); font-size: 11px; }
+  .budget-divider {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--muted);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 2px 0;
+  }
+  .budget-divider::before, .budget-divider::after {
+    content: "";
+    flex: 1;
+    border-top: 1px dashed var(--border);
+  }
 </style>
 </head>
 <body>
   <h1>EQ Legends — Multi-Class Spell Comparison</h1>
   <p class="subtitle">
-    Pick up to 3 classes and a level to see which class's version of each spell effect
-    (heal, HoT, buff, etc.) is best right now — by mana efficiency and by raw power.
-    Data sourced from <span>eqlwiki.com</span>.
+    Pick up to 3 classes and a level to get a recommended spell loadout — or dig into the full
+    side-by-side comparison. Data sourced from <span>eqlwiki.com</span>.
   </p>
 
   <div class="controls">
@@ -127,9 +192,42 @@
       <label for="level">Level</label>
       <input type="number" id="level" min="1" max="50" value="20">
     </div>
+    <div class="field">
+      <label for="slots">Memorize Slots</label>
+      <input type="number" id="slots" min="1" max="30" value="12">
+    </div>
+    <div class="roles-field">
+      <label>Grouping Roles</label>
+      <div class="roles-checkboxes" id="roles"></div>
+    </div>
   </div>
 
-  <div id="results"></div>
+  <div class="tabs">
+    <button class="tab-btn" data-tab="loadouts">Loadouts</button>
+    <button class="tab-btn" data-tab="comparison">Full Comparison</button>
+  </div>
+
+  <div id="loadouts-view" class="tab-panel">
+    <section class="loadout-section">
+      <h3>Buff Loadout <span id="buff-slot-meter" class="slot-meter"></span></h3>
+      <p class="loadout-section-desc">
+        Strongest buff per stat line across your selected classes — memorize these, then
+        Quick Buff. Ranked by magnitude; picks past your slot count are dimmed.
+      </p>
+      <div id="buff-loadout" class="loadout-list"></div>
+    </section>
+    <section class="loadout-section">
+      <h3>Grouping Loadout <span id="role-slot-meter" class="slot-meter"></span></h3>
+      <p class="loadout-section-desc">
+        Best available spell per tool within your selected roles above (pick at least one role).
+      </p>
+      <div id="role-loadout" class="loadout-list"></div>
+    </section>
+  </div>
+
+  <div id="comparison-view" class="tab-panel">
+    <div id="results"></div>
+  </div>
 
   <script src="data.js"></script>
   <script src="compare.js"></script>

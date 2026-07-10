@@ -4,7 +4,20 @@ const classSelects = [
   document.getElementById("class3"),
 ];
 const levelInput = document.getElementById("level");
+const slotsInput = document.getElementById("slots");
+const rolesContainer = document.getElementById("roles");
 const resultsEl = document.getElementById("results");
+const buffLoadoutEl = document.getElementById("buff-loadout");
+const roleLoadoutEl = document.getElementById("role-loadout");
+const buffSlotMeterEl = document.getElementById("buff-slot-meter");
+const roleSlotMeterEl = document.getElementById("role-slot-meter");
+const tabButtons = [...document.querySelectorAll(".tab-btn")];
+const tabPanels = {
+  loadouts: document.getElementById("loadouts-view"),
+  comparison: document.getElementById("comparison-view"),
+};
+
+let activeTab = "loadouts";
 
 function populateClassSelects() {
   const archetypes = [...new Set(CLASSES.map((c) => c.archetype))];
@@ -28,8 +41,25 @@ function populateClassSelects() {
   }
 }
 
+function populateRoleCheckboxes() {
+  for (const [id, def] of Object.entries(ROLE_DEFINITIONS)) {
+    const label = document.createElement("label");
+    const input = document.createElement("input");
+    input.type = "checkbox";
+    input.value = id;
+    input.id = `role-${id}`;
+    label.appendChild(input);
+    label.appendChild(document.createTextNode(def.label));
+    rolesContainer.appendChild(label);
+  }
+}
+
 function selectedClasses() {
   return classSelects.map((s) => s.value).filter(Boolean);
+}
+
+function selectedRoles() {
+  return [...rolesContainer.querySelectorAll("input:checked")].map((el) => el.value);
 }
 
 function applyStateFromQuery() {
@@ -41,9 +71,21 @@ function applyStateFromQuery() {
     }
   });
   const level = parseInt(params.get("lvl"), 10);
-  if (!isNaN(level)) {
-    levelInput.value = level;
+  if (!isNaN(level)) levelInput.value = level;
+
+  const slots = parseInt(params.get("slots"), 10);
+  if (!isNaN(slots)) slotsInput.value = slots;
+
+  const roles = (params.get("roles") || "").split(",").filter(Boolean);
+  if (roles.length) {
+    roles.forEach((id) => {
+      const cb = document.getElementById(`role-${id}`);
+      if (cb) cb.checked = true;
+    });
   }
+
+  const tab = params.get("tab");
+  if (tab && tabPanels[tab]) activeTab = tab;
 }
 
 function syncStateToQuery() {
@@ -52,6 +94,10 @@ function syncStateToQuery() {
     if (select.value) params.set(`c${i + 1}`, select.value);
   });
   params.set("lvl", levelInput.value);
+  params.set("slots", slotsInput.value);
+  const roles = selectedRoles();
+  if (roles.length) params.set("roles", roles.join(","));
+  params.set("tab", activeTab);
   history.replaceState(null, "", "?" + params.toString());
 }
 
@@ -64,15 +110,18 @@ function formatEffect(spell) {
   return `${spell.total_effect ?? spell.primary_value} ${stat}`.trim();
 }
 
-function spellCard(className, spell) {
-  const eff = spell.mana_efficiency != null ? spell.mana_efficiency.toFixed(2) : "—";
-  const icon = spell.icon
+function iconImg(spell) {
+  return spell.icon
     ? `<img class="spell-icon" src="${spell.icon}" alt="" width="32" height="32">`
     : `<span class="spell-icon spell-icon-placeholder"></span>`;
+}
+
+function spellCard(className, spell) {
+  const eff = spell.mana_efficiency != null ? spell.mana_efficiency.toFixed(2) : "—";
   return `
     <div class="spell-card">
       <div class="spell-card-header">
-        ${icon}
+        ${iconImg(spell)}
         <span class="class-name">${className}</span>
         <span class="spell-name">${spell.name}</span>
         <span class="spell-level">Lv ${spell.level}</span>
@@ -118,23 +167,119 @@ function renderUnique(unique) {
     </details>`;
 }
 
-function render() {
-  syncStateToQuery();
-
-  const classes = selectedClasses();
-  const level = parseInt(levelInput.value, 10) || 1;
-
+function renderComparison(classes, level) {
   if (classes.length === 0) {
     resultsEl.innerHTML = `<p class="empty">Pick 1-3 classes above to compare their spells.</p>`;
     return;
   }
-
   const { overlapping, unique } = compareClasses(classes, level);
   resultsEl.innerHTML = renderOverlapping(overlapping) + renderUnique(unique);
 }
 
+function loadoutRow(index, slotBudget, className, spell, statLabel) {
+  const overBudget = index >= slotBudget;
+  return `
+    <div class="loadout-row ${overBudget ? "over-budget" : ""}">
+      <span class="loadout-rank">${index + 1}</span>
+      ${iconImg(spell)}
+      <div class="loadout-main">
+        <span class="class-name">${className}</span>
+        <span class="spell-name">${spell.name}</span>
+        <span class="spell-level">Lv ${spell.level}</span>
+        <div class="spell-desc">${spell.description}</div>
+      </div>
+      <div class="loadout-stat">
+        ${statLabel}
+        <span class="loadout-sub">${spell.mana} mana · ${spell.duration}</span>
+      </div>
+    </div>`;
+}
+
+function withBudgetDivider(rows, slotBudget) {
+  if (slotBudget >= rows.length || slotBudget < 1) return rows.join("");
+  const divider = `<div class="budget-divider">beyond your ${slotBudget}-slot budget</div>`;
+  return rows.slice(0, slotBudget).join("") + divider + rows.slice(slotBudget).join("");
+}
+
+function updateSlotMeter(el, count, slotBudget) {
+  el.textContent = `${count} / ${slotBudget} slots`;
+  el.classList.toggle("over", count > slotBudget);
+}
+
+function renderBuffLoadout(classes, level, slotBudget) {
+  if (classes.length === 0) {
+    buffLoadoutEl.innerHTML = `<p class="empty">Pick 1-3 classes above.</p>`;
+    buffSlotMeterEl.textContent = "";
+    return;
+  }
+  const picks = buffLoadout(classes, level);
+  updateSlotMeter(buffSlotMeterEl, picks.length, slotBudget);
+  if (picks.length === 0) {
+    buffLoadoutEl.innerHTML = `<p class="empty">No buffs available for these classes at this level.</p>`;
+    return;
+  }
+  const rows = picks.map((spell, i) => {
+    const stat = spell.primary_value != null
+      ? `${spell.primary_value}${spell.primary_stat ? " " + spell.primary_stat : ""}`
+      : "—";
+    return loadoutRow(i, slotBudget, spell.class, spell, stat);
+  });
+  buffLoadoutEl.innerHTML = withBudgetDivider(rows, slotBudget);
+}
+
+function renderRoleLoadout(classes, level, slotBudget, roles) {
+  if (classes.length === 0) {
+    roleLoadoutEl.innerHTML = `<p class="empty">Pick 1-3 classes above.</p>`;
+    roleSlotMeterEl.textContent = "";
+    return;
+  }
+  if (roles.length === 0) {
+    roleLoadoutEl.innerHTML = `<p class="empty">Check one or more roles above to see recommendations.</p>`;
+    roleSlotMeterEl.textContent = "";
+    return;
+  }
+  const picks = roleLoadout(classes, level, roles);
+  updateSlotMeter(roleSlotMeterEl, picks.length, slotBudget);
+  if (picks.length === 0) {
+    roleLoadoutEl.innerHTML = `<p class="empty">No spells available for these roles/classes at this level.</p>`;
+    return;
+  }
+  const rows = picks.map((spell, i) => {
+    const stat = formatEffect(spell);
+    return loadoutRow(i, slotBudget, spell.class, spell, `${spell.kind} · ${stat}`);
+  });
+  roleLoadoutEl.innerHTML = withBudgetDivider(rows, slotBudget);
+}
+
+function setActiveTab(tab) {
+  activeTab = tab;
+  tabButtons.forEach((btn) => btn.classList.toggle("active", btn.dataset.tab === tab));
+  Object.entries(tabPanels).forEach(([id, el]) => el.classList.toggle("active", id === tab));
+}
+
+function render() {
+  const classes = selectedClasses();
+  const level = parseInt(levelInput.value, 10) || 1;
+  const slotBudget = parseInt(slotsInput.value, 10) || 1;
+  const roles = selectedRoles();
+
+  syncStateToQuery();
+  setActiveTab(activeTab);
+
+  renderBuffLoadout(classes, level, slotBudget);
+  renderRoleLoadout(classes, level, slotBudget, roles);
+  renderComparison(classes, level);
+}
+
 populateClassSelects();
+populateRoleCheckboxes();
 applyStateFromQuery();
+setActiveTab(activeTab);
+
 classSelects.forEach((s) => s.addEventListener("change", render));
 levelInput.addEventListener("input", render);
+slotsInput.addEventListener("input", render);
+rolesContainer.addEventListener("change", render);
+tabButtons.forEach((btn) => btn.addEventListener("click", () => { setActiveTab(btn.dataset.tab); syncStateToQuery(); }));
+
 render();
