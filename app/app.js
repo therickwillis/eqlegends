@@ -43,9 +43,13 @@ function formatEffect(spell) {
 
 function spellCard(className, spell) {
   const eff = spell.mana_efficiency != null ? spell.mana_efficiency.toFixed(2) : "—";
+  const icon = spell.icon
+    ? `<img class="spell-icon" src="${spell.icon}" alt="" width="32" height="32">`
+    : `<span class="spell-icon spell-icon-placeholder"></span>`;
   return `
     <div class="spell-card">
       <div class="spell-card-header">
+        ${icon}
         <span class="class-name">${className}</span>
         <span class="spell-name">${spell.name}</span>
         <span class="spell-level">Lv ${spell.level}</span>

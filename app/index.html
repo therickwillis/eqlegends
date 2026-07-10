@@ -65,14 +65,26 @@
   }
   .spell-card-header {
     display: flex;
-    justify-content: space-between;
-    align-items: baseline;
+    align-items: center;
     margin-bottom: 8px;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 6px 8px;
   }
-  .class-name { color: var(--gold); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
-  .spell-name { font-size: 16px; font-weight: bold; }
+  .spell-icon {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--border);
+    image-rendering: pixelated;
+  }
+  .spell-icon-placeholder { background: #0d1118; }
+  .class-name {
+    color: var(--gold);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .spell-name { font-size: 16px; font-weight: bold; flex: 1 1 auto; }
   .spell-level { color: var(--muted); font-size: 12px; }
   .spell-stats {
     display: grid;

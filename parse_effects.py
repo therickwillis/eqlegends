@@ -216,6 +216,8 @@ def build_metrics(spell: dict, effects: list, category: str, duration_seconds, m
 
 def main():
     raw = json.loads((DATA_DIR / "spells_raw.json").read_text(encoding="utf-8"))
+    icons_path = DATA_DIR / "spell_icons.json"
+    spell_icons = json.loads(icons_path.read_text(encoding="utf-8")) if icons_path.exists() else {}
 
     enriched = []
     for spell in raw:
@@ -239,6 +241,7 @@ def main():
             "duration_seconds": duration_seconds,
             "effects": effects,
             "category": category,
+            "icon": spell_icons.get(spell["name"]),
             **metrics,
         })
 
