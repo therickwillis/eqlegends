@@ -32,6 +32,29 @@ function selectedClasses() {
   return classSelects.map((s) => s.value).filter(Boolean);
 }
 
+function applyStateFromQuery() {
+  const params = new URLSearchParams(window.location.search);
+  classSelects.forEach((select, i) => {
+    const value = params.get(`c${i + 1}`);
+    if (value && [...select.options].some((o) => o.value === value)) {
+      select.value = value;
+    }
+  });
+  const level = parseInt(params.get("lvl"), 10);
+  if (!isNaN(level)) {
+    levelInput.value = level;
+  }
+}
+
+function syncStateToQuery() {
+  const params = new URLSearchParams();
+  classSelects.forEach((select, i) => {
+    if (select.value) params.set(`c${i + 1}`, select.value);
+  });
+  params.set("lvl", levelInput.value);
+  history.replaceState(null, "", "?" + params.toString());
+}
+
 function formatEffect(spell) {
   if (spell.primary_value == null) return "—";
   const stat = spell.primary_stat || "";
@@ -96,6 +119,8 @@ function renderUnique(unique) {
 }
 
 function render() {
+  syncStateToQuery();
+
   const classes = selectedClasses();
   const level = parseInt(levelInput.value, 10) || 1;
 
@@ -109,6 +134,7 @@ function render() {
 }
 
 populateClassSelects();
+applyStateFromQuery();
 classSelects.forEach((s) => s.addEventListener("change", render));
 levelInput.addEventListener("input", render);
 render();
