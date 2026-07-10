@@ -41,7 +41,8 @@ KIND_CATEGORY = {
     "DOT Disease": "DoT", "DOT Poison": "DoT", "DoT/Debuff": "DoT", "DoT/Snare": "DoT",
     "Debuff/DoT": "DoT",
     "Detrimental": "Debuff", "Debuff": "Debuff", "Utility Detrimental": "Debuff",
-    "Slow": "Debuff", "Fear": "Debuff", "Root": "Debuff", "Weaken": "Debuff", "Dispel": "Debuff",
+    "Weaken": "Debuff", "Dispel": "Debuff",
+    "Slow": "Slow", "Fear": "Fear", "Root": "Root",
     "Pet": "Pet/Summon", "Summon": "Pet/Summon", "Pet Summon": "Pet/Summon",
     "Summon Item": "Pet/Summon", "Create Item": "Pet/Summon", "Pet Proc": "Pet/Summon",
     "Pet Haste": "Pet/Summon",
@@ -60,7 +61,10 @@ CATEGORY_DESCRIPTIONS = {
     "Buff": "Beneficial stat/AC/resist/HP buff",
     "Nuke": "Direct damage spell",
     "DoT": "Damage over time",
-    "Debuff": "Detrimental effect on a target (slow, fear, root, dispel, etc.)",
+    "Debuff": "Detrimental effect on a target (stat/AC reduction, dispel, weaken, etc.)",
+    "Slow": "Reduces a target's attack/movement speed",
+    "Fear": "Makes a target flee in terror",
+    "Root": "Immobilizes a target",
     "Pet/Summon": "Summons a pet or item",
     "Charm": "Charms a target to fight for the caster",
     "Cure": "Cures poison/disease/curse",
@@ -177,12 +181,23 @@ def effect_numeric_value(effect: dict):
     return None
 
 
+NUMERIC_EFFECT_TYPES = ("flat", "range", "per_tick")
+
+
 def classify(spell: dict, effects: list, duration_seconds):
     category = KIND_CATEGORY.get(spell["kind"], "Other")
     # Refine Heal: a "Heal"-kind spell with a real (non-instant) duration and a
     # per-tick effect is actually a HoT even if the wiki tagged it plain "Heal".
     if category == "Heal-Instant" and duration_seconds and any(e["type"] == "per_tick" for e in effects):
         category = "Heal-HoT"
+    # The wiki tags situational utility spells (Levitate, Invisibility,
+    # Camouflage, Feign Death, Bind Affinity, Enduring Breath, ...) with the
+    # same "Beneficial"/"Utility Beneficial" kind as real stat buffs, but they
+    # don't occupy a stacking buff slot the way a real stat/AC/resist buff
+    # does. A real buff always parses out at least one numeric effect; these
+    # utility spells never do, so use that as the split.
+    if category == "Buff" and not any(e["type"] in NUMERIC_EFFECT_TYPES for e in effects):
+        category = "Utility"
     return category
 
 
@@ -218,6 +233,8 @@ def main():
     raw = json.loads((DATA_DIR / "spells_raw.json").read_text(encoding="utf-8"))
     icons_path = DATA_DIR / "spell_icons.json"
     spell_icons = json.loads(icons_path.read_text(encoding="utf-8")) if icons_path.exists() else {}
+    stacking_path = DATA_DIR / "buff_stacking.json"
+    buff_stacking = json.loads(stacking_path.read_text(encoding="utf-8")) if stacking_path.exists() else {}
 
     enriched = []
     for spell in raw:
@@ -235,6 +252,8 @@ def main():
 
         metrics = build_metrics(spell, effects, category, duration_seconds, mana, explicit_total)
 
+        stacking_groups = buff_stacking.get(spell["name"].lower(), []) if category == "Buff" else []
+
         enriched.append({
             **spell,
             "mana": mana,
@@ -242,6 +261,8 @@ def main():
             "effects": effects,
             "category": category,
             "icon": spell_icons.get(spell["name"]),
+            "stacking_groups": stacking_groups,
+            "stacking_confirmed": bool(stacking_groups),
             **metrics,
         })
 

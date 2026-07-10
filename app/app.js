@@ -176,7 +176,7 @@ function renderComparison(classes, level) {
   resultsEl.innerHTML = renderOverlapping(overlapping) + renderUnique(unique);
 }
 
-function loadoutRow(index, slotBudget, className, spell, statLabel) {
+function loadoutRow(index, slotBudget, className, spell, statLabel, subText, badge = "") {
   const overBudget = index >= slotBudget;
   return `
     <div class="loadout-row ${overBudget ? "over-budget" : ""}">
@@ -184,13 +184,13 @@ function loadoutRow(index, slotBudget, className, spell, statLabel) {
       ${iconImg(spell)}
       <div class="loadout-main">
         <span class="class-name">${className}</span>
-        <span class="spell-name">${spell.name}</span>
+        <span class="spell-name">${spell.name}</span>${badge}
         <span class="spell-level">Lv ${spell.level}</span>
         <div class="spell-desc">${spell.description}</div>
       </div>
       <div class="loadout-stat">
         ${statLabel}
-        <span class="loadout-sub">${spell.mana} mana · ${spell.duration}</span>
+        <span class="loadout-sub">${subText}</span>
       </div>
     </div>`;
 }
@@ -222,7 +222,13 @@ function renderBuffLoadout(classes, level, slotBudget) {
     const stat = spell.primary_value != null
       ? `${spell.primary_value}${spell.primary_stat ? " " + spell.primary_stat : ""}`
       : "—";
-    return loadoutRow(i, slotBudget, spell.class, spell, stat);
+    const subText = spell.confirmed
+      ? spell.stacking_groups.map((g) => g.label).join(" + ")
+      : "stacking unconfirmed";
+    const badge = spell.confirmed
+      ? ""
+      : ` <span class="unconfirmed-badge" title="No confirmed stacking data for this spell (not found on eqlwiki.com's Buff Lines page) — shown assuming it doesn't conflict with anything else.">?</span>`;
+    return loadoutRow(i, slotBudget, spell.class, spell, stat, subText, badge);
   });
   buffLoadoutEl.innerHTML = withBudgetDivider(rows, slotBudget);
 }
@@ -246,7 +252,8 @@ function renderRoleLoadout(classes, level, slotBudget, roles) {
   }
   const rows = picks.map((spell, i) => {
     const stat = formatEffect(spell);
-    return loadoutRow(i, slotBudget, spell.class, spell, `${spell.kind} · ${stat}`);
+    const subText = `${spell.mana} mana · ${spell.duration}`;
+    return loadoutRow(i, slotBudget, spell.class, spell, `${spell.category} · ${stat}`, subText);
   });
   roleLoadoutEl.innerHTML = withBudgetDivider(rows, slotBudget);
 }

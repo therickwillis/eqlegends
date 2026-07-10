@@ -166,6 +166,20 @@
     flex: 1;
     border-top: 1px dashed var(--border);
   }
+  .unconfirmed-badge {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    line-height: 14px;
+    text-align: center;
+    border-radius: 50%;
+    background: #6b5a2a;
+    color: #f0d98a;
+    font-size: 10px;
+    font-weight: bold;
+    font-family: sans-serif;
+    cursor: help;
+  }
 </style>
 </head>
 <body>
@@ -211,15 +225,19 @@
     <section class="loadout-section">
       <h3>Buff Loadout <span id="buff-slot-meter" class="slot-meter"></span></h3>
       <p class="loadout-section-desc">
-        Strongest buff per stat line across your selected classes — memorize these, then
-        Quick Buff. Ranked by magnitude; picks past your slot count are dimmed.
+        Strongest non-conflicting buffs across your selected classes, using real stacking-slot data from
+        eqlwiki.com's Buff Lines page — memorize these, then Quick Buff. Buffs with no confirmed stacking
+        data are marked <span class="unconfirmed-badge">?</span> and assumed not to conflict with anything.
+        Ranked by magnitude; picks past your slot count are dimmed.
       </p>
       <div id="buff-loadout" class="loadout-list"></div>
     </section>
     <section class="loadout-section">
       <h3>Grouping Loadout <span id="role-slot-meter" class="slot-meter"></span></h3>
       <p class="loadout-section-desc">
-        Best available spell per tool within your selected roles above (pick at least one role).
+        Best spell per class per category within your selected roles above (pick at least one role) — e.g.
+        both a Cleric heal and a Druid heal can show up, since heals aren't mutually exclusive the way
+        buffs are; only same-class redundant tiers get collapsed.
       </p>
       <div id="role-loadout" class="loadout-list"></div>
     </section>

@@ -54,36 +54,15 @@ function compareClasses(classNames, level) {
   return { overlapping, unique };
 }
 
-// Role -> the raw wiki `kind` values that count toward it. Kept granular
-// (pre-collapse) rather than our Buff/Nuke/DoT categories, since e.g. "Fear"
-// vs "Root" vs "Slow" are different tools a player wants distinct picks for,
-// not a single "Debuff" winner.
+// Role -> the effect categories that count toward it (post-collapse; Fear/
+// Root/Slow are already their own categories so Crowd Control keeps them
+// distinct without needing raw `kind` granularity).
 const ROLE_DEFINITIONS = {
-  healer: {
-    label: "Healer",
-    kinds: ["Heal", "Healing", "Pet Heal", "Heal Over Time", "Duration Heals",
-            "Duraiton Heals", "Regen", "HP/END/MANA Regen", "Cure", "Cure Poison"],
-  },
-  damage: {
-    label: "Damage",
-    kinds: ["Damage", "Direct Damage", "DD", "DD Cold", "Rain DD", "AE DD", "AE DD (quad)",
-            "Rain Dmg", "Damage/Root", "Damage/Stun", "Damage Over Time", "DoT", "Dot", "DOT",
-            "DOT Disease", "DOT Poison", "DoT/Debuff", "DoT/Snare", "Debuff/DoT",
-            "Taps", "Lifetap"],
-  },
-  crowd_control: {
-    label: "Crowd Control",
-    kinds: ["Charm", "Fear", "Root", "Slow"],
-  },
-  debuffer: {
-    label: "Debuffer",
-    kinds: ["Detrimental", "Debuff", "Utility Detrimental", "Weaken", "Dispel"],
-  },
-  support: {
-    label: "Utility / Support",
-    kinds: ["Summon", "Pet Summon", "Summon Item", "Create Item", "Pet Proc", "Pet Haste",
-            "Pet", "Travel", "Teleport", "Tradeskill", "Utility", "Mana"],
-  },
+  healer: { label: "Healer", categories: ["Heal-Instant", "Heal-HoT", "Regen", "Cure"] },
+  damage: { label: "Damage", categories: ["Nuke", "DoT", "Lifetap"] },
+  crowd_control: { label: "Crowd Control", categories: ["Charm", "Fear", "Root", "Slow"] },
+  debuffer: { label: "Debuffer", categories: ["Debuff"] },
+  support: { label: "Utility / Support", categories: ["Pet/Summon", "Travel", "Tradeskill", "Utility"] },
 };
 
 function spellPower(spell) {
@@ -104,42 +83,60 @@ function betterSpell(a, b) {
 }
 
 /**
- * Recommended buffs to memorize for a quick-buff pass: the single strongest
- * buff per distinct primary stat line across the selected classes, so you're
- * not memorizing two classes' AC/HP buffs when you only need the better one.
- * Note: only the spell's *primary* (first-listed) stat is used for grouping,
- * so a combo buff's secondary effects (e.g. Courage's AC + Max HP + HP) aren't
- * separately weighed against single-stat buffs of those same lines.
+ * Recommended buffs to memorize for a quick-buff pass. Buffs occupy a real
+ * in-game "slot" (e.g. AC Slot 1), and two buffs sharing any slot don't
+ * stack - only the stronger one takes effect. `stacking_groups` (sourced from
+ * eqlwiki.com's Buff Lines page) lists every slot a spell occupies; a combo
+ * buff like Courage occupies more than one (AC *and* HP), so this is a greedy
+ * set-cover: take spells strongest-first, skip any that share an already-
+ * claimed slot with a spell we already picked, and claim all of its slots
+ * when picked. Buffs with no known stacking data (not on that wiki page -
+ * roughly 25% of Buff-category spells, mostly newer/undocumented ones) get a
+ * synthetic per-spell group so they're never assumed to conflict with
+ * anything, and are flagged `confirmed: false` so the UI can call that out.
  */
 function buffLoadout(classNames, level) {
   const candidates = SPELLS.filter(
     (s) => classNames.includes(s.class) && s.level <= level && s.category === "Buff"
   );
-  const byStat = new Map();
-  for (const s of candidates) {
-    const key = s.primary_stat || s.description;
-    byStat.set(key, betterSpell(byStat.get(key), s));
+  const sorted = [...candidates].sort((a, b) => (spellPower(b) ?? 0) - (spellPower(a) ?? 0));
+
+  const claimed = new Set();
+  const picks = [];
+  for (const spell of sorted) {
+    const confirmed = spell.stacking_confirmed && spell.stacking_groups.length > 0;
+    const groupIds = confirmed
+      ? spell.stacking_groups.map((g) => g.group_id)
+      : [`unconfirmed:${spell.class}:${spell.name}`];
+
+    if (groupIds.some((id) => claimed.has(id))) continue;
+    groupIds.forEach((id) => claimed.add(id));
+    picks.push({ ...spell, confirmed });
   }
-  return [...byStat.values()].sort((a, b) => (spellPower(b) ?? 0) - (spellPower(a) ?? 0));
+  return picks;
 }
 
 /**
- * Recommended combat/utility loadout for one or more roles: the single best
- * spell per distinct `kind` within the selected roles, across the selected
- * classes. Multiple kinds within a role (e.g. Fear + Root + Slow under Crowd
- * Control) all get their own pick since they're different tools, not
- * competing versions of the same thing.
+ * Recommended combat/utility loadout for one or more roles: the best (highest
+ * level) spell per class per category within the selected roles. Unlike
+ * buffs, heals/nukes/CC aren't mutually exclusive - there's no reason not to
+ * memorize both a Cleric heal and a Druid heal - so this only collapses
+ * same-class redundancy (e.g. Druid's Light Healing vs Superior Healing;
+ * within one class + category, the higher-level spell is strictly the
+ * current tier to use), not cross-class options.
  */
 function roleLoadout(classNames, level, roleIds) {
-  const kinds = new Set();
-  roleIds.forEach((id) => ROLE_DEFINITIONS[id]?.kinds.forEach((k) => kinds.add(k)));
+  const categories = new Set();
+  roleIds.forEach((id) => ROLE_DEFINITIONS[id]?.categories.forEach((c) => categories.add(c)));
 
   const candidates = SPELLS.filter(
-    (s) => classNames.includes(s.class) && s.level <= level && kinds.has(s.kind)
+    (s) => classNames.includes(s.class) && s.level <= level && categories.has(s.category)
   );
-  const byKind = new Map();
+  const byClassCategory = new Map();
   for (const s of candidates) {
-    byKind.set(s.kind, betterSpell(byKind.get(s.kind), s));
+    const key = `${s.class}::${s.category}`;
+    const current = byClassCategory.get(key);
+    if (!current || s.level > current.level) byClassCategory.set(key, s);
   }
-  return [...byKind.values()].sort((a, b) => (spellPower(b) ?? 0) - (spellPower(a) ?? 0));
+  return [...byClassCategory.values()].sort((a, b) => (spellPower(b) ?? 0) - (spellPower(a) ?? 0));
 }
