@@ -1,0 +1,82 @@
+[
+  {
+    "name": "Enchanter",
+    "code": "ENC",
+    "archetype": "Casters"
+  },
+  {
+    "name": "Magician",
+    "code": "MAG",
+    "archetype": "Casters"
+  },
+  {
+    "name": "Necromancer",
+    "code": "NEC",
+    "archetype": "Casters"
+  },
+  {
+    "name": "Wizard",
+    "code": "WIZ",
+    "archetype": "Casters"
+  },
+  {
+    "name": "Cleric",
+    "code": "CLR",
+    "archetype": "Priests"
+  },
+  {
+    "name": "Druid",
+    "code": "DRU",
+    "archetype": "Priests"
+  },
+  {
+    "name": "Shaman",
+    "code": "SHM",
+    "archetype": "Priests"
+  },
+  {
+    "name": "Berserker",
+    "code": "BER",
+    "archetype": "Melee"
+  },
+  {
+    "name": "Monk",
+    "code": "MNK",
+    "archetype": "Melee"
+  },
+  {
+    "name": "Rogue",
+    "code": "ROG",
+    "archetype": "Melee"
+  },
+  {
+    "name": "Warrior",
+    "code": "WAR",
+    "archetype": "Melee"
+  },
+  {
+    "name": "Bard",
+    "code": "BRD",
+    "archetype": "Hybrids"
+  },
+  {
+    "name": "Beastlord",
+    "code": "BST",
+    "archetype": "Hybrids"
+  },
+  {
+    "name": "Paladin",
+    "code": "PAL",
+    "archetype": "Hybrids"
+  },
+  {
+    "name": "Ranger",
+    "code": "RNG",
+    "archetype": "Hybrids"
+  },
+  {
+    "name": "Shadow Knight",
+    "code": "SHD",
+    "archetype": "Hybrids"
+  }
+]
