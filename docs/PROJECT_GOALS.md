@@ -4,67 +4,114 @@
 
 EQ Legends' multiclass system means a character has up to 3 classes' worth of spells available at once,
 across 560 possible combinations. Several classes offer similar-effect spells (heals, HoTs, AC/HP buffs,
-crowd control, etc.), but it's not obvious from the wiki's per-class pages which class's version is
-actually better to use, or whether two classes' versions even work together — see
-`docs/GAME_NOTES.md`'s buff-stacking section for why that second question is a real mechanic, not a
-guess.
+crowd control, etc.), but it's not obvious which class's version is actually better to use, or whether
+two classes' versions even work together — see `docs/GAME_NOTES.md`'s buff-stacking section for why that
+second question is a real mechanic, not a guess.
 
-**Goal:** turn the wiki's raw spell data into something that answers, for a given 3-class combo and
+**Goal:** turn the game's raw spell data into something that answers, for a given 3-class combo and
 level: *what should I actually memorize?* — both for buffing (Quick Buff) and for general
 grouping/combat play.
 
 ## Current state
 
-Data pipeline (each step re-runnable independently, in order):
+**The game client is the source of truth for all numbers.** The local EQ Legends install
+(`F:\EverquestLegends`) ships `spells_us.txt` — the classic EQ-engine spell database (~74k rows,
+^-delimited, effect slots encoded as `SLOT|SPA|BASE1|BASE2|CALC|MAX`). Field offsets and the
+level-scaling/duration formulas were ported from the EQEmu open-source server project and verified
+against independently-known spell values. The wiki (eqlwiki.com) is used **only as an index** of which
+spells/classes/levels exist in EQ Legends' ruleset — that curation is server-side policy not present in
+any client file — plus icons. Every number, effect, category, and description is client-derived.
 
-1. `scrape.py` — pulls per-level spell tables for all 16 classes → `data/spells_raw.json`
-2. `fetch_icons.py` — resolves + downloads each spell's icon → `app/icons/`, `data/spell_icons.json`
-3. `buff_stacking.py` — parses the Buff Lines wiki page into a spell → stacking-slot map →
+Data pipeline — run `python update_pipeline.py` after a game update (client-only by default; `--full`
+also refreshes the wiki index/icons):
+
+1. `extract_client_spells.py` — parses the client's `spells_us.txt` → `data/spells_client_raw.json`
+   (gitignored, ~70MB)
+2. `scrape.py` — wiki spell index (names/classes/levels only) → `data/spells_wiki_index.json` [network]
+3. `build_spells_raw.py` — matches index → client records; computes real effect magnitudes at cast level
+   via `eq_spell_formulas.py`; classifies by SPA effect id; generates in-game-style descriptions →
+   `data/spells_raw.json`
+4. `fetch_icons.py` — spell icons from the wiki → `app/icons/`, `data/spell_icons.json` [network]
+5. `build_buff_stacking.py` — computes buff-stacking conflicts from client effect data (no wiki) →
    `data/buff_stacking.json`
-4. `parse_effects.py` — parses effect magnitudes, classifies into categories, attaches icons and
-   stacking data → `data/spells.json` (+ `app/data.js` for the no-build-step UI)
+6. `parse_effects.py` — final merge, derived metrics → `data/spells.json` + `app/data.js`
+7. `classify_roles.py` — data-driven per-class role-affinity analysis → `data/class_roles.json`
 
-UI (`app/index.html`, opened directly as a `file://` page, no server) has three tabs:
+UI (`app/index.html`, opened directly as a `file://` page, no server) has five tabs:
 
-- **Loadouts** — a Buff Loadout (real stacking-slot data, greedy set-cover so combo buffs correctly
-  claim multiple slots) and a role-based Grouping Loadout (Healer/Damage/Crowd Control/Debuffer/
-  Utility-Support), both against a user-set memorize-slot budget.
-- **Category Grid** — every category's best spell per selected class, at a glance, with the strongest
-  cell per row highlighted.
-- **Full Comparison** — the original detailed side-by-side view (all categories, both classes' full
-  stats shown).
+- **Loadouts** — Buff Loadout (greedy set-cover over real stacking lines) + role-based Grouping Loadout,
+  against a user-set memorize-slot budget.
+- **Buff Template** — the flagship recommendation view: a Quick Buff spell set scored by *recipient*
+  (Self/Tank/Melee/Caster/Healer/Pets, each toggleable with an importance slider), one pick per stacking
+  line with a generated "why" (top role, driving stats, rivals it beat), and an auditable
+  excluded-with-reasons section (see `suggestedBuffTemplate` in `app/rank.js`).
+- **Category Grid** — every category's best spell per selected class, at a glance.
+- **Full Comparison** — detailed side-by-side spell cards per category.
+- **Rank Lab** — experimental weighted multi-stat ranking of any category with live per-archetype weight
+  sliders; rows grouped per spell (shared spells show all classes/levels in one row).
 
-Class/level/slots/roles/active-tab selections persist through the URL querystring.
+Class/level/slots/roles/recipients/active-tab selections persist through the URL querystring.
 
 ## Design decisions worth remembering (the "why")
 
-- **Buffs are mutually exclusive by real stacking slot, not by text heuristics.** Early versions grouped
-  buffs by parsed primary-stat text, which both over- and under-merged. Now sourced from eqlwiki.com's
-  Buff Lines page. Spells not found there (~25-40% of Buff-category spells — mostly because they're
-  genuinely undocumented, or because non-buff utility spells like Levitate/Camouflage were originally
-  miscategorized as "Buff" and have since been reclassified to Utility) are still shown, flagged
-  "unconfirmed" rather than silently dropped or wrongly assumed to conflict.
-- **Heals/nukes/CC are *not* mutually exclusive across classes.** Unlike buffs, there's no game mechanic
-  stopping you from memorizing both a Cleric heal and a Druid heal — so the Grouping Loadout shows one
-  pick *per class per category*, only collapsing same-class redundant tiers (e.g. Druid's Light Healing
-  vs. Superior Healing). Fear/Root/Slow are each their own category (not collapsed into one generic
-  "Debuff" bucket) since they're different crowd-control tools you'd want separate picks for.
+- **Client numbers over wiki numbers, wiki only as an index.** The wiki's per-spell numbers are
+  hand-transcribed and pre-launch-stale; the client file is the game's own data. But the client file
+  contains the entire 25-year live-EQ spell database (~34k player-castable spells), and which subset is
+  "really in EQ Legends" (trainer lists, level cap) is server-side — so the wiki's curated spell list
+  stays as the inclusion filter. Wiki rows with no confident client match are dropped, not guessed.
+- **Classification comes from SPA effect ids, not text.** Each effect slot carries a numeric SPA id
+  (0=CurrentHP, 22=Charm, 99=Root, ...; `data/spa_effects.json`, from EQEmu's spdat.h). Order matters:
+  the client lists a spell's primary effect first, so a Cleric AC/HP combo buff with a one-time HP
+  kicker stays "Buff", not "Heal-Instant" — but CC SPAs (Charm/Fear/Mez/Root/Slow) win from any slot,
+  since CC is the headline mechanic whenever present. Zero-value slots (unused padding, e.g.
+  Disempower's dead CHA slot) are ignored everywhere: classification, display, scoring, stacking.
+- **Buff stacking is computed from client effect data, keyed by SPA type alone.** EQEmu's real
+  algorithm compares per-slot-index, but measured against this dataset effect order is a coin flip
+  (26 combo buffs put AC in slot 2, 25 in slot 1), so slot-index matching missed half the real
+  conflicts. SPA-only grouping over-flags slightly, which is the right failure mode for a planning
+  tool: telling you two buffs are fine together when they aren't is the harmful error. Bard songs
+  conflict only with each other; negative-AC effects don't claim the AC line. Long-duration Heal-HoTs
+  (Regeneration/Chloroplast line, ≥5 min) get stacking groups too — they behave as template buffs.
+- **Stacking conflicts only exist between buffs landing on the same body.** In the Buff Template
+  engine, self-only buffs (Shielding line, skins) and pet buffs (Burnout line) compete in their own
+  namespaces — your own Shielding and a Temperance cast on you coexist; Harnessing of Spirit must not
+  knock out Burnout via a shared STR line.
+- **Buff value depends on the recipient, not the caster.** Haste is a melee's biggest buff and worthless
+  on a wizard; Clarity-line regen is the reverse. The Buff Template scores each buff per recipient role
+  (concept weights in `TEMPLATE_ROLE_WEIGHTS`, `app/rank.js`) and sums across enabled recipients — one
+  gem that serves the whole group (Temperance) outranks a same-size single-role buff. "Self" weights
+  derive from what the selected trio can actually use. Junk is hard-excluded with auditable reasons
+  (pacify tools, tracking utilities, instant effects, emergency invulns, bard songs, durations below a
+  level-scaled threshold — buff durations scale with caster level, so level 1's 3-minute Holy Armor is
+  legitimate while 3 minutes at 50 is combat-tempo).
+- **Heals/nukes/CC are *not* mutually exclusive across classes** — no game mechanic stops memorizing
+  both a Cleric heal and a Druid heal, so the Grouping Loadout collapses only same-class redundant
+  tiers. Fear/Root/Slow/Mesmerize each stay their own category — different CC tools you'd want
+  separate picks for.
 - **Memorize slot count is a user input, not hardcoded** — the real number wasn't confirmed pre-launch.
-- **Level is currently one shared value for the whole 3-class combo**, even though classes actually level
-  independently after character level 10 (see GAME_NOTES.md). Simplification, not a data limitation —
-  revisit if per-class level input turns out to matter in practice.
-- Ranking "best" spell in a category is a single scalar magnitude heuristic (`spellPower` in
-  `app/compare.js`), which handles same-stat comparisons well (350 HP vs 600 HP) but is rougher across
-  incommensurable stat types within one category (e.g. ranking a +40 ATK buff against a +40 Poison Resist
-  buff in the Category Grid's "best" highlight). Damage-ish categories (Nuke/DoT/Debuff) store effect
-  values as negative numbers, so ranking compares by magnitude (`Math.abs`), not raw signed value.
+- **Level is one shared value for the whole 3-class combo**, though classes level independently after
+  character level 10 (see GAME_NOTES.md). Simplification — revisit if it matters in practice.
+- **Per-class "role affinity" is a derived score in its own file** (`data/class_roles.json`), keeping
+  hand-authored lore archetypes separate from numbers that change with the scoring formula. Spell count
+  per role, min-max normalized across classes; classes with no spell data (WAR/MNK/BER/ROG) excluded
+  rather than hand-labeled.
+- **Spell descriptions are generated from effects, not scraped.** The client has no prose tooltips for
+  classic-era memorized spells (`dbstr_us.txt` only covers AA/passives) — the in-game description is
+  itself generated from the effect list. `render_description` in `build_spells_raw.py` covers the
+  common SPAs; unmapped SPAs are omitted rather than shown as raw numbers, since several store spell
+  ids/flags in the value field (an honest incomplete description beats a fabricated-looking number).
 
 ## Known gaps / open items
 
-- Buff stacking-group coverage isn't 100% (see above) — re-run `buff_stacking.py` periodically; the wiki
-  may fill in gaps as EQL approaches/passes launch.
+- **Bard instrument scaling isn't modeled** — songs scale with instrument skill/mod at cast time (not
+  in the spell file); affected effects are flagged `approximate: true` and shown at base value.
+- **18 wiki-indexed spells have no client match** (mostly Rogue disciplines and a few Wizard
+  Al'Kabor nukes) and are dropped — revisit if the client updates.
+- **~4% of spells have no generated description** (proc/trigger-style effects with no phrase template
+  yet) and some SPAs aren't scored by the Buff Template ("no value for recipients" bucket) — extend
+  `SPA_CONCEPTS`/`FIXED_PHRASES` as they come up.
+- **Buff Template weights are a first encoding, not ground truth** — `TEMPLATE_ROLE_WEIGHTS` in
+  `app/rank.js` is the single tuning table; recipient importance sliders are the user-facing layer.
 - No per-class independent level input yet.
-- Some auto-generated stacking-group labels are terse (e.g. just "Primary") since the parser doesn't
-  always capture full table-header context from the wiki page.
-- Game launches 2026-07-28 — re-run the full pipeline periodically pre/post-launch as the community wiki
-  matures and any EQL-specific spell balance changes get documented.
+- Game launches 2026-07-28 — re-run `update_pipeline.py` after client patches; pass `--full`
+  occasionally in case the wiki's spell index/icons changed.

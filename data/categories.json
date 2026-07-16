@@ -8,12 +8,11 @@
   "Heal-HoT": "Restores HP over time (heal-over-time)",
   "Heal-Instant": "Restores HP immediately",
   "Lifetap": "Damages target and heals caster",
+  "Mesmerize": "Incapacitates a target until damaged or the effect breaks",
   "Nuke": "Direct damage spell",
   "Pet/Summon": "Summons a pet or item",
-  "Regen": "HP/mana/endurance regeneration over time",
   "Root": "Immobilizes a target",
   "Slow": "Reduces a target's attack/movement speed",
-  "Tradeskill": "Tradeskill utility",
   "Travel": "Movement speed or teleportation",
   "Utility": "Miscellaneous utility effect"
 }

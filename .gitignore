@@ -1,3 +1,7 @@
 __pycache__/
 *.pyc
 .venv/
+
+# Raw dump of the entire game client spell database (~70MB, regenerate anytime with
+# `python extract_client_spells.py` against a local EQ Legends install).
+data/spells_client_raw.json

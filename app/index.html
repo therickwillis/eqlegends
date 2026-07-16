@@ -15,7 +15,8 @@
   }
   * { box-sizing: border-box; }
   body {
-    margin: 0;
+    margin: 0 auto;
+    max-width: 1440px; /* cap line length on wide 16:9 displays; centered with even margins */
     padding: 24px;
     background: var(--bg);
     color: var(--text);
@@ -84,6 +85,28 @@
     text-transform: uppercase;
     letter-spacing: 1px;
   }
+  /* Per-class colored pill — color comes from --pc (set inline per class). */
+  .class-pill {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 4px;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: 0.3px;
+    padding: 1px 8px;
+    border-radius: 9px;
+    white-space: nowrap;
+    color: var(--pc, var(--muted));
+    background: color-mix(in srgb, var(--pc, var(--muted)) 15%, transparent);
+    border: 1px solid color-mix(in srgb, var(--pc, var(--muted)) 42%, transparent);
+  }
+  .class-pill .class-pill-lv {
+    font-weight: 500;
+    color: color-mix(in srgb, var(--pc, var(--muted)) 60%, var(--muted));
+  }
+  .class-pill-group { display: inline-flex; flex-wrap: wrap; gap: 4px; vertical-align: middle; }
   .spell-name { font-size: 16px; font-weight: bold; flex: 1 1 auto; }
   .spell-level { color: var(--muted); font-size: 12px; }
   .spell-stats {
@@ -148,6 +171,7 @@
   .loadout-main { flex: 1 1 auto; min-width: 0; }
   .loadout-main .spell-name { font-size: 14px; display: inline; }
   .loadout-main .class-name { margin-right: 6px; }
+  .loadout-main .class-pill { margin-right: 6px; }
   .loadout-main .spell-desc { margin-top: 2px; }
   .loadout-stat { font-size: 13px; color: var(--text); text-align: right; min-width: 130px; }
   .loadout-stat .loadout-sub { display: block; color: var(--muted); font-size: 11px; }
@@ -201,6 +225,197 @@
     border: 1px solid #c8e6a0;
     vertical-align: middle;
   }
+  /* --- Category Grid: a plain, easy-to-read table. Type | Best spell | Effect | Class |
+     same-line conflicts / alternatives. Cells wrap so the text flows - nothing is truncated. */
+  .grid-table { width: 100%; border-collapse: collapse; font-size: 13px; line-height: 1.45; }
+  .grid-table thead th {
+    position: sticky; top: 0; z-index: 1;
+    background: #0d1219;
+    color: var(--muted); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em;
+    text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--border); white-space: nowrap;
+  }
+  .grid-table td { padding: 6px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .grid-table tbody tr:hover td { background: rgba(255, 255, 255, 0.028); }
+  .grid-section-row td {
+    background: color-mix(in srgb, var(--gold) 9%, transparent);
+    color: var(--gold); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em;
+    padding: 6px 10px;
+  }
+  .grid-section-count { font-size: 10px; color: var(--muted); font-weight: normal; letter-spacing: 0; }
+  .gtc-type { color: var(--gold); font-weight: 600; width: 15%; }
+  .gtc-type .element-chip { margin-left: 6px; }
+  .gtc-best { width: 22%; }
+  .gtc-best .spell-icon { width: 16px; height: 16px; margin: 0 6px 0 0; vertical-align: -3px; }
+  .gtc-best .spell-name { font-weight: 600; }
+  .gtc-eff { color: var(--text); width: 12%; white-space: nowrap; }
+  .gtc-class { width: 14%; }
+  .gtc-others { color: var(--muted); }
+  .gt-other { white-space: nowrap; }
+  tr.gt-conflict .gtc-type { box-shadow: inset 2px 0 0 #b9704f; }
+  .gt-warn { color: #d98a5f; font-size: 10px; }
+  .gt-code {
+    display: inline-block;
+    font-size: 9px; font-weight: 700; letter-spacing: 0.02em; padding: 0 4px;
+    color: var(--pc, var(--muted));
+    background: color-mix(in srgb, var(--pc, var(--muted)) 16%, transparent);
+    border: 1px solid color-mix(in srgb, var(--pc, var(--muted)) 40%, transparent);
+    border-radius: 3px;
+  }
+  .element-chip {
+    display: inline-block;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    padding: 1px 7px;
+    border-radius: 9px;
+    white-space: nowrap;
+    color: var(--ec, var(--muted));
+    background: color-mix(in srgb, var(--ec, var(--muted)) 15%, transparent);
+    border: 1px solid color-mix(in srgb, var(--ec, var(--muted)) 42%, transparent);
+  }
+  button {
+    background: #0d1118;
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 7px 14px;
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  button:hover { border-color: var(--gold); color: var(--gold); }
+  .ranklab-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .ranklab-table-wrap { flex: 1 1 480px; min-width: 0; }
+  .rank-sliders {
+    flex: 0 0 260px;
+    position: sticky;
+    top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 16px 18px;
+    max-height: calc(100vh - 24px);
+    overflow-y: auto;
+  }
+  .rank-slider-field { display: flex; flex-direction: column; gap: 4px; }
+  .rank-slider-field label {
+    display: flex;
+    justify-content: space-between;
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 13px;
+    color: var(--text);
+  }
+  .rank-slider-field .rank-slider-value { color: var(--gold); font-variant-numeric: tabular-nums; }
+  .rank-slider-field input[type="range"] { width: 100%; accent-color: var(--gold); }
+  .rank-score { color: var(--gold); font-variant-numeric: tabular-nums; }
+  .rank-breakdown { color: var(--muted); font-size: 11px; }
+  .rank-slot { white-space: nowrap; }
+  .rank-description { font-size: 12px; line-height: 1.5; min-width: 180px; }
+  .rank-why { font-size: 11px; color: var(--gold); opacity: 0.85; margin-top: 2px; }
+
+  /* --- Buff Template tab --- */
+  .bt-recipients {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .bt-recipient-card {
+    flex: 1 1 170px;
+    max-width: 230px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    cursor: default;
+  }
+  .bt-recipient-card.recipient-off { opacity: 0.45; }
+  .bt-recipient-card > label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    text-transform: none;
+    letter-spacing: 0;
+    cursor: pointer;
+  }
+  .bt-recipient-card .rank-slider-value { margin-left: auto; color: var(--gold); font-size: 12px; font-variant-numeric: tabular-nums; }
+  .bt-recipient-card .bt-recipient-caption { font-size: 11px; color: var(--muted); line-height: 1.4; min-height: 28px; }
+  .bt-recipient-card input[type="range"] { width: 100%; accent-color: var(--gold); }
+  .bt-resists {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 16px;
+    margin-bottom: 16px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .bt-resists-label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
+  .bt-resist-toggle {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+    color: var(--text);
+    text-transform: none;
+    letter-spacing: 0;
+    cursor: pointer;
+  }
+  .bt-summary {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .bt-summary strong { color: var(--gold); font-weight: 600; }
+  .bt-list { display: flex; flex-direction: column; gap: 8px; max-width: 880px; }
+  .bt-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 10px 14px;
+  }
+  .bt-row.over-budget { opacity: 0.45; }
+  .bt-rank { color: var(--muted); font-size: 13px; width: 24px; flex-shrink: 0; text-align: right; font-variant-numeric: tabular-nums; }
+  .bt-row .spell-icon { margin: 0; }
+  .bt-main { flex: 1 1 auto; min-width: 0; }
+  .bt-title { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .bt-title .spell-name { font-size: 15px; }
+  .bt-chip {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 1px 7px;
+    border-radius: 9px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+  .bt-chip-group { color: #8fd18f; border-color: #3c5a3c; }
+  .bt-chip-self { color: #8fb8d1; border-color: #3c4c5a; }
+  .bt-chip-pet { color: #d1b48f; border-color: #5a4c3c; }
+  .bt-meta { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .bt-row .rank-why { font-size: 12px; margin-top: 3px; }
+  .bt-score { font-size: 17px; color: var(--gold); font-variant-numeric: tabular-nums; flex-shrink: 0; }
+  .bt-excluded-block { margin-top: 18px; max-width: 880px; font-size: 13px; }
+  .bt-excluded-block summary { color: var(--muted); cursor: pointer; padding: 8px 0; }
+  .bt-excl-group { margin: 10px 0; }
+  .bt-excl-reason { color: var(--text); font-weight: 600; display: block; margin-bottom: 3px; }
+  .bt-excl-names { color: var(--muted); line-height: 1.6; }
   .unconfirmed-badge {
     display: inline-block;
     width: 14px;
@@ -243,7 +458,7 @@
     </div>
     <div class="field">
       <label for="slots">Memorize Slots</label>
-      <input type="number" id="slots" min="1" max="30" value="12">
+      <input type="number" id="slots" min="1" max="14" value="12">
     </div>
     <div class="roles-field">
       <label>Grouping Roles</label>
@@ -253,8 +468,10 @@
 
   <div class="tabs">
     <button class="tab-btn" data-tab="loadouts">Loadouts</button>
+    <button class="tab-btn" data-tab="bufftemplate">Buff Template</button>
     <button class="tab-btn" data-tab="grid">Category Grid</button>
     <button class="tab-btn" data-tab="comparison">Full Comparison</button>
+    <button class="tab-btn" data-tab="ranklab">Rank Lab</button>
   </div>
 
   <div id="loadouts-view" class="tab-panel">
@@ -280,21 +497,67 @@
   </div>
 
   <div id="grid-view" class="tab-panel">
-    <p class="loadout-section-desc">
-      Every category's best available spell per selected class, at a glance. The
-      <span class="grid-best-swatch"></span> highlighted cell is the strongest option when 2+ classes have one.
+    <p class="loadout-section-desc grid-intro">
+      Best spell per job for your classes at this level. Each buff gets one row per <strong>stacking line</strong>;
+      a <span class="gt-warn">▲</span> marks buffs that won't stack with the same-line spells listed in the last column.
     </p>
-    <div class="grid-table-wrap">
-      <table class="grid-table" id="category-grid"></table>
-    </div>
+    <div id="category-grid"></div>
   </div>
 
   <div id="comparison-view" class="tab-panel">
     <div id="results"></div>
   </div>
 
+  <div id="ranklab-view" class="tab-panel">
+    <p class="loadout-section-desc">
+      Experimental: ranks spells within a category using a weighted, multi-stat score (sums <em>every</em>
+      effect on a spell, not just the first) instead of raw magnitude — lets combo buffs and otherwise-
+      incommensurable stats (a +40 ATK buff vs. a +40 Poison Resist buff) get compared on the same point
+      scale. Weights are a first-draft opinion, not a measured fact — drag a slider and the ranking below
+      updates live. For the Buff category, the Slot column shows the real in-game stacking slot (computed
+      from the game client's own spell effect data — see <span>build_buff_stacking.py</span>) — only the
+      top-ranked spell per slot is actually usable at once.
+    </p>
+    <div class="controls">
+      <div class="field">
+        <label for="rank-archetype">Archetype</label>
+        <select id="rank-archetype"></select>
+      </div>
+      <div class="field">
+        <label for="rank-category">Category</label>
+        <select id="rank-category"></select>
+      </div>
+      <div class="field">
+        <label>&nbsp;</label>
+        <button id="rank-reset" type="button">Reset weights</button>
+      </div>
+    </div>
+    <div class="ranklab-layout">
+      <div class="grid-table-wrap ranklab-table-wrap">
+        <table class="grid-table" id="rank-table"></table>
+      </div>
+      <aside class="rank-sliders" id="rank-sliders"></aside>
+    </div>
+  </div>
+
+  <div id="bufftemplate-view" class="tab-panel">
+    <p class="loadout-section-desc">
+      Your saved Quick Buff spell set: one pick per real stacking line, scored by what each buff
+      does for the people you actually cast it on. Toggle recipients below — haste only counts if
+      you buff melee, Clarity-line regen only if you buff casters — and weight how much each
+      matters. Anything that doesn't belong in a pre-buff pass (pacify tools, tracking utilities,
+      emergency buttons, 12-second songs) is excluded, with reasons you can audit at the bottom.
+    </p>
+    <div class="bt-recipients" id="bt-recipients"></div>
+    <div class="bt-resists" id="bt-resists"></div>
+    <div class="bt-summary" id="bt-summary"></div>
+    <div class="bt-list" id="bt-list"></div>
+    <div id="bt-excluded"></div>
+  </div>
+
   <script src="data.js"></script>
   <script src="compare.js"></script>
+  <script src="rank.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

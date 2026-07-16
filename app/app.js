@@ -13,13 +13,67 @@ const buffSlotMeterEl = document.getElementById("buff-slot-meter");
 const roleSlotMeterEl = document.getElementById("role-slot-meter");
 const tabButtons = [...document.querySelectorAll(".tab-btn")];
 const gridTableEl = document.getElementById("category-grid");
+const rankArchetypeSelect = document.getElementById("rank-archetype");
+const rankCategorySelect = document.getElementById("rank-category");
+const rankResetBtn = document.getElementById("rank-reset");
+const rankSlidersEl = document.getElementById("rank-sliders");
+const rankTableEl = document.getElementById("rank-table");
+const btRecipientsEl = document.getElementById("bt-recipients");
+const btResistsEl = document.getElementById("bt-resists");
+const btSummaryEl = document.getElementById("bt-summary");
+const btListEl = document.getElementById("bt-list");
+const btExcludedEl = document.getElementById("bt-excluded");
 const tabPanels = {
   loadouts: document.getElementById("loadouts-view"),
+  bufftemplate: document.getElementById("bufftemplate-view"),
   grid: document.getElementById("grid-view"),
   comparison: document.getElementById("comparison-view"),
+  ranklab: document.getElementById("ranklab-view"),
 };
 
+// Session-only working copy of the group weights - sliders mutate this
+// directly; "Reset weights" restores the current archetype's slice from
+// DEFAULT_GROUP_WEIGHTS (rank.js). Not persisted across reloads.
+const rankGroupWeights = cloneGroupWeights();
+
 let activeTab = "loadouts";
+
+// Invented per-class palette (EQ has no canonical class colors). Hues are grouped by
+// archetype so the color reinforces the grouping used elsewhere in the UI:
+//   Casters -> blues/violets, Priests -> golds/ambers,
+//   Melee   -> reds/oranges,  Hybrids -> greens/teals.
+const CLASS_COLORS = {
+  // Casters
+  Enchanter: "#bd8cf2",
+  Magician: "#8f8cf0",
+  Necromancer: "#6fb8d8",
+  Wizard: "#5f97f5",
+  // Priests
+  Cleric: "#e8d98a",
+  Druid: "#d6a95c",
+  Shaman: "#c3c07d",
+  // Melee
+  Warrior: "#e0705f",
+  Berserker: "#ee8a52",
+  Monk: "#e3a95f",
+  Rogue: "#e06f86",
+  // Hybrids
+  Beastlord: "#a6c85c",
+  Ranger: "#6cc06f",
+  Paladin: "#57c79c",
+  Bard: "#52c6c6",
+  "Shadow Knight": "#6f9e7a",
+};
+
+function classColor(name) {
+  return CLASS_COLORS[name] || "var(--muted)";
+}
+
+// Colored class "pill". Pass a level to append a muted "Lv N" inside the pill.
+function classPill(name, level) {
+  const lv = level != null ? ` <span class="class-pill-lv">Lv ${level}</span>` : "";
+  return `<span class="class-pill" style="--pc:${classColor(name)}">${name}${lv}</span>`;
+}
 
 function populateClassSelects() {
   const archetypes = [...new Set(CLASSES.map((c) => c.archetype))];
@@ -54,6 +108,22 @@ function populateRoleCheckboxes() {
     label.appendChild(document.createTextNode(def.label));
     rolesContainer.appendChild(label);
   }
+}
+
+function populateRankControls() {
+  for (const [id, def] of Object.entries(ROLE_DEFINITIONS)) {
+    const opt = document.createElement("option");
+    opt.value = id;
+    opt.textContent = def.label;
+    rankArchetypeSelect.appendChild(opt);
+  }
+  for (const category of Object.keys(CATEGORIES).sort()) {
+    const opt = document.createElement("option");
+    opt.value = category;
+    opt.textContent = category;
+    rankCategorySelect.appendChild(opt);
+  }
+  rankCategorySelect.value = "Buff";
 }
 
 function selectedClasses() {
@@ -99,6 +169,13 @@ function syncStateToQuery() {
   params.set("slots", slotsInput.value);
   const roles = selectedRoles();
   if (roles.length) params.set("roles", roles.join(","));
+  if (recipientStateInitialized) {
+    const enabled = TEMPLATE_ROLE_ORDER.filter((r) => recipientState[r].enabled);
+    params.set("r", enabled.join(","));
+  }
+  if (resistStateInitialized) {
+    params.set("res", RESIST_ELEMENTS.filter((r) => resistState[r.id]).map((r) => r.id).join(","));
+  }
   params.set("tab", activeTab);
   history.replaceState(null, "", "?" + params.toString());
 }
@@ -124,7 +201,7 @@ function spellCard(className, spell) {
     <div class="spell-card">
       <div class="spell-card-header">
         ${iconImg(spell)}
-        <span class="class-name">${className}</span>
+        ${classPill(className)}
         <span class="spell-name">${spell.name}</span>
         <span class="spell-level">Lv ${spell.level}</span>
       </div>
@@ -159,7 +236,7 @@ function renderUnique(unique) {
   const rows = unique
     .map(
       ({ category, entry }) =>
-        `<li><strong>${category}</strong> — only ${entry.className} (${entry.spell.name}, Lv ${entry.spell.level})</li>`
+        `<li><strong>${category}</strong> — only ${classPill(entry.className)} (${entry.spell.name}, Lv ${entry.spell.level})</li>`
     )
     .join("");
   return `
@@ -178,36 +255,99 @@ function renderComparison(classes, level) {
   resultsEl.innerHTML = renderOverlapping(overlapping) + renderUnique(unique);
 }
 
-function gridCell(cell) {
-  if (!cell.spell) {
-    return `<td class="grid-cell grid-cell-empty">—</td>`;
-  }
-  const spell = cell.spell;
-  const meta = `Lv ${spell.level} · ${formatEffect(spell)} · ${spell.mana} mana`;
+// Element/resist palette for the type chips: Fire warm, Cold icy, Magic violet, Poison green,
+// Disease sickly olive, Chromatic (resisted by lowest resist) a neutral lavender.
+const ELEMENT_COLORS = {
+  Fire: "#e8804f",
+  Cold: "#6fb8e8",
+  Magic: "#b98cf2",
+  Poison: "#7fc86a",
+  Disease: "#b0a060",
+  Chromatic: "#c98fd0",
+};
+
+function elementChip(resistType) {
+  if (!resistType) return "";
+  const c = ELEMENT_COLORS[resistType] || "var(--muted)";
+  return `<span class="element-chip" style="--ec:${c}">${resistType}</span>`;
+}
+
+const CLASS_CODE = Object.fromEntries(CLASSES.map((c) => [c.name, c.code]));
+function classCode(name) {
+  return CLASS_CODE[name] || name.slice(0, 3).toUpperCase();
+}
+
+// One table row per best-in-slot pick: Type | Best spell | Effect | Class | same-line/alternatives.
+// Nothing is truncated - cells wrap so the text flows. The Class column shows a colored pill per
+// class that gets the pick (with the level it lands); runner-ups stay compact as class codes.
+function gridTableRow(row) {
+  const { kind, resistType, best, runnersUp, conflict } = row;
+  const spell = best.spell;
+  const chip = kind === "category" ? elementChip(resistType) : "";
+  const warn = conflict && runnersUp.length ? ` <span class="gt-warn" title="Only the strongest of these takes effect">▲</span>` : "";
+  const pills = best.classLevels.map((cl) => classPill(cl.class, cl.level)).join("");
+  const others = runnersUp
+    .map((e) => `<span class="gt-other">${e.classLevels.map((c) => classCode(c.class)).join("/")} ${e.spell.name}</span>`)
+    .join(", ");
   return `
-    <td class="grid-cell ${cell.isBest ? "grid-cell-best" : ""}">
-      <span class="spell-name">${spell.name}</span>
-      <span class="grid-cell-meta">${meta}</span>
-    </td>`;
+    <tr class="${conflict ? "gt-conflict" : ""}">
+      <td class="gtc-type">${row.category}${chip}</td>
+      <td class="gtc-best">${iconImg(spell)}<span class="spell-name">${spell.name}</span>${warn}</td>
+      <td class="gtc-eff">${formatEffect(spell)}</td>
+      <td class="gtc-class"><span class="class-pill-group">${pills}</span></td>
+      <td class="gtc-others" title="${spell.mana} mana · ${spell.duration}">${others}</td>
+    </tr>`;
+}
+
+// The board's rows cluster into a few purpose sections (rendered as full-width header rows). Raw
+// categories map into these buckets so the CC rows (Charm/Fear/Root/Slow/Mez) read as one
+// "Crowd Control" group instead of five one-row sections; every buff-line row lands in "Buffs".
+const GRID_SECTIONS = [
+  { id: "heal", label: "Healing", cats: ["Heal-Instant", "Heal-HoT", "Regen", "Cure"] },
+  { id: "damage", label: "Damage", cats: ["Nuke", "DoT", "Lifetap"] },
+  { id: "cc", label: "Crowd Control", cats: ["Charm", "Fear", "Root", "Slow", "Mesmerize"] },
+  { id: "debuff", label: "Debuffs", cats: ["Debuff"] },
+  { id: "utility", label: "Utility", cats: ["Pet/Summon", "Travel", "Tradeskill", "Utility"] },
+  { id: "buff", label: "Buffs", cats: [] }, // every buff-line row, whatever its label
+];
+
+function gridSectionId(row) {
+  if (row.kind === "buff-line") return "buff";
+  const section = GRID_SECTIONS.find((s) => s.cats.includes(row.category));
+  return section ? section.id : "utility"; // unmapped categories fall into Utility
 }
 
 function renderGrid(classes, level) {
   if (classes.length === 0) {
-    gridTableEl.innerHTML = `<tr><td class="grid-cell-empty">Pick 1-3 classes above to see the category grid.</td></tr>`;
+    gridTableEl.innerHTML = `<p class="empty">Pick 1-3 classes above to see the best spell for each type.</p>`;
     return;
   }
-  const rows = categoryGrid(classes, level);
-  const header = `<thead><tr><th>Category</th>${classes.map((c) => `<th>${c}</th>`).join("")}</tr></thead>`;
-  const body = rows
-    .map(
-      ({ category, cells }) => `
-        <tr>
-          <th>${category}<span class="category-sub">${CATEGORIES[category] || ""}</span></th>
-          ${cells.map(gridCell).join("")}
-        </tr>`
-    )
+  const rows = categoryTypeGrid(classes, level);
+  if (rows.length === 0) {
+    gridTableEl.innerHTML = `<p class="empty">No spells available for these classes at this level.</p>`;
+    return;
+  }
+  const bySection = new Map();
+  for (const row of rows) {
+    const id = gridSectionId(row);
+    if (!bySection.has(id)) bySection.set(id, []);
+    bySection.get(id).push(row);
+  }
+  // One plain table: a full-width header row introduces each purpose section, then a row per pick.
+  const body = GRID_SECTIONS.filter((s) => bySection.has(s.id))
+    .map((s) => {
+      const secRows = bySection.get(s.id);
+      const header = `<tr class="grid-section-row"><td colspan="5">${s.label} <span class="grid-section-count">${secRows.length}</span></td></tr>`;
+      return header + secRows.map(gridTableRow).join("");
+    })
     .join("");
-  gridTableEl.innerHTML = header + `<tbody>${body}</tbody>`;
+  gridTableEl.innerHTML = `
+    <table class="grid-table">
+      <thead>
+        <tr><th>Type</th><th>Best in slot</th><th>Effect</th><th>Class</th><th>Won't stack with · alternatives</th></tr>
+      </thead>
+      <tbody>${body}</tbody>
+    </table>`;
 }
 
 function loadoutRow(index, slotBudget, className, spell, statLabel, subText, badge = "") {
@@ -217,7 +357,7 @@ function loadoutRow(index, slotBudget, className, spell, statLabel, subText, bad
       <span class="loadout-rank">${index + 1}</span>
       ${iconImg(spell)}
       <div class="loadout-main">
-        <span class="class-name">${className}</span>
+        ${classPill(className)}
         <span class="spell-name">${spell.name}</span>${badge}
         <span class="spell-level">Lv ${spell.level}</span>
         <div class="spell-desc">${spell.description}</div>
@@ -292,6 +432,294 @@ function renderRoleLoadout(classes, level, slotBudget, roles) {
   roleLoadoutEl.innerHTML = withBudgetDivider(rows, slotBudget);
 }
 
+function renderRankSliders() {
+  const archetype = rankArchetypeSelect.value;
+  const weights = rankGroupWeights[archetype];
+  rankSlidersEl.innerHTML = GROUP_ORDER.map((group) => `
+    <div class="rank-slider-field">
+      <label for="rank-slider-${group}">
+        ${GROUP_LABELS[group]}
+        <span class="rank-slider-value" id="rank-slider-value-${group}">${weights[group].toFixed(1)}</span>
+      </label>
+      <input type="range" id="rank-slider-${group}" min="0" max="5" step="0.1" value="${weights[group]}">
+    </div>`).join("");
+
+  for (const group of GROUP_ORDER) {
+    const input = document.getElementById(`rank-slider-${group}`);
+    const valueEl = document.getElementById(`rank-slider-value-${group}`);
+    input.addEventListener("input", () => {
+      const value = parseFloat(input.value);
+      rankGroupWeights[archetype][group] = value;
+      valueEl.textContent = value.toFixed(1);
+      renderRankTable();
+    });
+  }
+}
+
+function rankBreakdownText(breakdown) {
+  return breakdown
+    .map(({ stat, value, weight, points }) => `${stat} ${value > 0 ? "+" : ""}${value}×${weight}=${points.toFixed(1)}`)
+    .join(", ");
+}
+
+function renderRankTable() {
+  const classes = selectedClasses();
+  const level = parseInt(levelInput.value, 10) || 1;
+  const archetype = rankArchetypeSelect.value;
+  const category = rankCategorySelect.value;
+
+  if (classes.length === 0) {
+    rankTableEl.innerHTML = `<tr><td class="grid-cell-empty">Pick 1-3 classes above to rank their spells.</td></tr>`;
+    return;
+  }
+
+  const ranked = rankSpells(classes, level, category, archetype, rankGroupWeights);
+  if (ranked.length === 0) {
+    rankTableEl.innerHTML = `<tr><td class="grid-cell-empty">No ${category} spells for these classes at this level.</td></tr>`;
+    return;
+  }
+
+  const header = `<thead><tr><th>#</th><th></th><th>Class</th><th>Spell</th><th>Description</th><th>Target</th><th>Slot</th><th>Score</th><th>Breakdown</th></tr></thead>`;
+  const rows = ranked
+    .map(
+      ({ spell, classLevels, score, breakdown, slot }, i) => `
+        <tr>
+          <td>${i + 1}</td>
+          <td>${iconImg(spell)}</td>
+          <td class="rank-classes"><span class="class-pill-group">${classLevels
+            .map((cl) => classPill(cl.class, cl.level))
+            .join("")}</span></td>
+          <td><span class="spell-name">${spell.name}</span></td>
+          <td class="rank-description">${spell.description || "—"}</td>
+          <td>${spell.target || "—"}</td>
+          <td class="rank-slot">${slot}</td>
+          <td class="rank-score">${score.toFixed(1)}</td>
+          <td class="rank-breakdown">${rankBreakdownText(breakdown)}</td>
+        </tr>`
+    )
+    .join("");
+  rankTableEl.innerHTML = header + `<tbody>${rows}</tbody>`;
+}
+
+// --- Quick Buff template panel: recipient state + rendering --------------------------
+
+// Who the buff template is for. Enabled roles and their importance drive templateScore()
+// in rank.js. Pets defaults on only when the trio can actually field a pet (data-driven).
+const recipientState = {};
+let recipientStateInitialized = false;
+
+// Which resist elements the user wants folded into the template. Ordered fire/cold/magic
+// first (the common ones), then poison/disease. Defaults to all on = today's behavior.
+const RESIST_ELEMENTS = [
+  { id: "fire", label: "Fire" },
+  { id: "cold", label: "Cold" },
+  { id: "magic", label: "Magic" },
+  { id: "poison", label: "Poison" },
+  { id: "disease", label: "Disease" },
+];
+const resistState = {};
+let resistStateInitialized = false;
+
+function initResistState() {
+  const params = new URLSearchParams(window.location.search);
+  const fromUrl = params.get("res"); // "" (all off) is distinct from absent (default all on)
+  const enabledSet = fromUrl != null ? new Set(fromUrl.split(",").filter(Boolean)) : null;
+  for (const { id } of RESIST_ELEMENTS) {
+    resistState[id] = enabledSet ? enabledSet.has(id) : true;
+  }
+  resistStateInitialized = true;
+}
+
+function selectedResists() {
+  if (!resistStateInitialized) initResistState();
+  return new Set(RESIST_ELEMENTS.filter((r) => resistState[r.id]).map((r) => r.id));
+}
+
+function renderResistControls() {
+  if (!resistStateInitialized) initResistState();
+  btResistsEl.innerHTML =
+    `<span class="bt-resists-label">Resists in template</span>` +
+    RESIST_ELEMENTS.map(
+      (r) => `
+      <label class="bt-resist-toggle">
+        <input type="checkbox" id="resist-${r.id}" ${resistState[r.id] ? "checked" : ""}>
+        ${r.label}
+      </label>`
+    ).join("");
+
+  for (const { id } of RESIST_ELEMENTS) {
+    document.getElementById(`resist-${id}`).addEventListener("change", (e) => {
+      resistState[id] = e.target.checked;
+      syncStateToQuery();
+      renderBuffTemplate();
+    });
+  }
+}
+
+function trioHasPets(classes, level) {
+  return SPELLS.some(
+    (s) => s.category === "Pet/Summon" && classes.includes(s.class) && s.level <= level &&
+           (s.spas || []).some((spa) => [33, 71, 103, 106].includes(spa))
+  );
+}
+
+function initRecipientState() {
+  const params = new URLSearchParams(window.location.search);
+  const fromUrl = params.get("r");
+  const enabledSet = fromUrl ? new Set(fromUrl.split(",")) : null;
+  for (const role of TEMPLATE_ROLE_ORDER) {
+    const defaultOn = role === "pets"
+      ? trioHasPets(selectedClasses(), parseInt(levelInput.value, 10) || 1)
+      : true;
+    recipientState[role] = {
+      enabled: enabledSet ? enabledSet.has(role) : defaultOn,
+      importance: 1.0,
+    };
+  }
+  recipientStateInitialized = true;
+}
+
+// What each recipient card says it values - shown on the card so toggling it teaches the
+// scoring model instead of feeling like a mystery knob.
+const RECIPIENT_CAPTIONS = {
+  self: "Your own body — self-only buffs (Shielding line, skins, stances)",
+  tank: "AC · Max HP · damage shields · HP regen",
+  melee: "Haste · ATK · STR/DEX · weapon procs",
+  caster: "Mana regen (Clarity line) · runes",
+  healer: "Mana regen · WIS",
+  pets: "Pet haste (Burnout line) · pet damage shields",
+};
+
+function renderRecipientControls() {
+  if (!recipientStateInitialized) initRecipientState();
+  btRecipientsEl.innerHTML = TEMPLATE_ROLE_ORDER.map((role) => {
+    const st = recipientState[role];
+    return `
+      <div class="bt-recipient-card ${st.enabled ? "" : "recipient-off"}">
+        <label>
+          <input type="checkbox" id="recip-${role}" ${st.enabled ? "checked" : ""}>
+          ${TEMPLATE_ROLE_LABELS[role]}
+          <span class="rank-slider-value" id="recip-w-value-${role}">×${st.importance.toFixed(1)}</span>
+        </label>
+        <span class="bt-recipient-caption">${RECIPIENT_CAPTIONS[role]}</span>
+        <input type="range" id="recip-w-${role}" min="0" max="3" step="0.1" value="${st.importance}"
+               ${st.enabled ? "" : "disabled"} title="How much buffing this recipient matters to you">
+      </div>`;
+  }).join("");
+
+  for (const role of TEMPLATE_ROLE_ORDER) {
+    document.getElementById(`recip-${role}`).addEventListener("change", (e) => {
+      recipientState[role].enabled = e.target.checked;
+      syncStateToQuery();
+      renderRecipientControls();
+      renderBuffTemplate();
+    });
+    const slider = document.getElementById(`recip-w-${role}`);
+    slider.addEventListener("input", () => {
+      recipientState[role].importance = parseFloat(slider.value);
+      document.getElementById(`recip-w-value-${role}`).textContent = `×${recipientState[role].importance.toFixed(1)}`;
+      renderBuffTemplate();
+    });
+  }
+}
+
+function targetChip(spell) {
+  if (spell.target === "Self") return `<span class="bt-chip bt-chip-self">Self</span>`;
+  if (spell.target === "Pet") return `<span class="bt-chip bt-chip-pet">Pet</span>`;
+  if ((spell.target || "").includes("Group")) return `<span class="bt-chip bt-chip-group">Group</span>`;
+  return `<span class="bt-chip">Single</span>`;
+}
+
+function buffTemplateRow(index, slotBudget, pick) {
+  const { spell, classLevels, score, confirmed } = pick;
+  const overBudget = index >= slotBudget;
+  const classText = `<span class="class-pill-group">${classLevels
+    .map((cl) => classPill(cl.class, cl.level))
+    .join("")}</span>`;
+  const lineText = confirmed
+    ? spell.stacking_groups.map((g) => g.label).join(" + ")
+    : "stacking unconfirmed";
+  const badge = confirmed
+    ? ""
+    : ` <span class="unconfirmed-badge" title="No confirmed stacking data for this spell — shown assuming it doesn't conflict with anything else.">?</span>`;
+  return `
+    <div class="bt-row ${overBudget ? "over-budget" : ""}">
+      <span class="bt-rank">${index + 1}</span>
+      ${iconImg(spell)}
+      <div class="bt-main">
+        <div class="bt-title">
+          <span class="spell-name">${spell.name}</span>${badge}
+          ${targetChip(spell)}
+        </div>
+        <div class="bt-meta">${classText} · claims: ${lineText}</div>
+        <div class="rank-why">${pick.why}</div>
+      </div>
+      <div class="bt-score">${score.toFixed(0)}</div>
+    </div>`;
+}
+
+function renderBuffTemplateExcluded(excluded) {
+  if (excluded.length === 0) {
+    btExcludedEl.innerHTML = "";
+    return;
+  }
+  const byKey = new Map();
+  for (const entry of excluded) {
+    const key = entry.reason.key;
+    if (!byKey.has(key)) byKey.set(key, []);
+    byKey.get(key).push(entry);
+  }
+  const groups = [...byKey.entries()]
+    .sort((a, b) => b[1].length - a[1].length)
+    .map(([key, entries]) => {
+      const names = entries
+        .sort((a, b) => a.spell.name.localeCompare(b.spell.name))
+        .map(({ spell, reason }) => `<span title="${reason.text}">${spell.name}</span>`)
+        .join(", ");
+      return `
+        <div class="bt-excl-group">
+          <span class="bt-excl-reason">${EXCLUSION_GROUP_LABELS[key] || key} (${entries.length})</span>
+          <span class="bt-excl-names">${names}</span>
+        </div>`;
+    })
+    .join("");
+  btExcludedEl.innerHTML = `
+    <details class="bt-excluded-block">
+      <summary>Excluded from the template (${excluded.length}) — audit why</summary>
+      ${groups}
+    </details>`;
+}
+
+function renderBuffTemplate() {
+  const classes = selectedClasses();
+  const level = parseInt(levelInput.value, 10) || 1;
+  const slotBudget = parseInt(slotsInput.value, 10) || 1;
+
+  if (!recipientStateInitialized) initRecipientState();
+  if (classes.length === 0) {
+    btSummaryEl.innerHTML = "";
+    btListEl.innerHTML = `<p class="empty">Pick 1-3 classes above to build your Quick Buff template.</p>`;
+    btExcludedEl.innerHTML = "";
+    return;
+  }
+  const { picks, excluded } = suggestedBuffTemplate(classes, level, recipientState, selectedResists());
+  if (picks.length === 0) {
+    btSummaryEl.innerHTML = "";
+    btListEl.innerHTML = `<p class="empty">No template-worthy buffs for these classes/recipients at this level.</p>`;
+    renderBuffTemplateExcluded(excluded);
+    return;
+  }
+  const fits = Math.min(picks.length, slotBudget);
+  const overflow = picks.length - fits;
+  btSummaryEl.innerHTML =
+    `<strong>${picks.length}</strong> buffs cover every stacking line worth claiming — ` +
+    `<strong>${fits}</strong> fit your ${slotBudget}-slot budget` +
+    (overflow > 0 ? `, ${overflow} spill past it (dimmed below)` : "") +
+    ` · ${excluded.length} spells excluded`;
+  btListEl.innerHTML = withBudgetDivider(picks.map((p, i) => buffTemplateRow(i, slotBudget, p)), slotBudget);
+  renderBuffTemplateExcluded(excluded);
+}
+
 function setActiveTab(tab) {
   activeTab = tab;
   tabButtons.forEach((btn) => btn.classList.toggle("active", btn.dataset.tab === tab));
@@ -311,17 +739,33 @@ function render() {
   renderRoleLoadout(classes, level, slotBudget, roles);
   renderGrid(classes, level);
   renderComparison(classes, level);
+  renderRankTable();
+  renderBuffTemplate();
 }
 
 populateClassSelects();
 populateRoleCheckboxes();
+populateRankControls();
 applyStateFromQuery();
 setActiveTab(activeTab);
+renderRankSliders();
+renderRecipientControls();
+renderResistControls();
 
 classSelects.forEach((s) => s.addEventListener("change", render));
 levelInput.addEventListener("input", render);
 slotsInput.addEventListener("input", render);
 rolesContainer.addEventListener("change", render);
 tabButtons.forEach((btn) => btn.addEventListener("click", () => { setActiveTab(btn.dataset.tab); syncStateToQuery(); }));
+// The suggested-buff panel runs on recipient roles, not the caster archetype - only the
+// ranking table needs re-rendering when archetype sliders move.
+rankArchetypeSelect.addEventListener("change", () => { renderRankSliders(); renderRankTable(); });
+rankCategorySelect.addEventListener("change", renderRankTable);
+rankResetBtn.addEventListener("click", () => {
+  const archetype = rankArchetypeSelect.value;
+  rankGroupWeights[archetype] = { ...DEFAULT_GROUP_WEIGHTS[archetype] };
+  renderRankSliders();
+  renderRankTable();
+});
 
 render();

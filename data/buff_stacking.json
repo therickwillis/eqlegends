@@ -1,2064 +1,1886 @@
 {
-  "talisman of the cat": [
-    {
-      "group_id": "attribute-enhancing-agility-agility-primary",
-      "label": "Agility (Primary)"
-    }
-  ],
-  "agility": [
-    {
-      "group_id": "attribute-enhancing-agility-agility-primary",
-      "label": "Agility (Primary)"
-    }
-  ],
-  "spirit of cat": [
-    {
-      "group_id": "attribute-enhancing-agility-agility-primary",
-      "label": "Agility (Primary)"
-    }
-  ],
-  "nimble": [
-    {
-      "group_id": "attribute-enhancing-agility-agility-primary",
-      "label": "Agility (Primary)"
-    }
-  ],
-  "feet like cat": [
-    {
-      "group_id": "attribute-enhancing-agility-agility-primary",
-      "label": "Agility (Primary)"
-    }
-  ],
-  "deliriously nimble": [
-    {
-      "group_id": "attribute-enhancing-agility-agility-primary",
-      "label": "Agility (Primary)"
-    }
-  ],
-  "augment": [
-    {
-      "group_id": "attribute-enhancing-agility-agility-speed-augmentation",
-      "label": "Agility (Speed Augmentation)"
-    },
-    {
-      "group_id": "other-buffs-ac-ac-slot-3",
-      "label": "AC (Slot 3)"
-    },
-    {
-      "group_id": "other-buffs-haste-haste-primary",
-      "label": "Haste (Primary)"
-    }
-  ],
-  "visions of grandeur": [
-    {
-      "group_id": "attribute-enhancing-agility-agility-speed-augmentation",
-      "label": "Agility (Speed Augmentation)"
-    },
-    {
-      "group_id": "attribute-enhancing-dexterity-dexterity-power",
-      "label": "Dexterity (Power)"
-    },
-    {
-      "group_id": "other-buffs-attack-atk-attack-slot-4",
-      "label": "Attack (Slot 4)"
-    },
-    {
-      "group_id": "other-buffs-haste-haste-primary",
-      "label": "Haste (Primary)"
-    }
-  ],
-  "augmentation": [
-    {
-      "group_id": "attribute-enhancing-agility-agility-speed-augmentation",
-      "label": "Agility (Speed Augmentation)"
-    },
-    {
-      "group_id": "other-buffs-ac-ac-slot-3",
-      "label": "AC (Slot 3)"
-    },
-    {
-      "group_id": "other-buffs-haste-haste-primary",
-      "label": "Haste (Primary)"
-    }
-  ],
-  "nillipus' march of the wee": [
-    {
-      "group_id": "attribute-enhancing-agility-agility-march",
-      "label": "Agility (March)"
-    },
-    {
-      "group_id": "other-buffs-ac-ac-layer-2-slot-1",
-      "label": "AC (Layer 2, Slot 1)"
-    },
-    {
-      "group_id": "other-buffs-damage-absorption-damage-absorption-march",
-      "label": "Damage Absorption (March)"
-    }
-  ],
-  "avatar": [
-    {
-      "group_id": "attribute-enhancing-agility-agility-avatar",
-      "label": "Agility (Avatar)"
-    },
-    {
-      "group_id": "attribute-enhancing-dexterity-dexterity-avatar",
-      "label": "Dexterity (Avatar)"
-    },
-    {
-      "group_id": "attribute-enhancing-strength-strength-avatar",
-      "label": "Strength (Avatar)"
-    },
-    {
-      "group_id": "other-buffs-attack-atk-attack-slot-3",
-      "label": "Attack (Slot 3)"
-    }
-  ],
-  "unfailing reverence": [
-    {
-      "group_id": "attribute-enhancing-charisma-charisma-primary",
-      "label": "Charisma (Primary)"
-    }
-  ],
-  "glamour": [
-    {
-      "group_id": "attribute-enhancing-charisma-charisma-primary",
-      "label": "Charisma (Primary)"
-    }
-  ],
-  "spirit of snake": [
-    {
-      "group_id": "attribute-enhancing-charisma-charisma-primary",
-      "label": "Charisma (Primary)"
-    }
-  ],
-  "sympathetic aura": [
-    {
-      "group_id": "attribute-enhancing-charisma-charisma-primary",
-      "label": "Charisma (Primary)"
-    }
-  ],
-  "radiant visage": [
-    {
-      "group_id": "attribute-enhancing-charisma-charisma-primary",
-      "label": "Charisma (Primary)"
-    }
-  ],
-  "charisma": [
-    {
-      "group_id": "attribute-enhancing-charisma-charisma-primary",
-      "label": "Charisma (Primary)"
-    }
-  ],
-  "alluring aura": [
-    {
-      "group_id": "attribute-enhancing-charisma-charisma-primary",
-      "label": "Charisma (Primary)"
-    }
-  ],
-  "talisman of the serpent": [
-    {
-      "group_id": "attribute-enhancing-charisma-charisma-primary",
-      "label": "Charisma (Primary)"
-    }
-  ],
-  "overwhelming splendor": [
-    {
-      "group_id": "attribute-enhancing-charisma-charisma-primary",
-      "label": "Charisma (Primary)"
-    }
-  ],
-  "adorning grace": [
-    {
-      "group_id": "attribute-enhancing-charisma-charisma-primary",
-      "label": "Charisma (Primary)"
-    }
-  ],
-  "solon's charismatic concord": [
-    {
-      "group_id": "attribute-enhancing-charisma-charisma-bard-song",
-      "label": "Charisma (Bard Song)"
-    }
-  ],
-  "mortal deftness": [
-    {
-      "group_id": "attribute-enhancing-dexterity-dexterity-primary",
-      "label": "Dexterity (Primary)"
-    }
-  ],
-  "spirit of monkey": [
-    {
-      "group_id": "attribute-enhancing-dexterity-dexterity-primary",
-      "label": "Dexterity (Primary)"
-    }
-  ],
-  "rising dexterity": [
-    {
-      "group_id": "attribute-enhancing-dexterity-dexterity-primary",
-      "label": "Dexterity (Primary)"
-    }
-  ],
-  "deftness": [
-    {
-      "group_id": "attribute-enhancing-dexterity-dexterity-primary",
-      "label": "Dexterity (Primary)"
-    }
-  ],
-  "dexterity": [
-    {
-      "group_id": "attribute-enhancing-dexterity-dexterity-primary",
-      "label": "Dexterity (Primary)"
-    }
-  ],
-  "talisman of the raptor": [
-    {
-      "group_id": "attribute-enhancing-dexterity-dexterity-primary",
-      "label": "Dexterity (Primary)"
-    }
-  ],
-  "dexterous aura": [
-    {
-      "group_id": "attribute-enhancing-dexterity-dexterity-primary",
-      "label": "Dexterity (Primary)"
-    }
-  ],
-  "focus of spirit": [
-    {
-      "group_id": "attribute-enhancing-dexterity-dexterity-combination",
-      "label": "Dexterity (Combination)"
-    },
-    {
-      "group_id": "attribute-enhancing-strength-strength-power",
-      "label": "Strength (Power)"
-    },
-    {
-      "group_id": "other-buffs-hp-hit-points-hp-shielding-talisman",
-      "label": "HP (Shielding / Talisman)"
-    }
-  ],
   "chant of battle": [
     {
-      "group_id": "attribute-enhancing-dexterity-dexterity-power",
-      "label": "Dexterity (Power)"
-    },
-    {
-      "group_id": "attribute-enhancing-strength-strength-anthem",
-      "label": "Strength (Anthem)"
-    },
-    {
-      "group_id": "other-buffs-ac-ac-layer-2-slot-1",
-      "label": "AC (Layer 2, Slot 1)"
-    }
-  ],
-  "boon of the garou": [
-    {
-      "group_id": "attribute-enhancing-dexterity-dexterity-illusion",
-      "label": "Dexterity (Illusion)"
-    },
-    {
-      "group_id": "other-buffs-attack-atk-attack-slot-3",
-      "label": "Attack (Slot 3)"
-    }
-  ],
-  "fleeting fury": [
-    {
-      "group_id": "attribute-enhancing-dexterity-dexterity-short-duration",
-      "label": "Dexterity (Short Duration)"
-    },
-    {
-      "group_id": "attribute-enhancing-strength-strength-short-duration",
-      "label": "Strength (Short Duration)"
-    },
-    {
-      "group_id": "other-buffs-ac-ac-slot-3",
-      "label": "AC (Slot 3)"
-    }
-  ],
-  "insight": [
-    {
-      "group_id": "attribute-enhancing-intelligence-intelligence-primary",
-      "label": "Intelligence (Primary)"
-    },
-    {
-      "group_id": "attribute-enhancing-wisdom-wisdom-enchanter",
-      "label": "Wisdom (Enchanter)"
-    }
-  ],
-  "enlightenment": [
-    {
-      "group_id": "attribute-enhancing-intelligence-intelligence-primary",
-      "label": "Intelligence (Primary)"
-    },
-    {
-      "group_id": "attribute-enhancing-wisdom-wisdom-enchanter",
-      "label": "Wisdom (Enchanter)"
-    }
-  ],
-  "brilliance": [
-    {
-      "group_id": "attribute-enhancing-intelligence-intelligence-primary",
-      "label": "Intelligence (Primary)"
-    },
-    {
-      "group_id": "attribute-enhancing-wisdom-wisdom-enchanter",
-      "label": "Wisdom (Enchanter)"
-    }
-  ],
-  "cassindra's elegy": [
-    {
-      "group_id": "attribute-enhancing-intelligence-intelligence-elegy",
-      "label": "Intelligence (Elegy)"
-    },
-    {
-      "group_id": "attribute-enhancing-wisdom-wisdom-elegy",
-      "label": "Wisdom (Elegy)"
-    }
-  ],
-  "spirit of ox": [
-    {
-      "group_id": "attribute-enhancing-stamina-stamina-primary",
-      "label": "Stamina (Primary)"
-    }
-  ],
-  "health": [
-    {
-      "group_id": "attribute-enhancing-stamina-stamina-primary",
-      "label": "Stamina (Primary)"
-    }
-  ],
-  "stamina": [
-    {
-      "group_id": "attribute-enhancing-stamina-stamina-primary",
-      "label": "Stamina (Primary)"
-    }
-  ],
-  "riotous health": [
-    {
-      "group_id": "attribute-enhancing-stamina-stamina-primary",
-      "label": "Stamina (Primary)"
-    }
-  ],
-  "spirit of bear": [
-    {
-      "group_id": "attribute-enhancing-stamina-stamina-primary",
-      "label": "Stamina (Primary)"
-    }
-  ],
-  "talisman of the brute": [
-    {
-      "group_id": "attribute-enhancing-stamina-stamina-primary",
-      "label": "Stamina (Primary)"
-    }
-  ],
-  "strength of stone": [
-    {
-      "group_id": "attribute-enhancing-strength-strength-primary",
-      "label": "Strength (Primary)"
-    }
-  ],
-  "spirit strength": [
-    {
-      "group_id": "attribute-enhancing-strength-strength-primary",
-      "label": "Strength (Primary)"
-    }
-  ],
-  "tumultuous strength": [
-    {
-      "group_id": "attribute-enhancing-strength-strength-primary",
-      "label": "Strength (Primary)"
-    }
-  ],
-  "strength of earth": [
-    {
-      "group_id": "attribute-enhancing-strength-strength-primary",
-      "label": "Strength (Primary)"
-    }
-  ],
-  "strength": [
-    {
-      "group_id": "attribute-enhancing-strength-strength-primary",
-      "label": "Strength (Primary)"
-    }
-  ],
-  "storm strength": [
-    {
-      "group_id": "attribute-enhancing-strength-strength-primary",
-      "label": "Strength (Primary)"
-    }
-  ],
-  "strengthen": [
-    {
-      "group_id": "attribute-enhancing-strength-strength-primary",
-      "label": "Strength (Primary)"
-    }
-  ],
-  "talisman of the rhino": [
-    {
-      "group_id": "attribute-enhancing-strength-strength-primary",
-      "label": "Strength (Primary)"
-    }
-  ],
-  "furious strength": [
-    {
-      "group_id": "attribute-enhancing-strength-strength-primary",
-      "label": "Strength (Primary)"
-    }
-  ],
-  "raging strength": [
-    {
-      "group_id": "attribute-enhancing-strength-strength-primary",
-      "label": "Strength (Primary)"
-    }
-  ],
-  "girdle of karana": [
-    {
-      "group_id": "attribute-enhancing-strength-strength-primary",
-      "label": "Strength (Primary)"
-    }
-  ],
-  "berserker spirit": [
-    {
-      "group_id": "attribute-enhancing-strength-strength-primary",
-      "label": "Strength (Primary)"
-    },
-    {
-      "group_id": "other-buffs-damage-absorption-damage-absorption-berserker",
-      "label": "Damage Absorption (Berserker)"
-    }
-  ],
-  "maniacal strength": [
-    {
-      "group_id": "attribute-enhancing-strength-strength-primary",
-      "label": "Strength (Primary)"
-    }
-  ],
-  "rampage": [
-    {
-      "group_id": "attribute-enhancing-strength-strength-primary",
-      "label": "Strength (Primary)"
-    },
-    {
-      "group_id": "other-buffs-damage-absorption-damage-absorption-primary",
-      "label": "Damage Absorption (Primary)"
-    }
-  ],
-  "anthem de arms": [
-    {
-      "group_id": "attribute-enhancing-strength-strength-anthem",
-      "label": "Strength (Anthem)"
-    },
-    {
-      "group_id": "other-buffs-haste-haste-primary",
-      "label": "Haste (Primary)"
-    }
-  ],
-  "mcvaxius' rousing rondo": [
-    {
-      "group_id": "attribute-enhancing-strength-strength-anthem",
-      "label": "Strength (Anthem)"
-    },
-    {
-      "group_id": "other-buffs-attack-atk-attack-layer-2-slot-3-4",
-      "label": "Attack (Layer 2, Slot 3 & 4)"
-    },
-    {
-      "group_id": "other-buffs-damage-shield-stacking-damage-shield-layer-2-slot-4",
-      "label": "Damage Shield (Layer 2, Slot 4)"
-    },
-    {
-      "group_id": "other-buffs-haste-haste-primary",
-      "label": "Haste (Primary)"
-    }
-  ],
-  "niv's melody of preservation": [
-    {
-      "group_id": "attribute-enhancing-strength-strength-anthem",
-      "label": "Strength (Anthem)"
-    },
-    {
-      "group_id": "other-buffs-damage-absorption-magic-damage-absorption-magic-melody",
-      "label": "Damage Absorption, Magic (Melody)"
-    },
-    {
-      "group_id": "other-buffs-hp-regeneration-hp-regeneration-layer-2-slot-3",
-      "label": "HP Regeneration (Layer 2, Slot 3)"
-    }
-  ],
-  "jonthan's whistling warsong": [
-    {
-      "group_id": "attribute-enhancing-strength-strength-anthem",
-      "label": "Strength (Anthem)"
-    },
-    {
-      "group_id": "other-buffs-ac-ac-layer-2-slot-3",
-      "label": "AC (Layer 2, Slot 3)"
-    },
-    {
-      "group_id": "other-buffs-haste-haste-primary",
-      "label": "Haste (Primary)"
-    }
-  ],
-  "illusion: werewolf": [
-    {
-      "group_id": "attribute-enhancing-strength-strength-illusion",
-      "label": "Strength (Illusion)"
-    },
-    {
-      "group_id": "other-buffs-attack-atk-attack-slot-2",
-      "label": "Attack (Slot 2)"
-    },
-    {
-      "group_id": "other-buffs-haste-haste-primary",
-      "label": "Haste (Primary)"
-    }
-  ],
-  "illusion: earth elemental": [
-    {
-      "group_id": "attribute-enhancing-strength-strength-illusion",
-      "label": "Strength (Illusion)"
-    }
-  ],
-  "burst of strength": [
-    {
-      "group_id": "attribute-enhancing-strength-strength-short-duration",
-      "label": "Strength (Short Duration)"
-    }
-  ],
-  "yaulp": [
-    {
-      "group_id": "attribute-enhancing-strength-strength-short-duration-yaulp",
-      "label": "Strength (Short Duration: Yaulp)"
-    },
-    {
-      "group_id": "other-buffs-ac-ac-slot-2",
-      "label": "AC (Slot 2)"
-    }
-  ],
-  "yaulp ii": [
-    {
-      "group_id": "attribute-enhancing-strength-strength-short-duration-yaulp",
-      "label": "Strength (Short Duration: Yaulp)"
-    },
-    {
-      "group_id": "other-buffs-ac-ac-slot-2",
-      "label": "AC (Slot 2)"
-    }
-  ],
-  "yaulp iii": [
-    {
-      "group_id": "attribute-enhancing-strength-strength-short-duration-yaulp",
-      "label": "Strength (Short Duration: Yaulp)"
-    },
-    {
-      "group_id": "other-buffs-ac-ac-slot-2",
-      "label": "AC (Slot 2)"
-    }
-  ],
-  "berserker strength": [
-    {
-      "group_id": "attribute-enhancing-strength-strength-short-duration-bedlam",
-      "label": "Strength (Short Duration: Bedlam)"
-    },
-    {
-      "group_id": "other-buffs-damage-absorption-damage-absorption-berserker",
-      "label": "Damage Absorption (Berserker)"
-    }
-  ],
-  "bedlam": [
-    {
-      "group_id": "attribute-enhancing-strength-strength-short-duration-bedlam",
-      "label": "Strength (Short Duration: Bedlam)"
-    },
-    {
-      "group_id": "other-buffs-damage-absorption-damage-absorption-berserker",
-      "label": "Damage Absorption (Berserker)"
-    }
-  ],
-  "form of the great bear": [
-    {
-      "group_id": "attribute-enhancing-wisdom-wisdom-illusion-shaman-self-only",
-      "label": "Wisdom (Illusion, Shaman Self-Only)"
-    },
-    {
-      "group_id": "other-buffs-hp-regeneration-hp-regeneration-slot-2",
-      "label": "HP Regeneration (Slot 2)"
-    }
-  ],
-  "aegolism": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-1-4",
-      "label": "AC (Slot 1 & 4)"
-    },
-    {
-      "group_id": "other-buffs-hp-hit-points-hp-primary--cell0",
-      "label": "HP (Primary) (variant 1)"
-    }
-  ],
-  "skin like rock": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-1",
-      "label": "AC (Slot 1)"
-    },
-    {
-      "group_id": "other-buffs-hp-hit-points-hp-primary--cell1",
-      "label": "HP (Primary) (variant 2)"
-    }
-  ],
-  "skin like wood": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-1",
-      "label": "AC (Slot 1)"
-    },
-    {
-      "group_id": "other-buffs-hp-hit-points-hp-primary--cell1",
-      "label": "HP (Primary) (variant 2)"
-    }
-  ],
-  "skin like nature": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-1",
-      "label": "AC (Slot 1)"
-    },
-    {
-      "group_id": "other-buffs-hp-hit-points-hp-primary--cell1",
-      "label": "HP (Primary) (variant 2)"
-    },
-    {
-      "group_id": "other-buffs-hp-regeneration-hp-regeneration-slot-4",
-      "label": "HP Regeneration (Slot 4)"
-    }
-  ],
-  "valor": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-1",
-      "label": "AC (Slot 1)"
-    },
-    {
-      "group_id": "other-buffs-hp-hit-points-hp-primary--cell1",
-      "label": "HP (Primary) (variant 2)"
-    }
-  ],
-  "natureskin": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-1",
-      "label": "AC (Slot 1)"
-    },
-    {
-      "group_id": "other-buffs-hp-hit-points-hp-primary--cell1",
-      "label": "HP (Primary) (variant 2)"
-    },
-    {
-      "group_id": "other-buffs-hp-regeneration-hp-regeneration-slot-4",
-      "label": "HP Regeneration (Slot 4)"
-    }
-  ],
-  "skin like steel": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-1",
-      "label": "AC (Slot 1)"
-    },
-    {
-      "group_id": "other-buffs-hp-hit-points-hp-primary--cell1",
-      "label": "HP (Primary) (variant 2)"
-    }
-  ],
-  "bravery": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-1",
-      "label": "AC (Slot 1)"
-    },
-    {
-      "group_id": "other-buffs-hp-hit-points-hp-primary--cell1",
-      "label": "HP (Primary) (variant 2)"
-    }
-  ],
-  "resolution": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-1",
-      "label": "AC (Slot 1)"
-    },
-    {
-      "group_id": "other-buffs-hp-hit-points-hp-primary--cell1",
-      "label": "HP (Primary) (variant 2)"
-    }
-  ],
-  "protection of the glades": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-1",
-      "label": "AC (Slot 1)"
-    },
-    {
-      "group_id": "other-buffs-hp-hit-points-hp-primary--cell1",
-      "label": "HP (Primary) (variant 2)"
-    },
-    {
-      "group_id": "other-buffs-mana-regeneration-mana-regeneration-protection-of-the-glades",
-      "label": "Mana Regeneration (Protection of the Glades)"
-    }
-  ],
-  "fortitude": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-1",
-      "label": "AC (Slot 1)"
-    },
-    {
-      "group_id": "other-buffs-hp-hit-points-hp-primary--cell1",
-      "label": "HP (Primary) (variant 2)"
-    }
-  ],
-  "daring": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-1",
-      "label": "AC (Slot 1)"
-    }
-  ],
-  "skin like diamond": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-1",
-      "label": "AC (Slot 1)"
-    },
-    {
-      "group_id": "other-buffs-hp-hit-points-hp-primary--cell1",
-      "label": "HP (Primary) (variant 2)"
-    }
-  ],
-  "courage": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-1",
-      "label": "AC (Slot 1)"
-    },
-    {
-      "group_id": "other-buffs-hp-hit-points-hp-primary--cell1",
-      "label": "HP (Primary) (variant 2)"
-    }
-  ],
-  "inner fire": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-1",
-      "label": "AC (Slot 1)"
-    },
-    {
-      "group_id": "other-buffs-hp-hit-points-hp-primary--cell1",
-      "label": "HP (Primary) (variant 2)"
-    }
-  ],
-  "heroism": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-1",
-      "label": "AC (Slot 1)"
-    },
-    {
-      "group_id": "other-buffs-hp-hit-points-hp-primary--cell1",
-      "label": "HP (Primary) (variant 2)"
-    }
-  ],
-  "center": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-1",
-      "label": "AC (Slot 1)"
-    },
-    {
-      "group_id": "other-buffs-hp-hit-points-hp-primary--cell1",
-      "label": "HP (Primary) (variant 2)"
-    }
-  ],
-  "shield of the magi": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-2",
-      "label": "AC (Slot 2)"
-    },
-    {
-      "group_id": "other-buffs-hp-hit-points-hp-shielding-talisman",
-      "label": "HP (Shielding / Talisman)"
-    },
-    {
-      "group_id": "resistances-magic-resistance-magic-shield",
-      "label": "Magic Shield"
-    }
-  ],
-  "bramblecoat": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-2",
-      "label": "AC (Slot 2)"
-    },
-    {
-      "group_id": "other-buffs-damage-shield-stacking-damage-shield-slot-3",
-      "label": "Damage Shield (Slot 3)"
-    }
-  ],
-  "yaulp iv": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-2",
-      "label": "AC (Slot 2)"
-    },
-    {
-      "group_id": "other-buffs-attack-atk-attack-slot-1",
-      "label": "Attack (Slot 1)"
-    }
-  ],
-  "major shielding": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-2",
-      "label": "AC (Slot 2)"
-    },
-    {
-      "group_id": "other-buffs-hp-hit-points-hp-shielding-talisman",
-      "label": "HP (Shielding / Talisman)"
-    },
-    {
-      "group_id": "resistances-magic-resistance-magic-shield",
-      "label": "Magic Shield"
-    }
-  ],
-  "greater shielding": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-2",
-      "label": "AC (Slot 2)"
-    },
-    {
-      "group_id": "other-buffs-hp-hit-points-hp-shielding-talisman",
-      "label": "HP (Shielding / Talisman)"
-    },
-    {
-      "group_id": "resistances-magic-resistance-magic-shield",
-      "label": "Magic Shield"
-    }
-  ],
-  "spikecoat": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-2",
-      "label": "AC (Slot 2)"
-    },
-    {
-      "group_id": "other-buffs-damage-shield-stacking-damage-shield-slot-3",
-      "label": "Damage Shield (Slot 3)"
-    }
-  ],
-  "lesser shielding": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-2",
-      "label": "AC (Slot 2)"
-    },
-    {
-      "group_id": "other-buffs-hp-hit-points-hp-shielding-talisman",
-      "label": "HP (Shielding / Talisman)"
-    }
-  ],
-  "shielding": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-2",
-      "label": "AC (Slot 2)"
-    },
-    {
-      "group_id": "other-buffs-hp-hit-points-hp-shielding-talisman",
-      "label": "HP (Shielding / Talisman)"
-    },
-    {
-      "group_id": "resistances-magic-resistance-magic-shield",
-      "label": "Magic Shield"
-    }
-  ],
-  "minor shielding": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-2",
-      "label": "AC (Slot 2)"
-    },
-    {
-      "group_id": "other-buffs-hp-hit-points-hp-shielding-talisman",
-      "label": "HP (Shielding / Talisman)"
-    }
-  ],
-  "arch shielding": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-2",
-      "label": "AC (Slot 2)"
-    },
-    {
-      "group_id": "other-buffs-hp-hit-points-hp-shielding-talisman",
-      "label": "HP (Shielding / Talisman)"
-    },
-    {
-      "group_id": "resistances-magic-resistance-magic-shield",
-      "label": "Magic Shield"
-    }
-  ],
-  "thorncoat": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-2",
-      "label": "AC (Slot 2)"
-    },
-    {
-      "group_id": "other-buffs-damage-shield-stacking-damage-shield-slot-3",
-      "label": "Damage Shield (Slot 3)"
-    }
-  ],
-  "thistlecoat": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-2",
-      "label": "AC (Slot 2)"
-    },
-    {
-      "group_id": "other-buffs-damage-shield-stacking-damage-shield-slot-3",
-      "label": "Damage Shield (Slot 3)"
-    }
-  ],
-  "barbcoat": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-2",
-      "label": "AC (Slot 2)"
-    },
-    {
-      "group_id": "other-buffs-damage-shield-stacking-damage-shield-slot-3",
-      "label": "Damage Shield (Slot 3)"
-    }
-  ],
-  "bladecoat": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-2",
-      "label": "AC (Slot 2)"
-    },
-    {
-      "group_id": "other-buffs-damage-shield-stacking-damage-shield-slot-3",
-      "label": "Damage Shield (Slot 3)"
-    }
-  ],
-  "frenzy": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-3",
-      "label": "AC (Slot 3)"
-    }
-  ],
-  "call of earth": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-3",
-      "label": "AC (Slot 3)"
-    },
-    {
-      "group_id": "other-buffs-damage-shield-stacking-damage-shield-slot-2",
-      "label": "Damage Shield (Slot 2)"
-    }
-  ],
-  "guard": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-4",
-      "label": "AC (Slot 4)"
-    }
-  ],
-  "guardian": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-4",
-      "label": "AC (Slot 4)"
-    }
-  ],
-  "phantom armor": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-4",
-      "label": "AC (Slot 4)"
-    },
-    {
-      "group_id": "other-buffs-hp-regeneration-hp-regeneration-slot-2",
-      "label": "HP Regeneration (Slot 2)"
-    }
-  ],
-  "scale skin": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-4",
-      "label": "AC (Slot 4)"
-    }
-  ],
-  "shifting shield": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-4",
-      "label": "AC (Slot 4)"
-    }
-  ],
-  "cloud": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-4",
-      "label": "AC (Slot 4)"
-    }
-  ],
-  "holy armor": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-4",
-      "label": "AC (Slot 4)"
-    }
-  ],
-  "shroud of the spirits": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-4",
-      "label": "AC (Slot 4)"
-    }
-  ],
-  "shield of words": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-4",
-      "label": "AC (Slot 4)"
-    }
-  ],
-  "obscure": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-4",
-      "label": "AC (Slot 4)"
-    }
-  ],
-  "phantom leather": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-4",
-      "label": "AC (Slot 4)"
-    },
-    {
-      "group_id": "other-buffs-hp-regeneration-hp-regeneration-slot-2",
-      "label": "HP Regeneration (Slot 2)"
-    }
-  ],
-  "shade": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-4",
-      "label": "AC (Slot 4)"
-    }
-  ],
-  "haze": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-4",
-      "label": "AC (Slot 4)"
-    }
-  ],
-  "spirit armor": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-4",
-      "label": "AC (Slot 4)"
-    }
-  ],
-  "protect": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-4",
-      "label": "AC (Slot 4)"
-    }
-  ],
-  "armor of faith": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-4",
-      "label": "AC (Slot 4)"
-    }
-  ],
-  "umbra": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-4",
-      "label": "AC (Slot 4)"
-    }
-  ],
-  "phantom plate": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-4",
-      "label": "AC (Slot 4)"
-    },
-    {
-      "group_id": "other-buffs-hp-regeneration-hp-regeneration-slot-2",
-      "label": "HP Regeneration (Slot 2)"
-    }
-  ],
-  "mist": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-4",
-      "label": "AC (Slot 4)"
-    }
-  ],
-  "bulwark of faith": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-4",
-      "label": "AC (Slot 4)"
-    }
-  ],
-  "phantom chain": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-4",
-      "label": "AC (Slot 4)"
-    },
-    {
-      "group_id": "other-buffs-hp-regeneration-hp-regeneration-slot-2",
-      "label": "HP Regeneration (Slot 2)"
-    }
-  ],
-  "aegis": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-4",
-      "label": "AC (Slot 4)"
-    }
-  ],
-  "turtle skin": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-4",
-      "label": "AC (Slot 4)"
-    }
-  ],
-  "shadow": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-4",
-      "label": "AC (Slot 4)"
-    }
-  ],
-  "shroud of pain recourse": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-7",
-      "label": "AC (Slot 7)"
-    }
-  ],
-  "shadow vortex recourse": [
-    {
-      "group_id": "other-buffs-ac-ac-slot-7",
-      "label": "AC (Slot 7)"
-    }
-  ],
-  "guardian rhythms": [
-    {
-      "group_id": "other-buffs-ac-ac-layer-2-slot-1",
-      "label": "AC (Layer 2, Slot 1)"
-    },
-    {
-      "group_id": "resistances-magic-resistance-psalm",
-      "label": "Psalm"
-    }
-  ],
-  "niv's harmonic": [
-    {
-      "group_id": "other-buffs-ac-ac-layer-2-slot-2",
-      "label": "AC (Layer 2, Slot 2)"
-    }
-  ],
-  "psalm of warmth": [
-    {
-      "group_id": "other-buffs-ac-ac-layer-2-slot-4",
-      "label": "AC (Layer 2, Slot 4)"
-    },
-    {
-      "group_id": "other-buffs-damage-shield-stacking-damage-shield-layer-2-slot-1",
-      "label": "Damage Shield (Layer 2, Slot 1)"
-    },
-    {
-      "group_id": "resistances-cold-resistance-bard",
-      "label": "Bard"
-    }
-  ],
-  "psalm of vitality": [
-    {
-      "group_id": "other-buffs-ac-ac-layer-2-slot-4",
-      "label": "AC (Layer 2, Slot 4)"
-    },
-    {
-      "group_id": "resistances-disease-resistance-psalm",
-      "label": "Psalm"
-    }
-  ],
-  "elemental rhythms": [
-    {
-      "group_id": "other-buffs-ac-ac-layer-2-slot-4",
-      "label": "AC (Layer 2, Slot 4)"
-    },
-    {
-      "group_id": "resistances-fire-resistance-layer-2-slot-2-3",
-      "label": "Layer 2, Slot 2 & 3"
-    },
-    {
-      "group_id": "resistances-magic-resistance-psalm",
-      "label": "Psalm"
-    }
-  ],
-  "purifying rhythms": [
-    {
-      "group_id": "other-buffs-ac-ac-layer-2-slot-4",
-      "label": "AC (Layer 2, Slot 4)"
-    },
-    {
-      "group_id": "resistances-magic-resistance-psalm",
-      "label": "Psalm"
-    }
-  ],
-  "grim aura": [
-    {
-      "group_id": "other-buffs-attack-atk-attack-slot-1",
-      "label": "Attack (Slot 1)"
-    }
-  ],
-  "firefist": [
-    {
-      "group_id": "other-buffs-attack-atk-attack-slot-1",
-      "label": "Attack (Slot 1)"
-    }
-  ],
-  "strength of nature": [
-    {
-      "group_id": "other-buffs-attack-atk-attack-slot-1",
-      "label": "Attack (Slot 1)"
-    },
-    {
-      "group_id": "other-buffs-hp-hit-points-hp-strength",
-      "label": "HP (Strength)"
-    }
-  ],
-  "illusion: spirit wolf": [
-    {
-      "group_id": "other-buffs-attack-atk-attack-slot-2",
-      "label": "Attack (Slot 2)"
-    }
-  ],
-  "call of the predator": [
-    {
-      "group_id": "other-buffs-attack-atk-attack-slot-2",
-      "label": "Attack (Slot 2)"
-    }
-  ],
-  "wolf form": [
-    {
-      "group_id": "other-buffs-attack-atk-attack-slot-3",
-      "label": "Attack (Slot 3)"
-    },
-    {
-      "group_id": "speed-speed-primary",
-      "label": "Speed (Primary)"
-    }
-  ],
-  "form of the hunter": [
-    {
-      "group_id": "other-buffs-attack-atk-attack-slot-3",
-      "label": "Attack (Slot 3)"
-    },
-    {
-      "group_id": "speed-speed-primary",
-      "label": "Speed (Primary)"
-    }
-  ],
-  "greater wolf form": [
-    {
-      "group_id": "other-buffs-attack-atk-attack-slot-3",
-      "label": "Attack (Slot 3)"
-    },
-    {
-      "group_id": "speed-speed-primary",
-      "label": "Speed (Primary)"
-    }
-  ],
-  "form of the great wolf": [
-    {
-      "group_id": "other-buffs-attack-atk-attack-slot-3",
-      "label": "Attack (Slot 3)"
-    },
-    {
-      "group_id": "speed-speed-primary",
-      "label": "Speed (Primary)"
-    }
-  ],
-  "share wolf form": [
-    {
-      "group_id": "other-buffs-attack-atk-attack-slot-3",
-      "label": "Attack (Slot 3)"
-    },
-    {
-      "group_id": "speed-speed-primary",
-      "label": "Speed (Primary)"
-    }
-  ],
-  "shroud of hate recourse": [
-    {
-      "group_id": "other-buffs-attack-atk-attack-slot-7",
-      "label": "Attack (Slot 7)"
-    }
-  ],
-  "jonthan's provocation": [
-    {
-      "group_id": "other-buffs-attack-atk-attack-layer-2-slot-3-4",
-      "label": "Attack (Layer 2, Slot 3 & 4)"
-    },
-    {
-      "group_id": "other-buffs-haste-haste-primary",
-      "label": "Haste (Primary)"
-    }
-  ],
-  "jonthan's inspiration": [
-    {
-      "group_id": "other-buffs-attack-atk-attack-layer-2-slot-3-4",
-      "label": "Attack (Layer 2, Slot 3 & 4)"
-    },
-    {
-      "group_id": "other-buffs-haste-haste-primary",
-      "label": "Haste (Primary)"
-    }
-  ],
-  "manaskin": [
-    {
-      "group_id": "other-buffs-damage-absorption-damage-absorption-primary",
-      "label": "Damage Absorption (Primary)"
-    },
-    {
-      "group_id": "other-buffs-mana-regeneration-mana-regeneration-self-only",
-      "label": "Mana Regeneration (Self-Only)"
-    }
-  ],
-  "rune i": [
-    {
-      "group_id": "other-buffs-damage-absorption-damage-absorption-primary",
-      "label": "Damage Absorption (Primary)"
-    }
-  ],
-  "rune ii": [
-    {
-      "group_id": "other-buffs-damage-absorption-damage-absorption-primary",
-      "label": "Damage Absorption (Primary)"
-    }
-  ],
-  "steelskin": [
-    {
-      "group_id": "other-buffs-damage-absorption-damage-absorption-primary",
-      "label": "Damage Absorption (Primary)"
-    }
-  ],
-  "rune v": [
-    {
-      "group_id": "other-buffs-damage-absorption-damage-absorption-primary",
-      "label": "Damage Absorption (Primary)"
-    }
-  ],
-  "rune iii": [
-    {
-      "group_id": "other-buffs-damage-absorption-damage-absorption-primary",
-      "label": "Damage Absorption (Primary)"
-    }
-  ],
-  "leatherskin": [
-    {
-      "group_id": "other-buffs-damage-absorption-damage-absorption-primary",
-      "label": "Damage Absorption (Primary)"
-    }
-  ],
-  "diamondskin": [
-    {
-      "group_id": "other-buffs-damage-absorption-damage-absorption-primary",
-      "label": "Damage Absorption (Primary)"
-    }
-  ],
-  "rune iv": [
-    {
-      "group_id": "other-buffs-damage-absorption-damage-absorption-primary",
-      "label": "Damage Absorption (Primary)"
-    }
-  ],
-  "shieldskin": [
-    {
-      "group_id": "other-buffs-damage-absorption-damage-absorption-primary",
-      "label": "Damage Absorption (Primary)"
-    }
-  ],
-  "shield of song": [
-    {
-      "group_id": "other-buffs-damage-absorption-damage-absorption-shield-of-song",
-      "label": "Damage Absorption (Shield of Song)"
-    },
-    {
-      "group_id": "other-buffs-damage-absorption-magic-damage-absorption-magic-song-shield",
-      "label": "Damage Absorption, Magic (Song Shield)"
-    }
-  ],
-  "psalm of mystic shielding": [
-    {
-      "group_id": "other-buffs-damage-absorption-magic-damage-absorption-magic-psalm",
-      "label": "Damage Absorption, Magic (Psalm)"
-    },
-    {
-      "group_id": "other-buffs-hp-regeneration-hp-regeneration-layer-2-slot-3",
-      "label": "HP Regeneration (Layer 2, Slot 3)"
-    },
-    {
-      "group_id": "resistances-magic-resistance-psalm",
-      "label": "Psalm"
-    }
-  ],
-  "manasink": [
-    {
-      "group_id": "other-buffs-damage-absorption-magic-damage-absorption-magic-manasink",
-      "label": "Damage Absorption, Magic (Manasink)"
-    }
-  ],
-  "shield of lava": [
-    {
-      "group_id": "other-buffs-damage-shield-stacking-damage-shield-slot-1",
-      "label": "Damage Shield (Slot 1)"
-    },
-    {
-      "group_id": "resistances-fire-resistance-slot-2",
-      "label": "Slot 2"
-    }
-  ],
-  "cadeau of flame": [
-    {
-      "group_id": "other-buffs-damage-shield-stacking-damage-shield-slot-1",
-      "label": "Damage Shield (Slot 1)"
-    },
-    {
-      "group_id": "resistances-fire-resistance-slot-2",
-      "label": "Slot 2"
-    }
-  ],
-  "inferno shield": [
-    {
-      "group_id": "other-buffs-damage-shield-stacking-damage-shield-slot-1",
-      "label": "Damage Shield (Slot 1)"
-    },
-    {
-      "group_id": "resistances-fire-resistance-slot-2",
-      "label": "Slot 2"
-    }
-  ],
-  "shield of thistles": [
-    {
-      "group_id": "other-buffs-damage-shield-stacking-damage-shield-slot-1",
-      "label": "Damage Shield (Slot 1)"
-    }
-  ],
-  "shield of thorns (spell)": [
-    {
-      "group_id": "other-buffs-damage-shield-stacking-damage-shield-slot-1",
-      "label": "Damage Shield (Slot 1)"
-    }
-  ],
-  "barrier of combustion": [
-    {
-      "group_id": "other-buffs-damage-shield-stacking-damage-shield-slot-1",
-      "label": "Damage Shield (Slot 1)"
-    },
-    {
-      "group_id": "resistances-fire-resistance-slot-2",
-      "label": "Slot 2"
-    }
-  ],
-  "banshee aura": [
-    {
-      "group_id": "other-buffs-damage-shield-stacking-damage-shield-slot-1",
-      "label": "Damage Shield (Slot 1)"
-    }
-  ],
-  "shield of fire": [
-    {
-      "group_id": "other-buffs-damage-shield-stacking-damage-shield-slot-1",
-      "label": "Damage Shield (Slot 1)"
-    },
-    {
-      "group_id": "resistances-fire-resistance-slot-2",
-      "label": "Slot 2"
-    }
-  ],
-  "feedback": [
-    {
-      "group_id": "other-buffs-damage-shield-stacking-damage-shield-slot-1",
-      "label": "Damage Shield (Slot 1)"
-    }
-  ],
-  "shield of flame": [
-    {
-      "group_id": "other-buffs-damage-shield-stacking-damage-shield-slot-1",
-      "label": "Damage Shield (Slot 1)"
-    },
-    {
-      "group_id": "resistances-fire-resistance-slot-2",
-      "label": "Slot 2"
-    }
-  ],
-  "legacy of thorn": [
-    {
-      "group_id": "other-buffs-damage-shield-stacking-damage-shield-slot-1",
-      "label": "Damage Shield (Slot 1)"
-    }
-  ],
-  "shield of spikes": [
-    {
-      "group_id": "other-buffs-damage-shield-stacking-damage-shield-slot-1",
-      "label": "Damage Shield (Slot 1)"
-    }
-  ],
-  "boon of immolation": [
-    {
-      "group_id": "other-buffs-damage-shield-stacking-damage-shield-slot-1",
-      "label": "Damage Shield (Slot 1)"
-    },
-    {
-      "group_id": "resistances-fire-resistance-slot-2",
-      "label": "Slot 2"
-    }
-  ],
-  "shield of barbs": [
-    {
-      "group_id": "other-buffs-damage-shield-stacking-damage-shield-slot-1",
-      "label": "Damage Shield (Slot 1)"
-    }
-  ],
-  "aegis of ro": [
-    {
-      "group_id": "other-buffs-damage-shield-stacking-damage-shield-slot-1",
-      "label": "Damage Shield (Slot 1)"
-    },
-    {
-      "group_id": "resistances-fire-resistance-slot-2",
-      "label": "Slot 2"
-    }
-  ],
-  "o'keils radiation": [
-    {
-      "group_id": "other-buffs-damage-shield-stacking-damage-shield-slot-1",
-      "label": "Damage Shield (Slot 1)"
-    },
-    {
-      "group_id": "resistances-fire-resistance-slot-2",
-      "label": "Slot 2"
-    }
-  ],
-  "shield of blades": [
-    {
-      "group_id": "other-buffs-damage-shield-stacking-damage-shield-slot-1",
-      "label": "Damage Shield (Slot 1)"
-    }
-  ],
-  "shield of brambles": [
-    {
-      "group_id": "other-buffs-damage-shield-stacking-damage-shield-slot-1",
-      "label": "Damage Shield (Slot 1)"
-    }
-  ],
-  "illusion: fire elemental": [
-    {
-      "group_id": "other-buffs-damage-shield-stacking-damage-shield-slot-2",
-      "label": "Damage Shield (Slot 2)"
-    }
-  ],
-  "o'keils flickering flame": [
-    {
-      "group_id": "other-buffs-damage-shield-stacking-damage-shield-slot-2",
-      "label": "Damage Shield (Slot 2)"
-    },
-    {
-      "group_id": "resistances-fire-resistance-slot-3",
-      "label": "Slot 3"
-    }
-  ],
-  "psalm of cooling": [
-    {
-      "group_id": "other-buffs-damage-shield-stacking-damage-shield-layer-2-slot-1",
-      "label": "Damage Shield (Layer 2, Slot 1)"
-    },
-    {
-      "group_id": "resistances-fire-resistance-layer-2-slot-2-3",
-      "label": "Layer 2, Slot 2 & 3"
-    }
-  ],
-  "mcvaxius' berserker crescendo": [
-    {
-      "group_id": "other-buffs-haste-haste-primary",
-      "label": "Haste (Primary)"
-    }
-  ],
-  "aanya's quickening": [
-    {
-      "group_id": "other-buffs-haste-haste-primary",
-      "label": "Haste (Primary)"
-    }
-  ],
-  "alacrity": [
-    {
-      "group_id": "other-buffs-haste-haste-primary",
-      "label": "Haste (Primary)"
-    }
-  ],
-  "vilia's verses of celerity": [
-    {
-      "group_id": "other-buffs-haste-haste-primary",
-      "label": "Haste (Primary)"
-    }
-  ],
-  "verses of victory": [
-    {
-      "group_id": "other-buffs-haste-haste-primary",
-      "label": "Haste (Primary)"
-    }
-  ],
-  "swift like the wind": [
-    {
-      "group_id": "other-buffs-haste-haste-primary",
-      "label": "Haste (Primary)"
-    }
-  ],
-  "haste": [
-    {
-      "group_id": "other-buffs-haste-haste-primary",
-      "label": "Haste (Primary)"
-    }
-  ],
-  "wonderous rapidity": [
-    {
-      "group_id": "other-buffs-haste-haste-primary",
-      "label": "Haste (Primary)"
-    }
-  ],
-  "vilia's chorus of celerity": [
-    {
-      "group_id": "other-buffs-haste-haste-primary",
-      "label": "Haste (Primary)"
-    }
-  ],
-  "celerity": [
-    {
-      "group_id": "other-buffs-haste-haste-primary",
-      "label": "Haste (Primary)"
-    }
-  ],
-  "quickness": [
-    {
-      "group_id": "other-buffs-haste-haste-primary",
-      "label": "Haste (Primary)"
-    }
-  ],
-  "melody of ervaj": [
-    {
-      "group_id": "other-buffs-haste-haste-ervaj-v2",
-      "label": "Haste (Ervaj/\"v2\")"
-    }
-  ],
-  "composition of ervaj": [
-    {
-      "group_id": "other-buffs-haste-haste-ervaj-v2",
-      "label": "Haste (Ervaj/\"v2\")"
-    }
-  ],
-  "heroic bond": [
-    {
-      "group_id": "other-buffs-hp-hit-points-hp-primary--cell1",
-      "label": "HP (Primary) (variant 2)"
-    }
-  ],
-  "armor of protection": [
-    {
-      "group_id": "other-buffs-hp-hit-points-hp-primary--cell1",
-      "label": "HP (Primary) (variant 2)"
-    }
-  ],
-  "naltron's mark": [
-    {
-      "group_id": "other-buffs-hp-hit-points-hp-primary--cell2",
-      "label": "HP (Primary) (variant 3)"
-    }
-  ],
-  "symbol of transal": [
-    {
-      "group_id": "other-buffs-hp-hit-points-hp-primary--cell2",
-      "label": "HP (Primary) (variant 3)"
-    }
-  ],
-  "symbol of pinzarn": [
-    {
-      "group_id": "other-buffs-hp-hit-points-hp-primary--cell2",
-      "label": "HP (Primary) (variant 3)"
-    }
-  ],
-  "symbol of naltron": [
-    {
-      "group_id": "other-buffs-hp-hit-points-hp-primary--cell2",
-      "label": "HP (Primary) (variant 3)"
-    }
-  ],
-  "symbol of ryltan": [
-    {
-      "group_id": "other-buffs-hp-hit-points-hp-primary--cell2",
-      "label": "HP (Primary) (variant 3)"
-    }
-  ],
-  "symbol of marzin": [
-    {
-      "group_id": "other-buffs-hp-hit-points-hp-primary--cell2",
-      "label": "HP (Primary) (variant 3)"
-    }
-  ],
-  "talisman of kragg": [
-    {
-      "group_id": "other-buffs-hp-hit-points-hp-shielding-talisman",
-      "label": "HP (Shielding / Talisman)"
-    }
-  ],
-  "talisman of altuna": [
-    {
-      "group_id": "other-buffs-hp-hit-points-hp-shielding-talisman",
-      "label": "HP (Shielding / Talisman)"
-    }
-  ],
-  "talisman of tnarg": [
-    {
-      "group_id": "other-buffs-hp-hit-points-hp-shielding-talisman",
-      "label": "HP (Shielding / Talisman)"
-    }
-  ],
-  "divine strength": [
-    {
-      "group_id": "other-buffs-hp-hit-points-hp-strength",
-      "label": "HP (Strength)"
-    }
-  ],
-  "divine glory": [
-    {
-      "group_id": "other-buffs-hp-hit-points-hp-strength",
-      "label": "HP (Strength)"
-    }
-  ],
-  "pack regeneration": [
-    {
-      "group_id": "other-buffs-hp-regeneration-hp-regeneration-slot-1",
-      "label": "HP Regeneration (Slot 1)"
-    }
-  ],
-  "pack chloroplast": [
-    {
-      "group_id": "other-buffs-hp-regeneration-hp-regeneration-slot-1",
-      "label": "HP Regeneration (Slot 1)"
-    }
-  ],
-  "regeneration": [
-    {
-      "group_id": "other-buffs-hp-regeneration-hp-regeneration-slot-1",
-      "label": "HP Regeneration (Slot 1)"
-    }
-  ],
-  "chloroplast": [
-    {
-      "group_id": "other-buffs-hp-regeneration-hp-regeneration-slot-1",
-      "label": "HP Regeneration (Slot 1)"
-    }
-  ],
-  "regrowth of the grove": [
-    {
-      "group_id": "other-buffs-hp-regeneration-hp-regeneration-slot-1",
-      "label": "HP Regeneration (Slot 1)"
-    }
-  ],
-  "regrowth": [
-    {
-      "group_id": "other-buffs-hp-regeneration-hp-regeneration-slot-1",
-      "label": "HP Regeneration (Slot 1)"
-    }
-  ],
-  "divine purpose": [
-    {
-      "group_id": "other-buffs-hp-regeneration-hp-regeneration-slot-2",
-      "label": "HP Regeneration (Slot 2)"
-    }
-  ],
-  "spirit of oak": [
-    {
-      "group_id": "other-buffs-hp-regeneration-hp-regeneration-slot-3-6",
-      "label": "HP Regeneration (Slot 3 & 6)"
-    }
-  ],
-  "illusion: troll": [
-    {
-      "group_id": "other-buffs-hp-regeneration-hp-regeneration-slot-3-6",
-      "label": "HP Regeneration (Slot 3 & 6)"
-    }
-  ],
-  "treeform": [
-    {
-      "group_id": "other-buffs-hp-regeneration-hp-regeneration-slot-3-6",
-      "label": "HP Regeneration (Slot 3 & 6)"
-    }
-  ],
-  "hymn of restoration": [
-    {
-      "group_id": "other-buffs-hp-regeneration-hp-regeneration-layer-2-slot-1",
-      "label": "HP Regeneration (Layer 2, Slot 1)"
-    }
-  ],
-  "cantata of replenishment": [
-    {
-      "group_id": "other-buffs-hp-regeneration-hp-regeneration-layer-2-slot-1",
-      "label": "HP Regeneration (Layer 2, Slot 1)"
-    },
-    {
-      "group_id": "other-buffs-mana-regeneration-mana-regeneration-cantata",
-      "label": "Mana Regeneration (Cantata)"
-    }
-  ],
-  "cantata of soothing": [
-    {
-      "group_id": "other-buffs-hp-regeneration-hp-regeneration-layer-2-slot-1",
-      "label": "HP Regeneration (Layer 2, Slot 1)"
-    },
-    {
-      "group_id": "other-buffs-mana-regeneration-mana-regeneration-cantata",
-      "label": "Mana Regeneration (Cantata)"
-    }
-  ],
-  "gift of brilliance": [
-    {
-      "group_id": "other-buffs-mana-mana-primary",
-      "label": "Mana (Primary)"
-    },
-    {
-      "group_id": "other-buffs-mana-regeneration-mana-regeneration-gift",
-      "label": "Mana Regeneration (Gift)"
-    }
-  ],
-  "gift of magic": [
-    {
-      "group_id": "other-buffs-mana-mana-primary",
-      "label": "Mana (Primary)"
-    }
-  ],
-  "gift of insight": [
-    {
-      "group_id": "other-buffs-mana-mana-primary",
-      "label": "Mana (Primary)"
-    },
-    {
-      "group_id": "other-buffs-mana-regeneration-mana-regeneration-gift",
-      "label": "Mana Regeneration (Gift)"
-    }
-  ],
-  "boon of the clear mind": [
-    {
-      "group_id": "other-buffs-mana-regeneration-mana-regeneration-clarity",
-      "label": "Mana Regeneration (Clarity)"
-    }
-  ],
-  "breeze": [
-    {
-      "group_id": "other-buffs-mana-regeneration-mana-regeneration-clarity",
-      "label": "Mana Regeneration (Clarity)"
-    }
-  ],
-  "clarity ii": [
-    {
-      "group_id": "other-buffs-mana-regeneration-mana-regeneration-clarity",
-      "label": "Mana Regeneration (Clarity)"
-    }
-  ],
-  "clarity": [
-    {
-      "group_id": "other-buffs-mana-regeneration-mana-regeneration-clarity",
-      "label": "Mana Regeneration (Clarity)"
-    }
-  ],
-  "gift of pure thought": [
-    {
-      "group_id": "other-buffs-mana-regeneration-mana-regeneration-clarity",
-      "label": "Mana Regeneration (Clarity)"
-    }
-  ],
-  "mask of the hunter": [
-    {
-      "group_id": "other-buffs-mana-regeneration-mana-regeneration-gift",
-      "label": "Mana Regeneration (Gift)"
-    }
-  ],
-  "form of the howler": [
-    {
-      "group_id": "other-buffs-mana-regeneration-mana-regeneration-gift",
-      "label": "Mana Regeneration (Gift)"
-    },
-    {
-      "group_id": "speed-speed-primary",
-      "label": "Speed (Primary)"
-    }
-  ],
-  "cassindra's chorus of clarity": [
-    {
-      "group_id": "other-buffs-mana-regeneration-mana-regeneration-chorus",
-      "label": "Mana Regeneration (Chorus)"
-    }
-  ],
-  "cassindra's chant of clarity": [
-    {
-      "group_id": "other-buffs-mana-regeneration-mana-regeneration-chorus",
-      "label": "Mana Regeneration (Chorus)"
-    }
-  ],
-  "call of bones": [
-    {
-      "group_id": "other-buffs-mana-regeneration-mana-regeneration-lich",
-      "label": "Mana Regeneration (Lich)"
-    }
-  ],
-  "allure of death": [
-    {
-      "group_id": "other-buffs-mana-regeneration-mana-regeneration-lich",
-      "label": "Mana Regeneration (Lich)"
-    }
-  ],
-  "dark pact": [
-    {
-      "group_id": "other-buffs-mana-regeneration-mana-regeneration-lich",
-      "label": "Mana Regeneration (Lich)"
-    }
-  ],
-  "lich": [
-    {
-      "group_id": "other-buffs-mana-regeneration-mana-regeneration-lich",
-      "label": "Mana Regeneration (Lich)"
-    }
-  ],
-  "demi lich": [
-    {
-      "group_id": "other-buffs-mana-regeneration-mana-regeneration-lich",
-      "label": "Mana Regeneration (Lich)"
-    }
-  ],
-  "arch lich": [
-    {
-      "group_id": "other-buffs-mana-regeneration-mana-regeneration-lich",
-      "label": "Mana Regeneration (Lich)"
-    }
-  ],
-  "circle of summer": [
-    {
-      "group_id": "resistances-cold-resistance-primary",
-      "label": "Primary"
-    }
-  ],
-  "endure cold": [
-    {
-      "group_id": "resistances-cold-resistance-primary",
-      "label": "Primary"
-    }
-  ],
-  "resist cold": [
-    {
-      "group_id": "resistances-cold-resistance-primary",
-      "label": "Primary"
-    }
-  ],
-  "elemental armor": [
-    {
-      "group_id": "resistances-cold-resistance-flower-armor",
-      "label": "Flower/Armor"
-    },
-    {
-      "group_id": "resistances-fire-resistance-slot-4",
-      "label": "Slot 4"
-    }
-  ],
-  "resist disease": [
-    {
-      "group_id": "resistances-disease-resistance-primary",
-      "label": "Primary"
-    }
-  ],
-  "endure disease": [
-    {
-      "group_id": "resistances-disease-resistance-primary",
-      "label": "Primary"
-    }
-  ],
-  "talisman of jasinth": [
-    {
-      "group_id": "resistances-disease-resistance-primary",
-      "label": "Primary"
-    }
-  ],
-  "resistant skin": [
-    {
-      "group_id": "resistances-disease-resistance-primary",
-      "label": "Primary"
-    },
-    {
-      "group_id": "resistances-poison-resistance-primary",
-      "label": "Primary"
-    }
-  ],
-  "endure fire": [
-    {
-      "group_id": "resistances-fire-resistance-slot-1",
-      "label": "Slot 1"
-    }
-  ],
-  "resist fire": [
-    {
-      "group_id": "resistances-fire-resistance-slot-1",
-      "label": "Slot 1"
-    }
-  ],
-  "circle of winter": [
-    {
-      "group_id": "resistances-fire-resistance-slot-1",
-      "label": "Slot 1"
-    }
-  ],
-  "endure magic": [
-    {
-      "group_id": "resistances-magic-resistance-primary",
-      "label": "Primary"
-    }
-  ],
-  "resist magic": [
-    {
-      "group_id": "resistances-magic-resistance-primary",
-      "label": "Primary"
-    }
-  ],
-  "group resist magic": [
-    {
-      "group_id": "resistances-magic-resistance-primary",
-      "label": "Primary"
-    }
-  ],
-  "endure poison": [
-    {
-      "group_id": "resistances-poison-resistance-primary",
-      "label": "Primary"
-    }
-  ],
-  "resist poison": [
-    {
-      "group_id": "resistances-poison-resistance-primary",
-      "label": "Primary"
-    }
-  ],
-  "talisman of shadoo": [
-    {
-      "group_id": "resistances-poison-resistance-primary",
-      "label": "Primary"
-    }
-  ],
-  "dead man floating": [
-    {
-      "group_id": "resistances-poison-resistance-dead-man-floating",
-      "label": "Dead Man Floating"
-    }
-  ],
-  "psalm of purity": [
-    {
-      "group_id": "resistances-poison-resistance-psalm",
-      "label": "Psalm"
+      "group_id": "bard:combo:1-4-5",
+      "label": "AC + STR + DEX"
     }
   ],
   "selo's accelerando": [
     {
-      "group_id": "speed-speed-primary",
-      "label": "Speed (Primary)"
+      "group_id": "bard:combo:3",
+      "label": "Movement Speed"
+    }
+  ],
+  "jonthan's whistling warsong": [
+    {
+      "group_id": "bard:combo:1-4-11",
+      "label": "AC + STR + Haste"
+    }
+  ],
+  "kelin's lugubrious lament": [
+    {
+      "group_id": "bard:combo:18-30-86",
+      "label": "Lull + Change Frenzy Rad + Harmony"
+    }
+  ],
+  "elemental rhythms": [
+    {
+      "group_id": "bard:combo:1-46-47-50",
+      "label": "AC + Fire Resist + Cold Resist + Magic Resist"
+    }
+  ],
+  "magical monologue": [
+    {
+      "group_id": "bard:combo:117",
+      "label": "Magic Weapon"
+    }
+  ],
+  "anthem de arms": [
+    {
+      "group_id": "bard:combo:4-11",
+      "label": "STR + Haste"
+    }
+  ],
+  "cinda's charismatic carillon": [
+    {
+      "group_id": "bard:combo:19",
+      "label": "Add Faction"
+    }
+  ],
+  "purifying rhythms": [
+    {
+      "group_id": "bard:combo:1-48-49-50",
+      "label": "AC + Poison Resist + Disease Resist + Magic Resist"
+    }
+  ],
+  "song of sustenance": [
+    {
+      "group_id": "bard:combo:115",
+      "label": "Hunger"
+    }
+  ],
+  "guardian rhythms": [
+    {
+      "group_id": "bard:combo:1-50",
+      "label": "AC + Magic Resist"
+    }
+  ],
+  "cassindra's chant of clarity": [
+    {
+      "group_id": "bard:combo:15",
+      "label": "Mana"
+    }
+  ],
+  "largo's melodic binding": [
+    {
+      "group_id": "bard:combo:11",
+      "label": "Haste"
+    }
+  ],
+  "melanie's mellifluous motion": [
+    {
+      "group_id": "bard:combo:42",
+      "label": "Shadow Step"
+    }
+  ],
+  "alenia's disenchanting melody": [
+    {
+      "group_id": "bard:combo:27",
+      "label": "Cancel Magic"
+    }
+  ],
+  "amplification": [
+    {
+      "group_id": "bard:combo:118-382",
+      "label": "Amplification + Negate Spell Effect"
+    }
+  ],
+  "cassindra's chorus of clarity": [
+    {
+      "group_id": "bard:combo:15",
+      "label": "Mana"
+    }
+  ],
+  "vilia's verses of celerity": [
+    {
+      "group_id": "bard:combo:1-6-11",
+      "label": "AC + AGI + Haste"
+    }
+  ],
+  "katta's song of sword dancing": [
+    {
+      "group_id": "bard:combo:5",
+      "label": "DEX"
+    }
+  ],
+  "syvelian's anti-magic aria": [
+    {
+      "group_id": "bard:combo:27",
+      "label": "Cancel Magic"
+    }
+  ],
+  "psalm of mystic shielding": [
+    {
+      "group_id": "bard:combo:0-1-50-78",
+      "label": "HP + AC + Magic Resist + Absorb Magic Att"
+    }
+  ],
+  "mcvaxius' berserker crescendo": [
+    {
+      "group_id": "bard:combo:1-4-11",
+      "label": "AC + STR + Haste"
+    }
+  ],
+  "cassindra's elegy": [
+    {
+      "group_id": "bard:combo:8-9",
+      "label": "INT + WIS"
+    }
+  ],
+  "jonthan's provocation": [
+    {
+      "group_id": "bard:combo:2-4-11",
+      "label": "ATK + STR + Haste"
+    }
+  ],
+  "rizlona's embers": [
+    {
+      "group_id": "bard:combo:10-124",
+      "label": "CHA + Improved Damage"
+    }
+  ],
+  "niv's melody of preservation": [
+    {
+      "group_id": "bard:combo:0-4-78",
+      "label": "HP + STR + Absorb Magic Att"
+    }
+  ],
+  "selo's accelerating chorus": [
+    {
+      "group_id": "bard:combo:3",
+      "label": "Movement Speed"
+    }
+  ],
+  "shield of songs": [
+    {
+      "group_id": "bard:combo:55-78",
+      "label": "Rune + Absorb Magic Att"
+    }
+  ],
+  "melody of ervaj": [
+    {
+      "group_id": "bard:combo:10-98",
+      "label": "CHA + Attack Speed2"
+    }
+  ],
+  "verses of victory": [
+    {
+      "group_id": "bard:combo:1-4-6-11",
+      "label": "AC + STR + AGI + Haste"
+    }
+  ],
+  "sense animals": [
+    {
+      "group_id": "combo:54",
+      "label": "Sense Animals"
+    }
+  ],
+  "endure cold": [
+    {
+      "group_id": "combo:47",
+      "label": "Cold Resist"
+    }
+  ],
+  "inner fire": [
+    {
+      "group_id": "combo:1-69",
+      "label": "AC + Total HP"
+    }
+  ],
+  "endure fire": [
+    {
+      "group_id": "combo:46",
+      "label": "Fire Resist"
+    }
+  ],
+  "scale skin": [
+    {
+      "group_id": "combo:1",
+      "label": "AC"
+    }
+  ],
+  "fleeting fury": [
+    {
+      "group_id": "combo:1-4-5",
+      "label": "AC + STR + DEX"
+    }
+  ],
+  "spirit of lightning": [
+    {
+      "group_id": "combo:5",
+      "label": "DEX"
+    }
+  ],
+  "strengthen": [
+    {
+      "group_id": "combo:4",
+      "label": "STR"
+    }
+  ],
+  "spirit of bear": [
+    {
+      "group_id": "combo:7",
+      "label": "STA"
+    }
+  ],
+  "endure poison": [
+    {
+      "group_id": "combo:48",
+      "label": "Poison Resist"
+    }
+  ],
+  "spirit of the blizzard": [
+    {
+      "group_id": "combo:5",
+      "label": "DEX"
+    }
+  ],
+  "tiny companion": [
+    {
+      "group_id": "combo:298",
+      "label": "Change Height"
+    }
+  ],
+  "drowsy": [
+    {
+      "group_id": "combo:11",
+      "label": "Haste"
+    }
+  ],
+  "endure disease": [
+    {
+      "group_id": "combo:49",
+      "label": "Disease Resist"
+    }
+  ],
+  "shrink": [
+    {
+      "group_id": "combo:89",
+      "label": "Model Size"
     }
   ],
   "spirit of wolf": [
     {
-      "group_id": "speed-speed-primary",
-      "label": "Speed (Primary)"
+      "group_id": "combo:3",
+      "label": "Movement Speed"
     }
   ],
-  "selo's song of travel": [
+  "turtle skin": [
     {
-      "group_id": "speed-speed-primary",
-      "label": "Speed (Primary)"
+      "group_id": "combo:1",
+      "label": "AC"
     }
   ],
-  "scale of wolf": [
+  "spirit strength": [
     {
-      "group_id": "speed-speed-primary",
-      "label": "Speed (Primary)"
+      "group_id": "combo:4",
+      "label": "STR"
+    }
+  ],
+  "spirit of inferno": [
+    {
+      "group_id": "combo:5",
+      "label": "DEX"
+    }
+  ],
+  "endure magic": [
+    {
+      "group_id": "combo:50",
+      "label": "Magic Resist"
+    }
+  ],
+  "cancel magic": [
+    {
+      "group_id": "combo:27",
+      "label": "Cancel Magic"
+    }
+  ],
+  "spirit of ox": [
+    {
+      "group_id": "combo:7",
+      "label": "STA"
+    }
+  ],
+  "yekan's quickening": [
+    {
+      "group_id": "combo:1-2-4-11",
+      "label": "AC + ATK + STR + Haste"
+    }
+  ],
+  "spirit of monkey": [
+    {
+      "group_id": "combo:5",
+      "label": "DEX"
+    }
+  ],
+  "spirit of the scorpion": [
+    {
+      "group_id": "combo:5",
+      "label": "DEX"
+    }
+  ],
+  "raging strength": [
+    {
+      "group_id": "combo:4",
+      "label": "STR"
+    }
+  ],
+  "spiritual light": [
+    {
+      "group_id": "combo:0-15",
+      "label": "HP + Mana"
+    }
+  ],
+  "spiritual brawn": [
+    {
+      "group_id": "combo:2-69",
+      "label": "ATK + Total HP"
+    }
+  ],
+  "spirit of vermin": [
+    {
+      "group_id": "combo:5",
+      "label": "DEX"
+    }
+  ],
+  "frenzy": [
+    {
+      "group_id": "combo:1-4-5-6",
+      "label": "AC + STR + DEX + AGI"
+    }
+  ],
+  "protect": [
+    {
+      "group_id": "combo:1",
+      "label": "AC"
+    }
+  ],
+  "ward of calliav": [
+    {
+      "group_id": "combo:163",
+      "label": "Negate Attacks"
+    }
+  ],
+  "sha's lethargy": [
+    {
+      "group_id": "combo:11",
+      "label": "Haste"
+    }
+  ],
+  "courage": [
+    {
+      "group_id": "combo:1-69",
+      "label": "AC + Total HP"
+    }
+  ],
+  "divine aura": [
+    {
+      "group_id": "combo:40",
+      "label": "Divine Aura"
+    }
+  ],
+  "holy armor": [
+    {
+      "group_id": "combo:1",
+      "label": "AC"
+    }
+  ],
+  "lull": [
+    {
+      "group_id": "combo:30-86",
+      "label": "Change Frenzy Rad + Harmony"
+    }
+  ],
+  "yaulp": [
+    {
+      "group_id": "combo:1-4",
+      "label": "AC + STR"
+    }
+  ],
+  "reckless strength": [
+    {
+      "group_id": "combo:4",
+      "label": "STR"
+    }
+  ],
+  "cure blindness": [
+    {
+      "group_id": "combo:20",
+      "label": "Blind"
+    }
+  ],
+  "soothe": [
+    {
+      "group_id": "combo:18-30-86",
+      "label": "Lull + Change Frenzy Rad + Harmony"
+    }
+  ],
+  "sanctuary": [
+    {
+      "group_id": "combo:76",
+      "label": "Sentinel"
+    }
+  ],
+  "center": [
+    {
+      "group_id": "combo:1-69",
+      "label": "AC + Total HP"
+    }
+  ],
+  "blessing of the page": [
+    {
+      "group_id": "combo:121",
+      "label": "Reverse DS"
+    }
+  ],
+  "sense the dead": [
+    {
+      "group_id": "combo:52",
+      "label": "Sense Dead"
+    }
+  ],
+  "invisibility versus undead": [
+    {
+      "group_id": "combo:28",
+      "label": "Invis Vs Undead"
+    }
+  ],
+  "symbol of transal": [
+    {
+      "group_id": "combo:69",
+      "label": "Total HP"
+    }
+  ],
+  "reanimation": [
+    {
+      "group_id": "combo:81",
+      "label": "Revive"
+    }
+  ],
+  "sense summoned": [
+    {
+      "group_id": "combo:53",
+      "label": "Sense Summoned"
+    }
+  ],
+  "blessing of piety": [
+    {
+      "group_id": "combo:127",
+      "label": "Increase Spell Haste"
+    }
+  ],
+  "calm": [
+    {
+      "group_id": "combo:18-30-86",
+      "label": "Lull + Change Frenzy Rad + Harmony"
+    }
+  ],
+  "spirit armor": [
+    {
+      "group_id": "combo:1",
+      "label": "AC"
+    }
+  ],
+  "blessing of the squire": [
+    {
+      "group_id": "combo:121",
+      "label": "Reverse DS"
+    }
+  ],
+  "yaulp ii": [
+    {
+      "group_id": "combo:1-4",
+      "label": "AC + STR"
+    }
+  ],
+  "daring": [
+    {
+      "group_id": "combo:1-69",
+      "label": "AC + Total HP"
+    }
+  ],
+  "reconstitution": [
+    {
+      "group_id": "combo:81",
+      "label": "Revive"
+    }
+  ],
+  "ward of vie": [
+    {
+      "group_id": "combo:162",
+      "label": "Mitigate Melee Damage"
+    }
+  ],
+  "symbol of ryltan": [
+    {
+      "group_id": "combo:69",
+      "label": "Total HP"
+    }
+  ],
+  "bravery": [
+    {
+      "group_id": "combo:1-69",
+      "label": "AC + Total HP"
+    }
+  ],
+  "reparation": [
+    {
+      "group_id": "combo:81",
+      "label": "Revive"
+    }
+  ],
+  "guard": [
+    {
+      "group_id": "combo:1",
+      "label": "AC"
+    }
+  ],
+  "revive": [
+    {
+      "group_id": "combo:81",
+      "label": "Revive"
+    }
+  ],
+  "divine barrier": [
+    {
+      "group_id": "combo:40",
+      "label": "Divine Aura"
+    }
+  ],
+  "resist poison": [
+    {
+      "group_id": "combo:48",
+      "label": "Poison Resist"
+    }
+  ],
+  "frenzied strength": [
+    {
+      "group_id": "combo:4",
+      "label": "STR"
+    }
+  ],
+  "symbol of pinzarn": [
+    {
+      "group_id": "combo:69",
+      "label": "Total HP"
+    }
+  ],
+  "atone": [
+    {
+      "group_id": "combo:63",
+      "label": "Wipe Hate List"
+    }
+  ],
+  "renewal": [
+    {
+      "group_id": "combo:81",
+      "label": "Revive"
+    }
+  ],
+  "valor": [
+    {
+      "group_id": "combo:1-69",
+      "label": "AC + Total HP"
+    }
+  ],
+  "resist fire": [
+    {
+      "group_id": "combo:46",
+      "label": "Fire Resist"
+    }
+  ],
+  "armor of protection": [
+    {
+      "group_id": "combo:1-69",
+      "label": "AC + Total HP"
+    }
+  ],
+  "blessing of the knight": [
+    {
+      "group_id": "combo:121",
+      "label": "Reverse DS"
+    }
+  ],
+  "armor of faith": [
+    {
+      "group_id": "combo:1",
+      "label": "AC"
+    }
+  ],
+  "blessing of faith": [
+    {
+      "group_id": "combo:127",
+      "label": "Increase Spell Haste"
+    }
+  ],
+  "pacify": [
+    {
+      "group_id": "combo:18-30-86",
+      "label": "Lull + Change Frenzy Rad + Harmony"
+    }
+  ],
+  "resist disease": [
+    {
+      "group_id": "combo:49",
+      "label": "Disease Resist"
+    }
+  ],
+  "resuscitate": [
+    {
+      "group_id": "combo:81",
+      "label": "Revive"
+    }
+  ],
+  "nullify magic": [
+    {
+      "group_id": "combo:27",
+      "label": "Cancel Magic"
+    }
+  ],
+  "resist cold": [
+    {
+      "group_id": "combo:47",
+      "label": "Cold Resist"
+    }
+  ],
+  "promised renewal": [
+    {
+      "group_id": "combo:44-289-537",
+      "label": "Lycanthropy + Cast On Fade Effect + SPA537"
+    }
+  ],
+  "guard of vie": [
+    {
+      "group_id": "combo:162",
+      "label": "Mitigate Melee Damage"
+    }
+  ],
+  "temperance": [
+    {
+      "group_id": "combo:1-69",
+      "label": "AC + Total HP"
+    }
+  ],
+  "symbol of naltron": [
+    {
+      "group_id": "combo:69",
+      "label": "Total HP"
+    }
+  ],
+  "yaulp iii": [
+    {
+      "group_id": "combo:1-4",
+      "label": "AC + STR"
+    }
+  ],
+  "resolution": [
+    {
+      "group_id": "combo:1-69",
+      "label": "AC + Total HP"
+    }
+  ],
+  "restoration": [
+    {
+      "group_id": "combo:81",
+      "label": "Revive"
+    }
+  ],
+  "resist magic": [
+    {
+      "group_id": "combo:50",
+      "label": "Magic Resist"
+    }
+  ],
+  "blessing of temperance": [
+    {
+      "group_id": "combo:1-69",
+      "label": "AC + Total HP"
+    }
+  ],
+  "shield of words": [
+    {
+      "group_id": "combo:1",
+      "label": "AC"
+    }
+  ],
+  "resurrection": [
+    {
+      "group_id": "combo:81",
+      "label": "Revive"
+    }
+  ],
+  "blessing of the lord commander": [
+    {
+      "group_id": "combo:121",
+      "label": "Reverse DS"
+    }
+  ],
+  "improved invisibility to undead": [
+    {
+      "group_id": "combo:315",
+      "label": "Invis Vs Undead2"
+    }
+  ],
+  "armor of the faithful": [
+    {
+      "group_id": "combo:1-69",
+      "label": "AC + Total HP"
+    }
+  ],
+  "ward of the divine": [
+    {
+      "group_id": "combo:323",
+      "label": "Defensive Proc"
+    }
+  ],
+  "lull animal": [
+    {
+      "group_id": "combo:18-30-86",
+      "label": "Lull + Change Frenzy Rad + Harmony"
+    }
+  ],
+  "skin like wood": [
+    {
+      "group_id": "combo:1-69",
+      "label": "AC + Total HP"
+    }
+  ],
+  "harmony": [
+    {
+      "group_id": "combo:30-86",
+      "label": "Change Frenzy Rad + Harmony"
+    }
+  ],
+  "firefist": [
+    {
+      "group_id": "combo:2",
+      "label": "ATK"
+    }
+  ],
+  "strength of earth": [
+    {
+      "group_id": "combo:4",
+      "label": "STR"
+    }
+  ],
+  "thistlecoat": [
+    {
+      "group_id": "combo:1-59",
+      "label": "AC + Damage Shield"
+    }
+  ],
+  "invisibility versus animals": [
+    {
+      "group_id": "combo:29",
+      "label": "Invis Vs Animals"
+    }
+  ],
+  "protection of wood": [
+    {
+      "group_id": "combo:1-69",
+      "label": "AC + Total HP"
+    }
+  ],
+  "skin like rock": [
+    {
+      "group_id": "combo:1-69",
+      "label": "AC + Total HP"
+    }
+  ],
+  "calm animal": [
+    {
+      "group_id": "combo:18-30-86",
+      "label": "Lull + Change Frenzy Rad + Harmony"
+    }
+  ],
+  "barbcoat": [
+    {
+      "group_id": "combo:1-59",
+      "label": "AC + Damage Shield"
+    }
+  ],
+  "feral spirit": [
+    {
+      "group_id": "combo:1-4-11",
+      "label": "AC + STR + Haste"
+    }
+  ],
+  "protection of rock": [
+    {
+      "group_id": "combo:1-69",
+      "label": "AC + Total HP"
     }
   ],
   "spirit of cheetah": [
     {
-      "group_id": "speed-speed-primary",
-      "label": "Speed (Primary)"
+      "group_id": "combo:3",
+      "label": "Movement Speed"
+    }
+  ],
+  "skin like steel": [
+    {
+      "group_id": "combo:1-69",
+      "label": "AC + Total HP"
+    }
+  ],
+  "scale of wolf": [
+    {
+      "group_id": "combo:3",
+      "label": "Movement Speed"
+    }
+  ],
+  "succor: east karana": [
+    {
+      "group_id": "combo:88-146",
+      "label": "Succor + Electricity Resist"
+    }
+  ],
+  "bramblecoat": [
+    {
+      "group_id": "combo:1-59",
+      "label": "AC + Damage Shield"
+    }
+  ],
+  "protection of steel": [
+    {
+      "group_id": "combo:1-69",
+      "label": "AC + Total HP"
+    }
+  ],
+  "harmony of nature": [
+    {
+      "group_id": "combo:30-86",
+      "label": "Change Frenzy Rad + Harmony"
+    }
+  ],
+  "succor: butcherblock": [
+    {
+      "group_id": "combo:88-146",
+      "label": "Succor + Electricity Resist"
+    }
+  ],
+  "regeneration": [
+    {
+      "group_id": "combo:0",
+      "label": "HP"
+    }
+  ],
+  "strength of stone": [
+    {
+      "group_id": "combo:4",
+      "label": "STR"
+    }
+  ],
+  "pack spirit": [
+    {
+      "group_id": "combo:3",
+      "label": "Movement Speed"
+    }
+  ],
+  "skin like diamond": [
+    {
+      "group_id": "combo:1-69",
+      "label": "AC + Total HP"
+    }
+  ],
+  "spikecoat": [
+    {
+      "group_id": "combo:1-59",
+      "label": "AC + Damage Shield"
+    }
+  ],
+  "succor: south ro": [
+    {
+      "group_id": "combo:88-146",
+      "label": "Succor + Electricity Resist"
+    }
+  ],
+  "pack regeneration": [
+    {
+      "group_id": "combo:0",
+      "label": "HP"
+    }
+  ],
+  "protection of diamond": [
+    {
+      "group_id": "combo:1-69",
+      "label": "AC + Total HP"
+    }
+  ],
+  "savage spirit": [
+    {
+      "group_id": "combo:1-4-11",
+      "label": "AC + STR + Haste"
+    }
+  ],
+  "succor: lavastorm": [
+    {
+      "group_id": "combo:88-146",
+      "label": "Succor + Electricity Resist"
+    }
+  ],
+  "chloroplast": [
+    {
+      "group_id": "combo:0",
+      "label": "HP"
+    }
+  ],
+  "storm strength": [
+    {
+      "group_id": "combo:4",
+      "label": "STR"
+    }
+  ],
+  "pack chloroplast": [
+    {
+      "group_id": "combo:0",
+      "label": "HP"
+    }
+  ],
+  "skin like nature": [
+    {
+      "group_id": "combo:1-69",
+      "label": "AC + Total HP"
+    }
+  ],
+  "succor: north karana": [
+    {
+      "group_id": "combo:88-146",
+      "label": "Succor + Electricity Resist"
+    }
+  ],
+  "thorncoat": [
+    {
+      "group_id": "combo:1-59",
+      "label": "AC + Damage Shield"
+    }
+  ],
+  "improved superior camouflage": [
+    {
+      "group_id": "combo:314",
+      "label": "Invisibility2"
+    }
+  ],
+  "protection of nature": [
+    {
+      "group_id": "combo:1-69",
+      "label": "AC + Total HP"
+    }
+  ],
+  "minor shielding": [
+    {
+      "group_id": "combo:1-69",
+      "label": "AC + Total HP"
+    }
+  ],
+  "reclaim energy": [
+    {
+      "group_id": "combo:68",
+      "label": "Reclaim Pet"
+    }
+  ],
+  "taper enchantment": [
+    {
+      "group_id": "combo:27",
+      "label": "Cancel Magic"
+    }
+  ],
+  "haze": [
+    {
+      "group_id": "combo:1",
+      "label": "AC"
+    }
+  ],
+  "sentinel": [
+    {
+      "group_id": "combo:76",
+      "label": "Sentinel"
+    }
+  ],
+  "lesser shielding": [
+    {
+      "group_id": "combo:1-50-69",
+      "label": "AC + Magic Resist + Total HP"
+    }
+  ],
+  "alliance": [
+    {
+      "group_id": "combo:19",
+      "label": "Add Faction"
+    }
+  ],
+  "languid pace": [
+    {
+      "group_id": "combo:11",
+      "label": "Haste"
+    }
+  ],
+  "memory blur": [
+    {
+      "group_id": "combo:63",
+      "label": "Wipe Hate List"
+    }
+  ],
+  "mist": [
+    {
+      "group_id": "combo:1",
+      "label": "AC"
+    }
+  ],
+  "intellectual advancement": [
+    {
+      "group_id": "combo:112",
+      "label": "Casting Level"
+    }
+  ],
+  "rune i": [
+    {
+      "group_id": "combo:55",
+      "label": "Rune"
+    }
+  ],
+  "breeze": [
+    {
+      "group_id": "combo:15",
+      "label": "Mana"
+    }
+  ],
+  "quickness": [
+    {
+      "group_id": "combo:11",
+      "label": "Haste"
+    }
+  ],
+  "shielding": [
+    {
+      "group_id": "combo:1-50-69",
+      "label": "AC + Magic Resist + Total HP"
+    }
+  ],
+  "cloud": [
+    {
+      "group_id": "combo:1",
+      "label": "AC"
+    }
+  ],
+  "intellectual superiority": [
+    {
+      "group_id": "combo:112",
+      "label": "Casting Level"
+    }
+  ],
+  "sympathetic aura": [
+    {
+      "group_id": "combo:10",
+      "label": "CHA"
+    }
+  ],
+  "berserker strength": [
+    {
+      "group_id": "combo:4-6-55",
+      "label": "STR + AGI + Rune"
+    }
+  ],
+  "benevolence": [
+    {
+      "group_id": "combo:19",
+      "label": "Add Faction"
+    }
+  ],
+  "alacrity": [
+    {
+      "group_id": "combo:11",
+      "label": "Haste"
+    }
+  ],
+  "rune ii": [
+    {
+      "group_id": "combo:55",
+      "label": "Rune"
+    }
+  ],
+  "strip enchantment": [
+    {
+      "group_id": "combo:27",
+      "label": "Cancel Magic"
+    }
+  ],
+  "major shielding": [
+    {
+      "group_id": "combo:1-50-69",
+      "label": "AC + Magic Resist + Total HP"
+    }
+  ],
+  "tepid deeds": [
+    {
+      "group_id": "combo:11",
+      "label": "Haste"
+    }
+  ],
+  "clarity": [
+    {
+      "group_id": "combo:15",
+      "label": "Mana"
+    }
+  ],
+  "haunting visage": [
+    {
+      "group_id": "combo:114",
+      "label": "Change Aggro"
+    }
+  ],
+  "obscure": [
+    {
+      "group_id": "combo:1",
+      "label": "AC"
+    }
+  ],
+  "augmentation": [
+    {
+      "group_id": "combo:1-6-11",
+      "label": "AC + AGI + Haste"
+    }
+  ],
+  "ward of alendar": [
+    {
+      "group_id": "combo:161",
+      "label": "Mitigate Spell Damage"
+    }
+  ],
+  "greater shielding": [
+    {
+      "group_id": "combo:1-50-69",
+      "label": "AC + Magic Resist + Total HP"
+    }
+  ],
+  "radiant visage": [
+    {
+      "group_id": "combo:10",
+      "label": "CHA"
+    }
+  ],
+  "rune iii": [
+    {
+      "group_id": "combo:55",
+      "label": "Rune"
+    }
+  ],
+  "gift of magic": [
+    {
+      "group_id": "combo:97",
+      "label": "Mana Pool"
+    }
+  ],
+  "insight": [
+    {
+      "group_id": "combo:8-9",
+      "label": "INT + WIS"
+    }
+  ],
+  "calming visage": [
+    {
+      "group_id": "combo:114",
+      "label": "Change Aggro"
+    }
+  ],
+  "mind wipe": [
+    {
+      "group_id": "combo:63",
+      "label": "Wipe Hate List"
+    }
+  ],
+  "shade": [
+    {
+      "group_id": "combo:1",
+      "label": "AC"
+    }
+  ],
+  "rampage": [
+    {
+      "group_id": "combo:4-6-55",
+      "label": "STR + AGI + Rune"
+    }
+  ],
+  "celerity": [
+    {
+      "group_id": "combo:11",
+      "label": "Haste"
+    }
+  ],
+  "arch shielding": [
+    {
+      "group_id": "combo:1-50-69",
+      "label": "AC + Magic Resist + Total HP"
+    }
+  ],
+  "rune iv": [
+    {
+      "group_id": "combo:55",
+      "label": "Rune"
+    }
+  ],
+  "brilliance": [
+    {
+      "group_id": "combo:8-9",
+      "label": "INT + WIS"
+    }
+  ],
+  "shiftless deeds": [
+    {
+      "group_id": "combo:11",
+      "label": "Haste"
+    }
+  ],
+  "boon of the clear mind": [
+    {
+      "group_id": "combo:15",
+      "label": "Mana"
+    }
+  ],
+  "pillage enchantment": [
+    {
+      "group_id": "combo:27",
+      "label": "Cancel Magic"
+    }
+  ],
+  "bounce": [
+    {
+      "group_id": "combo:158",
+      "label": "Reflect"
+    }
+  ],
+  "guard of alendar": [
+    {
+      "group_id": "combo:161",
+      "label": "Mitigate Spell Damage"
+    }
+  ],
+  "reoccurring amnesia": [
+    {
+      "group_id": "combo:63",
+      "label": "Wipe Hate List"
+    }
+  ],
+  "adorning grace": [
+    {
+      "group_id": "combo:10",
+      "label": "CHA"
+    }
+  ],
+  "blanket of forgetfulness": [
+    {
+      "group_id": "combo:63",
+      "label": "Wipe Hate List"
+    }
+  ],
+  "berserker spirit": [
+    {
+      "group_id": "combo:4-6-55",
+      "label": "STR + AGI + Rune"
+    }
+  ],
+  "swift like the wind": [
+    {
+      "group_id": "combo:11",
+      "label": "Haste"
+    }
+  ],
+  "group resist magic": [
+    {
+      "group_id": "combo:50",
+      "label": "Magic Resist"
+    }
+  ],
+  "shadow": [
+    {
+      "group_id": "combo:1",
+      "label": "AC"
+    }
+  ],
+  "collaboration": [
+    {
+      "group_id": "combo:19",
+      "label": "Add Faction"
+    }
+  ],
+  "improved invisibility": [
+    {
+      "group_id": "combo:314",
+      "label": "Invisibility2"
+    }
+  ],
+  "flare": [
+    {
+      "group_id": "combo:24",
+      "label": "Stamina"
+    }
+  ],
+  "burnout": [
+    {
+      "group_id": "combo:1-4-11",
+      "label": "AC + STR + Haste"
+    }
+  ],
+  "elemental shield": [
+    {
+      "group_id": "combo:46-47",
+      "label": "Fire Resist + Cold Resist"
+    }
+  ],
+  "expedience": [
+    {
+      "group_id": "combo:3",
+      "label": "Movement Speed"
+    }
+  ],
+  "burnout ii": [
+    {
+      "group_id": "combo:1-4-11",
+      "label": "AC + STR + Haste"
+    }
+  ],
+  "elemental armor": [
+    {
+      "group_id": "combo:46-47",
+      "label": "Fire Resist + Cold Resist"
+    }
+  ],
+  "burnout iii": [
+    {
+      "group_id": "combo:1-4-11",
+      "label": "AC + STR + Haste"
+    }
+  ],
+  "numb the dead": [
+    {
+      "group_id": "combo:18-30-86",
+      "label": "Lull + Change Frenzy Rad + Harmony"
+    }
+  ],
+  "grim aura": [
+    {
+      "group_id": "combo:2",
+      "label": "ATK"
+    }
+  ],
+  "shadow step": [
+    {
+      "group_id": "combo:42",
+      "label": "Shadow Step"
+    }
+  ],
+  "dark pact": [
+    {
+      "group_id": "combo:0-15",
+      "label": "HP + Mana"
+    }
+  ],
+  "vampiric embrace": [
+    {
+      "group_id": "combo:10-85",
+      "label": "CHA + Weapon Proc"
+    }
+  ],
+  "impart strength": [
+    {
+      "group_id": "combo:4",
+      "label": "STR"
+    }
+  ],
+  "focus death": [
+    {
+      "group_id": "combo:1-4-11",
+      "label": "AC + STR + Haste"
+    }
+  ],
+  "shieldskin": [
+    {
+      "group_id": "combo:55",
+      "label": "Rune"
+    }
+  ],
+  "voice graft": [
+    {
+      "group_id": "combo:75",
+      "label": "Voice Graft"
+    }
+  ],
+  "shackle of bone": [
+    {
+      "group_id": "combo:11",
+      "label": "Haste"
+    }
+  ],
+  "allure of death": [
+    {
+      "group_id": "combo:0-15",
+      "label": "HP + Mana"
+    }
+  ],
+  "rapacious subvention": [
+    {
+      "group_id": "combo:15",
+      "label": "Mana"
+    }
+  ],
+  "leatherskin": [
+    {
+      "group_id": "combo:55",
+      "label": "Rune"
+    }
+  ],
+  "intensify death": [
+    {
+      "group_id": "combo:1-4-11",
+      "label": "AC + STR + Haste"
+    }
+  ],
+  "rest the dead": [
+    {
+      "group_id": "combo:18-30-63-86",
+      "label": "Lull + Change Frenzy Rad + Wipe Hate List + Harmony"
+    }
+  ],
+  "call of bones": [
+    {
+      "group_id": "combo:0-15",
+      "label": "HP + Mana"
+    }
+  ],
+  "steelskin": [
+    {
+      "group_id": "combo:55",
+      "label": "Rune"
+    }
+  ],
+  "augment death": [
+    {
+      "group_id": "combo:1-4-11",
+      "label": "AC + STR + Haste"
+    }
+  ],
+  "shackle of spirit": [
+    {
+      "group_id": "combo:11",
+      "label": "Haste"
+    }
+  ],
+  "covetous subversion": [
+    {
+      "group_id": "combo:15",
+      "label": "Mana"
+    }
+  ],
+  "diamondskin": [
+    {
+      "group_id": "combo:55",
+      "label": "Rune"
+    }
+  ],
+  "lich": [
+    {
+      "group_id": "combo:0-15",
+      "label": "HP + Mana"
+    }
+  ],
+  "instrument of nife": [
+    {
+      "group_id": "combo:10-85",
+      "label": "CHA + Weapon Proc"
+    }
+  ],
+  "divine vigor": [
+    {
+      "group_id": "combo:69",
+      "label": "Total HP"
+    }
+  ],
+  "valor of marr": [
+    {
+      "group_id": "combo:11",
+      "label": "Haste"
+    }
+  ],
+  "divine might": [
+    {
+      "group_id": "combo:10-85",
+      "label": "CHA + Weapon Proc"
+    }
+  ],
+  "brell's steadfast aegis": [
+    {
+      "group_id": "combo:69",
+      "label": "Total HP"
+    }
+  ],
+  "glimpse": [
+    {
+      "group_id": "combo:87",
+      "label": "Magnify Vision"
+    }
+  ],
+  "hawk eye": [
+    {
+      "group_id": "combo:184",
+      "label": "Hit Chance"
+    }
+  ],
+  "feet like cat": [
+    {
+      "group_id": "combo:6",
+      "label": "AGI"
+    }
+  ],
+  "call of sky": [
+    {
+      "group_id": "combo:10-85",
+      "label": "CHA + Weapon Proc"
+    }
+  ],
+  "nature's precision": [
+    {
+      "group_id": "combo:2",
+      "label": "ATK"
+    }
+  ],
+  "strengthen death": [
+    {
+      "group_id": "combo:1-4-11",
+      "label": "AC + STR + Haste"
+    }
+  ],
+  "dark temptation": [
+    {
+      "group_id": "combo:0-2",
+      "label": "HP + ATK"
+    }
+  ],
+  "scream of death": [
+    {
+      "group_id": "combo:10-85",
+      "label": "CHA + Weapon Proc"
+    }
+  ],
+  "voice of darkness": [
+    {
+      "group_id": "combo:114",
+      "label": "Change Aggro"
+    }
+  ],
+  "voice of shadows": [
+    {
+      "group_id": "combo:114",
+      "label": "Change Aggro"
+    }
+  ],
+  "dexterous aura": [
+    {
+      "group_id": "combo:5",
+      "label": "DEX"
+    }
+  ],
+  "talisman of the beast": [
+    {
+      "group_id": "combo:4",
+      "label": "STR"
+    }
+  ],
+  "spirit of snake": [
+    {
+      "group_id": "combo:10",
+      "label": "CHA"
+    }
+  ],
+  "burst of strength": [
+    {
+      "group_id": "combo:1-4-5",
+      "label": "AC + STR + DEX"
+    }
+  ],
+  "walking sleep": [
+    {
+      "group_id": "combo:11",
+      "label": "Haste"
+    }
+  ],
+  "grow": [
+    {
+      "group_id": "combo:89",
+      "label": "Model Size"
+    }
+  ],
+  "spirit of cat": [
+    {
+      "group_id": "combo:6",
+      "label": "AGI"
+    }
+  ],
+  "creeping vision": [
+    {
+      "group_id": "combo:87",
+      "label": "Magnify Vision"
+    }
+  ],
+  "rising dexterity": [
+    {
+      "group_id": "combo:5",
+      "label": "DEX"
+    }
+  ],
+  "tagar's insects": [
+    {
+      "group_id": "combo:11",
+      "label": "Haste"
+    }
+  ],
+  "alluring aura": [
+    {
+      "group_id": "combo:10",
+      "label": "CHA"
+    }
+  ],
+  "fury": [
+    {
+      "group_id": "combo:1-4-5-6",
+      "label": "AC + STR + DEX + AGI"
+    }
+  ],
+  "health": [
+    {
+      "group_id": "combo:7",
+      "label": "STA"
+    }
+  ],
+  "nimble": [
+    {
+      "group_id": "combo:6",
+      "label": "AGI"
+    }
+  ],
+  "shifting shield": [
+    {
+      "group_id": "combo:1",
+      "label": "AC"
+    }
+  ],
+  "talisman of tnarg": [
+    {
+      "group_id": "combo:69",
+      "label": "Total HP"
+    }
+  ],
+  "tumultuous strength": [
+    {
+      "group_id": "combo:4",
+      "label": "STR"
+    }
+  ],
+  "spirit of bih`li": [
+    {
+      "group_id": "combo:2-3",
+      "label": "ATK + Movement Speed"
+    }
+  ],
+  "glamour": [
+    {
+      "group_id": "combo:10",
+      "label": "CHA"
+    }
+  ],
+  "togor's insects": [
+    {
+      "group_id": "combo:11",
+      "label": "Haste"
+    }
+  ],
+  "deftness": [
+    {
+      "group_id": "combo:5",
+      "label": "DEX"
+    }
+  ],
+  "furious strength": [
+    {
+      "group_id": "combo:4",
+      "label": "STR"
+    }
+  ],
+  "talisman of altuna": [
+    {
+      "group_id": "combo:69",
+      "label": "Total HP"
+    }
+  ],
+  "agility": [
+    {
+      "group_id": "combo:6",
+      "label": "AGI"
+    }
+  ],
+  "guardian": [
+    {
+      "group_id": "combo:1",
+      "label": "AC"
+    }
+  ],
+  "stamina": [
+    {
+      "group_id": "combo:7",
+      "label": "STA"
+    }
+  ],
+  "rage": [
+    {
+      "group_id": "combo:1-4-5-6",
+      "label": "AC + STR + DEX + AGI"
+    }
+  ],
+  "harnessing of spirit": [
+    {
+      "group_id": "combo:4-5-69",
+      "label": "STR + DEX + Total HP"
+    }
+  ],
+  "strength": [
+    {
+      "group_id": "combo:4",
+      "label": "STR"
+    }
+  ],
+  "charisma": [
+    {
+      "group_id": "combo:10",
+      "label": "CHA"
+    }
+  ],
+  "dexterity": [
+    {
+      "group_id": "combo:5",
+      "label": "DEX"
+    }
+  ],
+  "infusion of spirit": [
+    {
+      "group_id": "combo:4-5-7",
+      "label": "STR + DEX + STA"
+    }
+  ],
+  "spirit quickening": [
+    {
+      "group_id": "combo:1-4-11",
+      "label": "AC + STR + Haste"
+    }
+  ],
+  "spirit of the puma": [
+    {
+      "group_id": "combo:10-85",
+      "label": "CHA + Weapon Proc"
+    }
+  ],
+  "talisman of jasinth": [
+    {
+      "group_id": "combo:49",
+      "label": "Disease Resist"
+    }
+  ],
+  "fade": [
+    {
+      "group_id": "combo:42",
+      "label": "Shadow Step"
+    }
+  ],
+  "resistant skin": [
+    {
+      "group_id": "combo:48-49",
+      "label": "Poison Resist + Disease Resist"
+    }
+  ],
+  "gaze": [
+    {
+      "group_id": "combo:87",
+      "label": "Magnify Vision"
+    }
+  ],
+  "minor familiar": [
+    {
+      "group_id": "combo:10-111-112",
+      "label": "CHA + Resist All + Casting Level"
+    }
+  ],
+  "yonder": [
+    {
+      "group_id": "combo:42",
+      "label": "Shadow Step"
+    }
+  ],
+  "evacuate: north karana": [
+    {
+      "group_id": "combo:88-146",
+      "label": "Succor + Electricity Resist"
+    }
+  ],
+  "evacuate: greater faydark": [
+    {
+      "group_id": "combo:88-146",
+      "label": "Succor + Electricity Resist"
+    }
+  ],
+  "harvest": [
+    {
+      "group_id": "combo:15",
+      "label": "Mana"
+    }
+  ],
+  "tishan's relocation": [
+    {
+      "group_id": "combo:88-146",
+      "label": "Succor + Electricity Resist"
+    }
+  ],
+  "markar's relocation": [
+    {
+      "group_id": "combo:88-146",
+      "label": "Succor + Electricity Resist"
+    }
+  ],
+  "evacuate: south ro": [
+    {
+      "group_id": "combo:88-146",
+      "label": "Succor + Electricity Resist"
+    }
+  ],
+  "invisibility to undead": [
+    {
+      "group_id": "combo:28",
+      "label": "Invis Vs Undead"
+    }
+  ],
+  "evacuate: nektulos": [
+    {
+      "group_id": "combo:88-146",
+      "label": "Succor + Electricity Resist"
+    }
+  ],
+  "evacuate: west karana": [
+    {
+      "group_id": "combo:88-146",
+      "label": "Succor + Electricity Resist"
+    }
+  ],
+  "ward of calrena": [
+    {
+      "group_id": "combo:161",
+      "label": "Mitigate Spell Damage"
     }
   ]
 }

@@ -54,46 +54,132 @@ function compareClasses(classNames, level) {
   return { overlapping, unique };
 }
 
-/**
- * Builds a category x class grid: one row per known category, one cell per
- * selected class holding that class's best available spell in it (or null).
- * `isBest` marks the strongest populated cell in the row (by spellPower,
- * falling back to level) for an at-a-glance "who wins this category" view.
- */
-function categoryGrid(classNames, level) {
-  const perClass = classNames.map((name) => ({
-    name,
-    spells: bestSpellsForClassAtLevel(name, level),
-  }));
+// "Best" ranks by effect magnitude (damage/heal/buff values are stored signed - a nuke's
+// HP delta is negative - so magnitude, not signed value, is what compares). Status effects
+// with no numeric power (Fear/Charm/Root) fall back to spell level.
+function spellMagnitude(spell) {
+  const p = spellPower(spell);
+  return p != null ? Math.abs(p) : spell.level;
+}
 
-  const allCategories = new Set();
-  perClass.forEach(({ spells }) => spells.forEach((_, cat) => allCategories.add(cat)));
+function resistKey(spell) {
+  return spell.resist_type || "None";
+}
 
-  const rows = [...allCategories].sort().map((category) => {
-    const cells = perClass.map(({ name, spells }) => ({
-      className: name,
-      spell: spells.get(category) || null,
-    }));
-
-    const populated = cells.filter((cell) => cell.spell);
-    let bestCell = null;
-    let bestVal = -Infinity;
-    for (const cell of populated) {
-      // Damage-ish effects (Nuke/DoT/Debuff) are stored as negative numbers,
-      // so "best" means largest magnitude, not largest signed value.
-      const val = Math.abs(spellPower(cell.spell) ?? cell.spell.level);
-      if (val > bestVal) {
-        bestVal = val;
-        bestCell = cell;
-      }
+// Collapses a list of spells into ranked multi-class entries keyed by `keyOf`: within one key
+// only the strongest tier per class survives (you don't list five tiers of your own fire nuke),
+// then classes sharing the identical spell (same spell_id) merge into one entry carrying every
+// class that gets it - the shape the grid/template rows render. Returns entries strongest-first.
+function rankedEntries(spells, keyOf) {
+  const perClass = new Map(); // `${class}::${key}` -> strongest spell
+  for (const s of spells) {
+    const k = `${s.class}::${keyOf(s)}`;
+    const cur = perClass.get(k);
+    if (!cur || spellMagnitude(s) > spellMagnitude(cur)) perClass.set(k, s);
+  }
+  const bySpell = new Map(); // spell_id|name -> merged entry
+  for (const s of perClass.values()) {
+    const spellKey = s.spell_id ?? s.name;
+    const entry = bySpell.get(spellKey);
+    if (!entry) {
+      bySpell.set(spellKey, { spell: s, classLevels: [{ class: s.class, level: s.level }] });
+    } else {
+      entry.classLevels.push({ class: s.class, level: s.level });
+      if (spellMagnitude(s) > spellMagnitude(entry.spell)) entry.spell = s;
     }
-    // Only worth highlighting a "winner" when there's actually a comparison
-    // to make - i.e. 2+ classes have a spell in this category.
-    cells.forEach((cell) => { cell.isBest = populated.length > 1 && cell === bestCell; });
+  }
+  const list = [...bySpell.values()];
+  list.forEach((e) => e.classLevels.sort((a, b) => a.level - b.level));
+  list.sort((a, b) => spellMagnitude(b.spell) - spellMagnitude(a.spell));
+  return list;
+}
 
-    return { category, cells };
-  });
+// A buff's stacking line: two buffs with the same key don't stack (only the stronger lands), so
+// the key IS the "pick one of these" set. From the precomputed signature (`stacking_groups`),
+// which already namespaces bard songs; pet buffs land on the pet, not you, so they get their own
+// namespace and never read as alternatives to a player buff. Buffs with no signature stand alone.
+function buffLineKey(spell) {
+  const confirmed = spell.stacking_confirmed && spell.stacking_groups.length > 0;
+  const base = confirmed ? spell.stacking_groups[0].group_id : `solo:${spell.name}`;
+  return (spell.target === "Pet" ? "pet:" : "") + base;
+}
 
+function buffLineLabel(spell) {
+  const confirmed = spell.stacking_confirmed && spell.stacking_groups.length > 0;
+  const label = confirmed ? spell.stacking_groups[0].label : spell.name;
+  return spell.target === "Pet" ? `Pet: ${label}` : label;
+}
+
+/**
+ * Builds the "best in slot" board for the Category Grid: the single best spell the selected
+ * classes can field for each job/purpose at this level, plus the spells each pick makes redundant.
+ * Two row kinds share one list (`kind`):
+ *
+ *   "category"  - heals, nukes, CC, debuffs, pets, utility. Keyed by category, and damage
+ *                 categories split by resist element (a Fire nuke and a Magic nuke aren't
+ *                 substitutes). `runnersUp` are weaker alternatives / lower tiers.
+ *   "buff-line" - one row per stacking line (`buffLineKey`), so "best haste" and "best AC" are
+ *                 distinct rows instead of one coarse "Buff". Its `runnersUp` are the spells that
+ *                 share the line and so WON'T stack with the pick (`conflict: true`) - pick the
+ *                 winner and you know what's pointless to also run.
+ *
+ * Every row: { kind, category, resistType, best, runnersUp, conflict }, where `category` doubles
+ * as the row heading (the line label for buff rows) and best/runnersUp are the merged multi-class
+ * entries from `rankedEntries`. Category rows sort first (alpha, element rows contiguous); buff
+ * lines cluster after, alpha by label.
+ */
+function categoryTypeGrid(classNames, level) {
+  const available = SPELLS.filter((s) => classNames.includes(s.class) && s.level <= level);
+  const rows = [];
+
+  // Non-buff rows: best per (category, element). Buffs are handled per stacking line below.
+  const nonBuff = available.filter((s) => s.category !== "Buff");
+  const byType = new Map(); // "category::element" -> spells
+  for (const s of nonBuff) {
+    const typeKey = `${s.category}::${resistKey(s)}`;
+    (byType.get(typeKey) || byType.set(typeKey, []).get(typeKey)).push(s);
+  }
+  for (const [typeKey, spells] of byType) {
+    const list = rankedEntries(spells, resistKey);
+    const sep = typeKey.lastIndexOf("::");
+    const element = typeKey.slice(sep + 2);
+    rows.push({
+      kind: "category",
+      category: typeKey.slice(0, sep),
+      resistType: element === "None" ? null : element,
+      best: list[0],
+      runnersUp: list.slice(1),
+      conflict: false,
+    });
+  }
+
+  // Buff rows: one per stacking line. `runnersUp` here are the same-line spells that won't stack.
+  const buffLines = new Map(); // lineKey -> spells
+  for (const s of available.filter((s) => s.category === "Buff")) {
+    const k = buffLineKey(s);
+    (buffLines.get(k) || buffLines.set(k, []).get(k)).push(s);
+  }
+  for (const spells of buffLines.values()) {
+    const list = rankedEntries(spells, buffLineKey);
+    rows.push({
+      kind: "buff-line",
+      category: buffLineLabel(list[0].spell),
+      resistType: null,
+      best: list[0],
+      runnersUp: list.slice(1),
+      conflict: true,
+    });
+  }
+
+  // Category rows first (alpha, element rows contiguous, strongest first); buff lines cluster
+  // after, alpha by label - a natural "reference table, then buffs you can't double up" order.
+  const sortGroup = (r) => (r.kind === "category" ? 0 : 1);
+  rows.sort(
+    (a, b) =>
+      sortGroup(a) - sortGroup(b) ||
+      a.category.localeCompare(b.category) ||
+      spellMagnitude(b.best.spell) - spellMagnitude(a.best.spell)
+  );
   return rows;
 }
 
@@ -103,7 +189,7 @@ function categoryGrid(classNames, level) {
 const ROLE_DEFINITIONS = {
   healer: { label: "Healer", categories: ["Heal-Instant", "Heal-HoT", "Regen", "Cure"] },
   damage: { label: "Damage", categories: ["Nuke", "DoT", "Lifetap"] },
-  crowd_control: { label: "Crowd Control", categories: ["Charm", "Fear", "Root", "Slow"] },
+  crowd_control: { label: "Crowd Control", categories: ["Charm", "Fear", "Root", "Slow", "Mesmerize"] },
   debuffer: { label: "Debuffer", categories: ["Debuff"] },
   support: { label: "Utility / Support", categories: ["Pet/Summon", "Travel", "Tradeskill", "Utility"] },
 };

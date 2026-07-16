@@ -2,7 +2,11 @@
 
 Pulls raw wikitext for each class page via the MediaWiki API, extracts the
 per-level {{RadSpellRow2 ...}} template blocks, and writes one normalized
-record per spell to data/spells_raw.json.
+record per spell to data/spells_wiki_index.json.
+
+This is used only as an INDEX of which spells/classes/levels exist - see
+build_spells_raw.py, which treats every other wiki field (mana/duration/kind/
+description text) as unreliable and recomputes them from the game client.
 """
 import json
 import re
@@ -133,7 +137,7 @@ def main():
         all_records.extend(records)
         time.sleep(0.5)  # be polite to the wiki
 
-    out_path = out_dir / "spells_raw.json"
+    out_path = out_dir / "spells_wiki_index.json"
     out_path.write_text(json.dumps(all_records, indent=2), encoding="utf-8")
     print(f"\nWrote {len(all_records)} spell records to {out_path}")
 
