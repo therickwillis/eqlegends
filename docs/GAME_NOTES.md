@@ -49,9 +49,21 @@ one slot at once.
 
 This is exactly the mechanic behind "a Cleric HP buff and a Druid HP buff don't stack" — they're
 different spells, different classes, even different stat-text, but the same underlying slot.
-eqlwiki.com's **Buff Lines** page (https://eqlwiki.com/Buff_Lines) hand-curates this cross-class, listing
-every known spell/item under the slot it occupies. It's classic-EQ-sourced content and not 100% complete
-for EQL specifically — see `docs/PROJECT_GOALS.md` for how the tool handles gaps.
+
+**The game client ships its own name for this line.** Every spell carries a Category and Subcategory
+(`spells_us.txt` fields 86/87, resolved through `dbstr_us.txt` type 5 — the same "spell line" text the
+client shows when you hover a spell). That subcategory *is* the cross-class buff-line id: Courage (CLR)
+and Skin like Wood (DRU) are both `HP Buffs › HP type one`, so they share a line and don't stack; Symbol
+of Ryltan is `HP Buffs › Symbol`, a different line that stacks with Courage. The tool uses this directly
+(see `docs/PROJECT_GOALS.md`), so no hand-curated cross-class table is needed. eqlwiki.com's **Buff Lines**
+page (https://eqlwiki.com/Buff_Lines) hand-curates the same thing from classic-EQ sources, but it's
+incomplete for EQL and no longer used.
+
+(Two other client-derived line signals worth knowing: **SpellGroup**, field 165 = `100` + class index +
+line number, clusters the same-class *tiers* of a line — Courage/Center/Bravery/Valor share one, as do
+Rk. II/III variants; and the true runtime stacking mechanic is the engine's slot-by-slot
+`CheckStackConflict` over the effect list, of which the Category/Subcategory taxonomy is a close, curated
+reflection.)
 
 ## Data source
 
@@ -61,5 +73,9 @@ for EQL specifically — see `docs/PROJECT_GOALS.md` for how the tool handles ga
   - Each spell also has its own individual page (e.g. `/Courage`) via a `{{Spellpage}}` template, which
     carries an icon code (`spellicon_<code>.png`) and sometimes a `Category:X line` tag (inconsistently
     applied — not reliable alone for stacking data).
-  - `/Buff_Lines` hand-curates cross-class buff stacking slots (see above).
+  - `/Buff_Lines` hand-curates cross-class buff stacking slots — superseded by the client's own spell-line
+    taxonomy (see above) and no longer scraped.
   - All fetched via the standard MediaWiki API (`api.php?action=query&prop=revisions...`), no auth needed.
+- **Game client string tables.** `dbstr_us.txt` (`id^type^text^…`) holds spell-line/category names
+  (type 5), among much else; `spells_us_str.txt` holds per-spell cast messages only. Both parsed from the
+  local install, no network.

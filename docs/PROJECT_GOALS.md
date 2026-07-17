@@ -32,7 +32,8 @@ also refreshes the wiki index/icons):
    via `eq_spell_formulas.py`; classifies by SPA effect id; generates in-game-style descriptions →
    `data/spells_raw.json`
 4. `fetch_icons.py` — spell icons from the wiki → `app/icons/`, `data/spell_icons.json` [network]
-5. `build_buff_stacking.py` — computes buff-stacking conflicts from client effect data (no wiki) →
+5. `build_buff_stacking.py` — buff-stacking lines from the client's own spell-line taxonomy (each
+   spell's Category/Subcategory; effect-signature fallback for the rare uncategorized spell) →
    `data/buff_stacking.json`
 6. `parse_effects.py` — final merge, derived metrics → `data/spells.json` + `app/data.js`
 7. `classify_roles.py` — data-driven per-class role-affinity analysis → `data/class_roles.json`
@@ -45,7 +46,14 @@ UI (`app/index.html`, opened directly as a `file://` page, no server) has five t
   (Self/Tank/Melee/Caster/Healer/Pets, each toggleable with an importance slider), one pick per stacking
   line with a generated "why" (top role, driving stats, rivals it beat), and an auditable
   excluded-with-reasons section (see `suggestedBuffTemplate` in `app/rank.js`).
-- **Category Grid** — every category's best spell per selected class, at a glance.
+- **Category Grid** — a best-in-slot board organized entirely by the client's own spell-line taxonomy:
+  each section is a client spell Category (Direct Damage, HP Buffs, Utility Detrimental, …), each row a
+  line (Subcategory) within it, showing the best spell your classes can field for that line plus the
+  same-line spells it beats (▲ for buff lines that won't stack). Sections and lines both sort alpha.
+  **Collection lines** — sets of equivalent variants with no "best" (Enchanter illusions: Dwarf isn't
+  better than Dark Elf; `isCollectionLine`, matches Illusion/Visage subcategories) — instead list every
+  spell as its own row under one shared label, rather than crowning a winner. See `spellLineGrid` in
+  `app/compare.js`.
 - **Full Comparison** — detailed side-by-side spell cards per category.
 - **Rank Lab** — experimental weighted multi-stat ranking of any category with live per-archetype weight
   sliders; rows grouped per spell (shared spells show all classes/levels in one row).
@@ -65,13 +73,25 @@ Class/level/slots/roles/recipients/active-tab selections persist through the URL
   kicker stays "Buff", not "Heal-Instant" — but CC SPAs (Charm/Fear/Mez/Root/Slow) win from any slot,
   since CC is the headline mechanic whenever present. Zero-value slots (unused padding, e.g.
   Disempower's dead CHA slot) are ignored everywhere: classification, display, scoring, stacking.
-- **Buff stacking is computed from client effect data, keyed by SPA type alone.** EQEmu's real
-  algorithm compares per-slot-index, but measured against this dataset effect order is a coin flip
-  (26 combo buffs put AC in slot 2, 25 in slot 1), so slot-index matching missed half the real
-  conflicts. SPA-only grouping over-flags slightly, which is the right failure mode for a planning
-  tool: telling you two buffs are fine together when they aren't is the harmful error. Bard songs
-  conflict only with each other; negative-AC effects don't claim the AC line. Long-duration Heal-HoTs
-  (Regeneration/Chloroplast line, ≥5 min) get stacking groups too — they behave as template buffs.
+- **Buff stacking uses the client's own spell-line taxonomy — lines are the display's organizing
+  thread.** Every spell carries a Category/Subcategory (`spells_us.txt` 86/87 → `dbstr_us.txt` type 5),
+  the "spell line" the game shows on hover, and its subcategory *is* the cross-class buff-line id:
+  Courage (CLR) and Skin like Wood (DRU) are both `HP Buffs › HP type one` → don't stack, while Symbol
+  of Ryltan (`HP Buffs › Symbol`) and the Shielding line are separate lines that stack with them. This
+  is the game's own labeling, so it separates lines that share an identical effect signature but sit on
+  different slots — the residual failure of the earlier effect-signature key, which grouped by the sorted
+  set of persistent stat SPAs and couldn't tell `Symbol` / `HP type one` / `Shielding` apart. 100% of the
+  ~500 EQL buff/long-HoT spells carry a client line; the ~27% uncategorized in the raw client file are
+  legacy duplicate entries the wiki-index match already drops, so the effect-signature approach survives
+  only as a fallback (currently unused). The line is surfaced on every spell in the UI (a chip on each
+  card/row, the row heading in the Category Grid's buff section, the "claims" line in the Buff Template,
+  a Line column in Rank Lab). Bard songs conflict only with each other (bard-only lines are namespaced);
+  negative-AC effects don't claim an AC line. Long-duration Heal-HoTs (Regeneration/Chloroplast line, ≥5
+  min) get lines too — they behave as template buffs.
+- **Same-class tier collapsing can key on SpellGroup.** `spells_us.txt` field 165 (`100` + class index +
+  line number) clusters the tiers of one class's line (Courage/Center/Bravery/Valor; Rk. II/III variants).
+  Carried through the pipeline as `spell_group`; the loadouts currently collapse tiers by class+category,
+  and this is available as a cleaner, name-independent key if that ever needs tightening.
 - **Stacking conflicts only exist between buffs landing on the same body.** In the Buff Template
   engine, self-only buffs (Shielding line, skins) and pet buffs (Burnout line) compete in their own
   namespaces — your own Shielding and a Temperance cast on you coexist; Harnessing of Spirit must not

@@ -346,11 +346,30 @@ def build_row(wiki_row: dict, class_code: str, caster_level: int, client_spell: 
     # the `effects` field (UI, rank_spells.py) sees only real numbers.
     display_effects = [e for e in effects if e["spa"] in MAGNITUDE_DISPLAY_SPAS and e["value"] != 0]
 
+    # The client's own spell-line taxonomy (fields 86/87 -> dbstr type 5; see
+    # extract_client_spells.py). `line` is the display label; `line_id` is the stable key that
+    # build_buff_stacking.py groups cross-class buff lines on. subcategory alone is the finest
+    # grain (e.g. "HP type one"); prefix with the category so identically-named subcategories
+    # under different parents can't collide.
+    line_category = client_spell.get("line_category")
+    line_subcategory = client_spell.get("line_subcategory")
+    if line_subcategory:
+        line_label = f"{line_category} › {line_subcategory}" if line_category else line_subcategory
+        line_id = f"{line_category or ''}:{line_subcategory}"
+    else:
+        line_label = line_category
+        line_id = f"{line_category}:" if line_category else None
+
     return {
         "class": wiki_row["class"],
         "level": caster_level,
         "name": wiki_row["name"],
         "spell_id": client_spell["id"],
+        "line_category": line_category,
+        "line_subcategory": line_subcategory,
+        "line": line_label,
+        "line_id": line_id,
+        "spell_group": client_spell.get("spell_group"),
         "mana": client_spell["mana"],
         "cast_time_s": client_spell["cast_time_ms"] / 1000,
         "recast_time_s": client_spell["recast_ms"] / 1000,

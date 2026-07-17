@@ -7,7 +7,7 @@ Pipeline:
   2. scrape.py                 - eqlwiki.com spell index    -> data/spells_wiki_index.json  [--refresh-index]
   3. build_spells_raw.py       - client + wiki index        -> data/spells_raw.json
   4. fetch_icons.py            - eqlwiki.com icons          -> data/spell_icons.json         [--refresh-icons]
-  5. build_buff_stacking.py    - client effect-slot data    -> data/buff_stacking.json
+  5. build_buff_stacking.py    - client spell-line taxonomy -> data/buff_stacking.json
   6. parse_effects.py          - final merge                -> data/spells.json, app/data.js
   7. classify_roles.py         - role-affinity analysis     -> data/class_roles.json
 
@@ -16,8 +16,9 @@ reused) since a client update doesn't necessarily mean the wiki's spell list or 
 The wiki index (step 2) also only needs a refresh when EQ Legends adds/removes spells, not when
 existing spell numbers get rebalanced - the client always wins for numbers regardless. Step 5
 used to scrape eqlwiki.com's Buff Lines page too (buff_stacking.py, still here but unused by
-this script) - it's now computed straight from client effect-slot data instead, which is both
-more complete and doesn't need a network refresh flag.
+this script) - it's now taken straight from the client's own spell-line taxonomy (each spell's
+Category/Subcategory, the "spell line" shown on hover), which is both more complete and doesn't
+need a network refresh flag.
 
 Usage:
   python update_pipeline.py                 # client-only refresh (the common case)
@@ -72,7 +73,7 @@ def main():
     else:
         print("\n=== 4/7 Spell icons: skipped (pass --refresh-icons or --full to update) ===")
 
-    run("build_buff_stacking.py", "5/7 Computing buff-stacking data from client effect slots")
+    run("build_buff_stacking.py", "5/7 Computing buff-stacking lines from the client's spell-line taxonomy")
 
     run("parse_effects.py", "6/7 Building final data/spells.json + app/data.js")
     run("classify_roles.py", "7/7 Computing class role-affinity analysis")

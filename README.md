@@ -9,14 +9,19 @@ decisions behind it.
 
 ## Regenerating the data
 
-Run in order from the repo root (each step is independently re-runnable):
+One command re-derives everything from the local game client (no network by default):
 
 ```
-python scrape.py          # spell tables for all 16 classes -> data/spells_raw.json
-python fetch_icons.py     # spell icons -> app/icons/, data/spell_icons.json
-python buff_stacking.py   # buff stacking-slot data -> data/buff_stacking.json
-python parse_effects.py   # parses/classifies everything -> data/spells.json, app/data.js
+python update_pipeline.py          # client-only refresh (the common case)
+python update_pipeline.py --full   # also refresh the wiki spell index + icons
 ```
+
+It runs, in order: `extract_client_spells.py` (parse the client's `spells_us.txt` +
+`dbstr_us.txt`, including each spell's line/Category), `build_spells_raw.py` (match the wiki
+spell index to client records, compute effects), `build_buff_stacking.py` (buff-stacking lines
+from the client's own spell-line taxonomy), `parse_effects.py` (final merge → `data/spells.json`,
+`app/data.js`), and `classify_roles.py`. The wiki steps (`scrape.py`, `fetch_icons.py`) are
+skipped unless `--full`/`--refresh-*` is passed. Each script is also independently re-runnable.
 
 ## Using the tool
 

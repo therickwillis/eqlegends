@@ -62,10 +62,6 @@ function spellMagnitude(spell) {
   return p != null ? Math.abs(p) : spell.level;
 }
 
-function resistKey(spell) {
-  return spell.resist_type || "None";
-}
-
 // Collapses a list of spells into ranked multi-class entries keyed by `keyOf`: within one key
 // only the strongest tier per class survives (you don't list five tiers of your own fire nuke),
 // then classes sharing the identical spell (same spell_id) merge into one entry carrying every
@@ -94,92 +90,76 @@ function rankedEntries(spells, keyOf) {
   return list;
 }
 
-// A buff's stacking line: two buffs with the same key don't stack (only the stronger lands), so
-// the key IS the "pick one of these" set. From the precomputed signature (`stacking_groups`),
-// which already namespaces bard songs; pet buffs land on the pet, not you, so they get their own
-// namespace and never read as alternatives to a player buff. Buffs with no signature stand alone.
-function buffLineKey(spell) {
-  const confirmed = spell.stacking_confirmed && spell.stacking_groups.length > 0;
-  const base = confirmed ? spell.stacking_groups[0].group_id : `solo:${spell.name}`;
-  return (spell.target === "Pet" ? "pet:" : "") + base;
-}
-
-function buffLineLabel(spell) {
-  const confirmed = spell.stacking_confirmed && spell.stacking_groups.length > 0;
-  const label = confirmed ? spell.stacking_groups[0].label : spell.name;
-  return spell.target === "Pet" ? `Pet: ${label}` : label;
-}
-
 /**
- * Builds the "best in slot" board for the Category Grid: the single best spell the selected
- * classes can field for each job/purpose at this level, plus the spells each pick makes redundant.
- * Two row kinds share one list (`kind`):
+ * Builds the "best in slot" board for the Category Grid, organized entirely by the game client's
+ * own spell-line taxonomy: the parent Category (e.g. "Direct Damage", "HP Buffs") is the section,
+ * and each Subcategory (e.g. "Fire", "Shielding") is one row = one line. This is the game's own
+ * two-level grouping, so it subsumes what the old grid did by hand - damage already splits by
+ * element (Direct Damage › Fire vs › Magic), and every buff line ("HP Buffs › HP type one",
+ * "Statistic Buffs › Armor Class") is its own row instead of one coarse "Buff".
  *
- *   "category"  - heals, nukes, CC, debuffs, pets, utility. Keyed by category, and damage
- *                 categories split by resist element (a Fire nuke and a Magic nuke aren't
- *                 substitutes). `runnersUp` are weaker alternatives / lower tiers.
- *   "buff-line" - one row per stacking line (`buffLineKey`), so "best haste" and "best AC" are
- *                 distinct rows instead of one coarse "Buff". Its `runnersUp` are the spells that
- *                 share the line and so WON'T stack with the pick (`conflict: true`) - pick the
- *                 winner and you know what's pointless to also run.
- *
- * Every row: { kind, category, resistType, best, runnersUp, conflict }, where `category` doubles
- * as the row heading (the line label for buff rows) and best/runnersUp are the merged multi-class
- * entries from `rankedEntries`. Category rows sort first (alpha, element rows contiguous); buff
- * lines cluster after, alpha by label.
+ * Each row: { category, subcategory, best, runnersUp, conflict } where best/runnersUp are the
+ * merged multi-class entries from `rankedEntries` (same-class tiers collapsed, shared spells
+ * merged). `conflict` is true for real buff/HoT stacking lines (stacking_confirmed) - then the
+ * runners-up are same-line spells that WON'T stack with the pick; for nukes/heals/CC they're just
+ * weaker or alternative options. Grouping into sections and section order live in renderGrid.
  */
-function categoryTypeGrid(classNames, level) {
+// Some lines aren't a "best in slot" at all - they're a set of equivalent variants where no one
+// spell beats another (an Enchanter's Illusion: Dwarf isn't better than Illusion: Dark Elf). For
+// those we list every spell instead of collapsing to a single winner. Detected by the client's own
+// subcategory (Illusion: *, Visages).
+function isCollectionLine(subcategory) {
+  return /illusion|visage/i.test(subcategory || "");
+}
+
+// Every distinct spell in a set, merging only truly-identical spells (same spell_id) across the
+// classes that share them. Unlike rankedEntries it does NOT collapse a class's lower tiers, so all
+// variants survive - what a collection line needs. Sorted alphabetically by name.
+function distinctSpellEntries(spells) {
+  const bySpell = new Map(); // spell_id|name -> entry
+  for (const s of spells) {
+    const key = s.spell_id ?? s.name;
+    const entry = bySpell.get(key);
+    if (!entry) {
+      bySpell.set(key, { spell: s, classLevels: [{ class: s.class, level: s.level }] });
+    } else {
+      entry.classLevels.push({ class: s.class, level: s.level });
+      if (spellMagnitude(s) > spellMagnitude(entry.spell)) entry.spell = s;
+    }
+  }
+  const list = [...bySpell.values()];
+  list.forEach((e) => e.classLevels.sort((a, b) => a.level - b.level));
+  list.sort((a, b) => a.spell.name.localeCompare(b.spell.name));
+  return list;
+}
+
+function spellLineGrid(classNames, level) {
   const available = SPELLS.filter((s) => classNames.includes(s.class) && s.level <= level);
+  const byLine = new Map(); // line_id ("Category:Subcategory") -> spells
+  for (const s of available) {
+    const key = s.line_id || `Other:${s.name}`;
+    (byLine.get(key) || byLine.set(key, []).get(key)).push(s);
+  }
   const rows = [];
-
-  // Non-buff rows: best per (category, element). Buffs are handled per stacking line below.
-  const nonBuff = available.filter((s) => s.category !== "Buff");
-  const byType = new Map(); // "category::element" -> spells
-  for (const s of nonBuff) {
-    const typeKey = `${s.category}::${resistKey(s)}`;
-    (byType.get(typeKey) || byType.set(typeKey, []).get(typeKey)).push(s);
+  for (const spells of byLine.values()) {
+    const category = spells[0].line_category || "Other";
+    const subcategory = spells[0].line_subcategory || "";
+    if (isCollectionLine(subcategory)) {
+      // Not best-in-slot: every variant is its own row, no winner and no runners-up.
+      for (const entry of distinctSpellEntries(spells)) {
+        rows.push({ category, subcategory, best: entry, runnersUp: [], conflict: false, collection: true });
+      }
+    } else {
+      const list = rankedEntries(spells, (s) => s.line_id || s.name); // collapse tiers, merge shared
+      rows.push({
+        category,
+        subcategory,
+        best: list[0],
+        runnersUp: list.slice(1),
+        conflict: !!list[0].spell.stacking_confirmed,
+      });
+    }
   }
-  for (const [typeKey, spells] of byType) {
-    const list = rankedEntries(spells, resistKey);
-    const sep = typeKey.lastIndexOf("::");
-    const element = typeKey.slice(sep + 2);
-    rows.push({
-      kind: "category",
-      category: typeKey.slice(0, sep),
-      resistType: element === "None" ? null : element,
-      best: list[0],
-      runnersUp: list.slice(1),
-      conflict: false,
-    });
-  }
-
-  // Buff rows: one per stacking line. `runnersUp` here are the same-line spells that won't stack.
-  const buffLines = new Map(); // lineKey -> spells
-  for (const s of available.filter((s) => s.category === "Buff")) {
-    const k = buffLineKey(s);
-    (buffLines.get(k) || buffLines.set(k, []).get(k)).push(s);
-  }
-  for (const spells of buffLines.values()) {
-    const list = rankedEntries(spells, buffLineKey);
-    rows.push({
-      kind: "buff-line",
-      category: buffLineLabel(list[0].spell),
-      resistType: null,
-      best: list[0],
-      runnersUp: list.slice(1),
-      conflict: true,
-    });
-  }
-
-  // Category rows first (alpha, element rows contiguous, strongest first); buff lines cluster
-  // after, alpha by label - a natural "reference table, then buffs you can't double up" order.
-  const sortGroup = (r) => (r.kind === "category" ? 0 : 1);
-  rows.sort(
-    (a, b) =>
-      sortGroup(a) - sortGroup(b) ||
-      a.category.localeCompare(b.category) ||
-      spellMagnitude(b.best.spell) - spellMagnitude(a.best.spell)
-  );
   return rows;
 }
 

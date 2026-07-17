@@ -109,6 +109,20 @@
   .class-pill-group { display: inline-flex; flex-wrap: wrap; gap: 4px; vertical-align: middle; }
   .spell-name { font-size: 16px; font-weight: bold; flex: 1 1 auto; }
   .spell-level { color: var(--muted); font-size: 12px; }
+  /* Spell line (client Category › Subcategory) — the through-line of the whole UI. Muted,
+     understated; a "›" separates the parent category from the finer line inside `spell.line`. */
+  .line-chip {
+    display: inline-block;
+    font-size: 10.5px;
+    letter-spacing: 0.02em;
+    padding: 1px 7px;
+    border-radius: 9px;
+    white-space: nowrap;
+    color: #b9b6d6;
+    background: color-mix(in srgb, #8f8cf0 12%, transparent);
+    border: 1px solid color-mix(in srgb, #8f8cf0 34%, transparent);
+  }
+  .line-chip.line-chip-solo { color: var(--muted); background: transparent; border-color: var(--border); }
   .spell-stats {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -242,6 +256,7 @@
     padding: 6px 10px;
   }
   .grid-section-count { font-size: 10px; color: var(--muted); font-weight: normal; letter-spacing: 0; }
+  .grid-section-gloss { font-size: 10px; color: var(--muted); font-weight: normal; text-transform: none; letter-spacing: 0; font-style: italic; }
   .gtc-type { color: var(--gold); font-weight: 600; width: 15%; }
   .gtc-type .element-chip { margin-left: 6px; }
   .gtc-best { width: 22%; }
@@ -436,7 +451,8 @@
   <h1>EQ Legends — Multi-Class Spell Comparison</h1>
   <p class="subtitle">
     Pick up to 3 classes and a level to get a recommended spell loadout — or dig into the full
-    side-by-side comparison. Data sourced from <span>eqlwiki.com</span>.
+    side-by-side comparison. Spell numbers and <span>spell lines</span> come straight from the
+    game client; the spell list is curated against <span>eqlwiki.com</span>.
   </p>
 
   <div class="controls">
@@ -478,10 +494,11 @@
     <section class="loadout-section">
       <h3>Buff Loadout <span id="buff-slot-meter" class="slot-meter"></span></h3>
       <p class="loadout-section-desc">
-        Strongest non-conflicting buffs across your selected classes, using real stacking-slot data from
-        eqlwiki.com's Buff Lines page — memorize these, then Quick Buff. Buffs with no confirmed stacking
-        data are marked <span class="unconfirmed-badge">?</span> and assumed not to conflict with anything.
-        Ranked by magnitude; picks past your slot count are dimmed.
+        Strongest non-conflicting buffs across your selected classes — one per <strong>spell line</strong>
+        (the game client's own hover category, shown as a chip on each row), so no two picks fight over the
+        same slot. Memorize these, then Quick Buff. The rare buff with no line in the client data is marked
+        <span class="unconfirmed-badge">?</span> and assumed not to conflict with anything. Ranked by
+        magnitude; picks past your slot count are dimmed.
       </p>
       <div id="buff-loadout" class="loadout-list"></div>
     </section>
@@ -498,8 +515,10 @@
 
   <div id="grid-view" class="tab-panel">
     <p class="loadout-section-desc grid-intro">
-      Best spell per job for your classes at this level. Each buff gets one row per <strong>stacking line</strong>;
-      a <span class="gt-warn">▲</span> marks buffs that won't stack with the same-line spells listed in the last column.
+      Best spell per <strong>spell line</strong> for your classes at this level, organized by the game client's own
+      taxonomy — each section is a client spell Category, each row a line within it. A <span class="gt-warn">▲</span>
+      marks buff lines where only the strongest pick actually stacks; the last column lists the same-line spells it
+      beats (or, for non-buffs, alternative options you might also bring).
     </p>
     <div id="category-grid"></div>
   </div>
@@ -514,9 +533,9 @@
       effect on a spell, not just the first) instead of raw magnitude — lets combo buffs and otherwise-
       incommensurable stats (a +40 ATK buff vs. a +40 Poison Resist buff) get compared on the same point
       scale. Weights are a first-draft opinion, not a measured fact — drag a slider and the ranking below
-      updates live. For the Buff category, the Slot column shows the real in-game stacking slot (computed
-      from the game client's own spell effect data — see <span>build_buff_stacking.py</span>) — only the
-      top-ranked spell per slot is actually usable at once.
+      updates live. For the Buff category, the Line column shows the spell line (the game client's own hover
+      category, e.g. <em>HP Buffs › HP type one</em>) — buffs sharing a line don't stack, so only the
+      top-ranked spell per line is actually usable at once.
     </p>
     <div class="controls">
       <div class="field">

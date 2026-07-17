@@ -195,6 +195,17 @@ function iconImg(spell) {
     : `<span class="spell-icon spell-icon-placeholder"></span>`;
 }
 
+// The spell's line (client Category › Subcategory, from the game's own hover taxonomy). This is
+// the organizing thread of the tool: buffs sharing a line don't stack, and it's the game's own
+// label for "what kind of spell this is". Rendered as a muted chip wherever a spell is shown.
+function lineChip(spell) {
+  if (!spell.line) return "";
+  const title = spell.line_category === spell.line
+    ? "Spell line (from the game client)"
+    : `Spell line: ${spell.line} — the game client's own hover category`;
+  return `<span class="line-chip" title="${title}">${spell.line}</span>`;
+}
+
 function spellCard(className, spell) {
   const eff = spell.mana_efficiency != null ? spell.mana_efficiency.toFixed(2) : "—";
   return `
@@ -204,6 +215,7 @@ function spellCard(className, spell) {
         ${classPill(className)}
         <span class="spell-name">${spell.name}</span>
         <span class="spell-level">Lv ${spell.level}</span>
+        ${lineChip(spell)}
       </div>
       <div class="spell-stats">
         <div><label>Mana</label><span>${spell.mana}</span></div>
@@ -277,21 +289,26 @@ function classCode(name) {
   return CLASS_CODE[name] || name.slice(0, 3).toUpperCase();
 }
 
-// One table row per best-in-slot pick: Type | Best spell | Effect | Class | same-line/alternatives.
-// Nothing is truncated - cells wrap so the text flows. The Class column shows a colored pill per
-// class that gets the pick (with the level it lands); runner-ups stay compact as class codes.
-function gridTableRow(row) {
-  const { kind, resistType, best, runnersUp, conflict } = row;
+// One table row per spell line: Line (the client subcategory) | Best spell | Effect | Class |
+// same-line/alternatives. The parent Category is the section header, so the row only needs the
+// subcategory. Damage/resist subcategories (Fire, Cold, ...) get their element color chip.
+// Nothing is truncated - cells wrap so the text flows.
+// `showLabel` is false for the 2nd+ row of a collection line (illusions), so a run of variants
+// reads as one grouped block under a single subcategory label instead of repeating it every row.
+function gridTableRow(row, showLabel = true) {
+  const { subcategory, best, runnersUp, conflict } = row;
   const spell = best.spell;
-  const chip = kind === "category" ? elementChip(resistType) : "";
+  const element = ELEMENT_COLORS[subcategory] ? subcategory : null;
+  const chip = element ? elementChip(element) : "";
   const warn = conflict && runnersUp.length ? ` <span class="gt-warn" title="Only the strongest of these takes effect">▲</span>` : "";
   const pills = best.classLevels.map((cl) => classPill(cl.class, cl.level)).join("");
   const others = runnersUp
     .map((e) => `<span class="gt-other">${e.classLevels.map((c) => classCode(c.class)).join("/")} ${e.spell.name}</span>`)
     .join(", ");
+  const label = showLabel ? `${subcategory || "General"}${chip}` : "";
   return `
     <tr class="${conflict ? "gt-conflict" : ""}">
-      <td class="gtc-type">${row.category}${chip}</td>
+      <td class="gtc-type">${label}</td>
       <td class="gtc-best">${iconImg(spell)}<span class="spell-name">${spell.name}</span>${warn}</td>
       <td class="gtc-eff">${formatEffect(spell)}</td>
       <td class="gtc-class"><span class="class-pill-group">${pills}</span></td>
@@ -299,52 +316,61 @@ function gridTableRow(row) {
     </tr>`;
 }
 
-// The board's rows cluster into a few purpose sections (rendered as full-width header rows). Raw
-// categories map into these buckets so the CC rows (Charm/Fear/Root/Slow/Mez) read as one
-// "Crowd Control" group instead of five one-row sections; every buff-line row lands in "Buffs".
-const GRID_SECTIONS = [
-  { id: "heal", label: "Healing", cats: ["Heal-Instant", "Heal-HoT", "Regen", "Cure"] },
-  { id: "damage", label: "Damage", cats: ["Nuke", "DoT", "Lifetap"] },
-  { id: "cc", label: "Crowd Control", cats: ["Charm", "Fear", "Root", "Slow", "Mesmerize"] },
-  { id: "debuff", label: "Debuffs", cats: ["Debuff"] },
-  { id: "utility", label: "Utility", cats: ["Pet/Summon", "Travel", "Tradeskill", "Utility"] },
-  { id: "buff", label: "Buffs", cats: [] }, // every buff-line row, whatever its label
-];
-
-function gridSectionId(row) {
-  if (row.kind === "buff-line") return "buff";
-  const section = GRID_SECTIONS.find((s) => s.cats.includes(row.category));
-  return section ? section.id : "utility"; // unmapped categories fall into Utility
-}
+// The board's sections ARE the client's own parent spell Categories, listed alphabetically (as are
+// the line rows within each). A short gloss demystifies the broad "Utility *" buckets that carry
+// the game's own (slightly opaque) names.
+const LINE_SECTION_GLOSS = {
+  "Utility Detrimental": "debuffs · crowd control",
+  "Utility Beneficial": "haste · shields · movement · utility",
+  "Taps": "lifetaps",
+  "Regen": "HP / mana regen",
+  "Create Item": "summoned items",
+};
 
 function renderGrid(classes, level) {
   if (classes.length === 0) {
-    gridTableEl.innerHTML = `<p class="empty">Pick 1-3 classes above to see the best spell for each type.</p>`;
+    gridTableEl.innerHTML = `<p class="empty">Pick 1-3 classes above to see the best spell for each line.</p>`;
     return;
   }
-  const rows = categoryTypeGrid(classes, level);
+  const rows = spellLineGrid(classes, level);
   if (rows.length === 0) {
     gridTableEl.innerHTML = `<p class="empty">No spells available for these classes at this level.</p>`;
     return;
   }
-  const bySection = new Map();
+  const bySection = new Map(); // client parent Category -> its line rows
   for (const row of rows) {
-    const id = gridSectionId(row);
-    if (!bySection.has(id)) bySection.set(id, []);
-    bySection.get(id).push(row);
+    if (!bySection.has(row.category)) bySection.set(row.category, []);
+    bySection.get(row.category).push(row);
   }
-  // One plain table: a full-width header row introduces each purpose section, then a row per pick.
-  const body = GRID_SECTIONS.filter((s) => bySection.has(s.id))
-    .map((s) => {
-      const secRows = bySection.get(s.id);
-      const header = `<tr class="grid-section-row"><td colspan="5">${s.label} <span class="grid-section-count">${secRows.length}</span></td></tr>`;
-      return header + secRows.map(gridTableRow).join("");
+  const ordered = [...bySection.keys()].sort((a, b) => a.localeCompare(b));
+  // One plain table: a full-width header row introduces each client Category, then a row per line
+  // within it (alpha by subcategory). Buff/HoT lines that don't stack are marked with a ▲.
+  const body = ordered
+    .map((cat) => {
+      // Alpha by subcategory, then by name so a collection line's variants (which share a
+      // subcategory) come out alphabetized among themselves.
+      const secRows = bySection.get(cat).sort(
+        (a, b) =>
+          (a.subcategory || "").localeCompare(b.subcategory || "") ||
+          a.best.spell.name.localeCompare(b.best.spell.name)
+      );
+      const gloss = LINE_SECTION_GLOSS[cat] ? ` <span class="grid-section-gloss">${LINE_SECTION_GLOSS[cat]}</span>` : "";
+      const header = `<tr class="grid-section-row"><td colspan="5">${cat}${gloss} <span class="grid-section-count">${secRows.length}</span></td></tr>`;
+      let prevSub = null;
+      const secBody = secRows
+        .map((r) => {
+          const showLabel = r.subcategory !== prevSub;
+          prevSub = r.subcategory;
+          return gridTableRow(r, showLabel);
+        })
+        .join("");
+      return header + secBody;
     })
     .join("");
   gridTableEl.innerHTML = `
     <table class="grid-table">
       <thead>
-        <tr><th>Type</th><th>Best in slot</th><th>Effect</th><th>Class</th><th>Won't stack with · alternatives</th></tr>
+        <tr><th>Line</th><th>Best in slot</th><th>Effect</th><th>Class</th><th>Won't stack with · alternatives</th></tr>
       </thead>
       <tbody>${body}</tbody>
     </table>`;
@@ -360,6 +386,7 @@ function loadoutRow(index, slotBudget, className, spell, statLabel, subText, bad
         ${classPill(className)}
         <span class="spell-name">${spell.name}</span>${badge}
         <span class="spell-level">Lv ${spell.level}</span>
+        ${lineChip(spell)}
         <div class="spell-desc">${spell.description}</div>
       </div>
       <div class="loadout-stat">
@@ -396,12 +423,10 @@ function renderBuffLoadout(classes, level, slotBudget) {
     const stat = spell.primary_value != null
       ? `${spell.primary_value}${spell.primary_stat ? " " + spell.primary_stat : ""}`
       : "—";
-    const subText = spell.confirmed
-      ? spell.stacking_groups.map((g) => g.label).join(" + ")
-      : "stacking unconfirmed";
+    const subText = `${spell.mana} mana · ${spell.duration}`;
     const badge = spell.confirmed
       ? ""
-      : ` <span class="unconfirmed-badge" title="No confirmed stacking data for this spell (not found on eqlwiki.com's Buff Lines page) — shown assuming it doesn't conflict with anything else.">?</span>`;
+      : ` <span class="unconfirmed-badge" title="This spell has no line in the game client's spell data — shown assuming it doesn't conflict with anything else.">?</span>`;
     return loadoutRow(i, slotBudget, spell.class, spell, stat, subText, badge);
   });
   buffLoadoutEl.innerHTML = withBudgetDivider(rows, slotBudget);
@@ -479,7 +504,7 @@ function renderRankTable() {
     return;
   }
 
-  const header = `<thead><tr><th>#</th><th></th><th>Class</th><th>Spell</th><th>Description</th><th>Target</th><th>Slot</th><th>Score</th><th>Breakdown</th></tr></thead>`;
+  const header = `<thead><tr><th>#</th><th></th><th>Class</th><th>Spell</th><th>Description</th><th>Target</th><th>Line</th><th>Score</th><th>Breakdown</th></tr></thead>`;
   const rows = ranked
     .map(
       ({ spell, classLevels, score, breakdown, slot }, i) => `

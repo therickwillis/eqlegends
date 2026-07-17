@@ -1,1886 +1,1886 @@
 {
   "chant of battle": [
     {
-      "group_id": "bard:combo:1-4-5",
-      "label": "AC + STR + DEX"
+      "group_id": "bard:line:Statistic Buffs:Armor Class",
+      "label": "Statistic Buffs \u203a Armor Class"
     }
   ],
   "selo's accelerando": [
     {
-      "group_id": "bard:combo:3",
-      "label": "Movement Speed"
+      "group_id": "bard:line:Utility Beneficial:Movement",
+      "label": "Utility Beneficial \u203a Movement"
     }
   ],
   "jonthan's whistling warsong": [
     {
-      "group_id": "bard:combo:1-4-11",
-      "label": "AC + STR + Haste"
+      "group_id": "bard:line:Utility Beneficial:Haste",
+      "label": "Utility Beneficial \u203a Haste"
     }
   ],
   "kelin's lugubrious lament": [
     {
-      "group_id": "bard:combo:18-30-86",
-      "label": "Lull + Change Frenzy Rad + Harmony"
+      "group_id": "bard:line:Utility Detrimental:Calm",
+      "label": "Utility Detrimental \u203a Calm"
     }
   ],
   "elemental rhythms": [
     {
-      "group_id": "bard:combo:1-46-47-50",
-      "label": "AC + Fire Resist + Cold Resist + Magic Resist"
+      "group_id": "bard:line:Statistic Buffs:Resist Buff",
+      "label": "Statistic Buffs \u203a Resist Buff"
     }
   ],
   "magical monologue": [
     {
-      "group_id": "bard:combo:117",
-      "label": "Magic Weapon"
+      "group_id": "bard:line:Utility Beneficial:Misc",
+      "label": "Utility Beneficial \u203a Misc"
     }
   ],
   "anthem de arms": [
     {
-      "group_id": "bard:combo:4-11",
-      "label": "STR + Haste"
+      "group_id": "bard:line:Utility Beneficial:Haste",
+      "label": "Utility Beneficial \u203a Haste"
     }
   ],
   "cinda's charismatic carillon": [
     {
-      "group_id": "bard:combo:19",
-      "label": "Add Faction"
+      "group_id": "bard:line:Utility Beneficial:Alliance",
+      "label": "Utility Beneficial \u203a Alliance"
     }
   ],
   "purifying rhythms": [
     {
-      "group_id": "bard:combo:1-48-49-50",
-      "label": "AC + Poison Resist + Disease Resist + Magic Resist"
+      "group_id": "bard:line:Statistic Buffs:Resist Buff",
+      "label": "Statistic Buffs \u203a Resist Buff"
     }
   ],
   "song of sustenance": [
     {
-      "group_id": "bard:combo:115",
-      "label": "Hunger"
+      "group_id": "bard:line:Utility Beneficial:Misc",
+      "label": "Utility Beneficial \u203a Misc"
     }
   ],
   "guardian rhythms": [
     {
-      "group_id": "bard:combo:1-50",
-      "label": "AC + Magic Resist"
+      "group_id": "bard:line:Statistic Buffs:Resist Buff",
+      "label": "Statistic Buffs \u203a Resist Buff"
     }
   ],
   "cassindra's chant of clarity": [
     {
-      "group_id": "bard:combo:15",
-      "label": "Mana"
+      "group_id": "bard:line:Regen:Mana",
+      "label": "Regen \u203a Mana"
     }
   ],
   "largo's melodic binding": [
     {
-      "group_id": "bard:combo:11",
-      "label": "Haste"
+      "group_id": "bard:line:Utility Detrimental:Slow",
+      "label": "Utility Detrimental \u203a Slow"
     }
   ],
   "melanie's mellifluous motion": [
     {
-      "group_id": "bard:combo:42",
-      "label": "Shadow Step"
+      "group_id": "bard:line:Utility Beneficial:Shadowstep",
+      "label": "Utility Beneficial \u203a Shadowstep"
     }
   ],
   "alenia's disenchanting melody": [
     {
-      "group_id": "bard:combo:27",
-      "label": "Cancel Magic"
+      "group_id": "bard:line:Utility Detrimental:Dispel",
+      "label": "Utility Detrimental \u203a Dispel"
     }
   ],
   "amplification": [
     {
-      "group_id": "bard:combo:118-382",
-      "label": "Amplification + Negate Spell Effect"
+      "group_id": "bard:line:Utility Beneficial:Misc",
+      "label": "Utility Beneficial \u203a Misc"
     }
   ],
   "cassindra's chorus of clarity": [
     {
-      "group_id": "bard:combo:15",
-      "label": "Mana"
+      "group_id": "bard:line:Regen:Mana",
+      "label": "Regen \u203a Mana"
     }
   ],
   "vilia's verses of celerity": [
     {
-      "group_id": "bard:combo:1-6-11",
-      "label": "AC + AGI + Haste"
+      "group_id": "bard:line:Utility Beneficial:Haste",
+      "label": "Utility Beneficial \u203a Haste"
     }
   ],
   "katta's song of sword dancing": [
     {
-      "group_id": "bard:combo:5",
-      "label": "DEX"
+      "group_id": "bard:line:Utility Beneficial:Combat Innates",
+      "label": "Utility Beneficial \u203a Combat Innates"
     }
   ],
   "syvelian's anti-magic aria": [
     {
-      "group_id": "bard:combo:27",
-      "label": "Cancel Magic"
+      "group_id": "bard:line:Utility Detrimental:Dispel",
+      "label": "Utility Detrimental \u203a Dispel"
     }
   ],
   "psalm of mystic shielding": [
     {
-      "group_id": "bard:combo:0-1-50-78",
-      "label": "HP + AC + Magic Resist + Absorb Magic Att"
+      "group_id": "bard:line:Statistic Buffs:Resist Buff",
+      "label": "Statistic Buffs \u203a Resist Buff"
     }
   ],
   "mcvaxius' berserker crescendo": [
     {
-      "group_id": "bard:combo:1-4-11",
-      "label": "AC + STR + Haste"
+      "group_id": "bard:line:Utility Beneficial:Haste",
+      "label": "Utility Beneficial \u203a Haste"
     }
   ],
   "cassindra's elegy": [
     {
-      "group_id": "bard:combo:8-9",
-      "label": "INT + WIS"
+      "group_id": "bard:line:Statistic Buffs:Wisdom/Intelligence",
+      "label": "Statistic Buffs \u203a Wisdom/Intelligence"
     }
   ],
   "jonthan's provocation": [
     {
-      "group_id": "bard:combo:2-4-11",
-      "label": "ATK + STR + Haste"
+      "group_id": "bard:line:Utility Beneficial:Haste",
+      "label": "Utility Beneficial \u203a Haste"
     }
   ],
   "rizlona's embers": [
     {
-      "group_id": "bard:combo:10-124",
-      "label": "CHA + Improved Damage"
+      "group_id": "bard:line:Utility Beneficial:Spell Focus",
+      "label": "Utility Beneficial \u203a Spell Focus"
     }
   ],
   "niv's melody of preservation": [
     {
-      "group_id": "bard:combo:0-4-78",
-      "label": "HP + STR + Absorb Magic Att"
+      "group_id": "bard:line:Utility Beneficial:Misc",
+      "label": "Utility Beneficial \u203a Misc"
     }
   ],
   "selo's accelerating chorus": [
     {
-      "group_id": "bard:combo:3",
-      "label": "Movement Speed"
+      "group_id": "bard:line:Utility Beneficial:Movement",
+      "label": "Utility Beneficial \u203a Movement"
     }
   ],
   "shield of songs": [
     {
-      "group_id": "bard:combo:55-78",
-      "label": "Rune + Absorb Magic Att"
+      "group_id": "bard:line:Utility Beneficial:Rune",
+      "label": "Utility Beneficial \u203a Rune"
     }
   ],
   "melody of ervaj": [
     {
-      "group_id": "bard:combo:10-98",
-      "label": "CHA + Attack Speed2"
+      "group_id": "bard:line:Utility Beneficial:Haste",
+      "label": "Utility Beneficial \u203a Haste"
     }
   ],
   "verses of victory": [
     {
-      "group_id": "bard:combo:1-4-6-11",
-      "label": "AC + STR + AGI + Haste"
+      "group_id": "bard:line:Utility Beneficial:Haste",
+      "label": "Utility Beneficial \u203a Haste"
     }
   ],
   "sense animals": [
     {
-      "group_id": "combo:54",
-      "label": "Sense Animals"
+      "group_id": "line:Utility Beneficial:Animal",
+      "label": "Utility Beneficial \u203a Animal"
     }
   ],
   "endure cold": [
     {
-      "group_id": "combo:47",
-      "label": "Cold Resist"
+      "group_id": "line:Statistic Buffs:Resist Buff",
+      "label": "Statistic Buffs \u203a Resist Buff"
     }
   ],
   "inner fire": [
     {
-      "group_id": "combo:1-69",
-      "label": "AC + Total HP"
+      "group_id": "line:HP Buffs:HP type one",
+      "label": "HP Buffs \u203a HP type one"
     }
   ],
   "endure fire": [
     {
-      "group_id": "combo:46",
-      "label": "Fire Resist"
+      "group_id": "line:Statistic Buffs:Resist Buff",
+      "label": "Statistic Buffs \u203a Resist Buff"
     }
   ],
   "scale skin": [
     {
-      "group_id": "combo:1",
-      "label": "AC"
+      "group_id": "line:Statistic Buffs:Armor Class",
+      "label": "Statistic Buffs \u203a Armor Class"
     }
   ],
   "fleeting fury": [
     {
-      "group_id": "combo:1-4-5",
-      "label": "AC + STR + DEX"
+      "group_id": "line:Statistic Buffs:Strength",
+      "label": "Statistic Buffs \u203a Strength"
     }
   ],
   "spirit of lightning": [
     {
-      "group_id": "combo:5",
-      "label": "DEX"
+      "group_id": "line:Pet:Pet Misc Buffs",
+      "label": "Pet \u203a Pet Misc Buffs"
     }
   ],
   "strengthen": [
     {
-      "group_id": "combo:4",
-      "label": "STR"
+      "group_id": "line:Statistic Buffs:Strength",
+      "label": "Statistic Buffs \u203a Strength"
     }
   ],
   "spirit of bear": [
     {
-      "group_id": "combo:7",
-      "label": "STA"
+      "group_id": "line:Statistic Buffs:Stamina",
+      "label": "Statistic Buffs \u203a Stamina"
     }
   ],
   "endure poison": [
     {
-      "group_id": "combo:48",
-      "label": "Poison Resist"
+      "group_id": "line:Statistic Buffs:Resist Buff",
+      "label": "Statistic Buffs \u203a Resist Buff"
     }
   ],
   "spirit of the blizzard": [
     {
-      "group_id": "combo:5",
-      "label": "DEX"
+      "group_id": "line:Pet:Pet Misc Buffs",
+      "label": "Pet \u203a Pet Misc Buffs"
     }
   ],
   "tiny companion": [
     {
-      "group_id": "combo:298",
-      "label": "Change Height"
+      "group_id": "line:Pet:Misc",
+      "label": "Pet \u203a Misc"
     }
   ],
   "drowsy": [
     {
-      "group_id": "combo:11",
-      "label": "Haste"
+      "group_id": "line:Utility Detrimental:Slow",
+      "label": "Utility Detrimental \u203a Slow"
     }
   ],
   "endure disease": [
     {
-      "group_id": "combo:49",
-      "label": "Disease Resist"
+      "group_id": "line:Statistic Buffs:Resist Buff",
+      "label": "Statistic Buffs \u203a Resist Buff"
     }
   ],
   "shrink": [
     {
-      "group_id": "combo:89",
-      "label": "Model Size"
+      "group_id": "line:Utility Beneficial:Misc",
+      "label": "Utility Beneficial \u203a Misc"
     }
   ],
   "spirit of wolf": [
     {
-      "group_id": "combo:3",
-      "label": "Movement Speed"
+      "group_id": "line:Utility Beneficial:Movement",
+      "label": "Utility Beneficial \u203a Movement"
     }
   ],
   "turtle skin": [
     {
-      "group_id": "combo:1",
-      "label": "AC"
+      "group_id": "line:Statistic Buffs:Armor Class",
+      "label": "Statistic Buffs \u203a Armor Class"
     }
   ],
   "spirit strength": [
     {
-      "group_id": "combo:4",
-      "label": "STR"
+      "group_id": "line:Statistic Buffs:Strength",
+      "label": "Statistic Buffs \u203a Strength"
     }
   ],
   "spirit of inferno": [
     {
-      "group_id": "combo:5",
-      "label": "DEX"
+      "group_id": "line:Pet:Pet Misc Buffs",
+      "label": "Pet \u203a Pet Misc Buffs"
     }
   ],
   "endure magic": [
     {
-      "group_id": "combo:50",
-      "label": "Magic Resist"
+      "group_id": "line:Statistic Buffs:Resist Buff",
+      "label": "Statistic Buffs \u203a Resist Buff"
     }
   ],
   "cancel magic": [
     {
-      "group_id": "combo:27",
-      "label": "Cancel Magic"
+      "group_id": "line:Utility Detrimental:Dispel",
+      "label": "Utility Detrimental \u203a Dispel"
     }
   ],
   "spirit of ox": [
     {
-      "group_id": "combo:7",
-      "label": "STA"
+      "group_id": "line:Statistic Buffs:Stamina",
+      "label": "Statistic Buffs \u203a Stamina"
     }
   ],
   "yekan's quickening": [
     {
-      "group_id": "combo:1-2-4-11",
-      "label": "AC + ATK + STR + Haste"
+      "group_id": "line:Pet:Pet Haste",
+      "label": "Pet \u203a Pet Haste"
     }
   ],
   "spirit of monkey": [
     {
-      "group_id": "combo:5",
-      "label": "DEX"
+      "group_id": "line:Statistic Buffs:Dexterity",
+      "label": "Statistic Buffs \u203a Dexterity"
     }
   ],
   "spirit of the scorpion": [
     {
-      "group_id": "combo:5",
-      "label": "DEX"
+      "group_id": "line:Pet:Pet Misc Buffs",
+      "label": "Pet \u203a Pet Misc Buffs"
     }
   ],
   "raging strength": [
     {
-      "group_id": "combo:4",
-      "label": "STR"
+      "group_id": "line:Statistic Buffs:Strength",
+      "label": "Statistic Buffs \u203a Strength"
     }
   ],
   "spiritual light": [
     {
-      "group_id": "combo:0-15",
-      "label": "HP + Mana"
+      "group_id": "line:Regen:Health/Mana",
+      "label": "Regen \u203a Health/Mana"
     }
   ],
   "spiritual brawn": [
     {
-      "group_id": "combo:2-69",
-      "label": "ATK + Total HP"
+      "group_id": "line:HP Buffs:HP type two",
+      "label": "HP Buffs \u203a HP type two"
     }
   ],
   "spirit of vermin": [
     {
-      "group_id": "combo:5",
-      "label": "DEX"
+      "group_id": "line:Pet:Pet Misc Buffs",
+      "label": "Pet \u203a Pet Misc Buffs"
     }
   ],
   "frenzy": [
     {
-      "group_id": "combo:1-4-5-6",
-      "label": "AC + STR + DEX + AGI"
+      "group_id": "line:Statistic Buffs:Strength",
+      "label": "Statistic Buffs \u203a Strength"
     }
   ],
   "protect": [
     {
-      "group_id": "combo:1",
-      "label": "AC"
+      "group_id": "line:Statistic Buffs:Armor Class",
+      "label": "Statistic Buffs \u203a Armor Class"
     }
   ],
   "ward of calliav": [
     {
-      "group_id": "combo:163",
-      "label": "Negate Attacks"
+      "group_id": "line:Pet:Block",
+      "label": "Pet \u203a Block"
     }
   ],
   "sha's lethargy": [
     {
-      "group_id": "combo:11",
-      "label": "Haste"
+      "group_id": "line:Utility Detrimental:Slow",
+      "label": "Utility Detrimental \u203a Slow"
     }
   ],
   "courage": [
     {
-      "group_id": "combo:1-69",
-      "label": "AC + Total HP"
+      "group_id": "line:HP Buffs:HP type one",
+      "label": "HP Buffs \u203a HP type one"
     }
   ],
   "divine aura": [
     {
-      "group_id": "combo:40",
-      "label": "Divine Aura"
+      "group_id": "line:Utility Beneficial:Invulnerability",
+      "label": "Utility Beneficial \u203a Invulnerability"
     }
   ],
   "holy armor": [
     {
-      "group_id": "combo:1",
-      "label": "AC"
+      "group_id": "line:Statistic Buffs:Armor Class",
+      "label": "Statistic Buffs \u203a Armor Class"
     }
   ],
   "lull": [
     {
-      "group_id": "combo:30-86",
-      "label": "Change Frenzy Rad + Harmony"
+      "group_id": "line:Utility Detrimental:Calm",
+      "label": "Utility Detrimental \u203a Calm"
     }
   ],
   "yaulp": [
     {
-      "group_id": "combo:1-4",
-      "label": "AC + STR"
+      "group_id": "line:Statistic Buffs:Attack",
+      "label": "Statistic Buffs \u203a Attack"
     }
   ],
   "reckless strength": [
     {
-      "group_id": "combo:4",
-      "label": "STR"
+      "group_id": "line:Statistic Buffs:Strength",
+      "label": "Statistic Buffs \u203a Strength"
     }
   ],
   "cure blindness": [
     {
-      "group_id": "combo:20",
-      "label": "Blind"
+      "group_id": "line:Heals:Cure",
+      "label": "Heals \u203a Cure"
     }
   ],
   "soothe": [
     {
-      "group_id": "combo:18-30-86",
-      "label": "Lull + Change Frenzy Rad + Harmony"
+      "group_id": "line:Utility Detrimental:Calm",
+      "label": "Utility Detrimental \u203a Calm"
     }
   ],
   "sanctuary": [
     {
-      "group_id": "combo:76",
-      "label": "Sentinel"
+      "group_id": "line:Utility Beneficial:Misc",
+      "label": "Utility Beneficial \u203a Misc"
     }
   ],
   "center": [
     {
-      "group_id": "combo:1-69",
-      "label": "AC + Total HP"
+      "group_id": "line:HP Buffs:HP type one",
+      "label": "HP Buffs \u203a HP type one"
     }
   ],
   "blessing of the page": [
     {
-      "group_id": "combo:121",
-      "label": "Reverse DS"
+      "group_id": "line:Heals:Indirect",
+      "label": "Heals \u203a Indirect"
     }
   ],
   "sense the dead": [
     {
-      "group_id": "combo:52",
-      "label": "Sense Dead"
+      "group_id": "line:Utility Beneficial:Misc",
+      "label": "Utility Beneficial \u203a Misc"
     }
   ],
   "invisibility versus undead": [
     {
-      "group_id": "combo:28",
-      "label": "Invis Vs Undead"
+      "group_id": "line:Utility Beneficial:Invisibility",
+      "label": "Utility Beneficial \u203a Invisibility"
     }
   ],
   "symbol of transal": [
     {
-      "group_id": "combo:69",
-      "label": "Total HP"
+      "group_id": "line:HP Buffs:Symbol",
+      "label": "HP Buffs \u203a Symbol"
     }
   ],
   "reanimation": [
     {
-      "group_id": "combo:81",
-      "label": "Revive"
+      "group_id": "line:Heals:Resurrection",
+      "label": "Heals \u203a Resurrection"
     }
   ],
   "sense summoned": [
     {
-      "group_id": "combo:53",
-      "label": "Sense Summoned"
+      "group_id": "line:Utility Beneficial:Summoned",
+      "label": "Utility Beneficial \u203a Summoned"
     }
   ],
   "blessing of piety": [
     {
-      "group_id": "combo:127",
-      "label": "Increase Spell Haste"
+      "group_id": "line:Utility Beneficial:Spell Focus",
+      "label": "Utility Beneficial \u203a Spell Focus"
     }
   ],
   "calm": [
     {
-      "group_id": "combo:18-30-86",
-      "label": "Lull + Change Frenzy Rad + Harmony"
+      "group_id": "line:Utility Detrimental:Calm",
+      "label": "Utility Detrimental \u203a Calm"
     }
   ],
   "spirit armor": [
     {
-      "group_id": "combo:1",
-      "label": "AC"
+      "group_id": "line:Statistic Buffs:Armor Class",
+      "label": "Statistic Buffs \u203a Armor Class"
     }
   ],
   "blessing of the squire": [
     {
-      "group_id": "combo:121",
-      "label": "Reverse DS"
+      "group_id": "line:Heals:Indirect",
+      "label": "Heals \u203a Indirect"
     }
   ],
   "yaulp ii": [
     {
-      "group_id": "combo:1-4",
-      "label": "AC + STR"
+      "group_id": "line:Statistic Buffs:Attack",
+      "label": "Statistic Buffs \u203a Attack"
     }
   ],
   "daring": [
     {
-      "group_id": "combo:1-69",
-      "label": "AC + Total HP"
+      "group_id": "line:HP Buffs:HP type one",
+      "label": "HP Buffs \u203a HP type one"
     }
   ],
   "reconstitution": [
     {
-      "group_id": "combo:81",
-      "label": "Revive"
+      "group_id": "line:Heals:Resurrection",
+      "label": "Heals \u203a Resurrection"
     }
   ],
   "ward of vie": [
     {
-      "group_id": "combo:162",
-      "label": "Mitigate Melee Damage"
+      "group_id": "line:Utility Beneficial:Melee Guard",
+      "label": "Utility Beneficial \u203a Melee Guard"
     }
   ],
   "symbol of ryltan": [
     {
-      "group_id": "combo:69",
-      "label": "Total HP"
+      "group_id": "line:HP Buffs:Symbol",
+      "label": "HP Buffs \u203a Symbol"
     }
   ],
   "bravery": [
     {
-      "group_id": "combo:1-69",
-      "label": "AC + Total HP"
+      "group_id": "line:HP Buffs:HP type one",
+      "label": "HP Buffs \u203a HP type one"
     }
   ],
   "reparation": [
     {
-      "group_id": "combo:81",
-      "label": "Revive"
+      "group_id": "line:Heals:Resurrection",
+      "label": "Heals \u203a Resurrection"
     }
   ],
   "guard": [
     {
-      "group_id": "combo:1",
-      "label": "AC"
+      "group_id": "line:Statistic Buffs:Armor Class",
+      "label": "Statistic Buffs \u203a Armor Class"
     }
   ],
   "revive": [
     {
-      "group_id": "combo:81",
-      "label": "Revive"
+      "group_id": "line:Heals:Resurrection",
+      "label": "Heals \u203a Resurrection"
     }
   ],
   "divine barrier": [
     {
-      "group_id": "combo:40",
-      "label": "Divine Aura"
+      "group_id": "line:Utility Beneficial:Invulnerability",
+      "label": "Utility Beneficial \u203a Invulnerability"
     }
   ],
   "resist poison": [
     {
-      "group_id": "combo:48",
-      "label": "Poison Resist"
+      "group_id": "line:Statistic Buffs:Resist Buff",
+      "label": "Statistic Buffs \u203a Resist Buff"
     }
   ],
   "frenzied strength": [
     {
-      "group_id": "combo:4",
-      "label": "STR"
+      "group_id": "line:Statistic Buffs:Strength",
+      "label": "Statistic Buffs \u203a Strength"
     }
   ],
   "symbol of pinzarn": [
     {
-      "group_id": "combo:69",
-      "label": "Total HP"
+      "group_id": "line:HP Buffs:Symbol",
+      "label": "HP Buffs \u203a Symbol"
     }
   ],
   "atone": [
     {
-      "group_id": "combo:63",
-      "label": "Wipe Hate List"
+      "group_id": "line:Utility Detrimental:Memory Blur",
+      "label": "Utility Detrimental \u203a Memory Blur"
     }
   ],
   "renewal": [
     {
-      "group_id": "combo:81",
-      "label": "Revive"
+      "group_id": "line:Heals:Resurrection",
+      "label": "Heals \u203a Resurrection"
     }
   ],
   "valor": [
     {
-      "group_id": "combo:1-69",
-      "label": "AC + Total HP"
+      "group_id": "line:HP Buffs:HP type one",
+      "label": "HP Buffs \u203a HP type one"
     }
   ],
   "resist fire": [
     {
-      "group_id": "combo:46",
-      "label": "Fire Resist"
+      "group_id": "line:Statistic Buffs:Resist Buff",
+      "label": "Statistic Buffs \u203a Resist Buff"
     }
   ],
   "armor of protection": [
     {
-      "group_id": "combo:1-69",
-      "label": "AC + Total HP"
+      "group_id": "line:HP Buffs:Shielding",
+      "label": "HP Buffs \u203a Shielding"
     }
   ],
   "blessing of the knight": [
     {
-      "group_id": "combo:121",
-      "label": "Reverse DS"
+      "group_id": "line:Heals:Indirect",
+      "label": "Heals \u203a Indirect"
     }
   ],
   "armor of faith": [
     {
-      "group_id": "combo:1",
-      "label": "AC"
+      "group_id": "line:Statistic Buffs:Armor Class",
+      "label": "Statistic Buffs \u203a Armor Class"
     }
   ],
   "blessing of faith": [
     {
-      "group_id": "combo:127",
-      "label": "Increase Spell Haste"
+      "group_id": "line:Utility Beneficial:Spell Focus",
+      "label": "Utility Beneficial \u203a Spell Focus"
     }
   ],
   "pacify": [
     {
-      "group_id": "combo:18-30-86",
-      "label": "Lull + Change Frenzy Rad + Harmony"
+      "group_id": "line:Utility Detrimental:Calm",
+      "label": "Utility Detrimental \u203a Calm"
     }
   ],
   "resist disease": [
     {
-      "group_id": "combo:49",
-      "label": "Disease Resist"
+      "group_id": "line:Statistic Buffs:Resist Buff",
+      "label": "Statistic Buffs \u203a Resist Buff"
     }
   ],
   "resuscitate": [
     {
-      "group_id": "combo:81",
-      "label": "Revive"
+      "group_id": "line:Heals:Resurrection",
+      "label": "Heals \u203a Resurrection"
     }
   ],
   "nullify magic": [
     {
-      "group_id": "combo:27",
-      "label": "Cancel Magic"
+      "group_id": "line:Utility Detrimental:Dispel",
+      "label": "Utility Detrimental \u203a Dispel"
     }
   ],
   "resist cold": [
     {
-      "group_id": "combo:47",
-      "label": "Cold Resist"
+      "group_id": "line:Statistic Buffs:Resist Buff",
+      "label": "Statistic Buffs \u203a Resist Buff"
     }
   ],
   "promised renewal": [
     {
-      "group_id": "combo:44-289-537",
-      "label": "Lycanthropy + Cast On Fade Effect + SPA537"
+      "group_id": "line:Heals:Delayed",
+      "label": "Heals \u203a Delayed"
     }
   ],
   "guard of vie": [
     {
-      "group_id": "combo:162",
-      "label": "Mitigate Melee Damage"
+      "group_id": "line:Utility Beneficial:Melee Guard",
+      "label": "Utility Beneficial \u203a Melee Guard"
     }
   ],
   "temperance": [
     {
-      "group_id": "combo:1-69",
-      "label": "AC + Total HP"
+      "group_id": "line:HP Buffs:Aegolism",
+      "label": "HP Buffs \u203a Aegolism"
     }
   ],
   "symbol of naltron": [
     {
-      "group_id": "combo:69",
-      "label": "Total HP"
+      "group_id": "line:HP Buffs:Symbol",
+      "label": "HP Buffs \u203a Symbol"
     }
   ],
   "yaulp iii": [
     {
-      "group_id": "combo:1-4",
-      "label": "AC + STR"
+      "group_id": "line:Statistic Buffs:Attack",
+      "label": "Statistic Buffs \u203a Attack"
     }
   ],
   "resolution": [
     {
-      "group_id": "combo:1-69",
-      "label": "AC + Total HP"
+      "group_id": "line:HP Buffs:HP type one",
+      "label": "HP Buffs \u203a HP type one"
     }
   ],
   "restoration": [
     {
-      "group_id": "combo:81",
-      "label": "Revive"
+      "group_id": "line:Heals:Resurrection",
+      "label": "Heals \u203a Resurrection"
     }
   ],
   "resist magic": [
     {
-      "group_id": "combo:50",
-      "label": "Magic Resist"
+      "group_id": "line:Statistic Buffs:Resist Buff",
+      "label": "Statistic Buffs \u203a Resist Buff"
     }
   ],
   "blessing of temperance": [
     {
-      "group_id": "combo:1-69",
-      "label": "AC + Total HP"
+      "group_id": "line:HP Buffs:Aegolism",
+      "label": "HP Buffs \u203a Aegolism"
     }
   ],
   "shield of words": [
     {
-      "group_id": "combo:1",
-      "label": "AC"
+      "group_id": "line:Statistic Buffs:Armor Class",
+      "label": "Statistic Buffs \u203a Armor Class"
     }
   ],
   "resurrection": [
     {
-      "group_id": "combo:81",
-      "label": "Revive"
+      "group_id": "line:Heals:Resurrection",
+      "label": "Heals \u203a Resurrection"
     }
   ],
   "blessing of the lord commander": [
     {
-      "group_id": "combo:121",
-      "label": "Reverse DS"
+      "group_id": "line:Heals:Indirect",
+      "label": "Heals \u203a Indirect"
     }
   ],
   "improved invisibility to undead": [
     {
-      "group_id": "combo:315",
-      "label": "Invis Vs Undead2"
+      "group_id": "line:Utility Beneficial:Invisibility",
+      "label": "Utility Beneficial \u203a Invisibility"
     }
   ],
   "armor of the faithful": [
     {
-      "group_id": "combo:1-69",
-      "label": "AC + Total HP"
+      "group_id": "line:HP Buffs:Shielding",
+      "label": "HP Buffs \u203a Shielding"
     }
   ],
   "ward of the divine": [
     {
-      "group_id": "combo:323",
-      "label": "Defensive Proc"
+      "group_id": "line:Utility Beneficial:Combat Innates",
+      "label": "Utility Beneficial \u203a Combat Innates"
     }
   ],
   "lull animal": [
     {
-      "group_id": "combo:18-30-86",
-      "label": "Lull + Change Frenzy Rad + Harmony"
+      "group_id": "line:Utility Detrimental:Calm",
+      "label": "Utility Detrimental \u203a Calm"
     }
   ],
   "skin like wood": [
     {
-      "group_id": "combo:1-69",
-      "label": "AC + Total HP"
+      "group_id": "line:HP Buffs:HP type one",
+      "label": "HP Buffs \u203a HP type one"
     }
   ],
   "harmony": [
     {
-      "group_id": "combo:30-86",
-      "label": "Change Frenzy Rad + Harmony"
+      "group_id": "line:Utility Detrimental:Calm",
+      "label": "Utility Detrimental \u203a Calm"
     }
   ],
   "firefist": [
     {
-      "group_id": "combo:2",
-      "label": "ATK"
+      "group_id": "line:Statistic Buffs:Attack",
+      "label": "Statistic Buffs \u203a Attack"
     }
   ],
   "strength of earth": [
     {
-      "group_id": "combo:4",
-      "label": "STR"
+      "group_id": "line:Statistic Buffs:Strength",
+      "label": "Statistic Buffs \u203a Strength"
     }
   ],
   "thistlecoat": [
     {
-      "group_id": "combo:1-59",
-      "label": "AC + Damage Shield"
+      "group_id": "line:Utility Beneficial:Damage Shield",
+      "label": "Utility Beneficial \u203a Damage Shield"
     }
   ],
   "invisibility versus animals": [
     {
-      "group_id": "combo:29",
-      "label": "Invis Vs Animals"
+      "group_id": "line:Utility Beneficial:Invisibility",
+      "label": "Utility Beneficial \u203a Invisibility"
     }
   ],
   "protection of wood": [
     {
-      "group_id": "combo:1-69",
-      "label": "AC + Total HP"
+      "group_id": "line:HP Buffs:HP type one",
+      "label": "HP Buffs \u203a HP type one"
     }
   ],
   "skin like rock": [
     {
-      "group_id": "combo:1-69",
-      "label": "AC + Total HP"
+      "group_id": "line:HP Buffs:HP type one",
+      "label": "HP Buffs \u203a HP type one"
     }
   ],
   "calm animal": [
     {
-      "group_id": "combo:18-30-86",
-      "label": "Lull + Change Frenzy Rad + Harmony"
+      "group_id": "line:Utility Detrimental:Calm",
+      "label": "Utility Detrimental \u203a Calm"
     }
   ],
   "barbcoat": [
     {
-      "group_id": "combo:1-59",
-      "label": "AC + Damage Shield"
+      "group_id": "line:Utility Beneficial:Damage Shield",
+      "label": "Utility Beneficial \u203a Damage Shield"
     }
   ],
   "feral spirit": [
     {
-      "group_id": "combo:1-4-11",
-      "label": "AC + STR + Haste"
+      "group_id": "line:Pet:Pet Haste",
+      "label": "Pet \u203a Pet Haste"
     }
   ],
   "protection of rock": [
     {
-      "group_id": "combo:1-69",
-      "label": "AC + Total HP"
+      "group_id": "line:HP Buffs:HP type one",
+      "label": "HP Buffs \u203a HP type one"
     }
   ],
   "spirit of cheetah": [
     {
-      "group_id": "combo:3",
-      "label": "Movement Speed"
+      "group_id": "line:Utility Beneficial:Movement",
+      "label": "Utility Beneficial \u203a Movement"
     }
   ],
   "skin like steel": [
     {
-      "group_id": "combo:1-69",
-      "label": "AC + Total HP"
+      "group_id": "line:HP Buffs:HP type one",
+      "label": "HP Buffs \u203a HP type one"
     }
   ],
   "scale of wolf": [
     {
-      "group_id": "combo:3",
-      "label": "Movement Speed"
+      "group_id": "line:Utility Beneficial:Movement",
+      "label": "Utility Beneficial \u203a Movement"
     }
   ],
   "succor: east karana": [
     {
-      "group_id": "combo:88-146",
-      "label": "Succor + Electricity Resist"
+      "group_id": "line:Transport:Antonica",
+      "label": "Transport \u203a Antonica"
     }
   ],
   "bramblecoat": [
     {
-      "group_id": "combo:1-59",
-      "label": "AC + Damage Shield"
+      "group_id": "line:Utility Beneficial:Damage Shield",
+      "label": "Utility Beneficial \u203a Damage Shield"
     }
   ],
   "protection of steel": [
     {
-      "group_id": "combo:1-69",
-      "label": "AC + Total HP"
+      "group_id": "line:HP Buffs:HP type one",
+      "label": "HP Buffs \u203a HP type one"
     }
   ],
   "harmony of nature": [
     {
-      "group_id": "combo:30-86",
-      "label": "Change Frenzy Rad + Harmony"
+      "group_id": "line:Utility Detrimental:Calm",
+      "label": "Utility Detrimental \u203a Calm"
     }
   ],
   "succor: butcherblock": [
     {
-      "group_id": "combo:88-146",
-      "label": "Succor + Electricity Resist"
+      "group_id": "line:Transport:Faydwer",
+      "label": "Transport \u203a Faydwer"
     }
   ],
   "regeneration": [
     {
-      "group_id": "combo:0",
-      "label": "HP"
+      "group_id": "line:Regen:Health",
+      "label": "Regen \u203a Health"
     }
   ],
   "strength of stone": [
     {
-      "group_id": "combo:4",
-      "label": "STR"
+      "group_id": "line:Statistic Buffs:Strength",
+      "label": "Statistic Buffs \u203a Strength"
     }
   ],
   "pack spirit": [
     {
-      "group_id": "combo:3",
-      "label": "Movement Speed"
+      "group_id": "line:Utility Beneficial:Movement",
+      "label": "Utility Beneficial \u203a Movement"
     }
   ],
   "skin like diamond": [
     {
-      "group_id": "combo:1-69",
-      "label": "AC + Total HP"
+      "group_id": "line:HP Buffs:HP type one",
+      "label": "HP Buffs \u203a HP type one"
     }
   ],
   "spikecoat": [
     {
-      "group_id": "combo:1-59",
-      "label": "AC + Damage Shield"
+      "group_id": "line:Utility Beneficial:Damage Shield",
+      "label": "Utility Beneficial \u203a Damage Shield"
     }
   ],
   "succor: south ro": [
     {
-      "group_id": "combo:88-146",
-      "label": "Succor + Electricity Resist"
+      "group_id": "line:Transport:Antonica",
+      "label": "Transport \u203a Antonica"
     }
   ],
   "pack regeneration": [
     {
-      "group_id": "combo:0",
-      "label": "HP"
+      "group_id": "line:Regen:Health",
+      "label": "Regen \u203a Health"
     }
   ],
   "protection of diamond": [
     {
-      "group_id": "combo:1-69",
-      "label": "AC + Total HP"
+      "group_id": "line:HP Buffs:HP type one",
+      "label": "HP Buffs \u203a HP type one"
     }
   ],
   "savage spirit": [
     {
-      "group_id": "combo:1-4-11",
-      "label": "AC + STR + Haste"
+      "group_id": "line:Pet:Pet Haste",
+      "label": "Pet \u203a Pet Haste"
     }
   ],
   "succor: lavastorm": [
     {
-      "group_id": "combo:88-146",
-      "label": "Succor + Electricity Resist"
+      "group_id": "line:Transport:Antonica",
+      "label": "Transport \u203a Antonica"
     }
   ],
   "chloroplast": [
     {
-      "group_id": "combo:0",
-      "label": "HP"
+      "group_id": "line:Regen:Health",
+      "label": "Regen \u203a Health"
     }
   ],
   "storm strength": [
     {
-      "group_id": "combo:4",
-      "label": "STR"
+      "group_id": "line:Statistic Buffs:Strength",
+      "label": "Statistic Buffs \u203a Strength"
     }
   ],
   "pack chloroplast": [
     {
-      "group_id": "combo:0",
-      "label": "HP"
+      "group_id": "line:Regen:Health",
+      "label": "Regen \u203a Health"
     }
   ],
   "skin like nature": [
     {
-      "group_id": "combo:1-69",
-      "label": "AC + Total HP"
+      "group_id": "line:HP Buffs:HP type one",
+      "label": "HP Buffs \u203a HP type one"
     }
   ],
   "succor: north karana": [
     {
-      "group_id": "combo:88-146",
-      "label": "Succor + Electricity Resist"
+      "group_id": "line:Transport:Antonica",
+      "label": "Transport \u203a Antonica"
     }
   ],
   "thorncoat": [
     {
-      "group_id": "combo:1-59",
-      "label": "AC + Damage Shield"
+      "group_id": "line:Utility Beneficial:Damage Shield",
+      "label": "Utility Beneficial \u203a Damage Shield"
     }
   ],
   "improved superior camouflage": [
     {
-      "group_id": "combo:314",
-      "label": "Invisibility2"
+      "group_id": "line:Utility Beneficial:Invisibility",
+      "label": "Utility Beneficial \u203a Invisibility"
     }
   ],
   "protection of nature": [
     {
-      "group_id": "combo:1-69",
-      "label": "AC + Total HP"
+      "group_id": "line:HP Buffs:HP type one",
+      "label": "HP Buffs \u203a HP type one"
     }
   ],
   "minor shielding": [
     {
-      "group_id": "combo:1-69",
-      "label": "AC + Total HP"
+      "group_id": "line:HP Buffs:Shielding",
+      "label": "HP Buffs \u203a Shielding"
     }
   ],
   "reclaim energy": [
     {
-      "group_id": "combo:68",
-      "label": "Reclaim Pet"
+      "group_id": "line:Pet:Misc",
+      "label": "Pet \u203a Misc"
     }
   ],
   "taper enchantment": [
     {
-      "group_id": "combo:27",
-      "label": "Cancel Magic"
+      "group_id": "line:Utility Detrimental:Dispel",
+      "label": "Utility Detrimental \u203a Dispel"
     }
   ],
   "haze": [
     {
-      "group_id": "combo:1",
-      "label": "AC"
+      "group_id": "line:Statistic Buffs:Armor Class",
+      "label": "Statistic Buffs \u203a Armor Class"
     }
   ],
   "sentinel": [
     {
-      "group_id": "combo:76",
-      "label": "Sentinel"
+      "group_id": "line:Utility Beneficial:Misc",
+      "label": "Utility Beneficial \u203a Misc"
     }
   ],
   "lesser shielding": [
     {
-      "group_id": "combo:1-50-69",
-      "label": "AC + Magic Resist + Total HP"
+      "group_id": "line:HP Buffs:Shielding",
+      "label": "HP Buffs \u203a Shielding"
     }
   ],
   "alliance": [
     {
-      "group_id": "combo:19",
-      "label": "Add Faction"
+      "group_id": "line:Utility Beneficial:Alliance",
+      "label": "Utility Beneficial \u203a Alliance"
     }
   ],
   "languid pace": [
     {
-      "group_id": "combo:11",
-      "label": "Haste"
+      "group_id": "line:Utility Detrimental:Slow",
+      "label": "Utility Detrimental \u203a Slow"
     }
   ],
   "memory blur": [
     {
-      "group_id": "combo:63",
-      "label": "Wipe Hate List"
+      "group_id": "line:Utility Detrimental:Memory Blur",
+      "label": "Utility Detrimental \u203a Memory Blur"
     }
   ],
   "mist": [
     {
-      "group_id": "combo:1",
-      "label": "AC"
+      "group_id": "line:Statistic Buffs:Armor Class",
+      "label": "Statistic Buffs \u203a Armor Class"
     }
   ],
   "intellectual advancement": [
     {
-      "group_id": "combo:112",
-      "label": "Casting Level"
+      "group_id": "line:Statistic Buffs:Fizzle Rate",
+      "label": "Statistic Buffs \u203a Fizzle Rate"
     }
   ],
   "rune i": [
     {
-      "group_id": "combo:55",
-      "label": "Rune"
+      "group_id": "line:Utility Beneficial:Rune",
+      "label": "Utility Beneficial \u203a Rune"
     }
   ],
   "breeze": [
     {
-      "group_id": "combo:15",
-      "label": "Mana"
+      "group_id": "line:Regen:Mana",
+      "label": "Regen \u203a Mana"
     }
   ],
   "quickness": [
     {
-      "group_id": "combo:11",
-      "label": "Haste"
+      "group_id": "line:Utility Beneficial:Haste",
+      "label": "Utility Beneficial \u203a Haste"
     }
   ],
   "shielding": [
     {
-      "group_id": "combo:1-50-69",
-      "label": "AC + Magic Resist + Total HP"
+      "group_id": "line:HP Buffs:Shielding",
+      "label": "HP Buffs \u203a Shielding"
     }
   ],
   "cloud": [
     {
-      "group_id": "combo:1",
-      "label": "AC"
+      "group_id": "line:Statistic Buffs:Armor Class",
+      "label": "Statistic Buffs \u203a Armor Class"
     }
   ],
   "intellectual superiority": [
     {
-      "group_id": "combo:112",
-      "label": "Casting Level"
+      "group_id": "line:Statistic Buffs:Fizzle Rate",
+      "label": "Statistic Buffs \u203a Fizzle Rate"
     }
   ],
   "sympathetic aura": [
     {
-      "group_id": "combo:10",
-      "label": "CHA"
+      "group_id": "line:Statistic Buffs:Charisma",
+      "label": "Statistic Buffs \u203a Charisma"
     }
   ],
   "berserker strength": [
     {
-      "group_id": "combo:4-6-55",
-      "label": "STR + AGI + Rune"
+      "group_id": "line:Statistic Buffs:Strength",
+      "label": "Statistic Buffs \u203a Strength"
     }
   ],
   "benevolence": [
     {
-      "group_id": "combo:19",
-      "label": "Add Faction"
+      "group_id": "line:Utility Beneficial:Alliance",
+      "label": "Utility Beneficial \u203a Alliance"
     }
   ],
   "alacrity": [
     {
-      "group_id": "combo:11",
-      "label": "Haste"
+      "group_id": "line:Utility Beneficial:Haste",
+      "label": "Utility Beneficial \u203a Haste"
     }
   ],
   "rune ii": [
     {
-      "group_id": "combo:55",
-      "label": "Rune"
+      "group_id": "line:Utility Beneficial:Rune",
+      "label": "Utility Beneficial \u203a Rune"
     }
   ],
   "strip enchantment": [
     {
-      "group_id": "combo:27",
-      "label": "Cancel Magic"
+      "group_id": "line:Utility Detrimental:Dispel",
+      "label": "Utility Detrimental \u203a Dispel"
     }
   ],
   "major shielding": [
     {
-      "group_id": "combo:1-50-69",
-      "label": "AC + Magic Resist + Total HP"
+      "group_id": "line:HP Buffs:Shielding",
+      "label": "HP Buffs \u203a Shielding"
     }
   ],
   "tepid deeds": [
     {
-      "group_id": "combo:11",
-      "label": "Haste"
+      "group_id": "line:Utility Detrimental:Slow",
+      "label": "Utility Detrimental \u203a Slow"
     }
   ],
   "clarity": [
     {
-      "group_id": "combo:15",
-      "label": "Mana"
+      "group_id": "line:Regen:Mana",
+      "label": "Regen \u203a Mana"
     }
   ],
   "haunting visage": [
     {
-      "group_id": "combo:114",
-      "label": "Change Aggro"
+      "group_id": "line:Utility Beneficial:Visages",
+      "label": "Utility Beneficial \u203a Visages"
     }
   ],
   "obscure": [
     {
-      "group_id": "combo:1",
-      "label": "AC"
+      "group_id": "line:Statistic Buffs:Armor Class",
+      "label": "Statistic Buffs \u203a Armor Class"
     }
   ],
   "augmentation": [
     {
-      "group_id": "combo:1-6-11",
-      "label": "AC + AGI + Haste"
+      "group_id": "line:Utility Beneficial:Haste",
+      "label": "Utility Beneficial \u203a Haste"
     }
   ],
   "ward of alendar": [
     {
-      "group_id": "combo:161",
-      "label": "Mitigate Spell Damage"
+      "group_id": "line:Utility Beneficial:Spell Guard",
+      "label": "Utility Beneficial \u203a Spell Guard"
     }
   ],
   "greater shielding": [
     {
-      "group_id": "combo:1-50-69",
-      "label": "AC + Magic Resist + Total HP"
+      "group_id": "line:HP Buffs:Shielding",
+      "label": "HP Buffs \u203a Shielding"
     }
   ],
   "radiant visage": [
     {
-      "group_id": "combo:10",
-      "label": "CHA"
+      "group_id": "line:Statistic Buffs:Charisma",
+      "label": "Statistic Buffs \u203a Charisma"
     }
   ],
   "rune iii": [
     {
-      "group_id": "combo:55",
-      "label": "Rune"
+      "group_id": "line:Utility Beneficial:Rune",
+      "label": "Utility Beneficial \u203a Rune"
     }
   ],
   "gift of magic": [
     {
-      "group_id": "combo:97",
-      "label": "Mana Pool"
+      "group_id": "line:Statistic Buffs:Mana",
+      "label": "Statistic Buffs \u203a Mana"
     }
   ],
   "insight": [
     {
-      "group_id": "combo:8-9",
-      "label": "INT + WIS"
+      "group_id": "line:Statistic Buffs:Wisdom/Intelligence",
+      "label": "Statistic Buffs \u203a Wisdom/Intelligence"
     }
   ],
   "calming visage": [
     {
-      "group_id": "combo:114",
-      "label": "Change Aggro"
+      "group_id": "line:Utility Beneficial:Visages",
+      "label": "Utility Beneficial \u203a Visages"
     }
   ],
   "mind wipe": [
     {
-      "group_id": "combo:63",
-      "label": "Wipe Hate List"
+      "group_id": "line:Utility Detrimental:Memory Blur",
+      "label": "Utility Detrimental \u203a Memory Blur"
     }
   ],
   "shade": [
     {
-      "group_id": "combo:1",
-      "label": "AC"
+      "group_id": "line:Statistic Buffs:Armor Class",
+      "label": "Statistic Buffs \u203a Armor Class"
     }
   ],
   "rampage": [
     {
-      "group_id": "combo:4-6-55",
-      "label": "STR + AGI + Rune"
+      "group_id": "line:Utility Beneficial:Rune",
+      "label": "Utility Beneficial \u203a Rune"
     }
   ],
   "celerity": [
     {
-      "group_id": "combo:11",
-      "label": "Haste"
+      "group_id": "line:Utility Beneficial:Haste",
+      "label": "Utility Beneficial \u203a Haste"
     }
   ],
   "arch shielding": [
     {
-      "group_id": "combo:1-50-69",
-      "label": "AC + Magic Resist + Total HP"
+      "group_id": "line:HP Buffs:Shielding",
+      "label": "HP Buffs \u203a Shielding"
     }
   ],
   "rune iv": [
     {
-      "group_id": "combo:55",
-      "label": "Rune"
+      "group_id": "line:Utility Beneficial:Rune",
+      "label": "Utility Beneficial \u203a Rune"
     }
   ],
   "brilliance": [
     {
-      "group_id": "combo:8-9",
-      "label": "INT + WIS"
+      "group_id": "line:Statistic Buffs:Wisdom/Intelligence",
+      "label": "Statistic Buffs \u203a Wisdom/Intelligence"
     }
   ],
   "shiftless deeds": [
     {
-      "group_id": "combo:11",
-      "label": "Haste"
+      "group_id": "line:Utility Detrimental:Slow",
+      "label": "Utility Detrimental \u203a Slow"
     }
   ],
   "boon of the clear mind": [
     {
-      "group_id": "combo:15",
-      "label": "Mana"
+      "group_id": "line:Regen:Mana",
+      "label": "Regen \u203a Mana"
     }
   ],
   "pillage enchantment": [
     {
-      "group_id": "combo:27",
-      "label": "Cancel Magic"
+      "group_id": "line:Utility Detrimental:Dispel",
+      "label": "Utility Detrimental \u203a Dispel"
     }
   ],
   "bounce": [
     {
-      "group_id": "combo:158",
-      "label": "Reflect"
+      "group_id": "line:Utility Beneficial:Reflection",
+      "label": "Utility Beneficial \u203a Reflection"
     }
   ],
   "guard of alendar": [
     {
-      "group_id": "combo:161",
-      "label": "Mitigate Spell Damage"
+      "group_id": "line:Utility Beneficial:Spell Guard",
+      "label": "Utility Beneficial \u203a Spell Guard"
     }
   ],
   "reoccurring amnesia": [
     {
-      "group_id": "combo:63",
-      "label": "Wipe Hate List"
+      "group_id": "line:Utility Detrimental:Memory Blur",
+      "label": "Utility Detrimental \u203a Memory Blur"
     }
   ],
   "adorning grace": [
     {
-      "group_id": "combo:10",
-      "label": "CHA"
+      "group_id": "line:Statistic Buffs:Charisma",
+      "label": "Statistic Buffs \u203a Charisma"
     }
   ],
   "blanket of forgetfulness": [
     {
-      "group_id": "combo:63",
-      "label": "Wipe Hate List"
+      "group_id": "line:Utility Detrimental:Memory Blur",
+      "label": "Utility Detrimental \u203a Memory Blur"
     }
   ],
   "berserker spirit": [
     {
-      "group_id": "combo:4-6-55",
-      "label": "STR + AGI + Rune"
+      "group_id": "line:Utility Beneficial:Rune",
+      "label": "Utility Beneficial \u203a Rune"
     }
   ],
   "swift like the wind": [
     {
-      "group_id": "combo:11",
-      "label": "Haste"
+      "group_id": "line:Utility Beneficial:Haste",
+      "label": "Utility Beneficial \u203a Haste"
     }
   ],
   "group resist magic": [
     {
-      "group_id": "combo:50",
-      "label": "Magic Resist"
+      "group_id": "line:Statistic Buffs:Resist Buff",
+      "label": "Statistic Buffs \u203a Resist Buff"
     }
   ],
   "shadow": [
     {
-      "group_id": "combo:1",
-      "label": "AC"
+      "group_id": "line:Statistic Buffs:Armor Class",
+      "label": "Statistic Buffs \u203a Armor Class"
     }
   ],
   "collaboration": [
     {
-      "group_id": "combo:19",
-      "label": "Add Faction"
+      "group_id": "line:Utility Beneficial:Alliance",
+      "label": "Utility Beneficial \u203a Alliance"
     }
   ],
   "improved invisibility": [
     {
-      "group_id": "combo:314",
-      "label": "Invisibility2"
+      "group_id": "line:Utility Beneficial:Invisibility",
+      "label": "Utility Beneficial \u203a Invisibility"
     }
   ],
   "flare": [
     {
-      "group_id": "combo:24",
-      "label": "Stamina"
+      "group_id": "line:Utility Beneficial:Misc",
+      "label": "Utility Beneficial \u203a Misc"
     }
   ],
   "burnout": [
     {
-      "group_id": "combo:1-4-11",
-      "label": "AC + STR + Haste"
+      "group_id": "line:Pet:Pet Haste",
+      "label": "Pet \u203a Pet Haste"
     }
   ],
   "elemental shield": [
     {
-      "group_id": "combo:46-47",
-      "label": "Fire Resist + Cold Resist"
+      "group_id": "line:Statistic Buffs:Resist Buff",
+      "label": "Statistic Buffs \u203a Resist Buff"
     }
   ],
   "expedience": [
     {
-      "group_id": "combo:3",
-      "label": "Movement Speed"
+      "group_id": "line:Pet:Pet Misc Buffs",
+      "label": "Pet \u203a Pet Misc Buffs"
     }
   ],
   "burnout ii": [
     {
-      "group_id": "combo:1-4-11",
-      "label": "AC + STR + Haste"
+      "group_id": "line:Pet:Pet Haste",
+      "label": "Pet \u203a Pet Haste"
     }
   ],
   "elemental armor": [
     {
-      "group_id": "combo:46-47",
-      "label": "Fire Resist + Cold Resist"
+      "group_id": "line:Statistic Buffs:Resist Buff",
+      "label": "Statistic Buffs \u203a Resist Buff"
     }
   ],
   "burnout iii": [
     {
-      "group_id": "combo:1-4-11",
-      "label": "AC + STR + Haste"
+      "group_id": "line:Pet:Pet Haste",
+      "label": "Pet \u203a Pet Haste"
     }
   ],
   "numb the dead": [
     {
-      "group_id": "combo:18-30-86",
-      "label": "Lull + Change Frenzy Rad + Harmony"
+      "group_id": "line:Utility Detrimental:Calm",
+      "label": "Utility Detrimental \u203a Calm"
     }
   ],
   "grim aura": [
     {
-      "group_id": "combo:2",
-      "label": "ATK"
+      "group_id": "line:Statistic Buffs:Attack",
+      "label": "Statistic Buffs \u203a Attack"
     }
   ],
   "shadow step": [
     {
-      "group_id": "combo:42",
-      "label": "Shadow Step"
+      "group_id": "line:Utility Beneficial:Shadowstep",
+      "label": "Utility Beneficial \u203a Shadowstep"
     }
   ],
   "dark pact": [
     {
-      "group_id": "combo:0-15",
-      "label": "HP + Mana"
+      "group_id": "line:Utility Beneficial:Conversions",
+      "label": "Utility Beneficial \u203a Conversions"
     }
   ],
   "vampiric embrace": [
     {
-      "group_id": "combo:10-85",
-      "label": "CHA + Weapon Proc"
+      "group_id": "line:Utility Beneficial:Combat Innates",
+      "label": "Utility Beneficial \u203a Combat Innates"
     }
   ],
   "impart strength": [
     {
-      "group_id": "combo:4",
-      "label": "STR"
+      "group_id": "line:Statistic Buffs:Strength",
+      "label": "Statistic Buffs \u203a Strength"
     }
   ],
   "focus death": [
     {
-      "group_id": "combo:1-4-11",
-      "label": "AC + STR + Haste"
+      "group_id": "line:Pet:Pet Haste",
+      "label": "Pet \u203a Pet Haste"
     }
   ],
   "shieldskin": [
     {
-      "group_id": "combo:55",
-      "label": "Rune"
+      "group_id": "line:Utility Beneficial:Rune",
+      "label": "Utility Beneficial \u203a Rune"
     }
   ],
   "voice graft": [
     {
-      "group_id": "combo:75",
-      "label": "Voice Graft"
+      "group_id": "line:Utility Beneficial:Misc",
+      "label": "Utility Beneficial \u203a Misc"
     }
   ],
   "shackle of bone": [
     {
-      "group_id": "combo:11",
-      "label": "Haste"
+      "group_id": "line:Utility Detrimental:Undead",
+      "label": "Utility Detrimental \u203a Undead"
     }
   ],
   "allure of death": [
     {
-      "group_id": "combo:0-15",
-      "label": "HP + Mana"
+      "group_id": "line:Utility Beneficial:Conversions",
+      "label": "Utility Beneficial \u203a Conversions"
     }
   ],
   "rapacious subvention": [
     {
-      "group_id": "combo:15",
-      "label": "Mana"
+      "group_id": "line:Heals:Mana Flow",
+      "label": "Heals \u203a Mana Flow"
     }
   ],
   "leatherskin": [
     {
-      "group_id": "combo:55",
-      "label": "Rune"
+      "group_id": "line:Utility Beneficial:Rune",
+      "label": "Utility Beneficial \u203a Rune"
     }
   ],
   "intensify death": [
     {
-      "group_id": "combo:1-4-11",
-      "label": "AC + STR + Haste"
+      "group_id": "line:Pet:Pet Haste",
+      "label": "Pet \u203a Pet Haste"
     }
   ],
   "rest the dead": [
     {
-      "group_id": "combo:18-30-63-86",
-      "label": "Lull + Change Frenzy Rad + Wipe Hate List + Harmony"
+      "group_id": "line:Utility Detrimental:Calm",
+      "label": "Utility Detrimental \u203a Calm"
     }
   ],
   "call of bones": [
     {
-      "group_id": "combo:0-15",
-      "label": "HP + Mana"
+      "group_id": "line:Utility Beneficial:Conversions",
+      "label": "Utility Beneficial \u203a Conversions"
     }
   ],
   "steelskin": [
     {
-      "group_id": "combo:55",
-      "label": "Rune"
+      "group_id": "line:Utility Beneficial:Rune",
+      "label": "Utility Beneficial \u203a Rune"
     }
   ],
   "augment death": [
     {
-      "group_id": "combo:1-4-11",
-      "label": "AC + STR + Haste"
+      "group_id": "line:Pet:Pet Haste",
+      "label": "Pet \u203a Pet Haste"
     }
   ],
   "shackle of spirit": [
     {
-      "group_id": "combo:11",
-      "label": "Haste"
+      "group_id": "line:Utility Detrimental:Undead",
+      "label": "Utility Detrimental \u203a Undead"
     }
   ],
   "covetous subversion": [
     {
-      "group_id": "combo:15",
-      "label": "Mana"
+      "group_id": "line:Heals:Mana Flow",
+      "label": "Heals \u203a Mana Flow"
     }
   ],
   "diamondskin": [
     {
-      "group_id": "combo:55",
-      "label": "Rune"
+      "group_id": "line:Utility Beneficial:Rune",
+      "label": "Utility Beneficial \u203a Rune"
     }
   ],
   "lich": [
     {
-      "group_id": "combo:0-15",
-      "label": "HP + Mana"
+      "group_id": "line:Utility Beneficial:Conversions",
+      "label": "Utility Beneficial \u203a Conversions"
     }
   ],
   "instrument of nife": [
     {
-      "group_id": "combo:10-85",
-      "label": "CHA + Weapon Proc"
+      "group_id": "line:Utility Beneficial:Combat Innates",
+      "label": "Utility Beneficial \u203a Combat Innates"
     }
   ],
   "divine vigor": [
     {
-      "group_id": "combo:69",
-      "label": "Total HP"
+      "group_id": "line:HP Buffs:HP type two",
+      "label": "HP Buffs \u203a HP type two"
     }
   ],
   "valor of marr": [
     {
-      "group_id": "combo:11",
-      "label": "Haste"
+      "group_id": "line:Utility Beneficial:Haste",
+      "label": "Utility Beneficial \u203a Haste"
     }
   ],
   "divine might": [
     {
-      "group_id": "combo:10-85",
-      "label": "CHA + Weapon Proc"
+      "group_id": "line:Utility Beneficial:Combat Innates",
+      "label": "Utility Beneficial \u203a Combat Innates"
     }
   ],
   "brell's steadfast aegis": [
     {
-      "group_id": "combo:69",
-      "label": "Total HP"
+      "group_id": "line:HP Buffs:HP type two",
+      "label": "HP Buffs \u203a HP type two"
     }
   ],
   "glimpse": [
     {
-      "group_id": "combo:87",
-      "label": "Magnify Vision"
+      "group_id": "line:Utility Beneficial:Vision",
+      "label": "Utility Beneficial \u203a Vision"
     }
   ],
   "hawk eye": [
     {
-      "group_id": "combo:184",
-      "label": "Hit Chance"
+      "group_id": "line:Utility Beneficial:Vision",
+      "label": "Utility Beneficial \u203a Vision"
     }
   ],
   "feet like cat": [
     {
-      "group_id": "combo:6",
-      "label": "AGI"
+      "group_id": "line:Statistic Buffs:Agility",
+      "label": "Statistic Buffs \u203a Agility"
     }
   ],
   "call of sky": [
     {
-      "group_id": "combo:10-85",
-      "label": "CHA + Weapon Proc"
+      "group_id": "line:Utility Beneficial:Combat Innates",
+      "label": "Utility Beneficial \u203a Combat Innates"
     }
   ],
   "nature's precision": [
     {
-      "group_id": "combo:2",
-      "label": "ATK"
+      "group_id": "line:Statistic Buffs:Attack",
+      "label": "Statistic Buffs \u203a Attack"
     }
   ],
   "strengthen death": [
     {
-      "group_id": "combo:1-4-11",
-      "label": "AC + STR + Haste"
+      "group_id": "line:Pet:Pet Haste",
+      "label": "Pet \u203a Pet Haste"
     }
   ],
   "dark temptation": [
     {
-      "group_id": "combo:0-2",
-      "label": "HP + ATK"
+      "group_id": "line:Utility Beneficial:Conversions",
+      "label": "Utility Beneficial \u203a Conversions"
     }
   ],
   "scream of death": [
     {
-      "group_id": "combo:10-85",
-      "label": "CHA + Weapon Proc"
+      "group_id": "line:Utility Beneficial:Combat Innates",
+      "label": "Utility Beneficial \u203a Combat Innates"
     }
   ],
   "voice of darkness": [
     {
-      "group_id": "combo:114",
-      "label": "Change Aggro"
+      "group_id": "line:Utility Beneficial:Visages",
+      "label": "Utility Beneficial \u203a Visages"
     }
   ],
   "voice of shadows": [
     {
-      "group_id": "combo:114",
-      "label": "Change Aggro"
+      "group_id": "line:Utility Beneficial:Visages",
+      "label": "Utility Beneficial \u203a Visages"
     }
   ],
   "dexterous aura": [
     {
-      "group_id": "combo:5",
-      "label": "DEX"
+      "group_id": "line:Statistic Buffs:Dexterity",
+      "label": "Statistic Buffs \u203a Dexterity"
     }
   ],
   "talisman of the beast": [
     {
-      "group_id": "combo:4",
-      "label": "STR"
+      "group_id": "line:Statistic Buffs:Strength",
+      "label": "Statistic Buffs \u203a Strength"
     }
   ],
   "spirit of snake": [
     {
-      "group_id": "combo:10",
-      "label": "CHA"
+      "group_id": "line:Statistic Buffs:Charisma",
+      "label": "Statistic Buffs \u203a Charisma"
     }
   ],
   "burst of strength": [
     {
-      "group_id": "combo:1-4-5",
-      "label": "AC + STR + DEX"
+      "group_id": "line:Statistic Buffs:Strength",
+      "label": "Statistic Buffs \u203a Strength"
     }
   ],
   "walking sleep": [
     {
-      "group_id": "combo:11",
-      "label": "Haste"
+      "group_id": "line:Utility Detrimental:Slow",
+      "label": "Utility Detrimental \u203a Slow"
     }
   ],
   "grow": [
     {
-      "group_id": "combo:89",
-      "label": "Model Size"
+      "group_id": "line:Utility Beneficial:Misc",
+      "label": "Utility Beneficial \u203a Misc"
     }
   ],
   "spirit of cat": [
     {
-      "group_id": "combo:6",
-      "label": "AGI"
+      "group_id": "line:Statistic Buffs:Agility",
+      "label": "Statistic Buffs \u203a Agility"
     }
   ],
   "creeping vision": [
     {
-      "group_id": "combo:87",
-      "label": "Magnify Vision"
+      "group_id": "line:Utility Beneficial:Vision",
+      "label": "Utility Beneficial \u203a Vision"
     }
   ],
   "rising dexterity": [
     {
-      "group_id": "combo:5",
-      "label": "DEX"
+      "group_id": "line:Statistic Buffs:Dexterity",
+      "label": "Statistic Buffs \u203a Dexterity"
     }
   ],
   "tagar's insects": [
     {
-      "group_id": "combo:11",
-      "label": "Haste"
+      "group_id": "line:Utility Detrimental:Slow",
+      "label": "Utility Detrimental \u203a Slow"
     }
   ],
   "alluring aura": [
     {
-      "group_id": "combo:10",
-      "label": "CHA"
+      "group_id": "line:Statistic Buffs:Charisma",
+      "label": "Statistic Buffs \u203a Charisma"
     }
   ],
   "fury": [
     {
-      "group_id": "combo:1-4-5-6",
-      "label": "AC + STR + DEX + AGI"
+      "group_id": "line:Statistic Buffs:Strength",
+      "label": "Statistic Buffs \u203a Strength"
     }
   ],
   "health": [
     {
-      "group_id": "combo:7",
-      "label": "STA"
+      "group_id": "line:Statistic Buffs:Stamina",
+      "label": "Statistic Buffs \u203a Stamina"
     }
   ],
   "nimble": [
     {
-      "group_id": "combo:6",
-      "label": "AGI"
+      "group_id": "line:Statistic Buffs:Agility",
+      "label": "Statistic Buffs \u203a Agility"
     }
   ],
   "shifting shield": [
     {
-      "group_id": "combo:1",
-      "label": "AC"
+      "group_id": "line:Statistic Buffs:Armor Class",
+      "label": "Statistic Buffs \u203a Armor Class"
     }
   ],
   "talisman of tnarg": [
     {
-      "group_id": "combo:69",
-      "label": "Total HP"
+      "group_id": "line:HP Buffs:Shielding",
+      "label": "HP Buffs \u203a Shielding"
     }
   ],
   "tumultuous strength": [
     {
-      "group_id": "combo:4",
-      "label": "STR"
+      "group_id": "line:Statistic Buffs:Strength",
+      "label": "Statistic Buffs \u203a Strength"
     }
   ],
   "spirit of bih`li": [
     {
-      "group_id": "combo:2-3",
-      "label": "ATK + Movement Speed"
+      "group_id": "line:Utility Beneficial:Movement",
+      "label": "Utility Beneficial \u203a Movement"
     }
   ],
   "glamour": [
     {
-      "group_id": "combo:10",
-      "label": "CHA"
+      "group_id": "line:Statistic Buffs:Charisma",
+      "label": "Statistic Buffs \u203a Charisma"
     }
   ],
   "togor's insects": [
     {
-      "group_id": "combo:11",
-      "label": "Haste"
+      "group_id": "line:Utility Detrimental:Slow",
+      "label": "Utility Detrimental \u203a Slow"
     }
   ],
   "deftness": [
     {
-      "group_id": "combo:5",
-      "label": "DEX"
+      "group_id": "line:Statistic Buffs:Dexterity",
+      "label": "Statistic Buffs \u203a Dexterity"
     }
   ],
   "furious strength": [
     {
-      "group_id": "combo:4",
-      "label": "STR"
+      "group_id": "line:Statistic Buffs:Strength",
+      "label": "Statistic Buffs \u203a Strength"
     }
   ],
   "talisman of altuna": [
     {
-      "group_id": "combo:69",
-      "label": "Total HP"
+      "group_id": "line:HP Buffs:Shielding",
+      "label": "HP Buffs \u203a Shielding"
     }
   ],
   "agility": [
     {
-      "group_id": "combo:6",
-      "label": "AGI"
+      "group_id": "line:Statistic Buffs:Agility",
+      "label": "Statistic Buffs \u203a Agility"
     }
   ],
   "guardian": [
     {
-      "group_id": "combo:1",
-      "label": "AC"
+      "group_id": "line:Statistic Buffs:Armor Class",
+      "label": "Statistic Buffs \u203a Armor Class"
     }
   ],
   "stamina": [
     {
-      "group_id": "combo:7",
-      "label": "STA"
+      "group_id": "line:Statistic Buffs:Stamina",
+      "label": "Statistic Buffs \u203a Stamina"
     }
   ],
   "rage": [
     {
-      "group_id": "combo:1-4-5-6",
-      "label": "AC + STR + DEX + AGI"
+      "group_id": "line:Statistic Buffs:Strength",
+      "label": "Statistic Buffs \u203a Strength"
     }
   ],
   "harnessing of spirit": [
     {
-      "group_id": "combo:4-5-69",
-      "label": "STR + DEX + Total HP"
+      "group_id": "line:HP Buffs:Shielding",
+      "label": "HP Buffs \u203a Shielding"
     }
   ],
   "strength": [
     {
-      "group_id": "combo:4",
-      "label": "STR"
+      "group_id": "line:Statistic Buffs:Strength",
+      "label": "Statistic Buffs \u203a Strength"
     }
   ],
   "charisma": [
     {
-      "group_id": "combo:10",
-      "label": "CHA"
+      "group_id": "line:Statistic Buffs:Charisma",
+      "label": "Statistic Buffs \u203a Charisma"
     }
   ],
   "dexterity": [
     {
-      "group_id": "combo:5",
-      "label": "DEX"
+      "group_id": "line:Statistic Buffs:Dexterity",
+      "label": "Statistic Buffs \u203a Dexterity"
     }
   ],
   "infusion of spirit": [
     {
-      "group_id": "combo:4-5-7",
-      "label": "STR + DEX + STA"
+      "group_id": "line:HP Buffs:Strength",
+      "label": "HP Buffs \u203a Strength"
     }
   ],
   "spirit quickening": [
     {
-      "group_id": "combo:1-4-11",
-      "label": "AC + STR + Haste"
+      "group_id": "line:Pet:Pet Haste",
+      "label": "Pet \u203a Pet Haste"
     }
   ],
   "spirit of the puma": [
     {
-      "group_id": "combo:10-85",
-      "label": "CHA + Weapon Proc"
+      "group_id": "line:Utility Beneficial:Combat Innates",
+      "label": "Utility Beneficial \u203a Combat Innates"
     }
   ],
   "talisman of jasinth": [
     {
-      "group_id": "combo:49",
-      "label": "Disease Resist"
+      "group_id": "line:Statistic Buffs:Resist Buff",
+      "label": "Statistic Buffs \u203a Resist Buff"
     }
   ],
   "fade": [
     {
-      "group_id": "combo:42",
-      "label": "Shadow Step"
+      "group_id": "line:Utility Beneficial:Shadowstep",
+      "label": "Utility Beneficial \u203a Shadowstep"
     }
   ],
   "resistant skin": [
     {
-      "group_id": "combo:48-49",
-      "label": "Poison Resist + Disease Resist"
+      "group_id": "line:Statistic Buffs:Resist Buff",
+      "label": "Statistic Buffs \u203a Resist Buff"
     }
   ],
   "gaze": [
     {
-      "group_id": "combo:87",
-      "label": "Magnify Vision"
+      "group_id": "line:Utility Beneficial:Vision",
+      "label": "Utility Beneficial \u203a Vision"
     }
   ],
   "minor familiar": [
     {
-      "group_id": "combo:10-111-112",
-      "label": "CHA + Resist All + Casting Level"
+      "group_id": "line:Pet:Sum: Familiar",
+      "label": "Pet \u203a Sum: Familiar"
     }
   ],
   "yonder": [
     {
-      "group_id": "combo:42",
-      "label": "Shadow Step"
+      "group_id": "line:Utility Beneficial:Shadowstep",
+      "label": "Utility Beneficial \u203a Shadowstep"
     }
   ],
   "evacuate: north karana": [
     {
-      "group_id": "combo:88-146",
-      "label": "Succor + Electricity Resist"
+      "group_id": "line:Transport:Antonica",
+      "label": "Transport \u203a Antonica"
     }
   ],
   "evacuate: greater faydark": [
     {
-      "group_id": "combo:88-146",
-      "label": "Succor + Electricity Resist"
+      "group_id": "line:Transport:Faydwer",
+      "label": "Transport \u203a Faydwer"
     }
   ],
   "harvest": [
     {
-      "group_id": "combo:15",
-      "label": "Mana"
+      "group_id": "line:Heals:Mana Flow",
+      "label": "Heals \u203a Mana Flow"
     }
   ],
   "tishan's relocation": [
     {
-      "group_id": "combo:88-146",
-      "label": "Succor + Electricity Resist"
+      "group_id": "line:Transport:Kunark",
+      "label": "Transport \u203a Kunark"
     }
   ],
   "markar's relocation": [
     {
-      "group_id": "combo:88-146",
-      "label": "Succor + Electricity Resist"
+      "group_id": "line:Transport:Kunark",
+      "label": "Transport \u203a Kunark"
     }
   ],
   "evacuate: south ro": [
     {
-      "group_id": "combo:88-146",
-      "label": "Succor + Electricity Resist"
+      "group_id": "line:Transport:Antonica",
+      "label": "Transport \u203a Antonica"
     }
   ],
   "invisibility to undead": [
     {
-      "group_id": "combo:28",
-      "label": "Invis Vs Undead"
+      "group_id": "line:Utility Beneficial:Invisibility",
+      "label": "Utility Beneficial \u203a Invisibility"
     }
   ],
   "evacuate: nektulos": [
     {
-      "group_id": "combo:88-146",
-      "label": "Succor + Electricity Resist"
+      "group_id": "line:Transport:Antonica",
+      "label": "Transport \u203a Antonica"
     }
   ],
   "evacuate: west karana": [
     {
-      "group_id": "combo:88-146",
-      "label": "Succor + Electricity Resist"
+      "group_id": "line:Transport:Antonica",
+      "label": "Transport \u203a Antonica"
     }
   ],
   "ward of calrena": [
     {
-      "group_id": "combo:161",
-      "label": "Mitigate Spell Damage"
+      "group_id": "line:Utility Beneficial:Spell Guard",
+      "label": "Utility Beneficial \u203a Spell Guard"
     }
   ]
 }
