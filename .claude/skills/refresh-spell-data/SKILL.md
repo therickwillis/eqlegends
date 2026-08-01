@@ -73,8 +73,11 @@ Judge it against the baseline from step 1:
   a patch. Investigate before committing.
 - **Category breakdown** should stay broadly proportional. A category emptying out points at the
   SPA classification in `parse_effects.py`.
-- **`git diff --stat` should show `app/data.js` changed.** If it did not, the pipeline did not
-  actually reach step 6 and there is nothing new to publish.
+- **An empty `git diff` is a normal, expected result.** The pipeline is deterministic: if the
+  client has not been patched since the last run, every output is byte-identical and there is
+  simply nothing to publish. Do not go hunting for a failure, and do not force an empty commit —
+  report "no client changes" and stop. Distinguish this from a real failure by the step output:
+  if step 6 printed its enriched-spell count, it ran.
 - Spot-check one known spell end to end. `Superior Healing` (id 9) is the reference used to
   validate the parser: 185 mana, 3.5s cast, Cleric level 30.
 
