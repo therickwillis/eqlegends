@@ -108,11 +108,16 @@ The push triggers `.github/workflows/pages.yml`, which uploads `app/` and deploy
 gh run watch $(gh run list --limit 1 --json databaseId --jq '.[0].databaseId') --exit-status --interval 10
 ```
 
-Then confirm the site actually serves the new data, rather than trusting a green check:
+Then confirm the site actually serves the new data, rather than trusting a green check. Compare
+the live spell count, not the byte size — `core.autocrlf=true` means the local `app/data.js` has
+CRLF line endings while the deployed copy has the index's LF, so the two files legitimately differ
+by a few bytes:
 
 ```powershell
-$r = Invoke-WebRequest "https://therickwillis.github.io/eqlegends/data.js" -UseBasicParsing
-"$($r.StatusCode) $([math]::Round($r.RawContentLength/1KB,1))KB"
+$d = (Invoke-WebRequest "https://therickwillis.github.io/eqlegends/data.js" -UseBasicParsing).Content
+$live = ([regex]::Matches($d, '"spell_id":')).Count
+$local = (python -c "import json;print(len(json.load(open('data/spells.json'))))")
+"live: $live  local: $local"
 ```
 
 Report the deployed URL and the spell-count delta.
