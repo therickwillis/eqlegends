@@ -159,8 +159,9 @@ function rankSpells(classNames, level, category, archetype, groupWeights) {
 //   3. Greedy set-cover over real stacking lines, tracking which rivals each pick beat so
 //      the UI can say WHY this spell and not that one.
 
-// SPA id -> gameplay concept. Only concepts listed here contribute to template score;
-// haste (SPA 11) is stored by the client as 100+bonus so it's normalized in conceptsFor().
+// SPA id -> gameplay concept. Only concepts listed here contribute to template score. Haste
+// (SPA 11) is stored by the client as a percentage of normal (160 = +60%); the data pipeline
+// normalizes it to a signed bonus, so it arrives here like every other stat.
 const SPA_CONCEPTS = {
   69: "maxhp", 1: "ac", 7: "sta", 4: "str", 5: "dex", 6: "agi",
   9: "wis", 8: "int", 10: "cha", 2: "atk", 11: "haste",
@@ -263,7 +264,6 @@ function conceptsFor(spell) {
     const concept = SPA_CONCEPTS[e.spa];
     if (!concept) continue;
     let amount = e.value;
-    if (concept === "haste") amount = e.value - 100; // client stores haste as 100+bonus%
     if (concept === "hpregen" && amount < 0) continue; // negative HP/tick = DoT, not regen
     if (amount <= 0 && concept !== "hpkick") continue; // debuff-side values give no template value
     const item = { concept, amount };

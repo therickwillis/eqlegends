@@ -142,7 +142,7 @@ def classify_single_effect(spa: int, value, duration_seconds, beneficial: bool, 
     if spa == MOVEMENT_SPEED:
         return "Slow" if value < 0 else "Buff"
     if spa == ATTACK_SPEED:
-        return "Buff"  # negative AttackSpeed (Slow) is handled as a CC-tier effect below
+        return "Slow" if value < 0 else "Buff"
     if spa in STAT_SPAS:
         return "Debuff" if value < 0 else "Buff"
     return None
@@ -162,8 +162,12 @@ def classify_spell(name: str, effects: list, duration_seconds, beneficial: bool)
         return "Mesmerize"
     if ROOT in spa_set:
         return "Root"
-    if any(e["spa"] in (ATTACK_SPEED, MOVEMENT_SPEED) and e["value"] < 0 for e in effects):
-        return "Slow"
+    # A slow is deliberately NOT in this "presence is identity" block: unlike Charm/Fear/Mez/Root,
+    # a haste/movement debuff is routinely a side-effect rather than the point. The Torpor line
+    # (Stoicism, Nonchalance) is a heal-over-time that costs the target attack speed; the
+    # Necromancer's Clinging Darkness line is a DoT that happens to snare. Those are the slot-order
+    # ambiguity the loop below already resolves, so ATTACK_SPEED/MOVEMENT_SPEED are classified
+    # there - a spell is a Slow when slowing is its *first* real effect, not merely one of them.
 
     for e in effects:
         category = classify_single_effect(e["spa"], e["value"], duration_seconds, beneficial, name)
@@ -283,9 +287,8 @@ def render_effect_phrase(effect: dict):
     spa, value = effect["spa"], effect["value"]
     if spa == 3:  # MovementSpeed
         return f"Increase Movement Speed by {_pct(value)}" if value >= 0 else f"Decrease Movement Speed by {_pct(value)}"
-    if spa == 11:  # AttackSpeed - stored as 100+bonus%
-        bonus = value - 100
-        return f"Increase Melee Haste by {_pct(bonus)}" if bonus >= 0 else f"Decrease Melee Haste by {_pct(bonus)}"
+    if spa == 11:  # AttackSpeed - already normalized to a signed bonus in build_row
+        return f"Increase Melee Haste by {_pct(value)}" if value >= 0 else f"Decrease Melee Haste by {_pct(value)}"
     if spa in SIGNED_PHRASES:
         up, down = SIGNED_PHRASES[spa]
         return (up if value >= 0 else down).format(v=abs(value))
@@ -337,6 +340,13 @@ def build_row(wiki_row: dict, class_code: str, caster_level: int, client_spell: 
         approximate = slot["spa"] in INSTRUMENT_SCALED_SPAS
         value = (slot["base1"] if approximate
                  else calc_effect_value(slot["calc"], slot["base1"], slot["max"], caster_level))
+        # AttackSpeed is stored as a percentage OF NORMAL, not a bonus: 160 is +60% haste and
+        # 30 is a 70% slow. Left raw, "bigger is better" ranking reads every slow backwards
+        # (Drowsy 75 beating Togor's Insects 30) and the sign tests below - which is what makes
+        # a slow classify as "Slow" instead of "Buff" - never fire, since 30 isn't negative.
+        # Normalize once, here, so every consumer sees a signed bonus like every other stat.
+        if slot["spa"] == ATTACK_SPEED:
+            value -= 100
         effects.append({"spa": slot["spa"], "spa_name": spa_name, "stat": humanize_spa(spa_name),
                          "value": value, "approximate": approximate})
 

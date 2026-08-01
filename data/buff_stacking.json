@@ -71,12 +71,6 @@
       "label": "Regen \u203a Mana"
     }
   ],
-  "largo's melodic binding": [
-    {
-      "group_id": "bard:line:Utility Detrimental:Slow",
-      "label": "Utility Detrimental \u203a Slow"
-    }
-  ],
   "melanie's mellifluous motion": [
     {
       "group_id": "bard:line:Utility Beneficial:Shadowstep",
@@ -251,12 +245,6 @@
       "label": "Pet \u203a Misc"
     }
   ],
-  "drowsy": [
-    {
-      "group_id": "line:Utility Detrimental:Slow",
-      "label": "Utility Detrimental \u203a Slow"
-    }
-  ],
   "endure disease": [
     {
       "group_id": "line:Statistic Buffs:Resist Buff",
@@ -369,12 +357,6 @@
     {
       "group_id": "line:Pet:Block",
       "label": "Pet \u203a Block"
-    }
-  ],
-  "sha's lethargy": [
-    {
-      "group_id": "line:Utility Detrimental:Slow",
-      "label": "Utility Detrimental \u203a Slow"
     }
   ],
   "courage": [
@@ -1019,12 +1001,6 @@
       "label": "Utility Beneficial \u203a Alliance"
     }
   ],
-  "languid pace": [
-    {
-      "group_id": "line:Utility Detrimental:Slow",
-      "label": "Utility Detrimental \u203a Slow"
-    }
-  ],
   "memory blur": [
     {
       "group_id": "line:Utility Detrimental:Memory Blur",
@@ -1119,12 +1095,6 @@
     {
       "group_id": "line:HP Buffs:Shielding",
       "label": "HP Buffs \u203a Shielding"
-    }
-  ],
-  "tepid deeds": [
-    {
-      "group_id": "line:Utility Detrimental:Slow",
-      "label": "Utility Detrimental \u203a Slow"
     }
   ],
   "clarity": [
@@ -1233,12 +1203,6 @@
     {
       "group_id": "line:Statistic Buffs:Wisdom/Intelligence",
       "label": "Statistic Buffs \u203a Wisdom/Intelligence"
-    }
-  ],
-  "shiftless deeds": [
-    {
-      "group_id": "line:Utility Detrimental:Slow",
-      "label": "Utility Detrimental \u203a Slow"
     }
   ],
   "boon of the clear mind": [
@@ -1415,12 +1379,6 @@
       "label": "Utility Beneficial \u203a Misc"
     }
   ],
-  "shackle of bone": [
-    {
-      "group_id": "line:Utility Detrimental:Undead",
-      "label": "Utility Detrimental \u203a Undead"
-    }
-  ],
   "allure of death": [
     {
       "group_id": "line:Utility Beneficial:Conversions",
@@ -1467,12 +1425,6 @@
     {
       "group_id": "line:Pet:Pet Haste",
       "label": "Pet \u203a Pet Haste"
-    }
-  ],
-  "shackle of spirit": [
-    {
-      "group_id": "line:Utility Detrimental:Undead",
-      "label": "Utility Detrimental \u203a Undead"
     }
   ],
   "covetous subversion": [
@@ -1607,12 +1559,6 @@
       "label": "Statistic Buffs \u203a Strength"
     }
   ],
-  "walking sleep": [
-    {
-      "group_id": "line:Utility Detrimental:Slow",
-      "label": "Utility Detrimental \u203a Slow"
-    }
-  ],
   "grow": [
     {
       "group_id": "line:Utility Beneficial:Misc",
@@ -1635,12 +1581,6 @@
     {
       "group_id": "line:Statistic Buffs:Dexterity",
       "label": "Statistic Buffs \u203a Dexterity"
-    }
-  ],
-  "tagar's insects": [
-    {
-      "group_id": "line:Utility Detrimental:Slow",
-      "label": "Utility Detrimental \u203a Slow"
     }
   ],
   "alluring aura": [
@@ -1695,12 +1635,6 @@
     {
       "group_id": "line:Statistic Buffs:Charisma",
       "label": "Statistic Buffs \u203a Charisma"
-    }
-  ],
-  "togor's insects": [
-    {
-      "group_id": "line:Utility Detrimental:Slow",
-      "label": "Utility Detrimental \u203a Slow"
     }
   ],
   "deftness": [

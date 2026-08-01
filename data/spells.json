@@ -212,7 +212,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 116,
+        "value": 16,
         "approximate": false
       },
       {
@@ -248,8 +248,8 @@
     ],
     "stacking_confirmed": true,
     "primary_stat": "Haste",
-    "primary_value": 116,
-    "total_effect": 116,
+    "primary_value": 16,
+    "total_effect": 16,
     "mana_efficiency": null
   },
   {
@@ -423,7 +423,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 110,
+        "value": 10,
         "approximate": false
       },
       {
@@ -450,8 +450,8 @@
     ],
     "stacking_confirmed": true,
     "primary_stat": "Haste",
-    "primary_value": 110,
-    "total_effect": 110,
+    "primary_value": 10,
+    "total_effect": 10,
     "mana_efficiency": null
   },
   {
@@ -909,13 +909,13 @@
     "target": "Caster PB AE",
     "resist_type": "Magic",
     "beneficial": false,
-    "category": "Buff",
+    "category": "Slow",
     "effects": [
       {
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 65,
+        "value": -35,
         "approximate": false
       },
       {
@@ -935,16 +935,11 @@
     "description_text": "This melody encompasses up to several nearby creatures in magical bonds, slowing their attack speed.",
     "duration": "12 Sec",
     "icon": "icons/spellicon_A.png",
-    "stacking_groups": [
-      {
-        "group_id": "bard:line:Utility Detrimental:Slow",
-        "label": "Utility Detrimental \u203a Slow"
-      }
-    ],
-    "stacking_confirmed": true,
+    "stacking_groups": [],
+    "stacking_confirmed": false,
     "primary_stat": "Haste",
-    "primary_value": 65,
-    "total_effect": 65,
+    "primary_value": -35,
+    "total_effect": -35,
     "mana_efficiency": null
   },
   {
@@ -1053,7 +1048,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 60,
+        "value": -40,
         "approximate": false
       }
     ],
@@ -1707,7 +1702,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 120,
+        "value": 20,
         "approximate": false
       },
       {
@@ -1742,8 +1737,8 @@
     ],
     "stacking_confirmed": true,
     "primary_stat": "Haste",
-    "primary_value": 120,
-    "total_effect": 120,
+    "primary_value": 20,
+    "total_effect": 20,
     "mana_efficiency": null
   },
   {
@@ -2110,7 +2105,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 118,
+        "value": 18,
         "approximate": false
       },
       {
@@ -2145,8 +2140,8 @@
     ],
     "stacking_confirmed": true,
     "primary_stat": "Haste",
-    "primary_value": 118,
-    "total_effect": 118,
+    "primary_value": 18,
+    "total_effect": 18,
     "mana_efficiency": null
   },
   {
@@ -2345,7 +2340,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 148,
+        "value": 48,
         "approximate": false
       },
       {
@@ -2381,8 +2376,8 @@
     ],
     "stacking_confirmed": true,
     "primary_stat": "Haste",
-    "primary_value": 148,
-    "total_effect": 148,
+    "primary_value": 48,
+    "total_effect": 48,
     "mana_efficiency": null
   },
   {
@@ -2565,7 +2560,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 75,
+        "value": -25,
         "approximate": false
       }
     ],
@@ -2790,7 +2785,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 130,
+        "value": 30,
         "approximate": false
       },
       {
@@ -2833,8 +2828,8 @@
     ],
     "stacking_confirmed": true,
     "primary_stat": "Haste",
-    "primary_value": 130,
-    "total_effect": 130,
+    "primary_value": 30,
+    "total_effect": 30,
     "mana_efficiency": null
   },
   {
@@ -4045,13 +4040,13 @@
     "target": "Single",
     "resist_type": "Magic",
     "beneficial": false,
-    "category": "Buff",
+    "category": "Slow",
     "effects": [
       {
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 75,
+        "value": -25,
         "approximate": false
       }
     ],
@@ -4064,17 +4059,12 @@
     "description_text": "Inflicts your target with a drowsy fever, slowing their attack rate for 1.2 minutes.",
     "duration": "1.2 Min",
     "icon": "icons/spellicon_17.png",
-    "stacking_groups": [
-      {
-        "group_id": "line:Utility Detrimental:Slow",
-        "label": "Utility Detrimental \u203a Slow"
-      }
-    ],
-    "stacking_confirmed": true,
+    "stacking_groups": [],
+    "stacking_confirmed": false,
     "primary_stat": "Haste",
-    "primary_value": 75,
-    "total_effect": 75,
-    "mana_efficiency": 3.75
+    "primary_value": -25,
+    "total_effect": -25,
+    "mana_efficiency": -1.25
   },
   {
     "class": "Beastlord",
@@ -5084,7 +5074,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 160,
+        "value": 60,
         "approximate": false
       },
       {
@@ -6038,13 +6028,13 @@
     "target": "Single",
     "resist_type": "Magic",
     "beneficial": false,
-    "category": "Buff",
+    "category": "Slow",
     "effects": [
       {
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 60,
+        "value": -40,
         "approximate": false
       }
     ],
@@ -6057,17 +6047,12 @@
     "description_text": "Causes your target to fall into a lethargic state, slowing their attack speed for 2.7 minutes.",
     "duration": "2.7 Min",
     "icon": "icons/spellicon_17.png",
-    "stacking_groups": [
-      {
-        "group_id": "line:Utility Detrimental:Slow",
-        "label": "Utility Detrimental \u203a Slow"
-      }
-    ],
-    "stacking_confirmed": true,
+    "stacking_groups": [],
+    "stacking_confirmed": false,
     "primary_stat": "Haste",
-    "primary_value": 60,
-    "total_effect": 60,
-    "mana_efficiency": 1.333
+    "primary_value": -40,
+    "total_effect": -40,
+    "mana_efficiency": -0.889
   },
   {
     "class": "Cleric",
@@ -15299,7 +15284,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 116,
+        "value": 16,
         "approximate": false
       },
       {
@@ -19166,7 +19151,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 161,
+        "value": 61,
         "approximate": false
       },
       {
@@ -20759,7 +20744,7 @@
     "target": "Self",
     "resist_type": null,
     "beneficial": true,
-    "category": "Slow",
+    "category": "Utility",
     "effects": [
       {
         "spa": 3,
@@ -22305,13 +22290,13 @@
     "target": "Single",
     "resist_type": "Magic",
     "beneficial": false,
-    "category": "Buff",
+    "category": "Slow",
     "effects": [
       {
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 70,
+        "value": -30,
         "approximate": false
       }
     ],
@@ -22324,17 +22309,12 @@
     "description_text": "Constricts your target's muscles, causing their attack speed to slow for 36 seconds.",
     "duration": "36 Sec",
     "icon": "icons/spellicon_A.png",
-    "stacking_groups": [
-      {
-        "group_id": "line:Utility Detrimental:Slow",
-        "label": "Utility Detrimental \u203a Slow"
-      }
-    ],
-    "stacking_confirmed": true,
+    "stacking_groups": [],
+    "stacking_confirmed": false,
     "primary_stat": "Haste",
-    "primary_value": 70,
-    "total_effect": 70,
-    "mana_efficiency": 1.4
+    "primary_value": -30,
+    "total_effect": -30,
+    "mana_efficiency": -0.6
   },
   {
     "class": "Enchanter",
@@ -23308,7 +23288,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 127,
+        "value": 27,
         "approximate": false
       }
     ],
@@ -23327,9 +23307,9 @@
     ],
     "stacking_confirmed": true,
     "primary_stat": "Haste",
-    "primary_value": 127,
-    "total_effect": 127,
-    "mana_efficiency": 1.587
+    "primary_value": 27,
+    "total_effect": 27,
+    "mana_efficiency": 0.338
   },
   {
     "class": "Enchanter",
@@ -24305,7 +24285,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 132,
+        "value": 32,
         "approximate": false
       }
     ],
@@ -24324,9 +24304,9 @@
     ],
     "stacking_confirmed": true,
     "primary_stat": "Haste",
-    "primary_value": 132,
-    "total_effect": 132,
-    "mana_efficiency": 1.148
+    "primary_value": 32,
+    "total_effect": 32,
+    "mana_efficiency": 0.278
   },
   {
     "class": "Enchanter",
@@ -24644,13 +24624,13 @@
     "target": "Single",
     "resist_type": "Magic",
     "beneficial": false,
-    "category": "Buff",
+    "category": "Slow",
     "effects": [
       {
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 50,
+        "value": -50,
         "approximate": false
       }
     ],
@@ -24663,17 +24643,12 @@
     "description_text": "Constricts your target's muscles, reducing attack speed by 80% for 1.3 minutes.",
     "duration": "1.3 Min",
     "icon": "icons/spellicon_A.png",
-    "stacking_groups": [
-      {
-        "group_id": "line:Utility Detrimental:Slow",
-        "label": "Utility Detrimental \u203a Slow"
-      }
-    ],
-    "stacking_confirmed": true,
+    "stacking_groups": [],
+    "stacking_confirmed": false,
     "primary_stat": "Haste",
-    "primary_value": 50,
-    "total_effect": 50,
-    "mana_efficiency": 0.5
+    "primary_value": -50,
+    "total_effect": -50,
+    "mana_efficiency": -0.5
   },
   {
     "class": "Enchanter",
@@ -25242,7 +25217,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 122,
+        "value": 22,
         "approximate": false
       },
       {
@@ -25279,9 +25254,9 @@
     ],
     "stacking_confirmed": true,
     "primary_stat": "Haste",
-    "primary_value": 122,
-    "total_effect": 122,
-    "mana_efficiency": 1.356
+    "primary_value": 22,
+    "total_effect": 22,
+    "mana_efficiency": 0.244
   },
   {
     "class": "Enchanter",
@@ -26776,7 +26751,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 147,
+        "value": 47,
         "approximate": false
       }
     ],
@@ -26795,9 +26770,9 @@
     ],
     "stacking_confirmed": true,
     "primary_stat": "Haste",
-    "primary_value": 147,
-    "total_effect": 147,
-    "mana_efficiency": 0.795
+    "primary_value": 47,
+    "total_effect": 47,
+    "mana_efficiency": 0.254
   },
   {
     "class": "Enchanter",
@@ -27157,13 +27132,13 @@
     "target": "Single",
     "resist_type": "Magic",
     "beneficial": false,
-    "category": "Buff",
+    "category": "Slow",
     "effects": [
       {
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 35,
+        "value": -65,
         "approximate": false
       }
     ],
@@ -27176,17 +27151,12 @@
     "description_text": "Constricts your target's muscles, causing their attack speed to slow for 2.2 minutes.",
     "duration": "2.2 Min",
     "icon": "icons/spellicon_A.png",
-    "stacking_groups": [
-      {
-        "group_id": "line:Utility Detrimental:Slow",
-        "label": "Utility Detrimental \u203a Slow"
-      }
-    ],
-    "stacking_confirmed": true,
+    "stacking_groups": [],
+    "stacking_confirmed": false,
     "primary_stat": "Haste",
-    "primary_value": 35,
-    "total_effect": 35,
-    "mana_efficiency": 0.175
+    "primary_value": -65,
+    "total_effect": -65,
+    "mana_efficiency": -0.325
   },
   {
     "class": "Enchanter",
@@ -28154,7 +28124,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 160,
+        "value": 60,
         "approximate": false
       }
     ],
@@ -28173,9 +28143,9 @@
     ],
     "stacking_confirmed": true,
     "primary_stat": "Haste",
-    "primary_value": 160,
-    "total_effect": 160,
-    "mana_efficiency": 0.64
+    "primary_value": 60,
+    "total_effect": 60,
+    "mana_efficiency": 0.24
   },
   {
     "class": "Enchanter",
@@ -29858,7 +29828,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 112,
+        "value": 12,
         "approximate": false
       },
       {
@@ -32161,7 +32131,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 129,
+        "value": 29,
         "approximate": false
       },
       {
@@ -34063,7 +34033,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 160,
+        "value": 60,
         "approximate": false
       },
       {
@@ -35040,7 +35010,7 @@
     "target": "Single",
     "resist_type": "Magic",
     "beneficial": false,
-    "category": "Slow",
+    "category": "DoT",
     "effects": [
       {
         "spa": 0,
@@ -35061,7 +35031,7 @@
       0,
       3
     ],
-    "description": "Decrease Current HP by 8<br>Decrease Movement Speed by 24%",
+    "description": "Decrease Current HP by 8 (per tick)<br>Decrease Movement Speed by 24% (per tick)",
     "description_text": "Summons a clinging darkness that binds your target's feet, decreasing their movement rate, and does 8 damage every 6 seconds for 12 seconds.",
     "duration": "12 Sec",
     "icon": "icons/spellicon_160.png",
@@ -35069,8 +35039,8 @@
     "stacking_confirmed": false,
     "primary_stat": "HP",
     "primary_value": -8,
-    "total_effect": -8,
-    "mana_efficiency": -0.4
+    "total_effect": -16,
+    "mana_efficiency": -0.8
   },
   {
     "class": "Necromancer",
@@ -36009,7 +35979,7 @@
     "target": "Single",
     "resist_type": "Magic",
     "beneficial": false,
-    "category": "Slow",
+    "category": "DoT",
     "effects": [
       {
         "spa": 0,
@@ -36030,7 +36000,7 @@
       0,
       3
     ],
-    "description": "Decrease Current HP by 11<br>Decrease Movement Speed by 40%",
+    "description": "Decrease Current HP by 11 (per tick)<br>Decrease Movement Speed by 40% (per tick)",
     "description_text": "Summons an engulfing darkness that binds your target's feet decreasing their movement rate, and doing 11 damage every 6 seconds for 1 minute.",
     "duration": "1 Min",
     "icon": "icons/spellicon_160.png",
@@ -36038,8 +36008,8 @@
     "stacking_confirmed": false,
     "primary_stat": "HP",
     "primary_value": -11,
-    "total_effect": -11,
-    "mana_efficiency": -0.183
+    "total_effect": -110,
+    "mana_efficiency": -1.833
   },
   {
     "class": "Necromancer",
@@ -36071,7 +36041,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 111,
+        "value": 11,
         "approximate": false
       },
       {
@@ -36783,13 +36753,13 @@
     "target": "Undead",
     "resist_type": "Magic",
     "beneficial": false,
-    "category": "Buff",
+    "category": "Slow",
     "effects": [
       {
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 65,
+        "value": -35,
         "approximate": false
       }
     ],
@@ -36801,17 +36771,12 @@
     "description_text": "Surrounds an undead target in a shackle of bone, slowing their attack speed.",
     "duration": "1 Min",
     "icon": "icons/spellicon_17.png",
-    "stacking_groups": [
-      {
-        "group_id": "line:Utility Detrimental:Undead",
-        "label": "Utility Detrimental \u203a Undead"
-      }
-    ],
-    "stacking_confirmed": true,
+    "stacking_groups": [],
+    "stacking_confirmed": false,
     "primary_stat": "Haste",
-    "primary_value": 65,
-    "total_effect": 65,
-    "mana_efficiency": 0.812
+    "primary_value": -35,
+    "total_effect": -35,
+    "mana_efficiency": -0.438
   },
   {
     "class": "Necromancer",
@@ -37593,7 +37558,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 121,
+        "value": 21,
         "approximate": false
       },
       {
@@ -37944,7 +37909,7 @@
     "target": "Single",
     "resist_type": "Magic",
     "beneficial": false,
-    "category": "Slow",
+    "category": "DoT",
     "effects": [
       {
         "spa": 0,
@@ -37965,7 +37930,7 @@
       0,
       3
     ],
-    "description": "Decrease Current HP by 20<br>Decrease Movement Speed by 48%",
+    "description": "Decrease Current HP by 20 (per tick)<br>Decrease Movement Speed by 48% (per tick)",
     "description_text": "Summons a dooming darkness that binds your target's feet, decreasing their movement rate, and doing 20 damage every 6 seconds for 1.3 minutes.",
     "duration": "1.3 Min",
     "icon": "icons/spellicon_160.png",
@@ -37973,8 +37938,8 @@
     "stacking_confirmed": false,
     "primary_stat": "HP",
     "primary_value": -20,
-    "total_effect": -20,
-    "mana_efficiency": -0.167
+    "total_effect": -260,
+    "mana_efficiency": -2.167
   },
   {
     "class": "Necromancer",
@@ -38723,7 +38688,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 145,
+        "value": 45,
         "approximate": false
       },
       {
@@ -39118,13 +39083,13 @@
     "target": "Undead",
     "resist_type": "Magic",
     "beneficial": false,
-    "category": "Buff",
+    "category": "Slow",
     "effects": [
       {
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 30,
+        "value": -70,
         "approximate": false
       }
     ],
@@ -39136,17 +39101,12 @@
     "description_text": "Surrounds an undead target in a shackle of spirits, slowing their attack speed.",
     "duration": "2.1 Min",
     "icon": "icons/spellicon_17.png",
-    "stacking_groups": [
-      {
-        "group_id": "line:Utility Detrimental:Undead",
-        "label": "Utility Detrimental \u203a Undead"
-      }
-    ],
-    "stacking_confirmed": true,
+    "stacking_groups": [],
+    "stacking_confirmed": false,
     "primary_stat": "Haste",
-    "primary_value": 30,
-    "total_effect": 30,
-    "mana_efficiency": 0.171
+    "primary_value": -70,
+    "total_effect": -70,
+    "mana_efficiency": -0.4
   },
   {
     "class": "Necromancer",
@@ -39975,7 +39935,7 @@
     "target": "Single",
     "resist_type": "Disease",
     "beneficial": false,
-    "category": "Slow",
+    "category": "Nuke",
     "effects": [
       {
         "spa": 79,
@@ -40108,7 +40068,7 @@
     "target": "Single",
     "resist_type": "Magic",
     "beneficial": false,
-    "category": "Slow",
+    "category": "DoT",
     "effects": [
       {
         "spa": 0,
@@ -40129,7 +40089,7 @@
       0,
       3
     ],
-    "description": "Decrease Current HP by 72<br>Decrease Movement Speed by 60%",
+    "description": "Decrease Current HP by 72 (per tick)<br>Decrease Movement Speed by 60% (per tick)",
     "description_text": "Summons a cascading darkness that binds your target's feet, decreasing their movement rate, and doing 72 damage every 6 seconds for 1.6 minutes.",
     "duration": "1.6 Min",
     "icon": "icons/spellicon_160.png",
@@ -40137,8 +40097,8 @@
     "stacking_confirmed": false,
     "primary_stat": "HP",
     "primary_value": -72,
-    "total_effect": -72,
-    "mana_efficiency": -0.24
+    "total_effect": -1152,
+    "mana_efficiency": -3.84
   },
   {
     "class": "Necromancer",
@@ -42836,7 +42796,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 125,
+        "value": 25,
         "approximate": false
       }
     ],
@@ -42855,9 +42815,9 @@
     ],
     "stacking_confirmed": true,
     "primary_stat": "Haste",
-    "primary_value": 125,
-    "total_effect": 125,
-    "mana_efficiency": 0.417
+    "primary_value": 25,
+    "total_effect": 25,
+    "mana_efficiency": 0.083
   },
   {
     "class": "Paladin",
@@ -46833,7 +46793,7 @@
     "target": "Single",
     "resist_type": "Magic",
     "beneficial": false,
-    "category": "Slow",
+    "category": "DoT",
     "effects": [
       {
         "spa": 0,
@@ -46854,7 +46814,7 @@
       0,
       3
     ],
-    "description": "Decrease Current HP by 8<br>Decrease Movement Speed by 30%",
+    "description": "Decrease Current HP by 8 (per tick)<br>Decrease Movement Speed by 30% (per tick)",
     "description_text": "Summons a clinging darkness that binds your target's feet, decreasing their movement rate, and does 8 damage every 6 seconds for 30 seconds.",
     "duration": "30 Sec",
     "icon": "icons/spellicon_160.png",
@@ -46862,8 +46822,8 @@
     "stacking_confirmed": false,
     "primary_stat": "HP",
     "primary_value": -8,
-    "total_effect": -8,
-    "mana_efficiency": -0.4
+    "total_effect": -40,
+    "mana_efficiency": -2.0
   },
   {
     "class": "Shadow Knight",
@@ -47342,7 +47302,7 @@
     "target": "Single",
     "resist_type": "Magic",
     "beneficial": false,
-    "category": "Slow",
+    "category": "DoT",
     "effects": [
       {
         "spa": 0,
@@ -47363,7 +47323,7 @@
       0,
       3
     ],
-    "description": "Decrease Current HP by 11<br>Decrease Movement Speed by 40%",
+    "description": "Decrease Current HP by 11 (per tick)<br>Decrease Movement Speed by 40% (per tick)",
     "description_text": "Summons an engulfing darkness that binds your target's feet decreasing their movement rate, and doing 11 damage every 6 seconds for 1 minute.",
     "duration": "1 Min",
     "icon": "icons/spellicon_160.png",
@@ -47371,8 +47331,8 @@
     "stacking_confirmed": false,
     "primary_stat": "HP",
     "primary_value": -11,
-    "total_effect": -11,
-    "mana_efficiency": -0.183
+    "total_effect": -110,
+    "mana_efficiency": -1.833
   },
   {
     "class": "Shadow Knight",
@@ -47714,7 +47674,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 120,
+        "value": 20,
         "approximate": false
       },
       {
@@ -48647,7 +48607,7 @@
     "target": "Single",
     "resist_type": "Magic",
     "beneficial": false,
-    "category": "Slow",
+    "category": "DoT",
     "effects": [
       {
         "spa": 0,
@@ -48668,7 +48628,7 @@
       0,
       3
     ],
-    "description": "Decrease Current HP by 20<br>Decrease Movement Speed by 57%",
+    "description": "Decrease Current HP by 20 (per tick)<br>Decrease Movement Speed by 57% (per tick)",
     "description_text": "Summons a dooming darkness that binds your target's feet, decreasing their movement rate, and doing 20 damage every 6 seconds for 1.5 minutes.",
     "duration": "1.5 Min",
     "icon": "icons/spellicon_160.png",
@@ -48676,8 +48636,8 @@
     "stacking_confirmed": false,
     "primary_stat": "HP",
     "primary_value": -20,
-    "total_effect": -20,
-    "mana_efficiency": -0.167
+    "total_effect": -300,
+    "mana_efficiency": -2.5
   },
   {
     "class": "Shadow Knight",
@@ -49873,13 +49833,13 @@
     "target": "Single",
     "resist_type": "Magic",
     "beneficial": false,
-    "category": "Buff",
+    "category": "Slow",
     "effects": [
       {
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 75,
+        "value": -25,
         "approximate": false
       }
     ],
@@ -49892,17 +49852,12 @@
     "description_text": "Inflicts your target with a drowsy fever, slowing their attack rate for 24 seconds.",
     "duration": "24 Sec",
     "icon": "icons/spellicon_17.png",
-    "stacking_groups": [
-      {
-        "group_id": "line:Utility Detrimental:Slow",
-        "label": "Utility Detrimental \u203a Slow"
-      }
-    ],
-    "stacking_confirmed": true,
+    "stacking_groups": [],
+    "stacking_confirmed": false,
     "primary_stat": "Haste",
-    "primary_value": 75,
-    "total_effect": 75,
-    "mana_efficiency": 3.75
+    "primary_value": -25,
+    "total_effect": -25,
+    "mana_efficiency": -1.25
   },
   {
     "class": "Shaman",
@@ -50884,13 +50839,13 @@
     "target": "Single",
     "resist_type": "Magic",
     "beneficial": false,
-    "category": "Buff",
+    "category": "Slow",
     "effects": [
       {
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 65,
+        "value": -35,
         "approximate": false
       }
     ],
@@ -50903,17 +50858,12 @@
     "description_text": "Inflicts your target with a listless fever, slowing their attack rate for 48 seconds.",
     "duration": "48 Sec",
     "icon": "icons/spellicon_A.png",
-    "stacking_groups": [
-      {
-        "group_id": "line:Utility Detrimental:Slow",
-        "label": "Utility Detrimental \u203a Slow"
-      }
-    ],
-    "stacking_confirmed": true,
+    "stacking_groups": [],
+    "stacking_confirmed": false,
     "primary_stat": "Haste",
-    "primary_value": 65,
-    "total_effect": 65,
-    "mana_efficiency": 1.083
+    "primary_value": -35,
+    "total_effect": -35,
+    "mana_efficiency": -0.583
   },
   {
     "class": "Shaman",
@@ -50965,7 +50915,7 @@
     "target": "Type 56",
     "resist_type": null,
     "beneficial": true,
-    "category": "Slow",
+    "category": "Heal-HoT",
     "effects": [
       {
         "spa": 100,
@@ -50987,7 +50937,7 @@
       10,
       100
     ],
-    "description": "Increase Current HP by 60<br>Decrease Movement Speed by 100%",
+    "description": "Increase Current HP by 60 (per tick)<br>Decrease Movement Speed by 100% (per tick)",
     "description_text": "Imbues your target with the health of a snail spirit, healing 60 hit points every 6 seconds for 24 seconds, but vastly decreasing their movement rate.",
     "duration": "24 Sec",
     "icon": "icons/spellicon_J.png",
@@ -50995,8 +50945,8 @@
     "stacking_confirmed": false,
     "primary_stat": "Heal Over Time",
     "primary_value": 60,
-    "total_effect": 60,
-    "mana_efficiency": 0.5
+    "total_effect": 240,
+    "mana_efficiency": 2.0
   },
   {
     "class": "Shaman",
@@ -51266,7 +51216,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 70,
+        "value": -30,
         "approximate": false
       }
     ],
@@ -52529,7 +52479,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 130,
+        "value": 30,
         "approximate": false
       }
     ],
@@ -52548,9 +52498,9 @@
     ],
     "stacking_confirmed": true,
     "primary_stat": "Haste",
-    "primary_value": 130,
-    "total_effect": 130,
-    "mana_efficiency": 1.625
+    "primary_value": 30,
+    "total_effect": 30,
+    "mana_efficiency": 0.375
   },
   {
     "class": "Shaman",
@@ -52681,13 +52631,13 @@
     "target": "Single",
     "resist_type": "Magic",
     "beneficial": false,
-    "category": "Buff",
+    "category": "Slow",
     "effects": [
       {
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 50,
+        "value": -50,
         "approximate": false
       }
     ],
@@ -52700,17 +52650,12 @@
     "description_text": "Engulfs your target in a swarm of insects, slowing their attack rate for 1.5 minutes.",
     "duration": "1.5 Min",
     "icon": "icons/spellicon_A.png",
-    "stacking_groups": [
-      {
-        "group_id": "line:Utility Detrimental:Slow",
-        "label": "Utility Detrimental \u203a Slow"
-      }
-    ],
-    "stacking_confirmed": true,
+    "stacking_groups": [],
+    "stacking_confirmed": false,
     "primary_stat": "Haste",
-    "primary_value": 50,
-    "total_effect": 50,
-    "mana_efficiency": 0.4
+    "primary_value": -50,
+    "total_effect": -50,
+    "mana_efficiency": -0.4
   },
   {
     "class": "Shaman",
@@ -52821,7 +52766,7 @@
     "target": "Type 56",
     "resist_type": null,
     "beneficial": true,
-    "category": "Slow",
+    "category": "Heal-HoT",
     "effects": [
       {
         "spa": 100,
@@ -52843,7 +52788,7 @@
       10,
       100
     ],
-    "description": "Increase Current HP by 120<br>Decrease Movement Speed by 100%",
+    "description": "Increase Current HP by 120 (per tick)<br>Decrease Movement Speed by 100% (per tick)",
     "description_text": "Imbues your target with the health of a tortoise spirit, healing 120 hit points every 6 seconds for 24 seconds, but vastly decreasing their movement rate.",
     "duration": "24 Sec",
     "icon": "icons/spellicon_118.png",
@@ -52851,8 +52796,8 @@
     "stacking_confirmed": false,
     "primary_stat": "Heal Over Time",
     "primary_value": 120,
-    "total_effect": 120,
-    "mana_efficiency": 0.774
+    "total_effect": 480,
+    "mana_efficiency": 3.097
   },
   {
     "class": "Shaman",
@@ -53472,7 +53417,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 70,
+        "value": -30,
         "approximate": false
       }
     ],
@@ -54512,13 +54457,13 @@
     "target": "Single",
     "resist_type": "Magic",
     "beneficial": false,
-    "category": "Buff",
+    "category": "Slow",
     "effects": [
       {
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 30,
+        "value": -70,
         "approximate": false
       }
     ],
@@ -54531,17 +54476,12 @@
     "description_text": "Engulfs your target in a swarm of insects, slowing their attack rate for 2.1 minutes.",
     "duration": "2.1 Min",
     "icon": "icons/spellicon_A.png",
-    "stacking_groups": [
-      {
-        "group_id": "line:Utility Detrimental:Slow",
-        "label": "Utility Detrimental \u203a Slow"
-      }
-    ],
-    "stacking_confirmed": true,
+    "stacking_groups": [],
+    "stacking_confirmed": false,
     "primary_stat": "Haste",
-    "primary_value": 30,
-    "total_effect": 30,
-    "mana_efficiency": 0.171
+    "primary_value": -70,
+    "total_effect": -70,
+    "mana_efficiency": -0.4
   },
   {
     "class": "Shaman",
@@ -55012,7 +54952,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 140,
+        "value": 40,
         "approximate": false
       }
     ],
@@ -55031,9 +54971,9 @@
     ],
     "stacking_confirmed": true,
     "primary_stat": "Haste",
-    "primary_value": 140,
-    "total_effect": 140,
-    "mana_efficiency": 1.217
+    "primary_value": 40,
+    "total_effect": 40,
+    "mana_efficiency": 0.348
   },
   {
     "class": "Shaman",
@@ -55140,7 +55080,7 @@
     "target": "Type 56",
     "resist_type": null,
     "beneficial": true,
-    "category": "Slow",
+    "category": "Heal-HoT",
     "effects": [
       {
         "spa": 100,
@@ -55162,7 +55102,7 @@
       10,
       100
     ],
-    "description": "Increase Current HP by 200<br>Decrease Movement Speed by 100%",
+    "description": "Increase Current HP by 200 (per tick)<br>Decrease Movement Speed by 100% (per tick)",
     "description_text": "Imbues your target with the health of a slug spirit, healing 200 hit points every 6 seconds for 24 seconds, but vastly decreasing their movement rate.",
     "duration": "24 Sec",
     "icon": "icons/spellicon_J.png",
@@ -55170,8 +55110,8 @@
     "stacking_confirmed": false,
     "primary_stat": "Heal Over Time",
     "primary_value": 200,
-    "total_effect": 200,
-    "mana_efficiency": 1.111
+    "total_effect": 800,
+    "mana_efficiency": 4.444
   },
   {
     "class": "Shaman",
@@ -55416,7 +55356,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 70,
+        "value": -30,
         "approximate": false
       }
     ],
@@ -56166,7 +56106,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 120,
+        "value": 20,
         "approximate": false
       },
       {

@@ -3,16 +3,16 @@
     "counts": {
       "healer": 0,
       "damage": 14,
-      "crowd_control": 19,
+      "crowd_control": 21,
       "debuffer": 20,
-      "support": 70
+      "support": 71
     },
     "normalized": {
       "healer": 0.0,
-      "damage": 0.318,
+      "damage": 0.286,
       "crowd_control": 1.0,
       "debuffer": 1.0,
-      "support": 0.722
+      "support": 0.732
     },
     "ranked": [
       "crowd_control",
@@ -36,7 +36,7 @@
     },
     "normalized": {
       "healer": 0.28,
-      "damage": 0.591,
+      "damage": 0.531,
       "crowd_control": 0.0,
       "debuffer": 0.35,
       "support": 1.0
@@ -55,15 +55,15 @@
   "Necromancer": {
     "counts": {
       "healer": 8,
-      "damage": 44,
-      "crowd_control": 16,
+      "damage": 49,
+      "crowd_control": 13,
       "debuffer": 6,
       "support": 27
     },
     "normalized": {
       "healer": 0.32,
       "damage": 1.0,
-      "crowd_control": 0.842,
+      "crowd_control": 0.619,
       "debuffer": 0.3,
       "support": 0.278
     },
@@ -88,16 +88,16 @@
     },
     "normalized": {
       "healer": 0.0,
-      "damage": 0.932,
-      "crowd_control": 0.316,
+      "damage": 0.837,
+      "crowd_control": 0.286,
       "debuffer": 0.3,
       "support": 0.526
     },
     "ranked": [
       "damage",
       "support",
-      "crowd_control",
       "debuffer",
+      "crowd_control",
       "healer"
     ],
     "dominant_roles": [
@@ -114,8 +114,8 @@
     },
     "normalized": {
       "healer": 0.96,
-      "damage": 0.614,
-      "crowd_control": 0.474,
+      "damage": 0.551,
+      "crowd_control": 0.429,
       "debuffer": 0.15,
       "support": 0.361
     },
@@ -140,8 +140,8 @@
     },
     "normalized": {
       "healer": 1.0,
-      "damage": 0.773,
-      "crowd_control": 0.789,
+      "damage": 0.694,
+      "crowd_control": 0.714,
       "debuffer": 0.45,
       "support": 0.608
     },
@@ -158,16 +158,16 @@
   },
   "Shaman": {
     "counts": {
-      "healer": 20,
+      "healer": 23,
       "damage": 25,
-      "crowd_control": 7,
+      "crowd_control": 8,
       "debuffer": 8,
       "support": 32
     },
     "normalized": {
-      "healer": 0.8,
-      "damage": 0.568,
-      "crowd_control": 0.368,
+      "healer": 0.92,
+      "damage": 0.51,
+      "crowd_control": 0.381,
       "debuffer": 0.4,
       "support": 0.33
     },
@@ -186,14 +186,14 @@
     "counts": {
       "healer": 3,
       "damage": 10,
-      "crowd_control": 7,
+      "crowd_control": 8,
       "debuffer": 5,
       "support": 5
     },
     "normalized": {
       "healer": 0.12,
-      "damage": 0.227,
-      "crowd_control": 0.368,
+      "damage": 0.204,
+      "crowd_control": 0.381,
       "debuffer": 0.25,
       "support": 0.052
     },
@@ -212,21 +212,21 @@
     "counts": {
       "healer": 13,
       "damage": 9,
-      "crowd_control": 0,
+      "crowd_control": 2,
       "debuffer": 2,
       "support": 18
     },
     "normalized": {
       "healer": 0.52,
-      "damage": 0.205,
-      "crowd_control": 0.0,
+      "damage": 0.184,
+      "crowd_control": 0.095,
       "debuffer": 0.1,
       "support": 0.186
     },
     "ranked": [
       "healer",
-      "damage",
       "support",
+      "damage",
       "debuffer",
       "crowd_control"
     ],
@@ -244,8 +244,8 @@
     },
     "normalized": {
       "healer": 0.52,
-      "damage": 0.227,
-      "crowd_control": 0.105,
+      "damage": 0.204,
+      "crowd_control": 0.095,
       "debuffer": 0.3,
       "support": 0.041
     },
@@ -270,37 +270,37 @@
     },
     "normalized": {
       "healer": 0.28,
-      "damage": 0.341,
-      "crowd_control": 0.263,
+      "damage": 0.306,
+      "crowd_control": 0.238,
       "debuffer": 0.25,
       "support": 0.113
     },
     "ranked": [
       "damage",
       "healer",
-      "crowd_control",
       "debuffer",
+      "crowd_control",
       "support"
     ],
     "dominant_roles": [
       "damage",
       "healer",
-      "crowd_control",
-      "debuffer"
+      "debuffer",
+      "crowd_control"
     ]
   },
   "Shadow Knight": {
     "counts": {
       "healer": 2,
-      "damage": 21,
-      "crowd_control": 6,
+      "damage": 24,
+      "crowd_control": 3,
       "debuffer": 11,
       "support": 11
     },
     "normalized": {
       "healer": 0.08,
-      "damage": 0.477,
-      "crowd_control": 0.316,
+      "damage": 0.49,
+      "crowd_control": 0.143,
       "debuffer": 0.55,
       "support": 0.113
     },

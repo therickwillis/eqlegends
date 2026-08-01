@@ -170,7 +170,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 116,
+        "value": 16,
         "approximate": false
       },
       {
@@ -329,7 +329,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 110,
+        "value": 10,
         "approximate": false
       },
       {
@@ -697,13 +697,13 @@
     "target": "Caster PB AE",
     "resist_type": "Magic",
     "beneficial": false,
-    "category": "Buff",
+    "category": "Slow",
     "effects": [
       {
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 65,
+        "value": -35,
         "approximate": false
       },
       {
@@ -802,7 +802,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 60,
+        "value": -40,
         "approximate": false
       }
     ],
@@ -1326,7 +1326,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 120,
+        "value": 20,
         "approximate": false
       },
       {
@@ -1645,7 +1645,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 118,
+        "value": 18,
         "approximate": false
       },
       {
@@ -1830,7 +1830,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 148,
+        "value": 48,
         "approximate": false
       },
       {
@@ -2003,7 +2003,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 75,
+        "value": -25,
         "approximate": false
       }
     ],
@@ -2173,7 +2173,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 130,
+        "value": 30,
         "approximate": false
       },
       {
@@ -3131,13 +3131,13 @@
     "target": "Single",
     "resist_type": "Magic",
     "beneficial": false,
-    "category": "Buff",
+    "category": "Slow",
     "effects": [
       {
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 75,
+        "value": -25,
         "approximate": false
       }
     ],
@@ -3920,7 +3920,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 160,
+        "value": 60,
         "approximate": false
       },
       {
@@ -4656,13 +4656,13 @@
     "target": "Single",
     "resist_type": "Magic",
     "beneficial": false,
-    "category": "Buff",
+    "category": "Slow",
     "effects": [
       {
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 60,
+        "value": -40,
         "approximate": false
       }
     ],
@@ -11676,7 +11676,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 116,
+        "value": 16,
         "approximate": false
       },
       {
@@ -14668,7 +14668,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 161,
+        "value": 61,
         "approximate": false
       },
       {
@@ -15890,7 +15890,7 @@
     "target": "Self",
     "resist_type": null,
     "beneficial": true,
-    "category": "Slow",
+    "category": "Utility",
     "effects": [
       {
         "spa": 3,
@@ -17066,13 +17066,13 @@
     "target": "Single",
     "resist_type": "Magic",
     "beneficial": false,
-    "category": "Buff",
+    "category": "Slow",
     "effects": [
       {
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 70,
+        "value": -30,
         "approximate": false
       }
     ],
@@ -17818,7 +17818,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 127,
+        "value": 27,
         "approximate": false
       }
     ],
@@ -18573,7 +18573,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 132,
+        "value": 32,
         "approximate": false
       }
     ],
@@ -18828,13 +18828,13 @@
     "target": "Single",
     "resist_type": "Magic",
     "beneficial": false,
-    "category": "Buff",
+    "category": "Slow",
     "effects": [
       {
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 50,
+        "value": -50,
         "approximate": false
       }
     ],
@@ -19294,7 +19294,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 122,
+        "value": 22,
         "approximate": false
       },
       {
@@ -20462,7 +20462,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 147,
+        "value": 47,
         "approximate": false
       }
     ],
@@ -20759,13 +20759,13 @@
     "target": "Single",
     "resist_type": "Magic",
     "beneficial": false,
-    "category": "Buff",
+    "category": "Slow",
     "effects": [
       {
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 35,
+        "value": -65,
         "approximate": false
       }
     ],
@@ -21511,7 +21511,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 160,
+        "value": 60,
         "approximate": false
       }
     ],
@@ -22800,7 +22800,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 112,
+        "value": 12,
         "approximate": false
       },
       {
@@ -24593,7 +24593,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 129,
+        "value": 29,
         "approximate": false
       },
       {
@@ -26068,7 +26068,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 160,
+        "value": 60,
         "approximate": false
       },
       {
@@ -26805,7 +26805,7 @@
     "target": "Single",
     "resist_type": "Magic",
     "beneficial": false,
-    "category": "Slow",
+    "category": "DoT",
     "effects": [
       {
         "spa": 0,
@@ -26826,7 +26826,7 @@
       0,
       3
     ],
-    "description": "Decrease Current HP by 8<br>Decrease Movement Speed by 24%",
+    "description": "Decrease Current HP by 8 (per tick)<br>Decrease Movement Speed by 24% (per tick)",
     "description_text": "Summons a clinging darkness that binds your target's feet, decreasing their movement rate, and does 8 damage every 6 seconds for %z."
   },
   {
@@ -27560,7 +27560,7 @@
     "target": "Single",
     "resist_type": "Magic",
     "beneficial": false,
-    "category": "Slow",
+    "category": "DoT",
     "effects": [
       {
         "spa": 0,
@@ -27581,7 +27581,7 @@
       0,
       3
     ],
-    "description": "Decrease Current HP by 11<br>Decrease Movement Speed by 40%",
+    "description": "Decrease Current HP by 11 (per tick)<br>Decrease Movement Speed by 40% (per tick)",
     "description_text": "Summons an engulfing darkness that binds your target's feet decreasing their movement rate, and doing 11 damage every 6 seconds for %z."
   },
   {
@@ -27614,7 +27614,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 111,
+        "value": 11,
         "approximate": false
       },
       {
@@ -28160,13 +28160,13 @@
     "target": "Undead",
     "resist_type": "Magic",
     "beneficial": false,
-    "category": "Buff",
+    "category": "Slow",
     "effects": [
       {
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 65,
+        "value": -35,
         "approximate": false
       }
     ],
@@ -28793,7 +28793,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 121,
+        "value": 21,
         "approximate": false
       },
       {
@@ -29060,7 +29060,7 @@
     "target": "Single",
     "resist_type": "Magic",
     "beneficial": false,
-    "category": "Slow",
+    "category": "DoT",
     "effects": [
       {
         "spa": 0,
@@ -29081,7 +29081,7 @@
       0,
       3
     ],
-    "description": "Decrease Current HP by 20<br>Decrease Movement Speed by 48%",
+    "description": "Decrease Current HP by 20 (per tick)<br>Decrease Movement Speed by 48% (per tick)",
     "description_text": "Summons a dooming darkness that binds your target's feet, decreasing their movement rate, and doing 20 damage every 6 seconds for %z."
   },
   {
@@ -29675,7 +29675,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 145,
+        "value": 45,
         "approximate": false
       },
       {
@@ -29988,13 +29988,13 @@
     "target": "Undead",
     "resist_type": "Magic",
     "beneficial": false,
-    "category": "Buff",
+    "category": "Slow",
     "effects": [
       {
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 30,
+        "value": -70,
         "approximate": false
       }
     ],
@@ -30660,7 +30660,7 @@
     "target": "Single",
     "resist_type": "Disease",
     "beneficial": false,
-    "category": "Slow",
+    "category": "Nuke",
     "effects": [
       {
         "spa": 79,
@@ -30769,7 +30769,7 @@
     "target": "Single",
     "resist_type": "Magic",
     "beneficial": false,
-    "category": "Slow",
+    "category": "DoT",
     "effects": [
       {
         "spa": 0,
@@ -30790,7 +30790,7 @@
       0,
       3
     ],
-    "description": "Decrease Current HP by 72<br>Decrease Movement Speed by 60%",
+    "description": "Decrease Current HP by 72 (per tick)<br>Decrease Movement Speed by 60% (per tick)",
     "description_text": "Summons a cascading darkness that binds your target's feet, decreasing their movement rate, and doing 72 damage every 6 seconds for %z."
   },
   {
@@ -32832,7 +32832,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 125,
+        "value": 25,
         "approximate": false
       }
     ],
@@ -35900,7 +35900,7 @@
     "target": "Single",
     "resist_type": "Magic",
     "beneficial": false,
-    "category": "Slow",
+    "category": "DoT",
     "effects": [
       {
         "spa": 0,
@@ -35921,7 +35921,7 @@
       0,
       3
     ],
-    "description": "Decrease Current HP by 8<br>Decrease Movement Speed by 30%",
+    "description": "Decrease Current HP by 8 (per tick)<br>Decrease Movement Speed by 30% (per tick)",
     "description_text": "Summons a clinging darkness that binds your target's feet, decreasing their movement rate, and does 8 damage every 6 seconds for %z."
   },
   {
@@ -36285,7 +36285,7 @@
     "target": "Single",
     "resist_type": "Magic",
     "beneficial": false,
-    "category": "Slow",
+    "category": "DoT",
     "effects": [
       {
         "spa": 0,
@@ -36306,7 +36306,7 @@
       0,
       3
     ],
-    "description": "Decrease Current HP by 11<br>Decrease Movement Speed by 40%",
+    "description": "Decrease Current HP by 11 (per tick)<br>Decrease Movement Speed by 40% (per tick)",
     "description_text": "Summons an engulfing darkness that binds your target's feet decreasing their movement rate, and doing 11 damage every 6 seconds for %z."
   },
   {
@@ -36580,7 +36580,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 120,
+        "value": 20,
         "approximate": false
       },
       {
@@ -37294,7 +37294,7 @@
     "target": "Single",
     "resist_type": "Magic",
     "beneficial": false,
-    "category": "Slow",
+    "category": "DoT",
     "effects": [
       {
         "spa": 0,
@@ -37315,7 +37315,7 @@
       0,
       3
     ],
-    "description": "Decrease Current HP by 20<br>Decrease Movement Speed by 57%",
+    "description": "Decrease Current HP by 20 (per tick)<br>Decrease Movement Speed by 57% (per tick)",
     "description_text": "Summons a dooming darkness that binds your target's feet, decreasing their movement rate, and doing 20 damage every 6 seconds for %z."
   },
   {
@@ -38248,13 +38248,13 @@
     "target": "Single",
     "resist_type": "Magic",
     "beneficial": false,
-    "category": "Buff",
+    "category": "Slow",
     "effects": [
       {
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 75,
+        "value": -25,
         "approximate": false
       }
     ],
@@ -39002,13 +39002,13 @@
     "target": "Single",
     "resist_type": "Magic",
     "beneficial": false,
-    "category": "Buff",
+    "category": "Slow",
     "effects": [
       {
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 65,
+        "value": -35,
         "approximate": false
       }
     ],
@@ -39062,7 +39062,7 @@
     "target": "Type 56",
     "resist_type": null,
     "beneficial": true,
-    "category": "Slow",
+    "category": "Heal-HoT",
     "effects": [
       {
         "spa": 100,
@@ -39084,7 +39084,7 @@
       10,
       100
     ],
-    "description": "Increase Current HP by 60<br>Decrease Movement Speed by 100%",
+    "description": "Increase Current HP by 60 (per tick)<br>Decrease Movement Speed by 100% (per tick)",
     "description_text": "Imbues your target with the health of a snail spirit, healing 60 hit points every 6 seconds for %z, but vastly decreasing their movement rate."
   },
   {
@@ -39300,7 +39300,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 70,
+        "value": -30,
         "approximate": false
       }
     ],
@@ -40261,7 +40261,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 130,
+        "value": 30,
         "approximate": false
       }
     ],
@@ -40371,13 +40371,13 @@
     "target": "Single",
     "resist_type": "Magic",
     "beneficial": false,
-    "category": "Buff",
+    "category": "Slow",
     "effects": [
       {
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 50,
+        "value": -50,
         "approximate": false
       }
     ],
@@ -40472,7 +40472,7 @@
     "target": "Type 56",
     "resist_type": null,
     "beneficial": true,
-    "category": "Slow",
+    "category": "Heal-HoT",
     "effects": [
       {
         "spa": 100,
@@ -40494,7 +40494,7 @@
       10,
       100
     ],
-    "description": "Increase Current HP by 120<br>Decrease Movement Speed by 100%",
+    "description": "Increase Current HP by 120 (per tick)<br>Decrease Movement Speed by 100% (per tick)",
     "description_text": "Imbues your target with the health of a tortoise spirit, healing 120 hit points every 6 seconds for %z, but vastly decreasing their movement rate."
   },
   {
@@ -40985,7 +40985,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 70,
+        "value": -30,
         "approximate": false
       }
     ],
@@ -41793,13 +41793,13 @@
     "target": "Single",
     "resist_type": "Magic",
     "beneficial": false,
-    "category": "Buff",
+    "category": "Slow",
     "effects": [
       {
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 30,
+        "value": -70,
         "approximate": false
       }
     ],
@@ -42175,7 +42175,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 140,
+        "value": 40,
         "approximate": false
       }
     ],
@@ -42269,7 +42269,7 @@
     "target": "Type 56",
     "resist_type": null,
     "beneficial": true,
-    "category": "Slow",
+    "category": "Heal-HoT",
     "effects": [
       {
         "spa": 100,
@@ -42291,7 +42291,7 @@
       10,
       100
     ],
-    "description": "Increase Current HP by 200<br>Decrease Movement Speed by 100%",
+    "description": "Increase Current HP by 200 (per tick)<br>Decrease Movement Speed by 100% (per tick)",
     "description_text": "Imbues your target with the health of a slug spirit, healing 200 hit points every 6 seconds for %z, but vastly decreasing their movement rate."
   },
   {
@@ -42482,7 +42482,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 70,
+        "value": -30,
         "approximate": false
       }
     ],
@@ -43082,7 +43082,7 @@
         "spa": 11,
         "spa_name": "AttackSpeed",
         "stat": "Haste",
-        "value": 120,
+        "value": 20,
         "approximate": false
       },
       {

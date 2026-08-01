@@ -27,9 +27,26 @@ const tabPanels = {
   loadouts: document.getElementById("loadouts-view"),
   bufftemplate: document.getElementById("bufftemplate-view"),
   grid: document.getElementById("grid-view"),
+  board: document.getElementById("board-view"),
+  matrix: document.getElementById("matrix-view"),
+  focus: document.getElementById("focus-view"),
   comparison: document.getElementById("comparison-view"),
   ranklab: document.getElementById("ranklab-view"),
 };
+
+// Tabs that own the whole viewport: the page itself stops scrolling, the header compacts, and the
+// width cap comes off (see body.viewport-mode in index.html). The three grid explorations, for now.
+const VIEWPORT_TABS = new Set(["board", "matrix", "focus"]);
+
+// The controls stay put at the top of the page, so everything else that sticks (the grid's own
+// table header, the Rank Lab sliders) has to start below them - publish the bar's live height as
+// --topbar-h for those rules. In viewport-mode the bar isn't sticky at all, so the offset is 0.
+const topbarEl = document.querySelector(".topbar");
+function syncTopbarHeight() {
+  const h = document.body.classList.contains("viewport-mode") ? 0 : topbarEl.offsetHeight;
+  document.documentElement.style.setProperty("--topbar-h", `${h}px`);
+}
+new ResizeObserver(syncTopbarHeight).observe(topbarEl);
 
 // Session-only working copy of the group weights - sliders mutate this
 // directly; "Reset weights" restores the current archetype's slice from
@@ -749,6 +766,8 @@ function setActiveTab(tab) {
   activeTab = tab;
   tabButtons.forEach((btn) => btn.classList.toggle("active", btn.dataset.tab === tab));
   Object.entries(tabPanels).forEach(([id, el]) => el.classList.toggle("active", id === tab));
+  document.body.classList.toggle("viewport-mode", VIEWPORT_TABS.has(tab));
+  syncTopbarHeight();
 }
 
 function render() {
@@ -763,6 +782,9 @@ function render() {
   renderBuffLoadout(classes, level, slotBudget);
   renderRoleLoadout(classes, level, slotBudget, roles);
   renderGrid(classes, level);
+  renderBoard(classes, level);
+  renderMatrix(classes, level);
+  renderFocus(classes, level);
   renderComparison(classes, level);
   renderRankTable();
   renderBuffTemplate();
