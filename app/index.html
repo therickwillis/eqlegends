@@ -40,6 +40,10 @@
     margin-bottom: 24px;
   }
   .field { display: flex; flex-direction: column; gap: 4px; }
+  /* The Class 1/2/3 labels wear their slot color (and the select a matching spine), so the
+     colored pills everywhere else in the UI read back to a specific dropdown without a legend. */
+  .field-slot label { color: var(--slot); }
+  .field-slot select { border-left: 3px solid var(--slot); }
   label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
   select, input {
     background: #0d1118;
@@ -152,19 +156,6 @@
   .tab-btn.active { color: var(--gold); background: #1b2230; }
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
-
-  .roles-field { display: flex; flex-direction: column; gap: 4px; }
-  .roles-checkboxes { display: flex; flex-wrap: wrap; gap: 4px 14px; }
-  .roles-checkboxes label {
-    text-transform: none;
-    letter-spacing: 0;
-    font-size: 13px;
-    color: var(--text);
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    cursor: pointer;
-  }
 
   .loadout-section { margin-bottom: 28px; }
   .loadout-section-desc { color: var(--muted); font-size: 13px; margin: 2px 0 12px; }
@@ -826,15 +817,15 @@
   </p>
 
   <div class="controls">
-    <div class="field">
+    <div class="field field-slot" style="--slot:#4b92ea">
       <label for="class1">Class 1</label>
       <select id="class1"></select>
     </div>
-    <div class="field">
+    <div class="field field-slot" style="--slot:#d07803">
       <label for="class2">Class 2</label>
       <select id="class2"></select>
     </div>
-    <div class="field">
+    <div class="field field-slot" style="--slot:#d2669d">
       <label for="class3">Class 3</label>
       <select id="class3"></select>
     </div>
@@ -845,10 +836,6 @@
     <div class="field">
       <label for="slots">Memorize Slots</label>
       <input type="number" id="slots" min="1" max="14" value="12">
-    </div>
-    <div class="roles-field">
-      <label>Grouping Roles</label>
-      <div class="roles-checkboxes" id="roles"></div>
     </div>
   </div>
 
@@ -876,15 +863,6 @@
         magnitude; picks past your slot count are dimmed.
       </p>
       <div id="buff-loadout" class="loadout-list"></div>
-    </section>
-    <section class="loadout-section">
-      <h3>Grouping Loadout <span id="role-slot-meter" class="slot-meter"></span></h3>
-      <p class="loadout-section-desc">
-        Best spell per class per category within your selected roles above (pick at least one role) — e.g.
-        both a Cleric heal and a Druid heal can show up, since heals aren't mutually exclusive the way
-        buffs are; only same-class redundant tiers get collapsed.
-      </p>
-      <div id="role-loadout" class="loadout-list"></div>
     </section>
   </div>
 

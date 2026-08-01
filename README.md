@@ -27,9 +27,14 @@ skipped unless `--full`/`--refresh-*` is passed. Each script is also independent
 
 Open `app/index.html` directly in a browser (no server, no build step — it's a plain `file://` page).
 
-- **Loadouts** — recommended Buff Loadout and role-based Grouping Loadout for your selected classes/level.
-- **Category Grid** — best spell per class per category, at a glance.
+- **Loadouts** — recommended Buff Loadout for your selected classes/level, against your slot budget.
+- **Buff Template** — a Quick Buff set scored by who you actually cast on.
+- **Category Grid** — best spell per spell line, organized by the client's own taxonomy.
+- **A · Board / B · Matrix / C · Focus** — three viewport-fit takes on that same board: newspaper
+  columns, a category × class matrix, and a category rail with detail cards. None of them scroll the page.
 - **Full Comparison** — detailed side-by-side stats for every category.
+- **Rank Lab** — experimental weighted multi-stat scoring with live sliders.
 
-Class/level/slot-budget/role selections are saved in the URL, so you can bookmark or refresh without
-losing your setup.
+Class 1/2/3 are color-coded (blue / amber / rose) everywhere a spell shows who gets it, so the color
+always points back to a specific dropdown. Class/level/slot-budget selections are saved in the URL, so
+you can bookmark or refresh without losing your setup.

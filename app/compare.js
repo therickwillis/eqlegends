@@ -163,15 +163,15 @@ function spellLineGrid(classNames, level) {
   return rows;
 }
 
-// Role -> the effect categories that count toward it (post-collapse; Fear/
-// Root/Slow are already their own categories so Crowd Control keeps them
-// distinct without needing raw `kind` granularity).
-const ROLE_DEFINITIONS = {
-  healer: { label: "Healer", categories: ["Heal-Instant", "Heal-HoT", "Regen", "Cure"] },
-  damage: { label: "Damage", categories: ["Nuke", "DoT", "Lifetap"] },
-  crowd_control: { label: "Crowd Control", categories: ["Charm", "Fear", "Root", "Slow", "Mesmerize"] },
-  debuffer: { label: "Debuffer", categories: ["Debuff"] },
-  support: { label: "Utility / Support", categories: ["Pet/Summon", "Travel", "Tradeskill", "Utility"] },
+// The play-style archetypes the Rank Lab scores against - its only remaining consumer, and the
+// keys DEFAULT_GROUP_WEIGHTS (rank.js) and classify_roles.py are both keyed by. These used to
+// also drive a "Grouping Roles" checkbox row and a Grouping Loadout section; both are gone.
+const ARCHETYPES = {
+  healer: "Healer",
+  damage: "Damage",
+  crowd_control: "Crowd Control",
+  debuffer: "Debuffer",
+  support: "Utility / Support",
 };
 
 function spellPower(spell) {
@@ -225,27 +225,3 @@ function buffLoadout(classNames, level) {
   return picks;
 }
 
-/**
- * Recommended combat/utility loadout for one or more roles: the best (highest
- * level) spell per class per category within the selected roles. Unlike
- * buffs, heals/nukes/CC aren't mutually exclusive - there's no reason not to
- * memorize both a Cleric heal and a Druid heal - so this only collapses
- * same-class redundancy (e.g. Druid's Light Healing vs Superior Healing;
- * within one class + category, the higher-level spell is strictly the
- * current tier to use), not cross-class options.
- */
-function roleLoadout(classNames, level, roleIds) {
-  const categories = new Set();
-  roleIds.forEach((id) => ROLE_DEFINITIONS[id]?.categories.forEach((c) => categories.add(c)));
-
-  const candidates = SPELLS.filter(
-    (s) => classNames.includes(s.class) && s.level <= level && categories.has(s.category)
-  );
-  const byClassCategory = new Map();
-  for (const s of candidates) {
-    const key = `${s.class}::${s.category}`;
-    const current = byClassCategory.get(key);
-    if (!current || s.level > current.level) byClassCategory.set(key, s);
-  }
-  return [...byClassCategory.values()].sort((a, b) => (spellPower(b) ?? 0) - (spellPower(a) ?? 0));
-}

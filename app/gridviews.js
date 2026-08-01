@@ -123,7 +123,9 @@ function boardLine(row) {
   // A merged collection row names its count instead of a winner - there isn't one.
   const name = row.merged
     ? `<span class="bv-name bv-name-many" title="${row.merged.map((r) => r.best.spell.name).join(", ")}">${row.merged.length} variants</span>`
-    : `<span class="bv-name" data-spell="${spell.spell_id}" title="${spell.name}">${spell.name}</span>`;
+    // No `title` here even though the name ellipsizes - this element raises the spell tooltip,
+    // which leads with the full name. A native title would just fight it (see tooltip.js).
+    : `<span class="bv-name" data-spell="${spell.spell_id}">${spell.name}</span>`;
   return `
     <li class="bv-line ${gvConflicted(row) ? "is-conflict" : ""}">
       <span class="bv-sub" title="${row.category} › ${sub}">${sub}</span>
@@ -220,9 +222,11 @@ function matrixChip(cell, className) {
   const spell = cell.spell;
   const eff = formatEffect(spell);
   const warn = cell.conflict && !cell.best ? ` <span class="mx-warn">▲</span>` : "";
+  // The chip raises the spell tooltip (line, class roster with levels, full stats), so it carries
+  // no `title` of its own - two tooltips describing one chip is what the browser does badly.
+  // Best-in-line stays encoded where it belongs: solid vs. dimmed, explained by the legend.
   return `<span class="mx-chip ${cell.best ? "is-best" : ""}" style="--pc:${classColor(className)}"
       data-spell="${spell.spell_id}"
-      title="${cell.subcategory || "General"} — ${className} Lv ${spell.level}${cell.best ? " (best of this line)" : " (a selected class has a stronger one)"}"
     >${spell.name}${eff === "—" ? "" : ` <b>${eff}</b>`}${warn}</span>`;
 }
 

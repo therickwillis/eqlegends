@@ -5,12 +5,9 @@ const classSelects = [
 ];
 const levelInput = document.getElementById("level");
 const slotsInput = document.getElementById("slots");
-const rolesContainer = document.getElementById("roles");
 const resultsEl = document.getElementById("results");
 const buffLoadoutEl = document.getElementById("buff-loadout");
-const roleLoadoutEl = document.getElementById("role-loadout");
 const buffSlotMeterEl = document.getElementById("buff-slot-meter");
-const roleSlotMeterEl = document.getElementById("role-slot-meter");
 const tabButtons = [...document.querySelectorAll(".tab-btn")];
 const gridTableEl = document.getElementById("category-grid");
 const rankArchetypeSelect = document.getElementById("rank-archetype");
@@ -55,35 +52,29 @@ const rankGroupWeights = cloneGroupWeights();
 
 let activeTab = "loadouts";
 
-// Invented per-class palette (EQ has no canonical class colors). Hues are grouped by
-// archetype so the color reinforces the grouping used elsewhere in the UI:
-//   Casters -> blues/violets, Priests -> golds/ambers,
-//   Melee   -> reds/oranges,  Hybrids -> greens/teals.
-const CLASS_COLORS = {
-  // Casters
-  Enchanter: "#bd8cf2",
-  Magician: "#8f8cf0",
-  Necromancer: "#6fb8d8",
-  Wizard: "#5f97f5",
-  // Priests
-  Cleric: "#e8d98a",
-  Druid: "#d6a95c",
-  Shaman: "#c3c07d",
-  // Melee
-  Warrior: "#e0705f",
-  Berserker: "#ee8a52",
-  Monk: "#e3a95f",
-  Rogue: "#e06f86",
-  // Hybrids
-  Beastlord: "#a6c85c",
-  Ranger: "#6cc06f",
-  Paladin: "#57c79c",
-  Bard: "#52c6c6",
-  "Shadow Knight": "#6f9e7a",
-};
+// Color follows the SLOT, not the class: whoever is in Class 1 is always blue, Class 2 amber,
+// Class 3 rose - the same three colors every session, matching the Class 1/2/3 labels above the
+// selects. A per-class palette (what this used to be) can't do that job: EQ's classes cluster by
+// archetype, so a Cleric and a Shaman - both priests - came out nearly the same gold and the
+// color told you nothing about which of YOUR picks a spell belonged to.
+//
+// The triad is validated, not eyeballed: OKLCH L 0.655 / C 0.15 at hues 255/62/350, which clears
+// the lightness band, the chroma floor, WCAG 3:1 against the panel, and - the point of the
+// exercise - stays separable under simulated color blindness (worst all-pairs OKLab ΔE 12.2
+// protan/deutan, 17.6 normal vision). Changing a value here means re-running that check.
+const SLOT_COLORS = ["#4b92ea", "#d07803", "#d2669d"];
+
+// Class name -> slot color, rebuilt whenever the selection changes (see render). Classes you
+// haven't picked - the other dozen in a tooltip's class roster - stay muted, so "which of these
+// is mine" is answerable at a glance.
+let slotColorByClass = new Map();
+
+function syncSlotColors(classes) {
+  slotColorByClass = new Map(classes.map((name, i) => [name, SLOT_COLORS[i % SLOT_COLORS.length]]));
+}
 
 function classColor(name) {
-  return CLASS_COLORS[name] || "var(--muted)";
+  return slotColorByClass.get(name) || "var(--muted)";
 }
 
 // Colored class "pill". Pass a level to append a muted "Lv N" inside the pill.
@@ -114,24 +105,11 @@ function populateClassSelects() {
   }
 }
 
-function populateRoleCheckboxes() {
-  for (const [id, def] of Object.entries(ROLE_DEFINITIONS)) {
-    const label = document.createElement("label");
-    const input = document.createElement("input");
-    input.type = "checkbox";
-    input.value = id;
-    input.id = `role-${id}`;
-    label.appendChild(input);
-    label.appendChild(document.createTextNode(def.label));
-    rolesContainer.appendChild(label);
-  }
-}
-
 function populateRankControls() {
-  for (const [id, def] of Object.entries(ROLE_DEFINITIONS)) {
+  for (const [id, label] of Object.entries(ARCHETYPES)) {
     const opt = document.createElement("option");
     opt.value = id;
-    opt.textContent = def.label;
+    opt.textContent = label;
     rankArchetypeSelect.appendChild(opt);
   }
   for (const category of Object.keys(CATEGORIES).sort()) {
@@ -145,10 +123,6 @@ function populateRankControls() {
 
 function selectedClasses() {
   return classSelects.map((s) => s.value).filter(Boolean);
-}
-
-function selectedRoles() {
-  return [...rolesContainer.querySelectorAll("input:checked")].map((el) => el.value);
 }
 
 function applyStateFromQuery() {
@@ -165,14 +139,6 @@ function applyStateFromQuery() {
   const slots = parseInt(params.get("slots"), 10);
   if (!isNaN(slots)) slotsInput.value = slots;
 
-  const roles = (params.get("roles") || "").split(",").filter(Boolean);
-  if (roles.length) {
-    roles.forEach((id) => {
-      const cb = document.getElementById(`role-${id}`);
-      if (cb) cb.checked = true;
-    });
-  }
-
   const tab = params.get("tab");
   if (tab && tabPanels[tab]) activeTab = tab;
 }
@@ -184,8 +150,6 @@ function syncStateToQuery() {
   });
   params.set("lvl", levelInput.value);
   params.set("slots", slotsInput.value);
-  const roles = selectedRoles();
-  if (roles.length) params.set("roles", roles.join(","));
   if (recipientStateInitialized) {
     const enabled = TEMPLATE_ROLE_ORDER.filter((r) => recipientState[r].enabled);
     params.set("r", enabled.join(","));
@@ -447,31 +411,6 @@ function renderBuffLoadout(classes, level, slotBudget) {
     return loadoutRow(i, slotBudget, spell.class, spell, stat, subText, badge);
   });
   buffLoadoutEl.innerHTML = withBudgetDivider(rows, slotBudget);
-}
-
-function renderRoleLoadout(classes, level, slotBudget, roles) {
-  if (classes.length === 0) {
-    roleLoadoutEl.innerHTML = `<p class="empty">Pick 1-3 classes above.</p>`;
-    roleSlotMeterEl.textContent = "";
-    return;
-  }
-  if (roles.length === 0) {
-    roleLoadoutEl.innerHTML = `<p class="empty">Check one or more roles above to see recommendations.</p>`;
-    roleSlotMeterEl.textContent = "";
-    return;
-  }
-  const picks = roleLoadout(classes, level, roles);
-  updateSlotMeter(roleSlotMeterEl, picks.length, slotBudget);
-  if (picks.length === 0) {
-    roleLoadoutEl.innerHTML = `<p class="empty">No spells available for these roles/classes at this level.</p>`;
-    return;
-  }
-  const rows = picks.map((spell, i) => {
-    const stat = formatEffect(spell);
-    const subText = `${spell.mana} mana · ${spell.duration}`;
-    return loadoutRow(i, slotBudget, spell.class, spell, `${spell.category} · ${stat}`, subText);
-  });
-  roleLoadoutEl.innerHTML = withBudgetDivider(rows, slotBudget);
 }
 
 function renderRankSliders() {
@@ -774,13 +713,12 @@ function render() {
   const classes = selectedClasses();
   const level = parseInt(levelInput.value, 10) || 1;
   const slotBudget = parseInt(slotsInput.value, 10) || 1;
-  const roles = selectedRoles();
 
+  syncSlotColors(classes); // every pill/chip below reads this - set it before anything renders
   syncStateToQuery();
   setActiveTab(activeTab);
 
   renderBuffLoadout(classes, level, slotBudget);
-  renderRoleLoadout(classes, level, slotBudget, roles);
   renderGrid(classes, level);
   renderBoard(classes, level);
   renderMatrix(classes, level);
@@ -791,7 +729,6 @@ function render() {
 }
 
 populateClassSelects();
-populateRoleCheckboxes();
 populateRankControls();
 applyStateFromQuery();
 setActiveTab(activeTab);
@@ -802,7 +739,6 @@ renderResistControls();
 classSelects.forEach((s) => s.addEventListener("change", render));
 levelInput.addEventListener("input", render);
 slotsInput.addEventListener("input", render);
-rolesContainer.addEventListener("change", render);
 tabButtons.forEach((btn) => btn.addEventListener("click", () => { setActiveTab(btn.dataset.tab); syncStateToQuery(); }));
 // The suggested-buff panel runs on recipient roles, not the caster archetype - only the
 // ranking table needs re-rendering when archetype sliders move.

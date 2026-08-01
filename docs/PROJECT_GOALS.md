@@ -38,10 +38,12 @@ also refreshes the wiki index/icons):
 6. `parse_effects.py` — final merge, derived metrics → `data/spells.json` + `app/data.js`
 7. `classify_roles.py` — data-driven per-class role-affinity analysis → `data/class_roles.json`
 
-UI (`app/index.html`, opened directly as a `file://` page, no server) has five tabs:
+UI (`app/index.html`, opened directly as a `file://` page, no server) has these tabs:
 
-- **Loadouts** — Buff Loadout (greedy set-cover over real stacking lines) + role-based Grouping Loadout,
-  against a user-set memorize-slot budget.
+- **Loadouts** — Buff Loadout (greedy set-cover over real stacking lines), against a user-set
+  memorize-slot budget. (A role-based "Grouping Loadout" and its Grouping Roles checkbox row lived
+  here too; both were cut as noise — the play-style archetypes they used survive as the Rank Lab's
+  archetype selector.)
 - **Buff Template** — the flagship recommendation view: a Quick Buff spell set scored by *recipient*
   (Self/Tank/Melee/Caster/Healer/Pets, each toggleable with an importance slider), one pick per stacking
   line with a generated "why" (top role, driving stats, rivals it beat), and an auditable
@@ -105,9 +107,9 @@ Class/level/slots/roles/recipients/active-tab selections persist through the URL
   level-scaled threshold — buff durations scale with caster level, so level 1's 3-minute Holy Armor is
   legitimate while 3 minutes at 50 is combat-tempo).
 - **Heals/nukes/CC are *not* mutually exclusive across classes** — no game mechanic stops memorizing
-  both a Cleric heal and a Druid heal, so the Grouping Loadout collapses only same-class redundant
-  tiers. Fear/Root/Slow/Mesmerize each stay their own category — different CC tools you'd want
-  separate picks for.
+  both a Cleric heal and a Druid heal, so only same-class redundant tiers ever collapse (unlike buffs,
+  where a shared stacking line means exactly one pick). Fear/Root/Slow/Mesmerize each stay their own
+  category — different CC tools you'd want separate picks for.
 - **Memorize slot count is a user input, not hardcoded** — the real number wasn't confirmed pre-launch.
 - **Level is one shared value for the whole 3-class combo**, though classes level independently after
   character level 10 (see GAME_NOTES.md). Simplification — revisit if it matters in practice.

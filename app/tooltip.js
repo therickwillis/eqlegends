@@ -105,6 +105,30 @@ document.body.appendChild(tooltipEl);
 
 let currentId = null;
 
+// The browser's own `title` bubble fights this panel: it pops up on its own delay, in its own
+// place, usually describing the very thing we're already describing - and it survives the panel
+// moving, so you get two boxes at once. While our tooltip is up, park the native title (the
+// nearest one at or above the trigger) and put it back when we hide. Elements that raise this
+// tooltip shouldn't carry a `title` in the first place; this is the guard for when one slips in,
+// or when the trigger sits inside a container that legitimately has one.
+let parkedTitle = null; // { el, text }
+
+function restoreNativeTitle() {
+  if (!parkedTitle) return;
+  parkedTitle.el.setAttribute("title", parkedTitle.text);
+  parkedTitle = null;
+}
+
+function parkNativeTitle(trigger) {
+  // Nothing found also covers the already-parked case - a parked element has no `title` left to
+  // match, so re-entering it is a no-op and the existing park stands.
+  const holder = trigger.closest("[title]");
+  if (!holder) return;
+  restoreNativeTitle(); // a different element than last time: give that one its title back first
+  parkedTitle = { el: holder, text: holder.getAttribute("title") };
+  holder.removeAttribute("title");
+}
+
 function positionTooltip(x, y) {
   const pad = 14;
   const rect = tooltipEl.getBoundingClientRect();
@@ -121,6 +145,7 @@ function positionTooltip(x, y) {
 function hideTooltip() {
   currentId = null;
   tooltipEl.classList.remove("visible");
+  restoreNativeTitle();
 }
 
 document.addEventListener("mouseover", (e) => {
@@ -129,6 +154,7 @@ document.addEventListener("mouseover", (e) => {
   const id = target.dataset.spell;
   const entry = SPELL_INDEX.get(Number(id)) || SPELL_INDEX.get(id);
   if (!entry) return;
+  parkNativeTitle(target);
   if (id !== currentId) {
     currentId = id;
     tooltipEl.innerHTML = tooltipHTML(entry);
