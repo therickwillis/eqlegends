@@ -1,0 +1,35 @@
+name: Deploy to GitHub Pages
+
+# The site is the self-contained `app/` directory: index.html plus data.js (spell data
+# baked in as a JS literal) and icons/. The `data/` and `docs/` trees are build inputs,
+# not site content, so only `app/` is uploaded — that also puts the site at the repo
+# root URL rather than /eqlegends/app/.
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Let a run in progress finish rather than cancelling it mid-deploy.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: app
+      - id: deployment
+        uses: actions/deploy-pages@v4
