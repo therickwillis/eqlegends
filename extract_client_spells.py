@@ -14,6 +14,7 @@ effect-slot blob is always read as the *last* ^-field regardless of total count,
 to that drift.
 """
 import json
+import re
 from pathlib import Path
 
 GAME_DIR = Path(r"F:\EverquestLegends")
@@ -30,6 +31,60 @@ DBSTR_FILE = GAME_DIR / "dbstr_us.txt"
 # "HP Buffs / HP type one", so they share a line and don't stack; Symbol of Ryltan is
 # "HP Buffs / Symbol", a different line that stacks with Courage.
 DBSTR_CATEGORY_TYPE = "5"
+
+# dbstr type 6 is the spell *description* prose table (35k+ entries) - the flavor/effect text the
+# game shows in the spell-info window ("Mends severe wounds, healing between #1 and @1 hit points").
+# A spell's field 85 (description_index) indexes into it. Every real memorized spell in this client
+# has one, contrary to an earlier assumption in build_spells_raw.py (now corrected there).
+DBSTR_DESC_TYPE = "6"
+
+# In-description placeholders for per-slot values: #N = slot N's base (min) magnitude, @N = its max
+# magnitude, $N = its secondary value (base2). Resolved here (where the raw base1/base2/max live);
+# the duration token (%z) and rarer count tokens are finished later in the pipeline.
+_SLOT_TOKEN = re.compile(r"([#@$])(\d+)")
+
+# Only substitute a slot's tokens when that slot's SPA actually stores a player-facing number.
+# Many SPAs put an internal id in base1/max instead (a proc/trigger's linked spell id, an
+# illusion's race id, a stacking-blocker's blocked-spell id) - resolving #1 there would print a
+# raw id like "perform 2720, a 1 attack" (Spirit of Lightning's proc slot). Mirrors the magnitude
+# allowlist in build_spells_raw.py (MAGNITUDE_DISPLAY_SPAS), plus the crowd-control/pacify SPAs
+# whose `max` is a real level cap ("...calms creatures up to level @1"). Tokens on any other SPA
+# are left unresolved and stripped downstream (parse_effects.py) rather than shown as a fake number.
+_MAGNITUDE_SPAS = {0, 79, 334, 100, 3, 11,  # heal/damage/HoT, movement, haste
+                    1, 2, 4, 5, 6, 7, 8, 9, 10, 15, 40, 46, 47, 48, 49, 50, 55, 59, 69, 78,
+                    161, 162, 178,  # stats / resists / runes (STAT_SPAS)
+                    35, 36, 116,  # disease/poison/curse counters
+                    68, 81, 118, 120}  # percent values: ReclaimPet%, Revive exp%, Amplify%, HealRate%
+_LEVELCAP_SPAS = {18, 22, 23, 30, 31, 86, 99}  # lull/charm/fear/mez/root - @N is a max-level cap
+_VALUE_SPAS = _MAGNITUDE_SPAS | _LEVELCAP_SPAS
+
+
+def resolve_slot_tokens(text: str, slots: list) -> str:
+    if not text:
+        return text
+    by_slot = {s["slot"]: s for s in slots if s.get("slot") is not None}
+
+    def repl(m):
+        sym, n = m.group(1), int(m.group(2))
+        slot = by_slot.get(n)
+        if slot is None or slot["spa"] not in _VALUE_SPAS:
+            return m.group(0)  # no such slot, or an id-bearing SPA - leave for downstream cleanup
+        if sym == "#":
+            return str(abs(slot["base1"]))
+        if sym == "@":
+            return str(abs(slot["max"] or slot["base1"]))  # max 0 = non-scaling -> same as base
+        return str(abs(slot["base2"]))  # $
+    return _SLOT_TOKEN.sub(repl, text)
+
+
+def load_type_texts(dbstr_type: str) -> dict[str, str]:
+    texts = {}
+    with open(DBSTR_FILE, encoding="latin-1") as fh:
+        for line in fh:
+            parts = line.rstrip("\n").split("^")
+            if len(parts) >= 3 and parts[1] == dbstr_type:
+                texts[parts[0]] = parts[2]
+    return texts
 
 
 def load_category_names() -> dict[str, str]:
@@ -133,18 +188,23 @@ def parse_line(line: str, category_names: dict[str, str]) -> dict | None:
 
 def main():
     category_names = load_category_names()
+    descriptions = load_type_texts(DBSTR_DESC_TYPE)
     spells = []
     with open(SPELLS_FILE, encoding="latin-1") as fh:
         for line in fh:
             parsed = parse_line(line, category_names)
             if parsed:
+                raw_desc = descriptions.get(str(parsed["description_index"]), "")
+                parsed["description_text"] = resolve_slot_tokens(raw_desc, parsed["effects"])
                 spells.append(parsed)
 
     out_path = DATA_DIR / "spells_client_raw.json"
     out_path.write_text(json.dumps(spells, indent=1), encoding="utf-8")
     with_line = sum(1 for s in spells if s["line_subcategory"])
+    with_desc = sum(1 for s in spells if s["description_text"])
     print(f"Parsed {len(spells)} spells -> {out_path}")
     print(f"Loaded {len(category_names)} category names; {with_line} spells carry a spell line")
+    print(f"Loaded {len(descriptions)} spell descriptions; {with_desc} spells carry description text")
 
 
 if __name__ == "__main__":

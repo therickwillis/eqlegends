@@ -178,14 +178,16 @@ def classify_spell(name: str, effects: list, duration_seconds, beneficial: bool)
 
 # --- "What the game would show": per-effect phrasing -----------------------------------
 
-# Classic-era spells in this game's client have no hand-authored tooltip text at all (checked
-# dbstr_us.txt directly against DESCRIPTION_INDEX for a sample of real spell ids - zero
-# matches; that file only holds prose for AA/passive abilities, not memorized spells). The
-# in-game spellbook description for a regular spell is generated from its effect list, same
-# approach as the reference eqspellparser project's SpellData.cs. This is a pragmatic subset
-# of that (the full switch there covers hundreds of SPAs across 25 years of content) sized to
-# what actually appears in this classic-era dataset - anything not covered falls back to the
-# same "+value Stat" phrasing this always used.
+# Two descriptions ride along on each spell, serving different UI needs:
+#   * `description` (built here) is a compact, generated effect list ("Increase AC by 5<br>...")
+#     synthesized from the SPA effects, same approach as the reference eqspellparser project's
+#     SpellData.cs. A pragmatic subset of its hundreds-of-SPA switch, sized to this classic-era
+#     dataset; anything not covered falls back to the "+value Stat" phrasing.
+#   * `description_text` (from extract_client_spells.py, %z/count tokens finished in
+#     parse_effects.py) is the game's own hand-authored prose from dbstr_us.txt type 6, keyed by
+#     each spell's description_index. An earlier version of this comment claimed that text didn't
+#     exist for memorized spells ("zero matches ... only AA/passive abilities") - that was wrong:
+#     every spell in this client has a real description there, which is what the UI tooltip shows.
 def _pct(value):
     return f"{abs(value)}%"
 
@@ -385,6 +387,10 @@ def build_row(wiki_row: dict, class_code: str, caster_level: int, client_spell: 
         # there's no displayable number for them.
         "spas": sorted({e["spa"] for e in effects}),
         "description": render_description(effects, category),
+        # The client's own prose description (dbstr type 6). Slot values (#N/@N/$N) are already
+        # resolved; the duration token (%z) and rarer count tokens are finished in parse_effects.py,
+        # which has the computed duration string.
+        "description_text": client_spell.get("description_text", ""),
     }
 
 

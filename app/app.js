@@ -191,8 +191,8 @@ function formatEffect(spell) {
 
 function iconImg(spell) {
   return spell.icon
-    ? `<img class="spell-icon" src="${spell.icon}" alt="" width="32" height="32">`
-    : `<span class="spell-icon spell-icon-placeholder"></span>`;
+    ? `<img class="spell-icon" src="${spell.icon}" alt="" width="32" height="32" data-spell="${spell.spell_id}">`
+    : `<span class="spell-icon spell-icon-placeholder" data-spell="${spell.spell_id}"></span>`;
 }
 
 // The spell's line (client Category › Subcategory, from the game's own hover taxonomy). This is
@@ -213,7 +213,7 @@ function spellCard(className, spell) {
       <div class="spell-card-header">
         ${iconImg(spell)}
         ${classPill(className)}
-        <span class="spell-name">${spell.name}</span>
+        <span class="spell-name" data-spell="${spell.spell_id}">${spell.name}</span>
         <span class="spell-level">Lv ${spell.level}</span>
         ${lineChip(spell)}
       </div>
@@ -309,7 +309,7 @@ function gridTableRow(row, showLabel = true) {
   return `
     <tr class="${conflict ? "gt-conflict" : ""}">
       <td class="gtc-type">${label}</td>
-      <td class="gtc-best">${iconImg(spell)}<span class="spell-name">${spell.name}</span>${warn}</td>
+      <td class="gtc-best">${iconImg(spell)}<span class="spell-name" data-spell="${spell.spell_id}">${spell.name}</span>${warn}</td>
       <td class="gtc-eff">${formatEffect(spell)}</td>
       <td class="gtc-class"><span class="class-pill-group">${pills}</span></td>
       <td class="gtc-others" title="${spell.mana} mana · ${spell.duration}">${others}</td>
@@ -384,7 +384,7 @@ function loadoutRow(index, slotBudget, className, spell, statLabel, subText, bad
       ${iconImg(spell)}
       <div class="loadout-main">
         ${classPill(className)}
-        <span class="spell-name">${spell.name}</span>${badge}
+        <span class="spell-name" data-spell="${spell.spell_id}">${spell.name}</span>${badge}
         <span class="spell-level">Lv ${spell.level}</span>
         ${lineChip(spell)}
         <div class="spell-desc">${spell.description}</div>
@@ -514,7 +514,7 @@ function renderRankTable() {
           <td class="rank-classes"><span class="class-pill-group">${classLevels
             .map((cl) => classPill(cl.class, cl.level))
             .join("")}</span></td>
-          <td><span class="spell-name">${spell.name}</span></td>
+          <td><span class="spell-name" data-spell="${spell.spell_id}">${spell.name}</span></td>
           <td class="rank-description">${spell.description || "—"}</td>
           <td>${spell.target || "—"}</td>
           <td class="rank-slot">${slot}</td>
@@ -673,7 +673,7 @@ function buffTemplateRow(index, slotBudget, pick) {
       ${iconImg(spell)}
       <div class="bt-main">
         <div class="bt-title">
-          <span class="spell-name">${spell.name}</span>${badge}
+          <span class="spell-name" data-spell="${spell.spell_id}">${spell.name}</span>${badge}
           ${targetChip(spell)}
         </div>
         <div class="bt-meta">${classText} · claims: ${lineText}</div>

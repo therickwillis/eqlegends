@@ -445,6 +445,90 @@
     font-family: sans-serif;
     cursor: help;
   }
+
+  /* Anything that can raise the spell tooltip gets the help cursor as an affordance. */
+  [data-spell] { cursor: help; }
+
+  /* --- In-game-style spell tooltip (tooltip.js) --------------------------------------
+     A floating parchment-dark panel that follows the cursor. Fixed-position, pointer-events
+     off so it never eats the hover it's describing. */
+  .spell-tooltip {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 320px;
+    max-width: calc(100vw - 28px);
+    background: #12151d;
+    border: 1px solid var(--gold);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6), inset 0 0 0 1px #000;
+    font-family: Georgia, serif;
+    color: var(--text);
+    padding: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.08s ease;
+  }
+  .spell-tooltip.visible { opacity: 1; visibility: visible; }
+
+  .tt-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(216, 202, 114, 0.08), transparent);
+  }
+  .tt-head .spell-icon { width: 34px; height: 34px; cursor: default; }
+  .tt-titles { min-width: 0; }
+  .tt-name { color: var(--gold); font-size: 16px; font-weight: bold; line-height: 1.2; }
+  .tt-sub { color: var(--muted); font-size: 11px; margin-top: 2px; }
+  /* A thin colored spine on the left telling beneficial from detrimental at a glance. */
+  .tt-head.tt-ben { box-shadow: inset 3px 0 0 #6cc06f; }
+  .tt-head.tt-det { box-shadow: inset 3px 0 0 #e0705f; }
+
+  /* The game's own prose description - the flavor/effect text, set apart in a soft-gold italic
+     the way the in-game spell window reads. */
+  .tt-desc {
+    padding: 9px 12px;
+    font-size: 12.5px;
+    line-height: 1.5;
+    font-style: italic;
+    color: #d8ca72;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tt-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 14px;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .tt-stat { display: flex; justify-content: space-between; gap: 8px; font-size: 12px; }
+  .tt-stat-label { color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; font-size: 10px; align-self: center; }
+  .tt-stat-val { color: var(--text); font-variant-numeric: tabular-nums; text-align: right; }
+
+  .tt-effects { padding: 8px 12px; }
+  .tt-effects:empty { display: none; }
+  .tt-effect { font-size: 12.5px; line-height: 1.5; color: #cfe6c0; }
+  .tt-slot {
+    display: inline-block;
+    min-width: 46px;
+    color: var(--muted);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .tt-roster {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 8px 12px 10px;
+    border-top: 1px solid var(--border);
+  }
+  .tt-roster:empty { display: none; }
 </style>
 </head>
 <body>
@@ -578,5 +662,6 @@
   <script src="compare.js"></script>
   <script src="rank.js"></script>
   <script src="app.js"></script>
+  <script src="tooltip.js"></script>
 </body>
 </html>
