@@ -73,6 +73,18 @@ Judge it against the baseline from step 1:
   a patch. Investigate before committing.
 - **Category breakdown** should stay broadly proportional. A category emptying out points at the
   SPA classification in `parse_effects.py`.
+- **Target-scope breakdown** should stay broadly proportional too. It comes from a positional field
+  (30) through a hand-built id→scope table, so a client field shift shows up here as a lopsided
+  distribution rather than an error:
+
+  ```powershell
+  python -c "import json,collections;d=json.load(open('data/spells.json'));print(collections.Counter(s['target_scope'] for s in d));print(sorted({s['target'] for s in d if s['target'].startswith('Type ')}))"
+  ```
+
+  Roughly 56% `single` / 29% `self` / 6% `group` / 5% `aoe` / 3% `pet`. The second list is target
+  type ids with no name in `TARGET_TYPES` — `['Type 56']` is the known, documented gap
+  (see PROJECT_GOALS.md); anything new there means the client added or moved a target type, and
+  `derive_target`'s AE-radius fallback is guessing for it.
 - **An empty `git diff` is a normal, expected result.** The pipeline is deterministic: if the
   client has not been patched since the last run, every output is byte-identical and there is
   simply nothing to publish. Do not go hunting for a failure, and do not force an empty commit —
@@ -88,7 +100,8 @@ python -c "import json;d=json.load(open('data/spells.json'));print([s for s in d
 If the client's `spells_us.txt` field layout changed in a patch, the failure mode is wrong values
 rather than a crash — fields are read positionally. `extract_client_spells.py` documents the
 expected 173-field layout and which offsets are load-bearing (86/87 spell line, 165 SpellGroup,
-85 description index, 36–51 per-class levels). Cross-reference
+85 description index, 36–51 per-class levels, 30 target type, 4/5 range and AE radius,
+143 MaxTargets). Cross-reference
 https://github.com/rumstil/eqspellparser if offsets need re-deriving.
 
 ## 4. Publish

@@ -50,8 +50,9 @@ UI (`app/index.html`, opened directly as a `file://` page, no server) has these 
   excluded-with-reasons section (see `suggestedBuffTemplate` in `app/rank.js`).
 - **Category Grid** — a best-in-slot board organized entirely by the client's own spell-line taxonomy:
   each section is a client spell Category (Direct Damage, HP Buffs, Utility Detrimental, …), each row a
-  line (Subcategory) within it, showing the best spell your classes can field for that line plus the
-  same-line spells it beats (▲ for buff lines that won't stack). Sections and lines both sort alpha.
+  line (Subcategory) **× target scope** within it, showing the best spell your classes can field for
+  that line plus the same-line spells it beats (▲ for buff lines that won't stack). Sections and lines
+  both sort alpha, and a line's rows sort narrow-reach first.
   **Collection lines** — sets of equivalent variants with no "best" (Enchanter illusions: Dwarf isn't
   better than Dark Elf; `isCollectionLine`, matches Illusion/Visage subcategories) — instead list every
   spell as its own row under one shared label, rather than crowning a winner. See `spellLineGrid` in
@@ -60,7 +61,7 @@ UI (`app/index.html`, opened directly as a `file://` page, no server) has these 
 - **Rank Lab** — experimental weighted multi-stat ranking of any category with live per-archetype weight
   sliders; rows grouped per spell (shared spells show all classes/levels in one row).
 
-Class/level/slots/roles/recipients/active-tab selections persist through the URL querystring.
+Class/level/slots/roles/recipients/target-scopes/active-tab selections persist through the URL querystring.
 
 ## Design decisions worth remembering (the "why")
 
@@ -90,6 +91,56 @@ Class/level/slots/roles/recipients/active-tab selections persist through the URL
   a Line column in Rank Lab). Bard songs conflict only with each other (bard-only lines are namespaced);
   negative-AC effects don't claim an AC line. Long-duration Heal-HoTs (Regeneration/Chloroplast line, ≥5
   min) get lines too — they behave as template buffs.
+- **Target scope partitions the board; it never re-ranks it.** Every spell carries a derived
+  `target_scope` (`self`/`single`/`group`/`aoe`/`pet`, from the client's target type — see
+  `derive_target` in `build_spells_raw.py`), and the best-in-slot views give each scope its own row
+  within a line. The reason is that a single-target nuke and an AE nuke aren't competing for one
+  memorize slot — you bring both — so ranking them against each other on raw magnitude produced
+  actively wrong crowns: `Direct Damage › Magic` for a Magician crowned the AE Upheaval and buried
+  the single-target nuke as a "runner-up", and `Heals › Heals` did the reverse to the group heal.
+  47 of 114 lines mix scopes, so this was the rule rather than the exception.
+  - **Buff lines are the exception: they partition by *body*, not headcount** (self / pet /
+    anyone-else). Group Temperance and Temperance are the same client line and genuinely knock each
+    other out, so splitting them into rival rows would tell you to memorize both. This is the same
+    namespace rule the Buff Template already used for stacking conflicts (`nsPrefix` in `rank.js`).
+  - **Reach is a tiebreak, never a ranking input.** At equal magnitude the wider spell wins (one
+    cast covers the group); it can never lift a weaker spell over a stronger one. Deliberately
+    conservative — the Buff Template's and Rank Lab's numbers are unchanged by target scope, so
+    adding the dimension couldn't silently move an existing recommendation.
+  - **"Which bodies" is a separate axis from "how many".** `target_restrict` (undead/animal/
+    summoned/plant/corpse) rides alongside the scope: Expulse Undead is an ordinary single-target
+    spell that happens to be useless on most mobs, which is a different fact from how wide it is.
+  - **Target scope is TEXT, never color** — a Target column in the Category Grid, a suffix on the
+    line label in the dense views, the Target/Reach/Radius/Max-targets rows in the spell tooltip.
+    Three visual encodings were tried and rejected before landing here: a chip (put a pill inside a
+    pill in the Matrix cell), a reticle glyph (illegible at 11px on busy dark rows), and a colored
+    ring on the spell icon (worked, but see the next bullet — the frame belongs to something else).
+    Words also retire a real problem: **the client ships no target-type palette**, so any colors
+    here were invented, and an invented 5-hue set competing with the class pills and element chips
+    is exactly what kept reading as noise. Words collide with nothing.
+  - **The dense views only say the target when a line actually split** (`row.split` from
+    `spellLineGrid`). That's the one case where two adjacent rows would otherwise look identical.
+    The Board's label column is a fixed 84px; spending it on a suffix every row is what pushed real
+    line names into an ellipsis.
+- **The spell icon's frame is the game's own: blue = beneficial, red = detrimental.** Copied from
+  EQ Legends' Actions › Spells window, hexes sampled from it (`#0060e0` / `#e00000`, drawn as an
+  `outline` so it sits outside the artwork the way the game's frame does). Verified 17/17 against a
+  live Enchanter spell list — including the two that would trip a guess, since **Lull** (a calm) and
+  **Taper Enchantment** (a dispel) both sit under the *Utility Detrimental* category yet are flagged
+  `beneficial`, and the game paints them blue. That same window lists **Gem | Name | Level | Category
+  | Subcategory** — the taxonomy this whole tool is built on — so mirroring its frame costs nothing
+  and buys instant familiarity for anyone with the real window open on a second monitor.
+  - Worth knowing for later: this is **not** the only color system in the game. The spell *bar*
+    tints its gem holder (`A_SpellGemHolder`, a greyscale mask in `window_pieces02.tga`) from a
+    different, wider palette — `#d81818` / `#d830d8` / `#c0d818` observed — which tracks
+    `spells_us.txt` **field 146**, a fixed 0–8 enum classifying spells as buff/cure/damage/
+    debuff-CC/heal/lifetap/summon/travel. Not currently used; it's a client-authoritative
+    classification we don't otherwise have, and it disagrees with our SPA classifier in places
+    (the client calls Cannibalize a *heal* and Tashania a *debuff*).
+  - The palette hunt that got here, so it isn't repeated: across 305 `.tga`s, 228 UI XMLs, both
+    `.ini` palettes and all 70 `dbstr_us.txt` string tables, nothing keys color to *target type*.
+    `uifiles/default/TargetIndicator.ini` is the closest thing and it's the **con-difficulty** ring
+    (Trivial `#505064` → Deadly `#FF0000`) — red there means "this will kill you", not "one target".
 - **Same-class tier collapsing can key on SpellGroup.** `spells_us.txt` field 165 (`100` + class index +
   line number) clusters the tiers of one class's line (Courage/Center/Bravery/Valor; Rk. II/III variants).
   Carried through the pipeline as `spell_group`; the loadouts currently collapse tiers by class+category,
@@ -127,6 +178,11 @@ Class/level/slots/roles/recipients/active-tab selections persist through the URL
 
 - **Bard instrument scaling isn't modeled** — songs scale with instrument skill/mod at cast time (not
   in the spell file); affected effects are flagged `approximate: true` and shown at base value.
+- **Client target type 56 isn't documented anywhere** — 10 beneficial SHM/DRU single-target spells
+  (Scale of Wolf, Stoicism, the Snails/Tortoises/Slugs Healing line) use it and rumstil/eqspellparser
+  doesn't list it. `derive_target` falls back on the AE radius (0 → `single`), which matches how they
+  actually cast, and the raw label stays `"Type 56"` so the gap stays visible. Revisit if the id
+  turns up documented.
 - **18 wiki-indexed spells have no client match** (mostly Rogue disciplines and a few Wizard
   Al'Kabor nukes) and are dropped — revisit if the client updates.
 - **~4% of spells have no generated description** (proc/trigger-style effects with no phrase template

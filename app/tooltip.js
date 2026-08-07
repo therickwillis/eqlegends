@@ -37,6 +37,16 @@ function fmtSeconds(sec) {
   return Number.isInteger(sec) ? `${sec}s` : `${sec.toFixed(1)}s`;
 }
 
+// "How wide, and where is it centered" - only when that's more than the raw target label already
+// says. Single-target and self spells get nothing; "Caster PB AE" gets "AoE · centered on you",
+// which is the part of that label people actually have to remember.
+function reachText(spell) {
+  const scope = spell.target_scope || "single";
+  if (scope === "single" || scope === "self") return null;
+  const shape = SHAPE_LABELS[spell.target_shape];
+  return shape ? `${SCOPE_META[scope].label} · ${shape}` : SCOPE_META[scope].label;
+}
+
 // A labeled stat cell, only when the value is worth showing. Kept null-safe so the grid stays tidy
 // (e.g. a beneficial buff with no resist and no recast just omits those cells).
 function statCell(label, value) {
@@ -69,7 +79,13 @@ function tooltipHTML(entry) {
     statCell("Recast", spell.recast_time_s ? fmtSeconds(spell.recast_time_s) : null),
     statCell("Duration", spell.duration),
     statCell("Target", spell.target),
+    // The area-effect facts, each omitted when it doesn't apply - a plain single-target spell shows
+    // none of these and its stat grid looks exactly as it did before target scope existed.
+    statCell("Reach", reachText(spell)),
+    statCell("Radius", spell.aoe_radius ? `${spell.aoe_radius} ft` : null),
+    statCell("Max targets", spell.max_targets),
     statCell("Range", spell.range),
+    statCell("Only affects", RESTRICT_LABELS[spell.target_restrict]),
     statCell("Resist", spell.resist_type),
   ].join("");
 

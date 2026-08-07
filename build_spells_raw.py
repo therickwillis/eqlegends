@@ -48,6 +48,89 @@ TARGET_TYPES = {
     50: "Targeted AE (No Players' Pets)", 51: "Single Ally or Self", 52: "Single Ally or Target's Target",
 }
 
+# The client's ~30 target types collapsed into the two questions that actually decide whether two
+# spells are rivals:
+#
+#   scope    - how many bodies does this land on? self / single / group / aoe / pet. This is the
+#              comparison key: a single-target nuke and an AE nuke are not competing for one slot,
+#              you memorize both, so the UI partitions on it instead of ranking across it.
+#   restrict - WHICH bodies is it even allowed to touch (undead, animals, summoned, ...)? A
+#              separate axis: "Expulse Undead" is an ordinary single-target spell that happens to
+#              be useless on most mobs, which is a different fact from how wide it is.
+#
+# `shape` is descriptive detail for the AE scopes only (is the circle centered on you or on your
+# target?) - it never affects grouping, just what the chip and tooltip say.
+TARGET_SCOPE = {
+    # id: (scope, shape, restrict)
+    1: ("single", None, None),          # Line of Sight
+    2: ("aoe", "pb", None),             # Caster AE
+    3: ("group", None, None),           # Caster's Group
+    4: ("aoe", "pb", None),             # Caster PB AE
+    5: ("single", None, None),          # Single
+    6: ("self", None, None),            # Self
+    8: ("aoe", "targeted", None),       # Targeted AE
+    9: ("single", None, "animal"),
+    10: ("single", None, "undead"),
+    11: ("single", None, "summoned"),
+    13: ("single", None, None),         # Lifetap - single-target, the tap is the effect not the target
+    14: ("pet", None, None),
+    15: ("single", None, "corpse"),
+    16: ("single", None, "plant"),
+    17: ("single", None, "giant"),
+    18: ("single", None, "dragon"),
+    20: ("aoe", "targeted", None),      # Targeted AE Lifetap
+    21: ("aoe", "targeted", "undead"),
+    25: ("aoe", "targeted", "summoned"),
+    32: ("aoe", "hatelist", None),
+    33: ("aoe", "hatelist", None),
+    34: ("single", None, None),         # Chest
+    35: ("single", None, "muramite"),
+    36: ("aoe", "pb", None),            # Caster PB (Players)
+    37: ("aoe", "pb", None),            # Caster PB (NPCs)
+    38: ("pet", None, None),
+    39: ("group", None, None),          # Group (No Pets)
+    40: ("aoe", "pb", None),            # Caster AE (Players)
+    41: ("group", None, None),          # Target's Group
+    42: ("aoe", "frontal", None),       # Directional AE
+    43: ("single", None, None),         # Single in Group
+    44: ("aoe", "frontal", None),       # Frontal AE
+    45: ("aoe", "ring", None),          # Targeted Ring AE
+    46: ("single", None, None),         # Target's Target
+    47: ("single", None, None),         # Pet's Owner
+    50: ("aoe", "targeted", None),      # Targeted AE (No Players' Pets)
+    51: ("single", None, None),         # Single Ally or Self
+    52: ("single", None, None),         # Single Ally or Target's Target
+}
+
+def derive_target(client_spell: dict) -> dict:
+    """Structured target facts: scope (the comparison key), plus the detail the UI shows.
+
+    Unmapped target-type ids fall back on the client's own AE radius, which is the physical
+    truth regardless of what the id means: a spell with an AE radius hits an area, one without
+    hits one thing. This currently covers exactly one id - **type 56**, ten beneficial SHM/DRU
+    single-target spells (Scale of Wolf, Stoicism, the Snails/Tortoises/Slugs Healing line) that
+    this client uses and rumstil/eqspellparser doesn't document. They all carry range 100 / AE
+    radius 0, so the fallback lands them on `single`, which matches how they actually cast. The
+    raw `target` label stays "Type 56" so the gap stays visible rather than being papered over.
+    """
+    target_type = client_spell["target_type"]
+    aoe_radius = client_spell.get("aoe_range") or 0
+    scope, shape, restrict = TARGET_SCOPE.get(
+        target_type, ("aoe" if aoe_radius > 0 else "single", None, None)
+    )
+    return {
+        "target_type": target_type,
+        "target_scope": scope,
+        "target_shape": shape,
+        "target_restrict": restrict,
+        # Radius is only meaningful for the scopes that cover an area - a group buff carries one
+        # too (the range within which group members get it), but a single-target spell's is noise.
+        "aoe_radius": (aoe_radius or None) if scope in ("aoe", "group") else None,
+        "max_targets": (client_spell.get("max_targets") or None) if scope == "aoe" else None,
+        "range": client_spell.get("range") or None,
+    }
+
+
 RESIST_TYPES = {
     0: None, 1: "Magic", 2: "Fire", 3: "Cold", 4: "Poison", 5: "Disease",
     6: "Chromatic", 7: "Prismatic", 8: "Physical", 9: "Corruption",
@@ -386,7 +469,12 @@ def build_row(wiki_row: dict, class_code: str, caster_level: int, client_spell: 
         "cast_time_s": client_spell["cast_time_ms"] / 1000,
         "recast_time_s": client_spell["recast_ms"] / 1000,
         "duration_seconds": duration_seconds,
+        # The raw client label, kept verbatim so an unmapped target type stays visible ("Type 56")
+        # rather than silently becoming whatever derive_target inferred for it.
         "target": TARGET_TYPES.get(client_spell["target_type"], f"Type {client_spell['target_type']}"),
+        # target_type / target_scope / target_shape / target_restrict / aoe_radius / max_targets /
+        # range - see derive_target. `target_scope` is the one the comparison views partition on.
+        **derive_target(client_spell),
         "resist_type": RESIST_TYPES.get(client_spell["resist_type"]),
         "beneficial": client_spell["beneficial"],
         "category": category,

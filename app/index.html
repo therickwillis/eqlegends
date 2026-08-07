@@ -254,6 +254,7 @@
   .gtc-best .spell-icon { width: 16px; height: 16px; margin: 0 6px 0 0; vertical-align: -3px; }
   .gtc-best .spell-name { font-weight: 600; }
   .gtc-eff { color: var(--text); width: 12%; white-space: nowrap; }
+  .gtc-target { width: 7%; white-space: nowrap; }
   .gtc-class { width: 14%; }
   .gtc-others { color: var(--muted); }
   .gt-other { white-space: nowrap; }
@@ -279,6 +280,53 @@
     background: color-mix(in srgb, var(--ec, var(--muted)) 15%, transparent);
     border: 1px solid color-mix(in srgb, var(--ec, var(--muted)) 42%, transparent);
   }
+  /* The spell gem frame, copied from the game's own Actions > Spells window: blue = beneficial,
+     red = detrimental, and that is the only thing it encodes there (see GEM_COLORS in app.js).
+     Hexes sampled from that window. Drawn as an `outline` rather than a border so it sits outside
+     the artwork the way the game's frame does, instead of cropping into a 16px icon — and outlines
+     take no layout space, so adding it moved nothing. */
+  .spell-icon.gem-ben { outline: 2px solid #0060e0; outline-offset: 0; }
+  .spell-icon.gem-det { outline: 2px solid #e00000; outline-offset: 0; }
+  /* Inline key for the frame colors, used in the view intros. */
+  .gem-key { display: inline-block; width: 9px; height: 9px; vertical-align: 0; }
+  .gem-key-ben { border: 2px solid #0060e0; }
+  .gem-key-det { border: 2px solid #e00000; }
+  /* Target scope is text, not color — the game spends its only color channel on beneficial vs
+     detrimental and spells the rest out in columns. */
+  .scope-word { font-size: 11px; color: var(--muted); white-space: nowrap; }
+  /* "only works on undead" — a different question from how wide the spell is, and rare enough that
+     plain italic text says it without another bordered thing competing for the eye. */
+  .scope-only { font-size: 10px; font-style: italic; color: var(--muted); margin-left: 4px; }
+  /* The filter row in the topbar. Doubles as the legend — the one place pairing each frame color
+     with its word. Off = drained of color, so the enabled set reads without a checkbox each. */
+  .scope-filter { display: flex; align-items: center; gap: 2px; }
+  .scope-filter[hidden] { display: none; }
+  .scope-filter-label {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--muted); margin-right: 4px;
+  }
+  .scope-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 8px;
+    border-radius: 9px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--muted);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    opacity: 0.4;
+  }
+  .scope-toggle.on {
+    opacity: 1;
+    color: var(--text);
+    background: color-mix(in srgb, var(--text) 12%, transparent);
+    border-color: var(--border);
+  }
+  .scope-toggle:hover { opacity: 1; }
   button {
     background: #0d1118;
     color: var(--text);
@@ -402,18 +450,8 @@
   .bt-main { flex: 1 1 auto; min-width: 0; }
   .bt-title { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
   .bt-title .spell-name { font-size: 15px; }
-  .bt-chip {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    padding: 1px 7px;
-    border-radius: 9px;
-    border: 1px solid var(--border);
-    color: var(--muted);
-  }
-  .bt-chip-group { color: #8fd18f; border-color: #3c5a3c; }
-  .bt-chip-self { color: #8fb8d1; border-color: #3c4c5a; }
-  .bt-chip-pet { color: #d1b48f; border-color: #5a4c3c; }
+  /* The Buff Template's old Self/Group/Pet chips are gone — target scope is the icon frame now
+     (it kept the old .bt-chip-* colors), and the row already shows the icon. */
   .bt-meta { font-size: 12px; color: var(--muted); margin-top: 2px; }
   .bt-row .rank-why { font-size: 12px; margin-top: 3px; }
   .bt-score { font-size: 17px; color: var(--gold); font-variant-numeric: tabular-nums; flex-shrink: 0; }
@@ -671,6 +709,8 @@
     flex: none;
     border-width: 0;
   }
+  /* Micro density drops the icon to buy 15px; the beneficial/detrimental frame goes with it, which
+     is fine — target scope is text in .bv-sub and survives, and the category says the rest. */
   .dens-micro .bv-line .spell-icon { display: none; }
   .bv-sub {
     flex: 0 0 var(--bv-sub);
@@ -727,11 +767,11 @@
   .mx-cell.is-empty { background: repeating-linear-gradient(-45deg, transparent 0 6px, rgba(255,255,255,0.022) 6px 12px); }
   .mx-chip {
     display: inline-flex;
-    align-items: baseline;
+    align-items: center;
     gap: 4px;
     max-width: 100%;
     margin: 0 3px 2px 0;
-    padding: 0 6px;
+    padding: 1px 6px 1px 3px;
     border-radius: 9px;
     font-size: 11px;
     white-space: nowrap;
@@ -745,6 +785,13 @@
   .mx-chip.is-best { background: color-mix(in srgb, var(--pc, var(--muted)) 24%, transparent); border-color: var(--pc, var(--muted)); }
   .mx-chip.is-best b { color: var(--text); }
   .mx-chip:not(.is-best) { opacity: 0.62; }
+  /* The chip's leading spell icon. Small enough that three class columns still fit across, and it
+     carries the game's beneficial/detrimental gem frame; the outline draws outside the 14px box so
+     it doesn't crop the artwork. */
+  .mx-chip .spell-icon { width: 14px; height: 14px; flex: none; border-width: 0; outline-width: 1.5px; }
+  /* Target scope rides as a short text suffix, and only when it isn't single — that's what
+     explains a line appearing twice in one cell, which an icon can't say. */
+  .mx-chip .mx-scope { font-style: normal; color: var(--muted); font-size: 9.5px; }
   .mx-chip .mx-warn { color: #d98a5f; font-size: 9px; }
   .mx-swatch { display: inline-block; width: 10px; height: 10px; border-radius: 5px; vertical-align: -1px; }
 
@@ -837,6 +884,8 @@
       <label for="slots">Memorize Slots</label>
       <input type="number" id="slots" min="1" max="14" value="12">
     </div>
+    <!-- Target-scope filter for the four board views; app.js hides it on the other tabs. -->
+    <div class="scope-filter" id="scope-filter" hidden></div>
   </div>
 
   <div class="tabs">
@@ -872,6 +921,12 @@
       taxonomy — each section is a client spell Category, each row a line within it. A <span class="gt-warn">▲</span>
       marks buff lines where only the strongest pick actually stacks; the last column lists the same-line spells it
       beats (or, for non-buffs, alternative options you might also bring).
+      Lines split by <strong>target</strong>: a single-target nuke and an AE nuke are separate rows because you'd
+      memorize both, not pick between them. Buff lines are the exception — they split by whose body the buff lands
+      on (yours, your pet's, anyone's), since a group buff and its single-target version still knock each other out.
+      Gem frames follow the game's own Actions &rsaquo; Spells window &mdash; <span class="gem-key gem-key-ben"></span>
+      blue is beneficial, <span class="gem-key gem-key-det"></span> red is detrimental. The
+      <strong>Targets</strong> control above filters the board.
     </p>
     <div id="category-grid"></div>
   </div>
@@ -882,6 +937,9 @@
       <strong>A · Board.</strong> Every spell line you have, one line per row, categories flowing into
       as many columns as your monitor is wide — the whole board in one eyeful. Hover any spell for the
       full tooltip; <span class="gt-warn">▲</span> marks lines where only the strongest pick stacks.
+      Gem frames are the game's own: <span class="gem-key gem-key-ben"></span> blue beneficial,
+      <span class="gem-key gem-key-det"></span> red detrimental. A line's <strong>target</strong> is
+      appended to its label when it isn't single-target.
     </p>
     <div class="gv-toolbar">
       <input type="search" id="board-filter" placeholder="Filter lines, spells, classes…">
@@ -899,8 +957,12 @@
   <div id="matrix-view" class="tab-panel">
     <p class="gv-intro">
       <strong>B · Matrix.</strong> One row per client Category, one column per class you picked —
-      each chip is a spell line that class covers. Solid chips are the lines that class wins outright;
-      dimmed chips are the same line covered better by someone else.
+      each chip is a spell line that class covers, led by the spell's game icon in its
+      <span class="gem-key gem-key-ben"></span> beneficial / <span class="gem-key gem-key-det"></span>
+      detrimental gem frame. Solid chips are the lines that class wins outright; dimmed chips are the
+      same line covered better by someone else. "Best in line" is judged within a target type, so a
+      class can hold both the best single-target and the best AoE version of one line — a chip says
+      its target only when that isn't single.
     </p>
     <div class="gv-toolbar">
       <span class="gv-legend">

@@ -9,6 +9,7 @@ const resultsEl = document.getElementById("results");
 const buffLoadoutEl = document.getElementById("buff-loadout");
 const buffSlotMeterEl = document.getElementById("buff-slot-meter");
 const tabButtons = [...document.querySelectorAll(".tab-btn")];
+const scopeFilterEl = document.getElementById("scope-filter");
 const gridTableEl = document.getElementById("category-grid");
 const rankArchetypeSelect = document.getElementById("rank-archetype");
 const rankCategorySelect = document.getElementById("rank-category");
@@ -34,6 +35,10 @@ const tabPanels = {
 // Tabs that own the whole viewport: the page itself stops scrolling, the header compacts, and the
 // width cap comes off (see body.viewport-mode in index.html). The three grid explorations, for now.
 const VIEWPORT_TABS = new Set(["board", "matrix", "focus"]);
+
+// Tabs built on spellLineGrid(), and so the only ones the target-scope filter can act on. The
+// control hides everywhere else rather than sitting there inert next to Buff Template or Rank Lab.
+const SCOPE_FILTER_TABS = new Set(["grid", "board", "matrix", "focus"]);
 
 // The controls stay put at the top of the page, so everything else that sticks (the grid's own
 // table header, the Rank Lab sliders) has to start below them - publish the bar's live height as
@@ -141,6 +146,13 @@ function applyStateFromQuery() {
 
   const tab = params.get("tab");
   if (tab && tabPanels[tab]) activeTab = tab;
+
+  // "" (everything filtered out) is a real state, distinct from absent (default: everything on).
+  const scopes = params.get("sc");
+  if (scopes != null) {
+    scopeFilter.clear();
+    scopes.split(",").filter((s) => SCOPE_META[s]).forEach((s) => scopeFilter.add(s));
+  }
 }
 
 function syncStateToQuery() {
@@ -157,6 +169,7 @@ function syncStateToQuery() {
   if (resistStateInitialized) {
     params.set("res", RESIST_ELEMENTS.filter((r) => resistState[r.id]).map((r) => r.id).join(","));
   }
+  params.set("sc", SCOPE_ORDER.filter((s) => scopeFilter.has(s)).join(","));
   params.set("tab", activeTab);
   history.replaceState(null, "", "?" + params.toString());
 }
@@ -170,10 +183,15 @@ function formatEffect(spell) {
   return `${spell.total_effect ?? spell.primary_value} ${stat}`.trim();
 }
 
+// The icon's frame carries beneficial (blue) vs detrimental (red), the way the game's own spell
+// window draws it. No `title` here - the icon raises the spell tooltip, which spells out the target,
+// the radius and everything else; a native title would just fight it (see tooltip.js).
 function iconImg(spell) {
+  const cls = `spell-icon ${spell.beneficial ? "gem-ben" : "gem-det"}`;
+  const attrs = `data-spell="${spell.spell_id}"`;
   return spell.icon
-    ? `<img class="spell-icon" src="${spell.icon}" alt="" width="32" height="32" data-spell="${spell.spell_id}">`
-    : `<span class="spell-icon spell-icon-placeholder" data-spell="${spell.spell_id}"></span>`;
+    ? `<img class="${cls}" ${attrs} src="${spell.icon}" alt="" width="32" height="32">`
+    : `<span class="${cls} spell-icon-placeholder" ${attrs}></span>`;
 }
 
 // The spell's line (client Category › Subcategory, from the game's own hover taxonomy). This is
@@ -194,7 +212,8 @@ function spellCard(className, spell) {
       <div class="spell-card-header">
         ${iconImg(spell)}
         ${classPill(className)}
-        <span class="spell-name" data-spell="${spell.spell_id}">${spell.name}</span>
+
+        <span class="spell-name" data-spell="${spell.spell_id}">${spell.name}</span>${restrictNote(spell)}
         <span class="spell-level">Lv ${spell.level}</span>
         ${lineChip(spell)}
       </div>
@@ -265,6 +284,105 @@ function elementChip(resistType) {
   return `<span class="element-chip" style="--ec:${c}">${resistType}</span>`;
 }
 
+// --- The spell gem: beneficial vs detrimental ----------------------------------------------------
+// The game's own Actions > Spells window frames every gem blue or red, and that is the ONLY thing
+// it encodes: `beneficial` (spells_us.txt field 28). Verified against a live Enchanter spell list,
+// 17/17 - including the two that would trip a guess, since Lull (a calm) and Taper Enchantment (a
+// dispel) both sit under the *Utility Detrimental* category yet are flagged beneficial, and the
+// game paints them blue. Same window also lists Gem | Name | Level | Category | Subcategory, which
+// is the taxonomy this whole tool is built on, so mirroring its frame costs nothing and buys
+// instant familiarity for anyone who has the real window open on a second monitor.
+//
+// iconImg tags every icon .gem-ben / .gem-det; the sampled hexes (#0060e0 / #e00000) and the
+// outline that draws them live in index.html next to the rest of the spell-icon styling.
+
+// Target scope is TEXT, not color. The game spends its only color channel on beneficial/detrimental
+// and spells everything else out in columns; this follows suit. It also retires a problem: there is
+// no target palette anywhere in the client, so any colors here would have been invented, and an
+// invented 5-color set competing with the class pills and element chips was the thing that kept
+// reading as noise. Words don't collide with anything.
+const SCOPE_META = {
+  self: { label: "Self" },
+  single: { label: "Single" },
+  group: { label: "Group" },
+  aoe: { label: "AoE" },
+  pet: { label: "Pet" },
+};
+
+// The scope as a word, plus the AE headcount cap - the one number that decides whether an area
+// effect earns a slot over the single-target version.
+function scopeLabel(spell) {
+  const scope = spell.target_scope || "single";
+  const meta = SCOPE_META[scope];
+  if (!meta) return "";
+  const cap = scope === "aoe" && spell.max_targets ? ` ${spell.max_targets}` : "";
+  return `<span class="scope-word" title="${targetDetail(spell)}">${meta.label}${cap}</span>`;
+}
+
+// Short form for the dense views: only says anything when the answer isn't the boring one. Half the
+// dataset is single-target, and on a split line the two rows are already adjacent, so "Fire" above
+// "Fire · AoE 4" disambiguates without a token on every row.
+function scopeSuffix(spell) {
+  const scope = spell.target_scope || "single";
+  if (scope === "single") return "";
+  const cap = scope === "aoe" && spell.max_targets ? ` ${spell.max_targets}` : "";
+  return ` · ${SCOPE_META[scope].label}${cap}`;
+}
+
+// "only works on undead" - a separate axis from how wide the spell is, so it's separate from the
+// mark too: plain italic text that TRAILS the spell name. Slotting it in front (where the mark
+// goes) put a word between the glyph and the name and broke the line up. Views tight on width skip
+// it; the mark's hover text carries it everywhere.
+function restrictNote(spell) {
+  const label = RESTRICT_LABELS[spell.target_restrict];
+  return label ? ` <i class="scope-only" title="Only works on ${label}">${label}</i>` : "";
+}
+
+// Order the filter toggles read in, narrow to wide - matches SCOPE_SORT's row order in compare.js.
+const SCOPE_ORDER = ["self", "single", "group", "aoe", "pet"];
+
+// Which scopes the board views show. Defaults to all; persisted in the URL as `sc=` alongside the
+// rest of the setup. Read by spellLineGrid (compare.js), which filters the spells before it builds
+// rows - so a hidden scope also stops appearing as a runner-up.
+const scopeFilter = new Set(SCOPE_ORDER);
+
+function renderScopeFilter() {
+  scopeFilterEl.innerHTML =
+    `<span class="scope-filter-label">Targets</span>` +
+    SCOPE_ORDER.map(
+      (s) => `<button type="button" class="scope-toggle ${scopeFilter.has(s) ? "on" : ""}"
+                data-scope="${s}">${SCOPE_META[s].label}</button>`
+    ).join("");
+}
+
+const SHAPE_LABELS = {
+  pb: "centered on you",
+  targeted: "centered on your target",
+  ring: "ring around your target",
+  frontal: "cone in front of you",
+  hatelist: "everyone on your hate list",
+};
+
+const RESTRICT_LABELS = {
+  undead: "undead", animal: "animals", summoned: "summoned creatures", plant: "plants",
+  corpse: "corpses", giant: "giants", dragon: "dragons", muramite: "muramites",
+};
+
+// The full target story in one line, used as the chip's hover text and in the spell tooltip:
+// "Targeted AE · centered on your target · 10 ft radius · up to 4 targets · 200 range".
+function targetDetail(spell) {
+  const parts = [spell.target].filter(Boolean);
+  if (SHAPE_LABELS[spell.target_shape]) parts.push(SHAPE_LABELS[spell.target_shape]);
+  if (spell.aoe_radius) parts.push(`${spell.aoe_radius} ft radius`);
+  if (spell.max_targets) parts.push(`up to ${spell.max_targets} targets`);
+  if (spell.range) parts.push(`${spell.range} range`);
+  if (RESTRICT_LABELS[spell.target_restrict]) {
+    parts.push(`only affects ${RESTRICT_LABELS[spell.target_restrict]}`);
+  }
+  return parts.join(" · ");
+}
+
+
 const CLASS_CODE = Object.fromEntries(CLASSES.map((c) => [c.name, c.code]));
 function classCode(name) {
   return CLASS_CODE[name] || name.slice(0, 3).toUpperCase();
@@ -276,6 +394,9 @@ function classCode(name) {
 // Nothing is truncated - cells wrap so the text flows.
 // `showLabel` is false for the 2nd+ row of a collection line (illusions), so a run of variants
 // reads as one grouped block under a single subcategory label instead of repeating it every row.
+// The target mark rides with the spell name rather than the line label: it's a fact about the
+// spell, and it always shows even on the 2nd+ row of a split line - it's what tells the two rows
+// apart, so suppressing it would leave a line looking duplicated.
 function gridTableRow(row, showLabel = true) {
   const { subcategory, best, runnersUp, conflict } = row;
   const spell = best.spell;
@@ -290,8 +411,9 @@ function gridTableRow(row, showLabel = true) {
   return `
     <tr class="${conflict ? "gt-conflict" : ""}">
       <td class="gtc-type">${label}</td>
-      <td class="gtc-best">${iconImg(spell)}<span class="spell-name" data-spell="${spell.spell_id}">${spell.name}</span>${warn}</td>
+      <td class="gtc-best">${iconImg(spell)}<span class="spell-name" data-spell="${spell.spell_id}">${spell.name}</span>${restrictNote(spell)}${warn}</td>
       <td class="gtc-eff">${formatEffect(spell)}</td>
+      <td class="gtc-target">${scopeLabel(spell)}</td>
       <td class="gtc-class"><span class="class-pill-group">${pills}</span></td>
       <td class="gtc-others" title="${spell.mana} mana · ${spell.duration}">${others}</td>
     </tr>`;
@@ -308,14 +430,14 @@ const LINE_SECTION_GLOSS = {
   "Create Item": "summoned items",
 };
 
-function renderGrid(classes, level) {
+function renderGrid(classes, level, scopes) {
   if (classes.length === 0) {
     gridTableEl.innerHTML = `<p class="empty">Pick 1-3 classes above to see the best spell for each line.</p>`;
     return;
   }
-  const rows = spellLineGrid(classes, level);
+  const rows = spellLineGrid(classes, level, scopes);
   if (rows.length === 0) {
-    gridTableEl.innerHTML = `<p class="empty">No spells available for these classes at this level.</p>`;
+    gridTableEl.innerHTML = `<p class="empty">No spells match these classes, level and target filter.</p>`;
     return;
   }
   const bySection = new Map(); // client parent Category -> its line rows
@@ -330,17 +452,23 @@ function renderGrid(classes, level) {
     .map((cat) => {
       // Alpha by subcategory, then by name so a collection line's variants (which share a
       // subcategory) come out alphabetized among themselves.
+      // Alpha by subcategory, then narrow-to-wide by scope so a split line's rows sit together
+      // in a predictable order (Single above AoE), then by name.
       const secRows = bySection.get(cat).sort(
         (a, b) =>
           (a.subcategory || "").localeCompare(b.subcategory || "") ||
+          rowScopeSort(a) - rowScopeSort(b) ||
           a.best.spell.name.localeCompare(b.best.spell.name)
       );
       const gloss = LINE_SECTION_GLOSS[cat] ? ` <span class="grid-section-gloss">${LINE_SECTION_GLOSS[cat]}</span>` : "";
-      const header = `<tr class="grid-section-row"><td colspan="5">${cat}${gloss} <span class="grid-section-count">${secRows.length}</span></td></tr>`;
+      const header = `<tr class="grid-section-row"><td colspan="6">${cat}${gloss} <span class="grid-section-count">${secRows.length}</span></td></tr>`;
       let prevSub = null;
       const secBody = secRows
         .map((r) => {
-          const showLabel = r.subcategory !== prevSub;
+          // Only a collection line's repeat variants drop their label (they read as one block).
+          // A scope-split line keeps it on every row: its rows are separate picks, and the scope
+          // chip alone wouldn't say which line they belong to.
+          const showLabel = r.subcategory !== prevSub || !r.collection;
           prevSub = r.subcategory;
           return gridTableRow(r, showLabel);
         })
@@ -351,7 +479,7 @@ function renderGrid(classes, level) {
   gridTableEl.innerHTML = `
     <table class="grid-table">
       <thead>
-        <tr><th>Line</th><th>Best in slot</th><th>Effect</th><th>Class</th><th>Won't stack with · alternatives</th></tr>
+        <tr><th>Line</th><th>Best in slot</th><th>Effect</th><th>Target</th><th>Class</th><th>Won't stack with · alternatives</th></tr>
       </thead>
       <tbody>${body}</tbody>
     </table>`;
@@ -365,7 +493,8 @@ function loadoutRow(index, slotBudget, className, spell, statLabel, subText, bad
       ${iconImg(spell)}
       <div class="loadout-main">
         ${classPill(className)}
-        <span class="spell-name" data-spell="${spell.spell_id}">${spell.name}</span>${badge}
+
+        <span class="spell-name" data-spell="${spell.spell_id}">${spell.name}</span>${badge}${restrictNote(spell)}
         <span class="spell-level">Lv ${spell.level}</span>
         ${lineChip(spell)}
         <div class="spell-desc">${spell.description}</div>
@@ -472,7 +601,7 @@ function renderRankTable() {
             .join("")}</span></td>
           <td><span class="spell-name" data-spell="${spell.spell_id}">${spell.name}</span></td>
           <td class="rank-description">${spell.description || "—"}</td>
-          <td>${spell.target || "—"}</td>
+          <td>${scopeLabel(spell) || "—"}</td>
           <td class="rank-slot">${slot}</td>
           <td class="rank-score">${score.toFixed(1)}</td>
           <td class="rank-breakdown">${rankBreakdownText(breakdown)}</td>
@@ -604,13 +733,6 @@ function renderRecipientControls() {
   }
 }
 
-function targetChip(spell) {
-  if (spell.target === "Self") return `<span class="bt-chip bt-chip-self">Self</span>`;
-  if (spell.target === "Pet") return `<span class="bt-chip bt-chip-pet">Pet</span>`;
-  if ((spell.target || "").includes("Group")) return `<span class="bt-chip bt-chip-group">Group</span>`;
-  return `<span class="bt-chip">Single</span>`;
-}
-
 function buffTemplateRow(index, slotBudget, pick) {
   const { spell, classLevels, score, confirmed } = pick;
   const overBudget = index >= slotBudget;
@@ -629,8 +751,8 @@ function buffTemplateRow(index, slotBudget, pick) {
       ${iconImg(spell)}
       <div class="bt-main">
         <div class="bt-title">
+
           <span class="spell-name" data-spell="${spell.spell_id}">${spell.name}</span>${badge}
-          ${targetChip(spell)}
         </div>
         <div class="bt-meta">${classText} · claims: ${lineText}</div>
         <div class="rank-why">${pick.why}</div>
@@ -706,6 +828,7 @@ function setActiveTab(tab) {
   tabButtons.forEach((btn) => btn.classList.toggle("active", btn.dataset.tab === tab));
   Object.entries(tabPanels).forEach(([id, el]) => el.classList.toggle("active", id === tab));
   document.body.classList.toggle("viewport-mode", VIEWPORT_TABS.has(tab));
+  scopeFilterEl.hidden = !SCOPE_FILTER_TABS.has(tab);
   syncTopbarHeight();
 }
 
@@ -719,10 +842,10 @@ function render() {
   setActiveTab(activeTab);
 
   renderBuffLoadout(classes, level, slotBudget);
-  renderGrid(classes, level);
-  renderBoard(classes, level);
-  renderMatrix(classes, level);
-  renderFocus(classes, level);
+  renderGrid(classes, level, scopeFilter);
+  renderBoard(classes, level, scopeFilter);
+  renderMatrix(classes, level, scopeFilter);
+  renderFocus(classes, level, scopeFilter);
   renderComparison(classes, level);
   renderRankTable();
   renderBuffTemplate();
@@ -735,11 +858,22 @@ setActiveTab(activeTab);
 renderRankSliders();
 renderRecipientControls();
 renderResistControls();
+renderScopeFilter();
 
 classSelects.forEach((s) => s.addEventListener("change", render));
 levelInput.addEventListener("input", render);
 slotsInput.addEventListener("input", render);
 tabButtons.forEach((btn) => btn.addEventListener("click", () => { setActiveTab(btn.dataset.tab); syncStateToQuery(); }));
+scopeFilterEl.addEventListener("click", (e) => {
+  const btn = e.target.closest("button[data-scope]");
+  if (!btn) return;
+  const scope = btn.dataset.scope;
+  // Turning the last one off would blank the board with no way back except the chips themselves,
+  // which is a fine trade - the chips stay visible and one click restores it.
+  scopeFilter.has(scope) ? scopeFilter.delete(scope) : scopeFilter.add(scope);
+  renderScopeFilter();
+  render();
+});
 // The suggested-buff panel runs on recipient roles, not the caster archetype - only the
 // ranking table needs re-rendering when archetype sliders move.
 rankArchetypeSelect.addEventListener("change", () => { renderRankSliders(); renderRankTable(); });

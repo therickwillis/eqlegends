@@ -7,7 +7,8 @@
 //   C · Focus   master/detail; a fixed category rail plus one category in full detail.
 //
 // They share app.js's presentation helpers (classColor/classPill/classCode/iconImg/formatEffect/
-// elementChip/LINE_SECTION_GLOSS) — this file loads first, but only touches them at render time.
+// elementChip/scopeSuffix/targetDetail/LINE_SECTION_GLOSS) — this file loads first, but only
+// touches them at render time.
 // Spell tooltips come for free: anything tagged data-spell is picked up by tooltip.js.
 
 const boardBodyEl = document.getElementById("board-body");
@@ -24,15 +25,15 @@ const focusDetailEl = document.getElementById("focus-detail");
 let boardDensity = "compact";
 let boardFilter = "";
 let focusCategory = null;
-let gvLast = { classes: [], level: 1 };
+let gvLast = { classes: [], level: 1, scopes: null };
 
 const GV_EMPTY = `<p class="empty">Pick 1-3 classes above to see the board.</p>`;
 
 // spellLineGrid()'s flat rows, grouped into the client's parent Categories (alphabetical, as are
 // the lines inside each) — the same shape all three views walk.
-function gvSections(classes, level) {
+function gvSections(classes, level, scopes) {
   const bySection = new Map();
-  for (const row of spellLineGrid(classes, level)) {
+  for (const row of spellLineGrid(classes, level, scopes)) {
     if (!bySection.has(row.category)) bySection.set(row.category, []);
     bySection.get(row.category).push(row);
   }
@@ -41,9 +42,11 @@ function gvSections(classes, level) {
     .map(([category, rows]) => ({
       category,
       gloss: LINE_SECTION_GLOSS[category] || "",
+      // Alpha by line, then narrow-to-wide by scope so a split line's rows sit together.
       rows: rows.sort(
         (a, b) =>
           (a.subcategory || "").localeCompare(b.subcategory || "") ||
+          rowScopeSort(a) - rowScopeSort(b) ||
           a.best.spell.name.localeCompare(b.best.spell.name)
       ),
     }));
@@ -56,9 +59,13 @@ function gvMatches(row, q) {
     row.category,
     row.subcategory,
     row.best.spell.name,
+    // Scope and target restriction, so "aoe", "group" and "undead" are typeable filters.
+    row.best.spell.target_scope,
+    row.best.spell.target_restrict,
     ...row.best.classLevels.map((c) => c.class),
     ...row.runnersUp.map((e) => e.spell.name),
   ]
+    .filter(Boolean)
     .join(" ")
     .toLowerCase();
   return hay.includes(q);
@@ -96,6 +103,7 @@ function boardRows(rows) {
   return singles.sort(
     (a, b) =>
       (a.subcategory || "").localeCompare(b.subcategory || "") ||
+      rowScopeSort(a) - rowScopeSort(b) ||
       a.best.spell.name.localeCompare(b.best.spell.name)
   );
 }
@@ -119,6 +127,10 @@ function boardLine(row) {
         .map((e) => `${e.classLevels.map((c) => classCode(c.class)).join("/")} ${e.spell.name}`)
         .join(", ")}">+${row.runnersUp.length}</span>`
     : "";
+  // The label carries the target only when this line actually split into more than one row - that
+  // is the one case where two adjacent rows would otherwise look identical. The Board's label
+  // column is a fixed 84px, so spending it on a suffix every row can't justify is what pushed real
+  // line names into an ellipsis.
   const sub = row.subcategory || "General";
   // A merged collection row names its count instead of a winner - there isn't one.
   const name = row.merged
@@ -128,7 +140,7 @@ function boardLine(row) {
     : `<span class="bv-name" data-spell="${spell.spell_id}">${spell.name}</span>`;
   return `
     <li class="bv-line ${gvConflicted(row) ? "is-conflict" : ""}">
-      <span class="bv-sub" title="${row.category} › ${sub}">${sub}</span>
+      <span class="bv-sub" title="${row.category} › ${sub}${scopeSuffix(spell)}">${sub}${row.split ? scopeSuffix(spell) : ""}</span>
       ${iconImg(spell)}
       ${name}${gvConflicted(row) ? GV_WARN : ""}
       <span class="bv-eff">${row.merged ? "" : formatEffect(spell)}</span>
@@ -136,15 +148,15 @@ function boardLine(row) {
     </li>`;
 }
 
-function renderBoard(classes, level) {
-  gvLast = { classes, level };
+function renderBoard(classes, level, scopes) {
+  gvLast = { classes, level, scopes };
   if (classes.length === 0) {
     boardBodyEl.innerHTML = GV_EMPTY;
     boardCountEl.innerHTML = "";
     return;
   }
   const q = boardFilter.trim().toLowerCase();
-  const sections = gvSections(classes, level)
+  const sections = gvSections(classes, level, scopes)
     .map((s) => ({ ...s, rows: boardRows(s.rows.filter((r) => gvMatches(r, q))) }))
     .filter((s) => s.rows.length > 0);
 
@@ -182,23 +194,29 @@ function renderBoard(classes, level) {
 
 // For each selected class, its strongest spell in every line it has — plus which class holds the
 // outright best of each line, so a cell can say "mine" vs "someone else's is stronger".
-function matrixData(classes, level) {
-  const available = SPELLS.filter((s) => classes.includes(s.class) && s.level <= level);
-  const perClassLine = new Map(); // "class::line_id" -> that class's strongest spell in the line
-  const lineBest = new Map(); // line_id -> strongest spell across all selected classes
+// Lines are keyed by scope as well as line_id here, for the same reason spellLineGrid partitions
+// its rows: a class's single-target and AE nuke are separate offerings, and "who holds the best of
+// this line" is only a meaningful question within one scope.
+function matrixData(classes, level, scopes) {
+  const available = SPELLS.filter(
+    (s) =>
+      classes.includes(s.class) && s.level <= level && (!scopes || scopes.has(s.target_scope || "single"))
+  );
+  const perClassLine = new Map(); // "class::line_id::scope" -> that class's strongest spell in it
+  const lineBest = new Map(); // "line_id::scope" -> strongest spell across all selected classes
   for (const s of available) {
-    const lineId = s.line_id || `Other:${s.name}`;
+    const lineId = `${s.line_id || `Other:${s.name}`}::${s.target_scope || "single"}`;
     const key = `${s.class}::${lineId}`;
     const cur = perClassLine.get(key);
-    if (!cur || spellMagnitude(s) > spellMagnitude(cur)) perClassLine.set(key, s);
+    if (!cur || isStronger(s, cur)) perClassLine.set(key, s);
     const bestSoFar = lineBest.get(lineId);
-    if (!bestSoFar || spellMagnitude(s) > spellMagnitude(bestSoFar)) lineBest.set(lineId, s);
+    if (!bestSoFar || isStronger(s, bestSoFar)) lineBest.set(lineId, s);
   }
 
   const byCategory = new Map(); // category -> class -> [{ spell, lineId, subcategory, best }]
   for (const spell of perClassLine.values()) {
     const category = spell.line_category || "Other";
-    const lineId = spell.line_id || `Other:${spell.name}`;
+    const lineId = `${spell.line_id || `Other:${spell.name}`}::${spell.target_scope || "single"}`;
     if (!byCategory.has(category)) byCategory.set(category, new Map());
     const perClass = byCategory.get(category);
     if (!perClass.has(spell.class)) perClass.set(spell.class, []);
@@ -222,22 +240,28 @@ function matrixChip(cell, className) {
   const spell = cell.spell;
   const eff = formatEffect(spell);
   const warn = cell.conflict && !cell.best ? ` <span class="mx-warn">▲</span>` : "";
+  // Each chip leads with the spell's game icon, so the Matrix reads with the same vocabulary as the
+  // other views - and the icon brings the game's beneficial/detrimental gem frame with it, which
+  // this view had no way to show before. Target scope still rides as a short text suffix when it
+  // isn't single: that's what explains why one line can appear twice in the same cell, and an icon
+  // can't say it.
   // The chip raises the spell tooltip (line, class roster with levels, full stats), so it carries
   // no `title` of its own - two tooltips describing one chip is what the browser does badly.
   // Best-in-line stays encoded where it belongs: solid vs. dimmed, explained by the legend.
+  const scope = scopeSuffix(spell);
   return `<span class="mx-chip ${cell.best ? "is-best" : ""}" style="--pc:${classColor(className)}"
       data-spell="${spell.spell_id}"
-    >${spell.name}${eff === "—" ? "" : ` <b>${eff}</b>`}${warn}</span>`;
+    >${iconImg(spell)}${spell.name}${eff === "—" ? "" : ` <b>${eff}</b>`}${scope ? `<i class="mx-scope">${scope}</i>` : ""}${warn}</span>`;
 }
 
-function renderMatrix(classes, level) {
-  gvLast = { classes, level };
+function renderMatrix(classes, level, scopes) {
+  gvLast = { classes, level, scopes };
   if (classes.length === 0) {
     matrixTableEl.innerHTML = `<tbody><tr><td>${GV_EMPTY}</td></tr></tbody>`;
     matrixCountEl.innerHTML = "";
     return;
   }
-  const data = matrixData(classes, level);
+  const data = matrixData(classes, level, scopes);
   const head =
     `<tr><th class="mx-corner">Category</th>` +
     classes
@@ -294,23 +318,28 @@ function focusCard(row) {
       <div class="fv-card-sub">${chip || sub}${gvConflicted(row) ? GV_WARN : ""}</div>
       <div class="fv-card-title">
         ${iconImg(spell)}
-        <span class="spell-name" data-spell="${spell.spell_id}">${spell.name}</span>
+        <span class="spell-name" data-spell="${spell.spell_id}">${spell.name}</span>${restrictNote(spell)}
       </div>
       ${formatEffect(spell) === "—" ? "" : `<div class="fv-card-eff">${formatEffect(spell)}</div>`}
-      <div class="fv-card-meta">${spell.mana} mana · ${spell.duration} · ${spell.target}</div>
+      <div class="fv-card-meta">${spell.mana} mana · ${spell.duration} · ${targetDetail(spell)}</div>
       <div class="fv-card-classes">${pills}</div>
       ${alts}
     </article>`;
 }
 
-function renderFocus(classes, level) {
-  gvLast = { classes, level };
+function renderFocus(classes, level, scopes) {
+  gvLast = { classes, level, scopes };
   if (classes.length === 0) {
     focusRailEl.innerHTML = "";
     focusDetailEl.innerHTML = GV_EMPTY;
     return;
   }
-  const sections = gvSections(classes, level);
+  const sections = gvSections(classes, level, scopes);
+  if (sections.length === 0) {
+    focusRailEl.innerHTML = "";
+    focusDetailEl.innerHTML = `<p class="empty">No spell lines match the target filter.</p>`;
+    return;
+  }
   // Keep the rail selection across class/level changes when the category still exists.
   if (!sections.some((s) => s.category === focusCategory)) focusCategory = sections[0].category;
 
@@ -335,7 +364,7 @@ function renderFocus(classes, level) {
 
 boardFilterEl.addEventListener("input", () => {
   boardFilter = boardFilterEl.value;
-  renderBoard(gvLast.classes, gvLast.level);
+  renderBoard(gvLast.classes, gvLast.level, gvLast.scopes);
 });
 
 boardDensityEl.addEventListener("click", (e) => {
@@ -343,7 +372,7 @@ boardDensityEl.addEventListener("click", (e) => {
   if (!btn) return;
   boardDensity = btn.dataset.d;
   [...boardDensityEl.querySelectorAll("button")].forEach((b) => b.classList.toggle("on", b === btn));
-  renderBoard(gvLast.classes, gvLast.level);
+  renderBoard(gvLast.classes, gvLast.level, gvLast.scopes);
 });
 [...boardDensityEl.querySelectorAll("button")].forEach((b) =>
   b.classList.toggle("on", b.dataset.d === boardDensity)
@@ -353,5 +382,5 @@ focusRailEl.addEventListener("click", (e) => {
   const btn = e.target.closest("button[data-cat]");
   if (!btn) return;
   focusCategory = btn.dataset.cat;
-  renderFocus(gvLast.classes, gvLast.level);
+  renderFocus(gvLast.classes, gvLast.level, gvLast.scopes);
 });

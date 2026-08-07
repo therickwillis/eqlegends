@@ -175,6 +175,12 @@ def parse_line(line: str, category_names: dict[str, str]) -> dict | None:
         "line_category": cat_name(86),
         "line_subcategory": cat_name(87),
         "endurance": i(96),
+        # MaxTargets (field 143): the headcount cap on an area effect. Confirmed positionally
+        # against this client's own data rather than assumed - across every spell the wiki index
+        # keeps, it is 0 on all Self/Single/Group/Pet targets without exception, and non-zero only
+        # on the AE target types (Caster PB AE -> 8, Targeted AE -> 4/5/30/100). Meaningless (and
+        # 0) for non-AE spells, so downstream treats 0 as "not an area effect at all".
+        "max_targets": i(143),
         "group_id": i(132),
         "rank": i(133),
         # SpellGroup (field 165): clusters the same-class tiers of a line (Courage/Center/

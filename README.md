@@ -29,12 +29,23 @@ Open `app/index.html` directly in a browser (no server, no build step — it's a
 
 - **Loadouts** — recommended Buff Loadout for your selected classes/level, against your slot budget.
 - **Buff Template** — a Quick Buff set scored by who you actually cast on.
-- **Category Grid** — best spell per spell line, organized by the client's own taxonomy.
+- **Category Grid** — best spell per spell line and target type, organized by the client's own taxonomy.
 - **A · Board / B · Matrix / C · Focus** — three viewport-fit takes on that same board: newspaper
   columns, a category × class matrix, and a category rail with detail cards. None of them scroll the page.
 - **Full Comparison** — detailed side-by-side stats for every category.
 - **Rank Lab** — experimental weighted multi-stat scoring with live sliders.
 
+Spell icons wear the game's own gem frame — **blue for beneficial, red for detrimental** — matching
+EQ Legends' Actions › Spells window, which lists spells by the same Gem / Name / Level / Category /
+Subcategory taxonomy this tool is built on.
+
+**Target** (Self · Single · Group · AoE · Pet) is its own column, not a color. It's a real dimension,
+not decoration: the best-in-slot views give each target type its own row, so a single-target nuke and
+an AE nuke sit side by side instead of one of them being crowned "better" on raw damage. The dense
+views append the target to a line's label only where that line actually split. The **Targets**
+control in the top bar filters those views (e.g. "show me every AoE I have"), and hovering any spell
+gives you the radius, how many it hits, its range, and whether it only works on undead/animals.
+
 Class 1/2/3 are color-coded (blue / amber / rose) everywhere a spell shows who gets it, so the color
-always points back to a specific dropdown. Class/level/slot-budget selections are saved in the URL, so
-you can bookmark or refresh without losing your setup.
+always points back to a specific dropdown. Class/level/slot-budget/target selections are saved in the
+URL, so you can bookmark or refresh without losing your setup.
